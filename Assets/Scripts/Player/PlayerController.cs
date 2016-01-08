@@ -9,21 +9,43 @@ public class PlayerController : MonoBehaviour {
     public Camera camera;
 
     private Rigidbody rb;
+    private bool paused = false;
+    private GameObject pauseCanvas;
+    private Canvas pauseScreen;
 
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
+        pauseCanvas = GameObject.Find("Canvas");
+        pauseScreen = pauseCanvas.GetComponent<Canvas>();
+        pauseScreen.enabled = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        
 
-        if (Input.GetAxis("Quit") > 0)
+
+        /*if (Input.GetAxis("Quit") > 0)
         {
             Application.Quit();
+        }*/ //This wasn't working -Pat
+
+        //Tongles pausing the game
+        if (Input.GetButtonDown("Quit") && !paused)
+        {
+            Debug.Log("Pause!");
+            paused = !paused;
+            Time.timeScale = 0;
+            pauseScreen.enabled = true;
         }
-	}
+        else if (Input.GetButtonDown("Quit") && paused)
+        {
+            Debug.Log("UnPause!");
+            paused = !paused;
+            Time.timeScale = 1;
+            pauseScreen.enabled = false;
+        }
+    }
 
     void FixedUpdate()
     {
@@ -58,5 +80,7 @@ public class PlayerController : MonoBehaviour {
             camera.transform.position = transform.position;
             camera.transform.Translate(Vector3.back * 3);
         }
+
+        
     }
 }
