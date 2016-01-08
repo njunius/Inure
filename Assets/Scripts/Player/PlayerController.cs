@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     public float moveSpeed = 20.0f;
-    public float rotSpeed = 180.0f;
+    public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
     public Camera camera;
 
@@ -49,9 +49,9 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        float moveLongitudinal = Input.GetAxis("Longitudinal") * moveSpeed * Time.deltaTime;
-        float moveLateral = Input.GetAxis("Lateral") * moveSpeed * Time.deltaTime;
-        float moveVertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        float moveLongitudinal = Input.GetAxis("Longitudinal") * moveSpeed;
+        float moveLateral = Input.GetAxis("Lateral") * moveSpeed;
+        float moveVertical = Input.GetAxis("Vertical") * moveSpeed;
         float rotPitch = Input.GetAxis("Pitch") * rotSpeed * Time.deltaTime;
         float rotYaw = Input.GetAxis("Yaw") * rotSpeed * Time.deltaTime;
         float rotRoll = Input.GetAxis("Roll") * rollSpeed * Time.deltaTime;
@@ -59,11 +59,10 @@ public class PlayerController : MonoBehaviour {
 
         if (moveLongitudinal != 0 || moveLateral != 0 || moveVertical != 0)
         {
-            //rb.velocity += transform.forward * moveLongitudinal;
-            //+ transform.right * moveLateral + transform.up * moveVertical;
-            rb.transform.Translate(Vector3.forward * moveLongitudinal);
+            rb.velocity = transform.TransformDirection(Vector3.forward * moveLongitudinal + Vector3.right * moveLateral + Vector3.up * moveVertical);
+            /*rb.transform.Translate(Vector3.forward * moveLongitudinal);
             rb.transform.Translate(Vector3.right * moveLateral);
-            rb.transform.Translate(Vector3.up * moveVertical);
+            rb.transform.Translate(Vector3.up * moveVertical);*/
         }
         else
         {
