@@ -31,14 +31,14 @@ public class PlayerController : MonoBehaviour {
         }*/ //This wasn't working -Pat
 
         //Tongles pausing the game
-        if (Input.GetButtonDown("Quit") && !paused)
+        if (Input.GetButtonDown("Pause") && !paused)
         {
             Debug.Log("Pause!");
             paused = !paused;
             Time.timeScale = 0;
             pauseScreen.enabled = true;
         }
-        else if (Input.GetButtonDown("Quit") && paused)
+        else if (Input.GetButtonDown("Pause") && paused)
         {
             Debug.Log("UnPause!");
             paused = !paused;
