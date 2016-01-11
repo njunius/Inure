@@ -45,6 +45,14 @@ public class PlayerController : MonoBehaviour {
             Time.timeScale = 1;
             pauseScreen.enabled = false;
         }
+
+        for (int i = 0; i < 20; i++)
+        {
+            if (Input.GetAxis("joystick button " + i) > 0)
+            {
+                Debug.Log("Button " + i + " was pressed!");
+            }
+        }
     }
 
     void FixedUpdate()
