@@ -81,12 +81,12 @@ public class PlayerController : MonoBehaviour {
         rb.transform.Rotate(Vector3.up * rotYaw);
         rb.transform.Rotate(Vector3.forward * rotRoll);
 
-        if (camera != null)
+        /*if (camera != null)
         {
             camera.transform.rotation = transform.rotation;
             camera.transform.position = transform.position;
             camera.transform.Translate(Vector3.back * 3);
-        }
+        } Camera following is now in its own script. Will delete once successfully implemented -Nick */
 
         
     }
