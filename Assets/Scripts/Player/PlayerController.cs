@@ -13,14 +13,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject pauseCanvas;
     private Canvas pauseScreen;
 
-    // shield elements (made private later)
-    public bool shielded;
-    public int maxShieldCharge, currShieldCharge;
-    public int shieldRechargeAmount; // used for recharging the shield to full
-    public int shieldDepleteAmount; // used for draining shield charge when player activates the shield
-    public float shieldChargeDelay; // delay in number of seconds
-    public float shieldChargeDelayTimer; // timer used to keep track of the delay from the shield being depleted before it starts recharging
-    public float shieldDeltaChargeTimer; // timer for delaying each change in the shield value
+    private ShieldController shield;
 
 
 	// Use this for initialization
@@ -30,15 +23,7 @@ public class PlayerController : MonoBehaviour {
         pauseScreen = pauseCanvas.GetComponent<Canvas>();
         pauseScreen.enabled = false;
 
-        // shield initializations
-        shielded = false;
-        maxShieldCharge = currShieldCharge = 100;
-        shieldChargeDelay = 2.0f;
-        shieldChargeDelayTimer = 0.0f;
-        shieldDepleteAmount = -20;
-        shieldRechargeAmount = 5;
-        shieldDeltaChargeTimer = 0.0f;
-
+        shield = GetComponentInChildren<ShieldController>();
     }
 	
 	// Update is called once per frame
@@ -67,9 +52,9 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Shield Controls 
-        if (Input.GetButtonDown("Shield") && !shielded && currShieldCharge == maxShieldCharge)
+        if (Input.GetButtonDown("Shield") && !shield.getShieldActive() && shield.isShieldCharged())
         {
-            shielded = !shielded;
+            shield.setShieldActive(true);
         }
 
         for (int i = 0; i < 20; i++)
@@ -83,39 +68,7 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (!shielded) // shield recharging
-        {
-            if (shieldChargeDelay > shieldChargeDelayTimer && currShieldCharge < maxShieldCharge) // delays the start of the shield recharge by 2 seconds
-            {
-                shieldChargeDelayTimer += Time.deltaTime;
-            }
-            else if(currShieldCharge < maxShieldCharge && shieldDeltaChargeTimer >= 1.0f) // add a charge to the shield after a 1 second delay
-            {
-                currShieldCharge += shieldRechargeAmount;
-                shieldDeltaChargeTimer = 0.0f;
-            }
-            else if(shieldDeltaChargeTimer < 1.0f)
-            {
-                shieldDeltaChargeTimer += Time.deltaTime;
-            }
-        }
-        else // shield depleting
-        {
-            if (currShieldCharge > 0 && shieldDeltaChargeTimer >= 1.0f) // remove a charge from the shield after a 1 second delay
-            {
-                currShieldCharge += shieldDepleteAmount;
-                shieldDeltaChargeTimer = 0.0f;
-            }
-            else if (shieldDeltaChargeTimer < 1.0f) 
-            {
-                shieldDeltaChargeTimer += Time.deltaTime;
-            }
-            else if (currShieldCharge <= 0)
-            {
-                shielded = !shielded;
-                shieldChargeDelayTimer = 0.0f;
-            }
-        }
+        
 
         float moveLongitudinal = Input.GetAxis("Longitudinal") * moveSpeed;
         float moveLateral = Input.GetAxis("Lateral") * moveSpeed;
@@ -153,6 +106,6 @@ public class PlayerController : MonoBehaviour {
 
     public bool isShielded()
     {
-        return shielded;
+        return shield.getShieldActive();
     }
 }
