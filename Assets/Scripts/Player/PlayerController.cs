@@ -7,9 +7,9 @@ public class PlayerController : MonoBehaviour {
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
     public Camera camera;
+    public bool paused = false;
 
     private Rigidbody rb;
-    private bool paused = false;
     private GameObject pauseCanvas;
     private Canvas pauseScreen;
 
