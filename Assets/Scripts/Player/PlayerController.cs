@@ -6,10 +6,12 @@ public class PlayerController : MonoBehaviour {
     public float moveSpeed = 20.0f;
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
-    //public Camera camera;
+
+    // public Camera camera;
+    public bool paused = false;
+
 
     private Rigidbody rb;
-    private bool paused = false;
     private GameObject pauseCanvas;
     private Canvas pauseScreen;
 
@@ -28,24 +30,18 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
-        /*if (Input.GetAxis("Quit") > 0)
-        {
-            Application.Quit();
-        }*/ //This wasn't working -Pat
-
+        
         //Tongles pausing the game
         if (Input.GetButtonDown("Pause") && !paused)
         {
-            Debug.Log("Pause!");
+            //Debug.Log("Pause!");
             paused = !paused;
             Time.timeScale = 0;
             pauseScreen.enabled = true;
         }
         else if (Input.GetButtonDown("Pause") && paused)
         {
-            Debug.Log("UnPause!");
+            //Debug.Log("UnPause!");
             paused = !paused;
             Time.timeScale = 1;
             pauseScreen.enabled = false;
