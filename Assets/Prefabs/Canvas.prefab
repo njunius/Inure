@@ -45,7 +45,6 @@ GameObject:
   - 222: {fileID: 22245116}
   - 114: {fileID: 11483052}
   - 114: {fileID: 11471974}
-  - 114: {fileID: 11415276}
   m_Layer: 5
   m_Name: RoomTestButton
   m_TagString: Untagged
@@ -117,7 +116,6 @@ GameObject:
   - 222: {fileID: 22288574}
   - 114: {fileID: 11419706}
   - 114: {fileID: 11402112}
-  - 114: {fileID: 11453250}
   m_Layer: 5
   m_Name: RaceTrackButton
   m_TagString: Untagged
@@ -181,7 +179,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11436394}
         m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
@@ -243,17 +241,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Paused
---- !u!114 &11415276
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215e669212ac4ae4a9dc848da4ea695d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11419706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,17 +312,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: INURE
---- !u!114 &11453250
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215e669212ac4ae4a9dc848da4ea695d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11458746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -617,7 +593,7 @@ RectTransform:
   m_Children:
   - {fileID: 22443976}
   m_Father: {fileID: 22494962}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -276, y: -73}
@@ -652,7 +628,7 @@ RectTransform:
   m_Children:
   - {fileID: 22405378}
   m_Father: {fileID: 22494962}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -276, y: -25}
@@ -703,8 +679,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22498130}
-  - {fileID: 22408514}
   - {fileID: 22441296}
+  - {fileID: 22408514}
   - {fileID: 22477694}
   - {fileID: 22420138}
   m_Father: {fileID: 0}
