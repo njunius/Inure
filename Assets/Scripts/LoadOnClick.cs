@@ -4,8 +4,9 @@ using System.Collections;
 
 public class LoadOnClick : MonoBehaviour {
 
-	public void LoadScene(int levelNum)
+	public void LoadScene(string level)
     {
-        SceneManager.LoadScene(levelNum);
+        Debug.Log("Loading!");
+        SceneManager.LoadScene(level);
     }
 }
