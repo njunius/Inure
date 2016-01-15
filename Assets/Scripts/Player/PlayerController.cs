@@ -52,14 +52,6 @@ public class PlayerController : MonoBehaviour {
         {
             shield.setShieldActive(true);
         }
-
-        for (int i = 0; i < 20; i++)
-        {
-            if (Input.GetAxis("joystick button " + i) > 0)
-            {
-                Debug.Log("Button " + i + " was pressed!");
-            }
-        }
     }
 
     void FixedUpdate()
