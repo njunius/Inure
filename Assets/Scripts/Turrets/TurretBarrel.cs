@@ -11,13 +11,11 @@ using System.Collections;
 public class TurretBarrel {
 
 	public int bulletVel;
-	public Color bulletColor;
 	//public Vector3 relativePosition;
 	public float relativeSpawnPoint;
 
-	public TurretBarrel (float bWidth, Color bCol, int bVel) {
+	public TurretBarrel (float bWidth, int bVel) {
 		relativeSpawnPoint = bWidth;
-		//bulletPrefab.GetComponent<Renderer>().sharedMaterial.color = bCol;
 		bulletVel = bVel;
 	}
 

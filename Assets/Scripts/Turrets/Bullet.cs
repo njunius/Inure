@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
@@ -38,7 +37,8 @@ public class Bullet : MonoBehaviour {
 		if (hit.gameObject.name == "Player") {
 			
 		}
-
-		Destroy (gameObject);
+		if (hit.gameObject.tag != "Projectile") {
+			Destroy (gameObject);
+		}
 	}
 }
