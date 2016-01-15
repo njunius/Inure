@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 // Controls the shield collision volume and mesh visibility as well as the logic for using the shield
 public class ShieldController : MonoBehaviour {
-    // shield elements (made private later)
+    // shield fields (made private later)
     public bool shieldActive;
     public int maxShieldCharge, currShieldCharge;
     public int shieldRechargeAmount; // used for recharging the shield to full
@@ -12,6 +13,10 @@ public class ShieldController : MonoBehaviour {
     public float shieldChargeDelay; // delay in number of seconds
     public float shieldChargeDelayTimer; // timer used to keep track of the delay from the shield being depleted before it starts recharging
     public float shieldDeltaChargeTimer; // timer for delaying each change in the shield value
+
+    // Shield Gauge fields
+    public Image shieldGauge;
+    public float interpShieldValue;
 
     // Use this for initialization
     void Start() {
@@ -23,6 +28,8 @@ public class ShieldController : MonoBehaviour {
         shieldDepleteAmount = -20;
         shieldRechargeAmount = 5;
         shieldDeltaChargeTimer = 0.0f;
+
+        interpShieldValue = 100.0f;
     }
 
     // Update is called once per frame
@@ -39,6 +46,18 @@ public class ShieldController : MonoBehaviour {
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
         }
+
+        if (shieldActive)
+        {
+            interpShieldValue += shieldDepleteAmount * Time.deltaTime;
+            shieldGauge.fillAmount = interpShieldValue / (float)maxShieldCharge;
+        }
+        else if (currShieldCharge < maxShieldCharge)
+        {
+            interpShieldValue += shieldRechargeAmount * Time.deltaTime;
+            shieldGauge.fillAmount = interpShieldValue / (float)maxShieldCharge;
+        }
+
     }
 
     void FixedUpdate()
