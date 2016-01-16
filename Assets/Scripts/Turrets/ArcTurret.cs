@@ -5,6 +5,10 @@ public class ArcTurret : SimpleTurret {
 
 	private float RELATIVE_SPAWNPOINT_MULTIPLIER = 1.5f;
 	private float SEPARATION_ANGLE = Mathf.PI/12;
+
+	// Z-component must be a factor of 360
+	private Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
+	private int numFire = 0;
 	private float distFromCenter;
 
 	// Use this for initialization
@@ -38,6 +42,10 @@ public class ArcTurret : SimpleTurret {
 		//if the player is within the turret's range of sight, target the player and fire
 		if (distance < sensorRange) {
 			gameObject.transform.LookAt (target.transform);
+
+			//give appropriate rotation for the number of times the turret has fired
+			transform.Rotate (ROTATION_ANGLE * numFire);
+
 			//find new point at end of turret once required to target player
 			Vector3 forwardNorm = gameObject.transform.forward;
 			forwardNorm.Normalize ();
@@ -73,6 +81,13 @@ public class ArcTurret : SimpleTurret {
 		createBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 2);
 		createBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 3);
 		createBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 4);
+
+		//if the turret has made a complete rotation, reset the number of times it has been fired
+		if (numFire == 360 / ROTATION_ANGLE.z)
+			numFire = (int)ROTATION_ANGLE.z;
+		//else increase the number of times the turret has been fired
+		else
+			++numFire;
 	}
 
 	/*
