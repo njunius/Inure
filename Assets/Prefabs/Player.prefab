@@ -641,16 +641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36251e5a691d1b443b03d18e653c81ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldActive: 0
-  maxShieldCharge: 0
-  currShieldCharge: 0
-  shieldRechargeAmount: 0
-  shieldDepleteAmount: 0
-  shieldChargeDelay: 0
-  shieldChargeDelayTimer: 0
-  shieldDeltaChargeTimer: 0
   shieldGauge: {fileID: 11446442}
-  interpShieldValue: 0
+  bomb: {fileID: 0}
 --- !u!114 &11497392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -692,7 +684,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135032}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -824,7 +816,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164156}
