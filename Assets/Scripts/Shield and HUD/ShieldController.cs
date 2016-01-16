@@ -5,18 +5,20 @@ using UnityEngine.UI;
 
 // Controls the shield collision volume and mesh visibility as well as the logic for using the shield
 public class ShieldController : MonoBehaviour {
-    // shield fields (made private later)
-    public bool shieldActive;
-    public int maxShieldCharge, currShieldCharge;
-    public int shieldRechargeAmount; // used for recharging the shield to full
-    public int shieldDepleteAmount; // used for draining shield charge when player activates the shield
-    public float shieldChargeDelay; // delay in number of seconds
-    public float shieldChargeDelayTimer; // timer used to keep track of the delay from the shield being depleted before it starts recharging
-    public float shieldDeltaChargeTimer; // timer for delaying each change in the shield value
+    // shield fields
+    private bool shieldActive;
+    private int maxShieldCharge, currShieldCharge;
+    private int shieldRechargeAmount; // used for recharging the shield to full
+    private int shieldDepleteAmount; // used for draining shield charge when player activates the shield
+    private float shieldChargeDelay; // delay in number of seconds
+    private float shieldChargeDelayTimer; // timer used to keep track of the delay from the shield being depleted before it starts recharging
+    private float shieldDeltaChargeTimer; // timer for delaying each change in the shield value
 
     // Shield Gauge fields
     public Image shieldGauge;
-    public float interpShieldValue;
+    public GameObject bomb;
+    private BombController bombBehavior;
+    private float interpShieldValue;
 
     // Use this for initialization
     void Start() {
@@ -30,6 +32,7 @@ public class ShieldController : MonoBehaviour {
         shieldDeltaChargeTimer = 0.0f;
 
         interpShieldValue = 100.0f;
+        bombBehavior = bomb.GetComponent<BombController>();
     }
 
     // Update is called once per frame
@@ -94,6 +97,15 @@ public class ShieldController : MonoBehaviour {
                 shieldActive = !shieldActive;
                 shieldChargeDelayTimer = 0.0f;
             }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collision");
+        if (other.gameObject.tag == "Projectile" && shieldActive)
+        {
+            bombBehavior.chargeBomb(1);
         }
     }
 

@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class BombController : MonoBehaviour {
 
-    public bool isPlanted;
+    private bool isPlanted;
     public int currBombCharge;
-    public int maxBombCharge;
+    private int maxBombCharge;
 
-    public Transform playerLocation;
+    public GameObject player;
+    public Image bombGauge;
+    private PlayerController playerBehavior;
 
 	// Use this for initialization
 	void Start () {
@@ -15,14 +18,18 @@ public class BombController : MonoBehaviour {
         isPlanted = false;
         currBombCharge = 0;
         maxBombCharge = 100;
+
+        playerBehavior = player.GetComponent<PlayerController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (!isPlanted)
         {
-            transform.position = playerLocation.position;
+            transform.position = player.transform.position;
         }
+
+        bombGauge.fillAmount = (float)currBombCharge / (float)maxBombCharge;
 	}
 
     /*
