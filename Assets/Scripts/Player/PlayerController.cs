@@ -13,12 +13,18 @@ public class PlayerController : MonoBehaviour {
     private GameObject pauseCanvas;
     private Canvas pauseScreen;
 
+    private GameObject gameController;
+    private InputManager im;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
         pauseCanvas = GameObject.Find("Canvas");
         pauseScreen = pauseCanvas.GetComponent<Canvas>();
         pauseScreen.enabled = false;
+
+        gameController = GameObject.Find("GameController");
+        im = gameController.GetComponent<InputManager>();
     }
 	
 	// Update is called once per frame
@@ -46,23 +52,20 @@ public class PlayerController : MonoBehaviour {
             pauseScreen.enabled = false;
         }
 
-        for (int i = 0; i < 20; i++)
-        {
-            if (Input.GetAxis("joystick button " + i) > 0)
-            {
-                Debug.Log("Button " + i + " was pressed!");
-            }
-        }
     }
 
     void FixedUpdate()
     {
-        float moveLongitudinal = Input.GetAxis("Longitudinal") * moveSpeed;
-        float moveLateral = Input.GetAxis("Lateral") * moveSpeed;
-        float moveVertical = Input.GetAxis("Vertical") * moveSpeed;
-        float rotPitch = Input.GetAxis("Pitch") * rotSpeed * Time.deltaTime;
-        float rotYaw = Input.GetAxis("Yaw") * rotSpeed * Time.deltaTime;
-        float rotRoll = Input.GetAxis("Roll") * rollSpeed * Time.deltaTime;
+        
+        
+        
+
+        float moveLongitudinal = im.getInput("Longitudinal") * moveSpeed;
+        float moveLateral = im.getInput("Lateral") * moveSpeed;
+        float moveVertical = im.getInput("Vertical") * moveSpeed;
+        float rotRoll = im.getInput("Roll") * rollSpeed;
+        float rotPitch = im.getInput("Pitch") * rotSpeed;
+        float rotYaw = im.getInput("Yaw") * rotSpeed;
 
 
         if (moveLongitudinal != 0 || moveLateral != 0 || moveVertical != 0)
@@ -76,10 +79,15 @@ public class PlayerController : MonoBehaviour {
         {
             rb.velocity = Vector3.zero;
         }
-        
-        rb.transform.Rotate(Vector3.left * rotPitch);
+
+        if (rotPitch != 0 || rotYaw != 0 || rotRoll != 0)
+        {
+            rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
+        }
+
+        /*rb.transform.Rotate(Vector3.left * rotPitch);
         rb.transform.Rotate(Vector3.up * rotYaw);
-        rb.transform.Rotate(Vector3.forward * rotRoll);
+        rb.transform.Rotate(Vector3.forward * rotRoll);*/
 
         if (camera != null)
         {
