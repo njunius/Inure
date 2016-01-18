@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &153720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 410606}
+  - 114: {fileID: 11458694}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &410606
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153720}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.14272934, y: 0.3433454, z: -0.09761047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11458694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b06a39e9aed0a4897007019046f72c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectorInputs:
+  - name: Longitudinal
+    bidirectional: 1
+    positiveAxis: w
+    negativeAxis: s
+    dead: 0
+    sensitivity: 1
+  - name: Lateral
+    bidirectional: 1
+    positiveAxis: d
+    negativeAxis: a
+    dead: 0
+    sensitivity: 1
+  - name: Vertical
+    bidirectional: 1
+    positiveAxis: Space
+    negativeAxis: Left Shift
+    dead: 0
+    sensitivity: 1
+  - name: Roll
+    bidirectional: 1
+    positiveAxis: e
+    negativeAxis: q
+    dead: 0
+    sensitivity: 1
+  - name: Pitch
+    bidirectional: 0
+    positiveAxis: Mouse Y
+    negativeAxis: 
+    dead: 0
+    sensitivity: 0.005
+  - name: Yaw
+    bidirectional: 0
+    positiveAxis: Mouse X
+    negativeAxis: 
+    dead: 0
+    sensitivity: 0.005
+  - name: Sheild
+    bidirectional: 0
+    positiveAxis: Mouse 1
+    negativeAxis: 
+    dead: 0
+    sensitivity: 1
+  - name: Shoot
+    bidirectional: 0
+    positiveAxis: Mouse 0
+    negativeAxis: 
+    dead: 0
+    sensitivity: 1
+  - name: Pause
+    bidirectional: 0
+    positiveAxis: Esc
+    negativeAxis: 
+    dead: 0
+    sensitivity: 1
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 153720}
+  m_IsPrefabParent: 1

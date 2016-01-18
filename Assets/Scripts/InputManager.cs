@@ -66,7 +66,15 @@ public class InputManager : MonoBehaviour {
     {
         foreach (InputBinding input in inspectorInputs)
         {
-            inputs.Add(input.name, input);
+            if (!inputs.ContainsKey(input.name))
+            {
+                inputs.Add(input.name, input);
+            }
+            else
+            {
+                inputs[name] = input;
+            }
+            
         }
     }
 

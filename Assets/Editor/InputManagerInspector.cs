@@ -79,6 +79,7 @@ public class InputManagerInspector : Editor {
         */
         if (GUI.changed)
         {
+            Debug.Log(im == true);
             im.inspectorListToDict();
             /*Debug.Log("change");
             im.inputs.Clear();
