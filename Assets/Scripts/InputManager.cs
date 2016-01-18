@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*  Pipes custom input to Unity's built in Input Manager.
+    This will make it possible to all players to customize 
+    controls in game
+*/
+
+
+using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,11 +26,16 @@ public class InputManager : MonoBehaviour {
 
     public float getInput(string name)
     {
-        /*  Pipes custom inputs through Unity's input manager.*/
+        /*  Returns float value of input.  Good for analog, mouse, and/or continuous input*/
         
         float posAxis;
         float negAxis = 0;
         float value;
+
+        if (inputs == null)
+        {
+            return 0;
+        }
 
         if (!inputs.ContainsKey(name))
         {
@@ -34,7 +45,7 @@ public class InputManager : MonoBehaviour {
         InputBinding input = inputs[name];
 
         posAxis = Input.GetAxis(input.positiveAxis);
-        Debug.Log(posAxis);
+        //Debug.Log(posAxis);
 
         if (input.bidirectional)
         {
@@ -58,8 +69,42 @@ public class InputManager : MonoBehaviour {
         }
 
         value *= input.sensitivity;
-
+        //Debug.Log("value: " + value);
         return value;
+    }
+
+    public bool getInputDown(string name)
+    {
+        /*  Returns true if input was pressed. Only checks positive input.*/
+        if (!inputs.ContainsKey(name))
+        {
+            Debug.Log(name + " not bound.");
+            return false;
+        }
+        InputBinding input = inputs[name];
+
+        if (Input.GetButtonDown(input.positiveAxis))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool getInputUp(string name)
+    {
+        /*  Returns true if input was released.  Only checks positive input. */
+        if (!inputs.ContainsKey(name))
+        {
+            Debug.Log(name + " not bound.");
+            return false;
+        }
+        InputBinding input = inputs[name];
+
+        if (Input.GetButtonUp(input.positiveAxis))
+        {
+            return true;
+        }
+        return false;
     }
 
     public void inspectorListToDict()

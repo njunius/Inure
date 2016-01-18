@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour {
 
     private ShieldController shield;
 
-    private GameObject gameController;
-    private InputManager im;
+    public GameObject gameController;
+    public InputManager im;
 
     // Use this for initialization
     void Start () {
@@ -29,26 +29,28 @@ public class PlayerController : MonoBehaviour {
 
         shield = GetComponentInChildren<ShieldController>();
 
-        gameController = GameObject.Find("GameController");
-        if (gameController != null)
+        if (GameObject.Find("GameController") == null)
         {
-            im = gameController.GetComponent<InputManager>();
-        }//else
-        
+            Instantiate(gameController);         
+        }
+        gameController = GameObject.FindGameObjectWithTag("GameController");
+        im = gameController.GetComponent<InputManager>();
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-        
+
         //Tongles pausing the game
-        if (Input.GetButtonDown("Pause") && !paused)
+
+        if (im.getInputDown("Pause") && !paused)
         {
             //Debug.Log("Pause!");
             paused = !paused;
             Time.timeScale = 0;
             pauseScreen.enabled = true;
         }
-        else if (Input.GetButtonDown("Pause") && paused)
+        else if (im.getInputDown("Pause") && paused)
         {
             //Debug.Log("UnPause!");
             paused = !paused;
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Shield Controls 
-        if (Input.GetButtonDown("Shield") && !shield.getShieldActive() && shield.isShieldCharged())
+        if (im.getInputDown("Shield") && !shield.getShieldActive() && shield.isShieldCharged())
         {
             shield.setShieldActive(true);
         }

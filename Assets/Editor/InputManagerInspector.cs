@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*  Custom inspector for the InputManager and graveyard of hopes.
+    For now it just updates the input dictionary if the developer
+    has made any changes.  Useful for tweaking values while running
+    game in Unity.
+*/
+
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;

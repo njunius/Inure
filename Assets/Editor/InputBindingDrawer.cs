@@ -1,11 +1,17 @@
-﻿using UnityEngine;
+﻿/*  Custom Property Draw for an InputBinding and graveyard of dreams.
+    It does nothing for now, but maybe once I have leveled up my understanding 
+    of Unity editor customization this can be a starting point for making
+    a better input manager interface.
+*/
+
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
 //[CustomPropertyDrawer(typeof(InputBinding))]
 public class InputBindingDrawer : PropertyDrawer {
 
-	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+	/*public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         EditorGUI.BeginProperty(position, label, property);
 
@@ -41,10 +47,10 @@ public class InputBindingDrawer : PropertyDrawer {
         {
             positiveAxis = EditorGUILayout.TextField("Axis", positiveAxis);
         }*/
-        dead = EditorGUI.FloatField(deadRect, "Dead", dead);
+        /*dead = EditorGUI.FloatField(deadRect, "Dead", dead);
         //sensitivity = EditorGUILayout.FloatField("Sensitivity", sensitivity);
 
         EditorGUI.indentLevel = indent;
-        EditorGUI.EndProperty();
-    }
+        EditorGUI.EndProperty();*/
+    //}
 }
