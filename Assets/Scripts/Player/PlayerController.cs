@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+ * Controls the player's physical movement
+ * Responsible for interpreting the input manager into player actions during gameplay
+ * Responsible for keeping track of player's hull integrity
+ */
+
+using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -7,9 +14,12 @@ public class PlayerController : MonoBehaviour {
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
 
-    // public Camera camera;
     public bool paused = false;
 
+    // player armor/health stats
+    private int maxHullIntegrity;
+    private int currHullIntegrity;
+    private Image armorGauge;
 
     private Rigidbody rb;
     private GameObject pauseCanvas;
@@ -28,6 +38,9 @@ public class PlayerController : MonoBehaviour {
         pauseScreen.enabled = false;
 
         shield = GetComponentInChildren<ShieldController>();
+        armorGauge = GameObject.Find("Armor Gauge").GetComponent<Image>();
+
+        maxHullIntegrity = currHullIntegrity = 100;
 
         if (GameObject.Find("GameController") == null)
         {
@@ -41,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //Tongles pausing the game
+        //Toggles pausing the game
 
         if (im.getInputDown("Pause") && !paused)
         {
@@ -63,6 +76,9 @@ public class PlayerController : MonoBehaviour {
         {
             shield.setShieldActive(true);
         }
+
+        // Armor Gauge control
+        armorGauge.fillAmount = (float)currHullIntegrity / (float)maxHullIntegrity;
     }
 
     void FixedUpdate()
@@ -96,6 +112,27 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    // returns true if the player's hull integrity has dropped to 0
+    public bool isDead()
+    {
+        return currHullIntegrity == 0;
+    }
+
+    /* pre: damage is a positive number
+     * reduces the player's hull integrity by a specified amount
+     * NOTE: the player's health is base 100
+     */
+    public void takeDamage(int damage)
+    {
+        currHullIntegrity -= damage;
+
+        if(currHullIntegrity < 0)
+        {
+            currHullIntegrity = 0;
+        }
+    }
+
+    // returns the status of the player's shield
     public bool isShielded()
     {
         return shield.getShieldActive();

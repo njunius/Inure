@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+ * Controls the physical location of the bomb 
+ * Responsible for updating the on screen HUD with the bomb's charge
+ * TO BE IMPLEMENTED: moving the bomb off of the player ship and starting a countdown timer
+ */
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -8,9 +14,9 @@ public class BombController : MonoBehaviour {
     public int currBombCharge;
     private int maxBombCharge;
 
-    public GameObject player;
-    public Image bombGauge;
-    private PlayerController playerBehavior;
+    private GameObject player;
+    private Image bombGauge;
+    private PlayerController playerBehavior; // for use later when planting the bomb
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +25,10 @@ public class BombController : MonoBehaviour {
         currBombCharge = 0;
         maxBombCharge = 100;
 
+        player = GameObject.FindGameObjectWithTag("Player");
         playerBehavior = player.GetComponent<PlayerController>();
+
+        bombGauge = GameObject.Find("Bomb Gauge").GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
@@ -41,5 +50,13 @@ public class BombController : MonoBehaviour {
         currBombCharge += newCharge;
         if (currBombCharge > maxBombCharge)
             currBombCharge = maxBombCharge;
+    }
+
+    /*
+     * returns true if the bomb has been successfully charged to 100%
+     */
+    public bool isCharged()
+    {
+        return currBombCharge == maxBombCharge;
     }
 }
