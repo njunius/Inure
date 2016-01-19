@@ -34,8 +34,10 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnCollisionEnter (Collision hit) {
-		if (hit.gameObject.name == "Player") {
-			
+		if (hit.gameObject.tag == "Player" && !hit.gameObject.GetComponent<PlayerController>().isShielded()) {
+            // note that the 50 is a placeholder for real damage values later
+            // and that the player's health is base 100 for future reference
+            hit.gameObject.GetComponent<PlayerController>().takeDamage(50);
 		}
 		if (hit.gameObject.tag != "Projectile") {
 			Destroy (gameObject);

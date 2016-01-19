@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿/* Controls the shield collision volume and mesh visibility
+ * Responsible for the logic of depleting and recharging the shield
+ * Responsible for knowing when to charge the bomb
+ */
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-
-// Controls the shield collision volume and mesh visibility as well as the logic for using the shield
 public class ShieldController : MonoBehaviour {
     // shield fields
     private bool shieldActive;
@@ -15,8 +18,8 @@ public class ShieldController : MonoBehaviour {
     private float shieldDeltaChargeTimer; // timer for delaying each change in the shield value
 
     // Shield Gauge fields
-    public Image shieldGauge;
-    public GameObject bomb;
+    private Image shieldGauge;
+    private GameObject bomb;
     private BombController bombBehavior;
     private float interpShieldValue;
 
@@ -30,9 +33,11 @@ public class ShieldController : MonoBehaviour {
         shieldDepleteAmount = -20;
         shieldRechargeAmount = 5;
         shieldDeltaChargeTimer = 0.0f;
-
         interpShieldValue = 100.0f;
+
+        bomb = GameObject.FindGameObjectWithTag("Bomb");
         bombBehavior = bomb.GetComponent<BombController>();
+        shieldGauge = GameObject.Find("Shield Gauge").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -102,7 +107,6 @@ public class ShieldController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision");
         if (other.gameObject.tag == "Projectile" && shieldActive)
         {
             bombBehavior.chargeBomb(1);
