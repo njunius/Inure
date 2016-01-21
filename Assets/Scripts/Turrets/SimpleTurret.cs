@@ -16,7 +16,7 @@ using System.Collections;
 public class SimpleTurret : Turret {
 
 	public GameObject target;
-	protected float sensorRange = 15;
+	protected float sensorRange = 30;
 	protected bool isFiring = false;
 	protected float fireDelay = 0;
 
