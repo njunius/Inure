@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
         pauseScreen.enabled = false;
 
         shield = GetComponentInChildren<ShieldController>();
-        armorGauge = GameObject.Find("Armor Gauge").GetComponent<Image>();
+        armorGauge = GameObject.FindGameObjectWithTag("Armor Gauge").GetComponent<Image>();
 
         maxHullIntegrity = currHullIntegrity = 100;
 

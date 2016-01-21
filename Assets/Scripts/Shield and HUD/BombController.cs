@@ -28,7 +28,7 @@ public class BombController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         playerBehavior = player.GetComponent<PlayerController>();
 
-        bombGauge = GameObject.Find("Bomb Gauge").GetComponent<Image>();
+        bombGauge = GameObject.FindGameObjectWithTag("Bomb Gauge").GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
