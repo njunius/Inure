@@ -3,7 +3,7 @@
  * 
  * Defines members specific to PointTurret child of SimpleTurret:
  * - Fires single bullet toward player
- * - Highest velocity of any bullet
+ * - Highest velocity bullets
  * - Medium rate of fire
  * - No acceleration
  * - Blue bullets
