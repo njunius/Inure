@@ -39,68 +39,678 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b06a39e9aed0a4897007019046f72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inspectorInputs:
-  - name: Longitudinal
-    bidirectional: 1
-    positiveAxis: w
-    negativeAxis: s
-    dead: 0
-    sensitivity: 1
-  - name: Lateral
-    bidirectional: 1
-    positiveAxis: d
-    negativeAxis: a
-    dead: 0
-    sensitivity: 1
-  - name: Vertical
-    bidirectional: 1
-    positiveAxis: Space
-    negativeAxis: Left Shift
-    dead: 0
-    sensitivity: 1
-  - name: Roll
-    bidirectional: 1
-    positiveAxis: e
-    negativeAxis: q
-    dead: 0
-    sensitivity: 1
-  - name: Pitch
-    bidirectional: 0
-    positiveAxis: Mouse Y
-    negativeAxis: 
-    dead: 0
-    sensitivity: 0.005
-  - name: Yaw
-    bidirectional: 0
-    positiveAxis: Mouse X
-    negativeAxis: 
-    dead: 0
-    sensitivity: 0.005
-  - name: Shield
-    bidirectional: 0
-    positiveAxis: Mouse 1
-    negativeAxis: 
-    dead: 0
-    sensitivity: 1
-  - name: Shoot
-    bidirectional: 0
-    positiveAxis: Mouse 0
-    negativeAxis: 
-    dead: 0
-    sensitivity: 1
-  - name: Pause
-    bidirectional: 0
-    positiveAxis: Esc
-    negativeAxis: 
-    dead: 0
-    sensitivity: 1
+  hi: 0
+  inspectorPresets:
+  - presetName: Keyboard & Mouse
+    bindings:
+    - name: Longitudinal
+      bidirectional: 1
+      posAxis: w
+      negAxis: s
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Lateral
+      bidirectional: 1
+      posAxis: d
+      negAxis: a
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Vertical
+      bidirectional: 1
+      posAxis: Space
+      negAxis: Left Shift
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Roll
+      bidirectional: 1
+      posAxis: q
+      negAxis: e
+      dead: 0
+      sensitivity: 0.025
+      invert: 0
+    - name: Pitch
+      bidirectional: 0
+      posAxis: Mouse Y
+      negAxis: 
+      dead: 0
+      sensitivity: 0.005
+      invert: 0
+    - name: Yaw
+      bidirectional: 0
+      posAxis: Mouse X
+      negAxis: 
+      dead: 0
+      sensitivity: 0.005
+      invert: 0
+    - name: Shield
+      bidirectional: 0
+      posAxis: Mouse 1
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Shoot
+      bidirectional: 0
+      posAxis: Mouse 0
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Pause
+      bidirectional: 1
+      posAxis: Esc
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
+  - presetName: Xbox 360 Controller
+    bindings:
+    - name: Longitudinal
+      bidirectional: 0
+      posAxis: Joystick Axis 2
+      negAxis: 
+      dead: 0.2
+      sensitivity: 1
+      invert: 1
+    - name: Lateral
+      bidirectional: 0
+      posAxis: Joystick Axis 1
+      negAxis: 
+      dead: 0.2
+      sensitivity: 1
+      invert: 0
+    - name: Vertical
+      bidirectional: 1
+      posAxis: Space
+      negAxis: Left Shift
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Roll
+      bidirectional: 1
+      posAxis: Joystick Button 4
+      negAxis: Joystick Button 5
+      dead: 0
+      sensitivity: 0.025
+      invert: 0
+    - name: Pitch
+      bidirectional: 0
+      posAxis: Joystick Axis 5
+      negAxis: 
+      dead: 0.2
+      sensitivity: 0.025
+      invert: 1
+    - name: Yaw
+      bidirectional: 0
+      posAxis: Joystick Axis 4
+      negAxis: 
+      dead: 0.2
+      sensitivity: 0.025
+      invert: 0
+    - name: Shield
+      bidirectional: 1
+      posAxis: Joystick Axis 24
+      negAxis: Joystick Axis 3
+      dead: 0.3
+      sensitivity: 1
+      invert: 0
+    - name: Shoot
+      bidirectional: 1
+      posAxis: Joystick Axis 3
+      negAxis: Joystick Axis 24
+      dead: 0.3
+      sensitivity: 1
+      invert: 0
+    - name: Pause
+      bidirectional: 1
+      posAxis: Joystick Axis 1
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
+  - presetName: Joystick
+    bindings:
+    - name: Longitudinal
+      bidirectional: 1
+      posAxis: w
+      negAxis: s
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Lateral
+      bidirectional: 1
+      posAxis: d
+      negAxis: a
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Vertical
+      bidirectional: 1
+      posAxis: Space
+      negAxis: Left Shift
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Roll
+      bidirectional: 1
+      posAxis: e
+      negAxis: q
+      dead: 0
+      sensitivity: 0.05
+      invert: 0
+    - name: Pitch
+      bidirectional: 0
+      posAxis: Mouse Y
+      negAxis: 
+      dead: 0
+      sensitivity: 0.005
+      invert: 0
+    - name: Yaw
+      bidirectional: 0
+      posAxis: Mouse X
+      negAxis: 
+      dead: 0
+      sensitivity: 0.005
+      invert: 0
+    - name: Shield
+      bidirectional: 0
+      posAxis: Mouse 1
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Shoot
+      bidirectional: 0
+      posAxis: Mouse 0
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
+    - name: Pause
+      bidirectional: 1
+      posAxis: Esc
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[2].preset.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[0].name
+      value: Longitudinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].presetName
+      value: Keyboard & Mouse
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].presetName
+      value: Xbox 360 Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[0].bidirectional
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[2].presetName
+      value: Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[2].preset.Array.data[0].name
+      value: Longitudinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[0].posAxis
+      value: w
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[0].negAxis
+      value: s
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[0].sensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[1].name
+      value: Lateral
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[1].posAxis
+      value: d
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[1].negAxis
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[1].sensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[2].name
+      value: Vertical
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[2].posAxis
+      value: Space
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[2].negAxis
+      value: Left Shift
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[2].sensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[3].name
+      value: Roll
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[3].posAxis
+      value: e
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[3].negAxis
+      value: q
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[3].sensitivity
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[4].name
+      value: Pitch
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[4].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[4].posAxis
+      value: Mouse Y
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[4].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[4].sensitivity
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[5].name
+      value: Yaw
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[5].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[5].posAxis
+      value: Mouse X
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[5].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[5].sensitivity
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[6].name
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[6].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[6].posAxis
+      value: Mouse 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[6].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[6].sensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[7].name
+      value: Shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[7].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[7].posAxis
+      value: Mouse 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[7].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[7].sensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[8].name
+      value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[8].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[8].posAxis
+      value: Esc
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[8].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].preset.Array.data[8].sensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[0].name
+      value: Longitudinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[0].bidirectional
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[0].posAxis
+      value: w
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[0].negAxis
+      value: s
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[0].sensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[1].name
+      value: Lateral
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[1].posAxis
+      value: d
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[1].negAxis
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[2].name
+      value: Vertical
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[2].posAxis
+      value: Space
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[2].negAxis
+      value: Left Shift
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[3].name
+      value: Roll
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[3].posAxis
+      value: q
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[3].negAxis
+      value: e
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[3].sensitivity
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[4].name
+      value: Pitch
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[4].posAxis
+      value: Mouse Y
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[4].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[4].sensitivity
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[5].name
+      value: Yaw
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[5].posAxis
+      value: Mouse X
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[5].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[5].sensitivity
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[6].name
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[4].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[5].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[6].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[6].posAxis
+      value: Mouse 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[6].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[7].name
+      value: Shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[7].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[7].posAxis
+      value: Mouse 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[7].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[8].name
+      value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[8].posAxis
+      value: Esc
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[8].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[0].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[0].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[0].posAxis
+      value: Joystick Axis 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[0].dead
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[1].bidirectional
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[1].name
+      value: Joystick Axis 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[1].posAxis
+      value: Joystick Axis 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[1].negAxis
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[1].dead
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[3].posAxis
+      value: Joystick Button 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[3].negAxis
+      value: Joystick Button 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[4].posAxis
+      value: Joystick Axis 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[4].dead
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[5].posAxis
+      value: Joystick Axis 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[5].dead
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[8].posAxis
+      value: Joystick Button 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[6].name
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[6].posAxis
+      value: Joystick Axis 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[6].negAxis
+      value: Joystick Axis 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[6].dead
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[6].bidirectional
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[7].bidirectional
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[7].posAxis
+      value: Joystick Axis 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[7].negAxis
+      value: Joystick Axis 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[7].dead
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[3].sensitivity
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[0].sensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[0].invert
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[4].invert
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[4].sensitivity
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[5].sensitivity
+      value: 0.025
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153720}

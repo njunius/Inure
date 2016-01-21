@@ -11,18 +11,48 @@ using System.Collections.Generic;
 
 public class InputManager : MonoBehaviour {
 
-    public List<InputBinding> inspectorInputs;
-    Dictionary<string, InputBinding> inputs;
+    public int hi = 0;
+    public List<InspectorInputPreset> inspectorPresets;
+    private List<Dictionary<string, InputBinding>> inputPresets;
+
+    private int presetIndex = 0;
 
 	// Use this for initialization
 	void Start () {
-        inputs = new Dictionary<string, InputBinding>();
+        inputPresets = new List<Dictionary<string, InputBinding>>();
+        inputPresets.Add(new Dictionary<string, InputBinding>());
 
-        inspectorListToDict();
 
+        Debug.Log("Bloop");
+        inspectorToDicts();
+        Debug.Log("Blap");
 
     }
-	
+
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
+    void Update()
+    {
+        ///delete this after we have made an input options menu
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            //Switch to keyboard and mouse
+            presetIndex = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            //switch to gamepad
+            presetIndex = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            //switch to joystick
+            presetIndex = 2;
+        }
+    }
 
     public float getInput(string name)
     {
@@ -32,24 +62,24 @@ public class InputManager : MonoBehaviour {
         float negAxis = 0;
         float value;
 
-        if (inputs == null)
+        if (inputPresets == null || inputPresets[presetIndex] == null)
         {
             return 0;
         }
 
-        if (!inputs.ContainsKey(name))
+        if (!inputPresets[presetIndex].ContainsKey(name))
         {
             Debug.Log(name + " not bound.");
             return 0;
         }
-        InputBinding input = inputs[name];
+        InputBinding input = inputPresets[presetIndex][name];
 
-        posAxis = Input.GetAxis(input.positiveAxis);
+        posAxis = Input.GetAxis(input.posAxis);
         //Debug.Log(posAxis);
 
         if (input.bidirectional)
         {
-            negAxis = Input.GetAxis(input.negativeAxis);
+            negAxis = Input.GetAxis(input.negAxis);
         }
 
         if (input.bidirectional && Math.Abs(negAxis) > posAxis)
@@ -69,21 +99,26 @@ public class InputManager : MonoBehaviour {
         }
 
         value *= input.sensitivity;
-        //Debug.Log("value: " + value);
+        if (input.invert)
+        {
+            value *= -1;
+        }
+        if (value != 0)
+            Debug.Log(name + value);
         return value;
     }
 
     public bool getInputDown(string name)
     {
         /*  Returns true if input was pressed. Only checks positive input.*/
-        if (!inputs.ContainsKey(name))
+        if (!inputPresets[presetIndex].ContainsKey(name))
         {
             Debug.Log(name + " not bound.");
             return false;
         }
-        InputBinding input = inputs[name];
+        InputBinding input = inputPresets[presetIndex][name];
 
-        if (Input.GetButtonDown(input.positiveAxis))
+        if (Input.GetButtonDown(input.posAxis))
         {
             return true;
         }
@@ -93,34 +128,78 @@ public class InputManager : MonoBehaviour {
     public bool getInputUp(string name)
     {
         /*  Returns true if input was released.  Only checks positive input. */
-        if (!inputs.ContainsKey(name))
+        if (!inputPresets[presetIndex].ContainsKey(name))
         {
             Debug.Log(name + " not bound.");
             return false;
         }
-        InputBinding input = inputs[name];
+        InputBinding input = inputPresets[presetIndex][name];
 
-        if (Input.GetButtonUp(input.positiveAxis))
+        if (Input.GetButtonUp(input.posAxis))
         {
             return true;
         }
         return false;
     }
 
-    public void inspectorListToDict()
+    public void inspectorToDicts()
     {
-        foreach (InputBinding input in inspectorInputs)
+        Debug.Log("hello ");
+        if (inputPresets == null)
         {
-            if (!inputs.ContainsKey(input.name))
-            {
-                inputs.Add(input.name, input);
-            }
-            else
-            {
-                inputs[name] = input;
-            }
-            
+            inputPresets = new List<Dictionary<string, InputBinding>>();
+            inputPresets.Add(new Dictionary<string, InputBinding>());
         }
+
+        while (inputPresets.Count < inspectorPresets.Count)
+        {
+            inputPresets.Add(new Dictionary<string, InputBinding>());
+        }
+        //for each preset
+        for (int i = 0; i < inspectorPresets.Count; ++i)
+        {
+            //for each input
+            foreach (InputBinding input in inspectorPresets[i].bindings)
+            {
+                if (!inputPresets[i].ContainsKey(input.name))
+                {
+                    inputPresets[i].Add(input.name, input);
+                }
+                else
+                {
+                    inputPresets[i][name] = input;
+                }
+            }
+        }
+    }
+
+    public void nextPreset()
+    {
+        if (presetIndex <= inputPresets.Count)
+        {
+            presetIndex++;
+        }
+        else
+        {
+            presetIndex = 0;
+        }
+    }
+
+    public void prevPreset()
+    {
+        if (presetIndex > 0)
+        {
+            presetIndex--;
+        }
+        else
+        {
+            presetIndex = inputPresets.Count - 1;
+        }
+    }
+
+    public string getPresetName()
+    {
+        return inspectorPresets[presetIndex].presetName;
     }
 
 }
@@ -130,19 +209,35 @@ public class InputBinding
 {
     public string name;                 //Name of input binding
     public bool bidirectional;          //Does the input have different keys for positive and negative directions?
-    public string positiveAxis;         //Unity input for positive direction
-    public string negativeAxis;         //Unity input for negative direction
+    public string posAxis;         //Unity input for positive direction
+    public string negAxis;         //Unity input for negative direction
     public float dead;                  //Dead zone
     public float sensitivity;           //Multipier for sensitivity
+    public bool invert;
 
     public InputBinding()
     {
         name = "";
         bidirectional = false;
-        positiveAxis = "";
-        negativeAxis = "";
+        posAxis = "";
+        negAxis = "";
         dead = 0.1f;
         sensitivity = 1;
+        invert = false;
+    }
+}
+
+[Serializable]
+public class InspectorInputPreset
+{
+    public string presetName;
+    [SerializeField]
+    public List<InputBinding> bindings;
+
+    public InspectorInputPreset()
+    {
+        presetName = "New Preset";
+        bindings = new List<InputBinding>();
     }
 }
 

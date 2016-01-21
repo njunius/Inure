@@ -86,7 +86,7 @@ public class InputManagerInspector : Editor {
         if (GUI.changed)
         {
             Debug.Log(im == true);
-            im.inspectorListToDict();
+            im.inspectorToDicts();
             /*Debug.Log("change");
             im.inputs.Clear();
             foreach (InputBinding input in inputs)
