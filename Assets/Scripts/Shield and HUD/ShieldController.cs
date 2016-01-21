@@ -37,7 +37,7 @@ public class ShieldController : MonoBehaviour {
 
         bomb = GameObject.FindGameObjectWithTag("Bomb");
         bombBehavior = bomb.GetComponent<BombController>();
-        shieldGauge = GameObject.Find("Shield Gauge").GetComponent<Image>();
+        shieldGauge = GameObject.FindGameObjectWithTag("Shield Gauge").GetComponent<Image>();
     }
 
     // Update is called once per frame

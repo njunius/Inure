@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/*
+ * PointTurret.cs
+ * 
+ * Defines members specific to ArcTurret child of SimpleTurret:
+ * - Fires five bullets in arc toward player
+ * - High velocity bullets
+ * - Medium rate of fire
+ * - No acceleration
+ * - Green bullets
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class ArcTurret : SimpleTurret {
@@ -126,7 +137,7 @@ public class ArcTurret : SimpleTurret {
 			bulletObj = (GameObject) Instantiate (bulletPrefab, Vector3.RotateTowards (endOfTurret - turrCenter, rightNorm, SEPARATION_ANGLE*2, 0f) + turrCenter + (newAimDirNorm * (barrelList [4].relativeSpawnPoint)), zQuat);
 			break;
 		default:
-			Debug.Log ("Invalid Bullet Number");
+			Debug.Log ("Arc Turret: Invalid Bullet Number");
 			debugBool = true;
 			break;
 		}
