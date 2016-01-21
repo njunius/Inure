@@ -26,7 +26,7 @@ public class BulletBracketController : MonoBehaviour {
 	void Update () {
         if(Vector3.Distance(player.position, transform.position) < maxDistFromPlayer)
         {
-            transform.LookAt(Camera.main.transform, -Vector3.up);
+            transform.LookAt(Camera.main.transform, Camera.main.transform.up);
             brackets.enabled = true;
         }
         else
