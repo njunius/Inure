@@ -12,26 +12,20 @@ public class BulletBracketController : MonoBehaviour {
     private Transform player;
     private Image brackets;
 
-    private float maxDistFromPlayer;
+    //private float maxDistFromPlayer;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         brackets = GetComponentInChildren<Image>();
-        
-        maxDistFromPlayer = 10.0f; // To be adjusted later
+
+        brackets.enabled = false;
+        //maxDistFromPlayer = 10.0f; // To be adjusted later
     }
 
 	// Update is called once per frame
 	void Update () {
-        if(Vector3.Distance(player.position, transform.position) < maxDistFromPlayer)
-        {
+        if(brackets.enabled)
             transform.LookAt(Camera.main.transform, Camera.main.transform.up);
-            brackets.enabled = true;
-        }
-        else
-        {
-            brackets.enabled = false;
-        }
     }
 }
