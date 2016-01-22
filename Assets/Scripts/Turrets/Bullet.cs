@@ -12,7 +12,7 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-	private Vector3 velocity;
+	//private Vector3 velocity;
 
     private int absorbValue;
     private int damage;
@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position += velocity * Time.deltaTime;
+        //transform.position += velocity * Time.deltaTime;
         //gameObject.GetComponent<Rigidbody>().velocity = velocity;
 
         //Debug.Log ("update");
@@ -40,9 +40,9 @@ public class Bullet : MonoBehaviour {
 	 */
     public void setVars (Color bColor, Vector3 newVel) {
 		gameObject.GetComponent<Renderer> ().material.color = bColor;
-		velocity = newVel;
-        Debug.Log(velocity);
-        //gameObject.GetComponent<Rigidbody> ().velocity = velocity;
+		//velocity = newVel;
+        Debug.Log(newVel);
+        gameObject.GetComponent<Rigidbody> ().velocity = newVel;
 
     }
 
