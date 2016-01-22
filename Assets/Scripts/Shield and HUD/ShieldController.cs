@@ -107,9 +107,9 @@ public class ShieldController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Projectile" && shieldActive)
+        if (other.gameObject.CompareTag("Projectile") && shieldActive)
         {
-            bombBehavior.chargeBomb(1);
+            bombBehavior.chargeBomb(other.gameObject.GetComponent<Bullet>().getAbsorbValue());
         }
     }
 

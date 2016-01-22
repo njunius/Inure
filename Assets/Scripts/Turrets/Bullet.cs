@@ -7,40 +7,70 @@
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-	private Vector3 velocity;
+	//private Vector3 velocity;
+
+    private int absorbValue;
+    private int damage;
+
+    private Image brackets;
 
 	// Use this for initialization
 	void Start () {
+        brackets = GetComponentInChildren<Image>();
+        absorbValue = 1;
+        damage = 50;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position += velocity * Time.deltaTime;
-		//gameObject.GetComponent<Rigidbody> ().velocity = velocity;
-		//Debug.Log ("update");
-	}
+        //transform.position += velocity * Time.deltaTime;
+        //gameObject.GetComponent<Rigidbody>().velocity = velocity;
 
-	/*
+        //Debug.Log ("update");
+    }
+
+    /*
 	 * Description: Sets values for empty vars
 	 * post: color and velocity of bullet are set
 	 */
-	public void setVars (Color bColor, Vector3 newVel) {
+    public void setVars (Color bColor, Vector3 newVel) {
 		gameObject.GetComponent<Renderer> ().material.color = bColor;
-		velocity = newVel;
-	}
+		//velocity = newVel;
+        Debug.Log(newVel);
+        gameObject.GetComponent<Rigidbody> ().velocity = newVel;
 
-	void OnCollisionEnter (Collision hit) {
-		if (hit.gameObject.tag == "Player" && !hit.gameObject.GetComponent<PlayerController>().isShielded()) {
+    }
+
+    void OnCollisionEnter (Collision hit) {
+		if (hit.gameObject.CompareTag("Player") && !hit.gameObject.GetComponent<PlayerController>().isShielded()) {
             // note that the 50 is a placeholder for real damage values later
             // and that the player's health is base 100 for future reference
-            hit.gameObject.GetComponent<PlayerController>().takeDamage(50);
+            hit.gameObject.GetComponent<PlayerController>().takeDamage(damage);
 		}
-		if (hit.gameObject.tag != "Projectile") {
+		if (!hit.gameObject.CompareTag("Projectile")) {
 			Destroy (gameObject);
 		}
 	}
+
+    void OnTriggerEnter(Collider volume)
+    {
+        if (volume.gameObject.CompareTag("Warning Radius"))
+            brackets.enabled = true;
+    }
+
+    void OnTriggerExit(Collider volume)
+    {
+        if (volume.gameObject.CompareTag("Warning Radius"))
+            brackets.enabled = false;
+    }
+
+    public int getAbsorbValue()
+    {
+        return absorbValue;
+    }
 }
