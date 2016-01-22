@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 
     // player armor/health stats
     private int maxHullIntegrity;
-    private int currHullIntegrity;
+    public int currHullIntegrity; //Changed to Public for outside scripting
     private Image armorGauge;
 
     private Rigidbody rb;
@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody>();
         
-		//Set the UI objects and assign components
+		//Set the UI objects and assign components 
+		//(Wall of text to be fixed in future updates)
 		canvasOBJ = GameObject.Find("Canvas");
         UICanvas = canvasOBJ.GetComponent<Canvas>();
 		pauseTxtOBJ = GameObject.Find ("PausedTXT");
