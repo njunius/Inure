@@ -18,12 +18,14 @@ public class PlayerController : MonoBehaviour {
 
     // player armor/health stats
     private int maxHullIntegrity;
-    private int currHullIntegrity;
+    public int currHullIntegrity; //Changed to Public for outside scripting
     private Image armorGauge;
 
     private Rigidbody rb;
-    private GameObject pauseCanvas;
-    private Canvas pauseScreen;
+	private GameObject canvasOBJ, gameOverOBJ, pauseTxtOBJ, inureTxtOBJ; //UI GameObjects
+    private Canvas UICanvas; //Base user interface, pause menu here
+	private RawImage gameOver; //Game Over IMG
+	private Text pauseTxt, inureTxt;
 
     private ShieldController shield;
 
@@ -33,9 +35,20 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
-        pauseCanvas = GameObject.Find("Canvas");
-        pauseScreen = pauseCanvas.GetComponent<Canvas>();
-        pauseScreen.enabled = false;
+        
+		//Set the UI objects and assign components 
+		//(Wall of text to be fixed in future updates)
+		canvasOBJ = GameObject.Find("Canvas");
+        UICanvas = canvasOBJ.GetComponent<Canvas>();
+		pauseTxtOBJ = GameObject.Find ("PausedTXT");
+		pauseTxt = pauseTxtOBJ.GetComponent<Text> ();
+		inureTxtOBJ = GameObject.Find ("InureTXT");
+		inureTxt = inureTxtOBJ.GetComponent<Text> ();
+		gameOverOBJ = GameObject.Find("GameOverIMG");
+		gameOver = gameOverOBJ.GetComponent<RawImage> ();
+
+		UICanvas.enabled = false;
+		gameOver.enabled = false;
 
         shield = GetComponentInChildren<ShieldController>();
         armorGauge = GameObject.FindGameObjectWithTag("Armor Gauge").GetComponent<Image>();
@@ -61,14 +74,14 @@ public class PlayerController : MonoBehaviour {
             //Debug.Log("Pause!");
             paused = !paused;
             Time.timeScale = 0;
-            pauseScreen.enabled = true;
+            UICanvas.enabled = true;
         }
         else if (im.getInputDown("Pause") && paused)
         {
             //Debug.Log("UnPause!");
             paused = !paused;
             Time.timeScale = 1;
-            pauseScreen.enabled = false;
+            UICanvas.enabled = false;
         }
 
         // Shield Controls 
@@ -108,7 +121,18 @@ public class PlayerController : MonoBehaviour {
             rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
         }
 
-
+		//Activate the game over sequence when death is true
+		if (isDead ()) 
+		{
+			//Show Game Over Screen
+			pauseTxt.enabled = false;
+			inureTxt.enabled = false;
+			Time.timeScale = 0.3f;
+			gameOver.enabled = true;
+			UICanvas.enabled = true;
+			//Destroy player
+			this.enabled = false;
+		}
 
     }
 
