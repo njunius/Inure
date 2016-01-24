@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
         lookAtTarget = GameObject.FindGameObjectWithTag("Camera Target").GetComponent<Transform>();
 
         // y offset = -0.7 for new camera and -1.0 for newer camera from prototype
-        cameraPositionOffset = new Vector3(0.0f, -1.0f, 3.0f); // x offset should not be edited as that will uncenter the camera
+        cameraPositionOffset = new Vector3(0.0f, -1.0f, 4.0f); // x offset should not be edited as that will uncenter the camera
         transform.position = positionTarget.position - cameraPositionOffset;
 
         transform.LookAt(lookAtTarget.transform);
