@@ -102,8 +102,8 @@ public class InputManager : MonoBehaviour {
             value *= -1;
         }
         /*if (value != 0)
-            Debug.Log(name + value);
-        return value;*/
+            Debug.Log(name + value);*/
+        return value;
     }
 
     public bool getInputDown(string name)
