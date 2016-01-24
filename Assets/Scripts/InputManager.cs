@@ -14,11 +14,18 @@ public class InputManager : MonoBehaviour {
     public int hi = 0;
     public List<InspectorInputPreset> inspectorPresets;
     private List<Dictionary<string, InputBinding>> inputPresets;
+    private bool isOnWindows = false;
 
     private int presetIndex = 0;
 
 	// Use this for initialization
 	void Start () {
+        #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+           isOnWindows = true;
+        #endif
+
+
+
         inputPresets = new List<Dictionary<string, InputBinding>>();
         inputPresets.Add(new Dictionary<string, InputBinding>());
 

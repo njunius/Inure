@@ -152,14 +152,14 @@ MonoBehaviour:
       invert: 0
     - name: Shield
       bidirectional: 0
-      posAxis: joystick axis 3
+      posAxis: joystick axis 9
       negAxis: 
       dead: 0.3
       sensitivity: 1
       invert: 0
     - name: Shoot
       bidirectional: 0
-      posAxis: joystick button 1
+      posAxis: joystick axis 10
       negAxis: 
       dead: 0.3
       sensitivity: 1
@@ -198,7 +198,7 @@ MonoBehaviour:
       bidirectional: 0
       posAxis: joystick axis 3
       negAxis: 
-      dead: 0.5
+      dead: 0.8
       sensitivity: 0.025
       invert: 1
     - name: Pitch
@@ -625,7 +625,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[3].posAxis
-      value: joystick button 4
+      value: 'joystick '
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[3].negAxis
@@ -657,7 +657,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[6].posAxis
-      value: joystick axis 3
+      value: joystick axis 9
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[6].negAxis
@@ -677,7 +677,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[7].posAxis
-      value: joystick button 1
+      value: joystick axis 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[7].negAxis
@@ -737,7 +737,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[2].bindings.Array.data[3].dead
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[2].bindings.Array.data[4].posAxis
