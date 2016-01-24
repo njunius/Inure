@@ -137,7 +137,6 @@ public class ArcTurret : SimpleTurret {
 			bulletObj = (GameObject) Instantiate (bulletPrefab, Vector3.RotateTowards (endOfTurret - turrCenter, rightNorm, SEPARATION_ANGLE*2, 0f) + turrCenter + (newAimDirNorm * (barrelList [4].relativeSpawnPoint)), zQuat);
 			break;
 		default:
-			Debug.Log ("Arc Turret: Invalid Bullet Number");
 			debugBool = true;
 			break;
 		}

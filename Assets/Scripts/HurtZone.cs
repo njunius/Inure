@@ -15,12 +15,10 @@ public class HurtZone : MonoBehaviour {
 		//Debug.Log ("Entered Trigger!");
 
 		if (tmp.tag == "Player") {
-			//Debug.Log ("Offender == Player");
 			if (instaKill)
 				tmp.GetComponent<PlayerController> ().currHullIntegrity = 0;
 			else {
 				tmp.GetComponent<PlayerController> ().currHullIntegrity -= dmgRate;
-				Debug.Log ("Current Hull points: " + tmp.GetComponent<PlayerController> ().currHullIntegrity);
 			}
 		}
 	}
