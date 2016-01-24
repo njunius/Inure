@@ -77,7 +77,6 @@ public class PlayerController : MonoBehaviour {
         }
         else if (im.getInputDown("Pause") && paused)
         {
-            //Debug.Log("UnPause!");
             paused = !paused;
             Time.timeScale = 1;
             UICanvas.enabled = false;

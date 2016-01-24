@@ -137,7 +137,6 @@ public class TriangleTurret_Flat : SimpleTurret {
 
 			break;
 		default:
-			Debug.Log ("Triangle Turret: Invalid Shot Number");
 			break;
 		}
 	}

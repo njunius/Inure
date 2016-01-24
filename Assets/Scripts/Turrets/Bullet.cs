@@ -28,10 +28,7 @@ public class Bullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //transform.position += velocity * Time.deltaTime;
-        //gameObject.GetComponent<Rigidbody>().velocity = velocity;
 
-        //Debug.Log ("update");
     }
 
     /*
@@ -40,8 +37,6 @@ public class Bullet : MonoBehaviour {
 	 */
     public void setVars (Color bColor, Vector3 newVel) {
 		gameObject.GetComponent<Renderer> ().material.color = bColor;
-		//velocity = newVel;
-        Debug.Log(newVel);
         gameObject.GetComponent<Rigidbody> ().velocity = newVel;
 
     }
