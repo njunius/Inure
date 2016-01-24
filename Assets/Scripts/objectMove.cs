@@ -34,7 +34,7 @@ public class objectMove : MonoBehaviour {
 		} else if (closeEnough (gameObject, nodes [index]) && index + 1 >= numElements) {
 			index = 0;
 		}
-		Debug.Log (index);
+		//Debug.Log (index);
 		transform.position = Vector3.MoveTowards (transform.position, nodes[index].transform.position, speed);
 	}
 
