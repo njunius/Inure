@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour {
 
         if (im.getInputDown("Pause") && !paused)
         {
-            //Debug.Log("Pause!");
             paused = !paused;
             Time.timeScale = 0;
             pauseScreen.enabled = true;
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Shield Controls 
-        if (im.getInputDown("Shield") && !shield.getShieldActive() && shield.isShieldCharged())
+        if (im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
         {
             shield.setShieldActive(true);
         }

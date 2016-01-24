@@ -23,9 +23,7 @@ public class InputManager : MonoBehaviour {
         inputPresets.Add(new Dictionary<string, InputBinding>());
 
 
-        Debug.Log("Bloop");
         inspectorToDicts();
-        Debug.Log("Blap");
 
     }
 
@@ -69,7 +67,7 @@ public class InputManager : MonoBehaviour {
 
         if (!inputPresets[presetIndex].ContainsKey(name))
         {
-            Debug.Log(name + " not bound.");
+            //Debug.Log(name + " not bound.");
             return 0;
         }
         InputBinding input = inputPresets[presetIndex][name];
@@ -103,9 +101,9 @@ public class InputManager : MonoBehaviour {
         {
             value *= -1;
         }
-        if (value != 0)
+        /*if (value != 0)
             Debug.Log(name + value);
-        return value;
+        return value;*/
     }
 
     public bool getInputDown(string name)
@@ -113,12 +111,12 @@ public class InputManager : MonoBehaviour {
         /*  Returns true if input was pressed. Only checks positive input.*/
         if (!inputPresets[presetIndex].ContainsKey(name))
         {
-            Debug.Log(name + " not bound.");
+            //Debug.Log(name + " not bound.");
             return false;
         }
         InputBinding input = inputPresets[presetIndex][name];
 
-        if (Input.GetButtonDown(input.posAxis))
+        if ((presetIndex != 1 && Input.GetButtonDown(input.posAxis)) || (presetIndex == 1 && Input.GetKeyDown(input.posAxis)))
         {
             return true;
         }
@@ -130,7 +128,7 @@ public class InputManager : MonoBehaviour {
         /*  Returns true if input was released.  Only checks positive input. */
         if (!inputPresets[presetIndex].ContainsKey(name))
         {
-            Debug.Log(name + " not bound.");
+            //Debug.Log(name + " not bound.");
             return false;
         }
         InputBinding input = inputPresets[presetIndex][name];
@@ -144,7 +142,6 @@ public class InputManager : MonoBehaviour {
 
     public void inspectorToDicts()
     {
-        Debug.Log("hello ");
         if (inputPresets == null)
         {
             inputPresets = new List<Dictionary<string, InputBinding>>();
@@ -209,11 +206,11 @@ public class InputBinding
 {
     public string name;                 //Name of input binding
     public bool bidirectional;          //Does the input have different keys for positive and negative directions?
-    public string posAxis;         //Unity input for positive direction
-    public string negAxis;         //Unity input for negative direction
+    public string posAxis;              //Unity input for positive direction
+    public string negAxis;              //Unity input for negative direction
     public float dead;                  //Dead zone
     public float sensitivity;           //Multipier for sensitivity
-    public bool invert;
+    public bool invert;                 //Invert input values.
 
     public InputBinding()
     {
