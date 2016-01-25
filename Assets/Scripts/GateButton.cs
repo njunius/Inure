@@ -3,36 +3,59 @@ using System.Collections;
 
 public class GateButton : MonoBehaviour
 {
-    public bool Button_Pressed = false;
+    bool Raise_Gate = false;
+    bool Button_Pressed = false;
     float Pressed_Position = -30.2f;
-    Vector3 OG_Position;
+    float FinalHeight = 8f;
+    Vector3 gate_OG_Position;
+    Vector3 button_OG_Position;
     public float speed = 1f;
+    public float button_speed = 2f;
+    Vector3 buttonFinalPosition = Vector3.zero;
     Vector3 finalPosition = Vector3.zero;
-    float step;
+    float button_step;
+    float gate_step;
+    GameObject moving_gate = GameObject.Find("Moving Gate");
 
     // Use this for initialization
     void Start()
     {
-        OG_Position = transform.position;
-        step = speed * Time.deltaTime;
-        finalPosition = new Vector3(Pressed_Position, transform.position.y, transform.position.z);
+        button_OG_Position = transform.position;
+        //gate_OG_Position = moving_gate.transform.position;
+        button_step = button_speed * Time.deltaTime;
+        gate_step = speed * Time.deltaTime;
+        buttonFinalPosition = new Vector3(Pressed_Position, transform.position.y, transform.position.z);
+        finalPosition = new Vector3(transform.position.x, FinalHeight, transform.position.z);
     }
 
-    // Update is called once per frame
+    // called once per frame
     void Update()
     {
         if (Button_Pressed)
         {
-            transform.position = Vector3.MoveTowards(transform.position, finalPosition, step);
+            Debug.Log("BUTTON IS PRESSED!");
+            transform.position = Vector3.MoveTowards(transform.position, buttonFinalPosition, button_step);
 
-            if (transform.position == finalPosition)
+            //moving_gate.transform.position = Vector3.MoveTowards(transform.position, finalPosition, 10 * gate_step);
+
+            // Move Button back to Original Position once pressed all the way
+            if (transform.position == buttonFinalPosition)
             {
                 Button_Pressed = false;
             }
+
+            // Move Gate back to original Position once raised all the way
+            /*
+            if (moving_gate.transform.position == finalPosition)
+            {
+                Raise_Gate = false;
+            }
+            */
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, OG_Position, step);
+            transform.position = Vector3.MoveTowards(transform.position, button_OG_Position, button_step);
+            //moving_gate.transform.position = Vector3.MoveTowards(transform.position, gate_OG_Position, gate_step);
         }
     }
 
@@ -41,6 +64,7 @@ public class GateButton : MonoBehaviour
         if (hit.gameObject.tag == "Player")
         {
             Button_Pressed = true;
+            Raise_Gate = true;
         }
     }
 }
