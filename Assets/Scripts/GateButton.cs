@@ -15,17 +15,17 @@ public class GateButton : MonoBehaviour
     Vector3 finalPosition = Vector3.zero;
     float button_step;
     float gate_step;
-    GameObject moving_gate = GameObject.Find("Moving Gate");
+    public GameObject moving_gate;
 
     // Use this for initialization
     void Start()
     {
         button_OG_Position = transform.position;
-        //gate_OG_Position = moving_gate.transform.position;
+        gate_OG_Position = moving_gate.transform.position;
         button_step = button_speed * Time.deltaTime;
         gate_step = speed * Time.deltaTime;
         buttonFinalPosition = new Vector3(Pressed_Position, transform.position.y, transform.position.z);
-        finalPosition = new Vector3(transform.position.x, FinalHeight, transform.position.z);
+        finalPosition = new Vector3(moving_gate.transform.position.x, FinalHeight, moving_gate.transform.position.z);
     }
 
     // called once per frame
@@ -36,7 +36,7 @@ public class GateButton : MonoBehaviour
             Debug.Log("BUTTON IS PRESSED!");
             transform.position = Vector3.MoveTowards(transform.position, buttonFinalPosition, button_step);
 
-            //moving_gate.transform.position = Vector3.MoveTowards(transform.position, finalPosition, 10 * gate_step);
+            moving_gate.transform.position = Vector3.MoveTowards(moving_gate.transform.position, finalPosition, 10 * gate_step);
 
             // Move Button back to Original Position once pressed all the way
             if (transform.position == buttonFinalPosition)
@@ -45,17 +45,17 @@ public class GateButton : MonoBehaviour
             }
 
             // Move Gate back to original Position once raised all the way
-            /*
+            
             if (moving_gate.transform.position == finalPosition)
             {
                 Raise_Gate = false;
             }
-            */
+            
         }
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, button_OG_Position, button_step);
-            //moving_gate.transform.position = Vector3.MoveTowards(transform.position, gate_OG_Position, gate_step);
+            //moving_gate.transform.position = Vector3.MoveTowards(moving_gate.transform.position, gate_OG_Position, gate_step);
         }
     }
 
