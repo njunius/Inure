@@ -71,21 +71,19 @@ public class PlayerController : MonoBehaviour {
 
         if (im.getInputDown("Pause") && !paused)
         {
-            //Debug.Log("Pause!");
             paused = !paused;
             Time.timeScale = 0;
             UICanvas.enabled = true;
         }
         else if (im.getInputDown("Pause") && paused)
         {
-            //Debug.Log("UnPause!");
             paused = !paused;
             Time.timeScale = 1;
             UICanvas.enabled = false;
         }
 
         // Shield Controls 
-        if (im.getInputDown("Shield") && !shield.getShieldActive() && shield.isShieldCharged())
+        if (im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
         {
             shield.setShieldActive(true);
         }
