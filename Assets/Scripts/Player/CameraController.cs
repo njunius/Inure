@@ -41,7 +41,6 @@ public class CameraController : MonoBehaviour {
             {
                 targetDistance = hit.distance;
                 float ratio = currentDistance / defaultDistance;
-                Debug.Log(ratio);
                 targetHeight = ratio * defaultHeight;
             }
         }
