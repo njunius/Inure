@@ -55,13 +55,27 @@ public class Bullet : MonoBehaviour {
     void OnTriggerEnter(Collider volume)
     {
         if (volume.gameObject.CompareTag("Warning Radius"))
+        {
             brackets.enabled = true;
+        }
+
+        if (volume.gameObject.CompareTag("Threat Quadrant"))
+        {
+            volume.gameObject.GetComponent<ThreatTriggerController>().incrementBulletCount();
+        }
     }
 
     void OnTriggerExit(Collider volume)
     {
         if (volume.gameObject.CompareTag("Warning Radius"))
+        {
             brackets.enabled = false;
+        }
+
+        if (volume.gameObject.CompareTag("Threat Quadrant"))
+        {
+            volume.gameObject.GetComponent<ThreatTriggerController>().decrementBulletCount();
+        }
     }
 
     public int getAbsorbValue()

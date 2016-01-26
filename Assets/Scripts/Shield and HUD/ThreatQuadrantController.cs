@@ -1,0 +1,22 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+public class ThreatQuadrantController : MonoBehaviour {
+
+    public ThreatTriggerController trackedQuadrant;
+    private Image quadrantIndicator;
+    private float threatAlpha;
+
+	// Use this for initialization
+	void Start () {
+        quadrantIndicator = GetComponent<Image>();
+        threatAlpha = 0.0f;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        threatAlpha = 0.01f * trackedQuadrant.getNumBullets();
+	    quadrantIndicator.color = new Color(quadrantIndicator.color.r, quadrantIndicator.color.b, quadrantIndicator.color.g, threatAlpha);
+	}
+}
