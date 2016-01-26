@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour {
     private int damage;
 
     private Image brackets;
+    private ThreatTriggerController cachedTriggerLocation;
 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +49,10 @@ public class Bullet : MonoBehaviour {
             hit.gameObject.GetComponent<PlayerController>().takeDamage(damage);
 		}
 		if (!hit.gameObject.CompareTag("Projectile")) {
+            if(cachedTriggerLocation != null && cachedTriggerLocation.getNumBullets() > 1)
+            {
+                cachedTriggerLocation.decrementBulletCount();
+            }
 			Destroy (gameObject);
 		}
 	}
@@ -55,13 +60,28 @@ public class Bullet : MonoBehaviour {
     void OnTriggerEnter(Collider volume)
     {
         if (volume.gameObject.CompareTag("Warning Radius"))
+        {
             brackets.enabled = true;
+        }
+
+        if (volume.gameObject.CompareTag("Threat Quadrant"))
+        {
+            cachedTriggerLocation = volume.gameObject.GetComponent<ThreatTriggerController>();
+            cachedTriggerLocation.incrementBulletCount();
+        }
     }
 
     void OnTriggerExit(Collider volume)
     {
         if (volume.gameObject.CompareTag("Warning Radius"))
+        {
             brackets.enabled = false;
+        }
+
+        if (volume.gameObject.CompareTag("Threat Quadrant"))
+        {
+            volume.gameObject.GetComponent<ThreatTriggerController>().decrementBulletCount();
+        }
     }
 
     public int getAbsorbValue()
