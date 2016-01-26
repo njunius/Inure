@@ -13,7 +13,7 @@ public class ThreatQuadrantController : MonoBehaviour {
 	void Start () {
         quadrantIndicator = GetComponent<Image>();
         threatAlpha = 0.0f;
-        bulletsToAlpha = 0.01f; //value to be tweaked
+        bulletsToAlpha = 0.05f; //value to be tweaked
 	}
 	
 	// Update is called once per frame
