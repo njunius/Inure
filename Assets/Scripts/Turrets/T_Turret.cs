@@ -76,7 +76,7 @@ public class T_Turret : SimpleTurret {
 
 		//if the turret has made a complete rotation, reset the number of times it has been fired
 		if (numFire == 360 / ROTATION_ANGLE.z)
-			numFire = (int)ROTATION_ANGLE.z;
+			numFire = 1;
 		//else increase the number of times the turret has been fired
 		else
 			++numFire;
