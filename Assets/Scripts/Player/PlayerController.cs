@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour {
     // player armor/health stats
     private int maxHullIntegrity;
     public int currHullIntegrity; //Changed to Public for outside scripting
-    private Image armorGauge;
 
     private Rigidbody rb;
 	private GameObject canvasOBJ, gameOverOBJ, pauseTxtOBJ, inureTxtOBJ; //UI GameObjects
@@ -57,7 +56,6 @@ public class PlayerController : MonoBehaviour {
 		gameOver.enabled = false;
 
         shield = GetComponentInChildren<ShieldController>();
-        //armorGauge = GameObject.FindGameObjectWithTag("Armor Gauge").GetComponent<Image>();
 
         maxHullIntegrity = currHullIntegrity = 100;
 
@@ -112,8 +110,6 @@ public class PlayerController : MonoBehaviour {
 			isFiring = false;
 		}
 
-        // Armor Gauge control
-        //armorGauge.fillAmount = (float)currHullIntegrity / (float)maxHullIntegrity;
     }
 
     void FixedUpdate()
@@ -178,10 +174,19 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    // returns the status of the player's shield
     public bool isShielded()
     {
         return shield.getShieldActive();
+    }
+
+    public int getMaxHullIntegrity()
+    {
+        return maxHullIntegrity;
+    }
+
+    public int getCurrHullIntegrity()
+    {
+        return currHullIntegrity;
     }
 
 	private void fireBullets() {

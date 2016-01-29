@@ -121,4 +121,9 @@ public class Bullet : MonoBehaviour {
     {
         return absorbValue;
     }
+
+    public int getDamage()
+    {
+        return damage;
+    }
 }
