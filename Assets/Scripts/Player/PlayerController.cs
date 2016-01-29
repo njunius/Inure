@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
 		gameOver.enabled = false;
 
         shield = GetComponentInChildren<ShieldController>();
-        armorGauge = GameObject.FindGameObjectWithTag("Armor Gauge").GetComponent<Image>();
+        //armorGauge = GameObject.FindGameObjectWithTag("Armor Gauge").GetComponent<Image>();
 
         maxHullIntegrity = currHullIntegrity = 100;
 
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
         // Armor Gauge control
-        armorGauge.fillAmount = (float)currHullIntegrity / (float)maxHullIntegrity;
+        //armorGauge.fillAmount = (float)currHullIntegrity / (float)maxHullIntegrity;
     }
 
     void FixedUpdate()
