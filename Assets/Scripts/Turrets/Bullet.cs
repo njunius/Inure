@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour {
     private int damage;
 
     private Image brackets;
-    private ThreatTriggerController cachedTriggerLocation;
+    public ThreatTriggerController cachedTriggerLocation;
 
 	// Use this for initialization
 	void Awake () {
@@ -48,13 +48,11 @@ public class Bullet : MonoBehaviour {
             // and that the player's health is base 100 for future reference
             hit.gameObject.GetComponent<PlayerController>().takeDamage(damage);
 		}
-		if (!hit.gameObject.CompareTag("Projectile")) {
-            if(cachedTriggerLocation != null && cachedTriggerLocation.getNumBullets() > 1)
-            {
-                cachedTriggerLocation.decrementBulletCount();
-            }
-			Destroy (gameObject);
-		}
+        if(cachedTriggerLocation != null && cachedTriggerLocation.getNumBullets() > 1)
+        {
+            cachedTriggerLocation.decrementBulletCount();
+        }
+		Destroy (gameObject);
 	}
 
     void OnTriggerEnter(Collider volume)
