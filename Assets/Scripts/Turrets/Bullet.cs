@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour {
     private ThreatTriggerController cachedTriggerLocation;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         brackets = GetComponentInChildren<Image>();
         absorbValue = 1;
         damage = 50;

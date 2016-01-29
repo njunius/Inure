@@ -17,8 +17,6 @@ public class SimpleTurret : Turret {
 
 	public GameObject target;
 	protected float sensorRange = 30;
-	protected bool isFiring = false;
-	protected float fireDelay = 0;
 
 	// Use this for initialization
 	void Start () {

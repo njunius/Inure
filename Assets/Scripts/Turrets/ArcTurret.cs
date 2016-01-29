@@ -24,11 +24,11 @@ public class ArcTurret : SimpleTurret {
 
 	// Use this for initialization
 	void Start () {
-		distFromCenter = gameObject.GetComponent<Renderer> ().bounds.extents.z;
+		distFromCenter = gameObject.GetComponent<Renderer> ().bounds.size.z;
 
 		bulletVel = Velocity.High;
 		bulletColor = Color.green;
-		fireRate = RateOfFire.Medium;
+		fireRate = RateOfFire.Extreme;
 		barrelList = new TurretBarrel[5];
 		//leftmost
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x * RELATIVE_SPAWNPOINT_MULTIPLIER,
@@ -95,7 +95,7 @@ public class ArcTurret : SimpleTurret {
 
 		//if the turret has made a complete rotation, reset the number of times it has been fired
 		if (numFire == 360 / ROTATION_ANGLE.z)
-			numFire = (int)ROTATION_ANGLE.z;
+			numFire = 1;
 		//else increase the number of times the turret has been fired
 		else
 			++numFire;
