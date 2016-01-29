@@ -48,9 +48,6 @@ public class Bullet : MonoBehaviour {
             // and that the player's health is base 100 for future reference
             hit.gameObject.GetComponent<PlayerController>().takeDamage(damage);
 		}
-
-        Debug.Log(cachedTriggerLocation);
-
         if(cachedTriggerLocation != null && cachedTriggerLocation.getNumBullets() > 1)
         {
             cachedTriggerLocation.decrementBulletCount();
