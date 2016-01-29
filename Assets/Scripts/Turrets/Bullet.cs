@@ -100,8 +100,16 @@ public class Bullet : MonoBehaviour {
             brackets.enabled = false;
         }
 
-        if (volume.gameObject.CompareTag("Threat Quadrant") && volume.gameObject.GetComponent<ThreatTriggerController>().getNumBullets() > 0)
+        if (volume.gameObject.CompareTag("Threat Quadrant"))
         {
+            for(int i = 0; i < cachedTrigger.Length; ++i)
+            {
+                if(cachedTrigger[i] == volume.gameObject.GetComponent<ThreatTriggerController>())
+                {
+                    cachedTrigger[i] = null;
+                    break;
+                }
+            }
             volume.gameObject.GetComponent<ThreatTriggerController>().decrementBulletCount();
         }
     }
