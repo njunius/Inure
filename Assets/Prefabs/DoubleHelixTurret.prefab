@@ -84,7 +84,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 130172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddcee36f0dfa9ac46b68d524eeb91250, type: 3}
+  m_Script: {fileID: 11500000, guid: 6104d324546a7044ea48c573859ea3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 181106, guid: 0155d5d86cc9a9247973533badd825f4, type: 2}
@@ -96,7 +96,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 181106, guid: 0155d5d86cc9a9247973533badd825f4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 130172}
