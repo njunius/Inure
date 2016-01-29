@@ -81,6 +81,7 @@ public class Bullet : MonoBehaviour {
         if (volume.gameObject.CompareTag("Threat Quadrant"))
         {
             volume.gameObject.GetComponent<ThreatTriggerController>().decrementBulletCount();
+            cachedTriggerLocation = null;
         }
     }
 
