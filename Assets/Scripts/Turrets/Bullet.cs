@@ -44,10 +44,11 @@ public class Bullet : MonoBehaviour {
     }
 
     void OnCollisionEnter (Collision hit) {
-        if (hit.gameObject.CompareTag("Player") && !hit.gameObject.GetComponent<PlayerController>().isShielded()) {
+        PlayerController hitScript = hit.gameObject.GetComponent<PlayerController>();
+        if (hit.gameObject.CompareTag("Player") && !hitScript.isShielded()) {
             // note that the 50 is a placeholder for real damage values later
             // and that the player's health is base 100 for future reference
-            hit.gameObject.GetComponent<PlayerController>().takeDamage(damage);
+            hitScript.takeDamage(damage);
 		}
 
         // go through all cached triggers and remove the bullet from the count before destruction
@@ -72,19 +73,20 @@ public class Bullet : MonoBehaviour {
 
         if(volume.gameObject.CompareTag("Threat Quadrant"))
         {
+            ThreatTriggerController volumeScript = volume.gameObject.GetComponent<ThreatTriggerController>();
             // check to see if a quadrant has already been cached
             // if not add it
             // increment the quadrant's count
             for (int i = 0; i < cachedTrigger.Length; ++i)
             {
-                if(cachedTrigger[i] == volume.gameObject.GetComponent<ThreatTriggerController>())
+                if(cachedTrigger[i] == volumeScript)
                 {
                     cachedTrigger[i].incrementBulletCount();
                     break;
                 }
                 if(cachedTrigger[i] == null)
                 {
-                    cachedTrigger[i] = volume.gameObject.GetComponent<ThreatTriggerController>();
+                    cachedTrigger[i] = volumeScript;
                     cachedTrigger[i].incrementBulletCount();
                     break;
                 }
@@ -102,15 +104,16 @@ public class Bullet : MonoBehaviour {
 
         if (volume.gameObject.CompareTag("Threat Quadrant"))
         {
-            for(int i = 0; i < cachedTrigger.Length; ++i)
+            ThreatTriggerController volumeScript = volume.gameObject.GetComponent<ThreatTriggerController>();
+            for (int i = 0; i < cachedTrigger.Length; ++i)
             {
-                if(cachedTrigger[i] == volume.gameObject.GetComponent<ThreatTriggerController>())
+                if(cachedTrigger[i] == volumeScript)
                 {
                     cachedTrigger[i] = null;
                     break;
                 }
             }
-            volume.gameObject.GetComponent<ThreatTriggerController>().decrementBulletCount();
+            volumeScript.decrementBulletCount();
         }
     }
 
