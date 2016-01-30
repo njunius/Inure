@@ -4,7 +4,6 @@ using System.Collections;
 
 public class ArmorController : MonoBehaviour {
 
-    //public Bullet bullet;
     private PlayerController player;
 
     public GameObject armorChunk;
@@ -21,7 +20,7 @@ public class ArmorController : MonoBehaviour {
 
         Debug.Log(player.getMaxHullIntegrity());
 
-        currChunks = maxChunks = 100 / 50; // this should be player.getMaxHullIntegrity() / bullet.getDamage() or some variation to allow for dynamic sizing
+        currChunks = maxChunks = player.getMaxHullIntegrity() / 50; // this should be player.getMaxHullIntegrity() / gameController.getBulletDamage() or some variation to allow for dynamic sizing
 
         armorChunkTracker = new Image[maxChunks];
 

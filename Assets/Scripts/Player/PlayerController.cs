@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     public InputManager im;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         rb = GetComponent<Rigidbody>();
         
 		//Set the UI objects and assign components 
