@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
 
         shield = GetComponentInChildren<ShieldController>();
 
-        maxHullIntegrity = currHullIntegrity = 100;
+        maxHullIntegrity = currHullIntegrity = 2;
 
         if (GameObject.Find("GameController") == null)
         {
@@ -160,13 +160,13 @@ public class PlayerController : MonoBehaviour {
         return currHullIntegrity == 0;
     }
 
-    /* pre: damage is a positive number
-     * reduces the player's hull integrity by a specified amount
-     * NOTE: the player's health is base 100
+    /* 
+     * reduces the player's hull integrity by 1
+     * NOTE: the player's health is the number of hits that can be taken
      */
-    public void takeDamage(int damage)
+    public void takeDamage()
     {
-        currHullIntegrity -= damage;
+        --currHullIntegrity;
 
         if(currHullIntegrity < 0)
         {

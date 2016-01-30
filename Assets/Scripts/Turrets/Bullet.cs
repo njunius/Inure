@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour {
 	//private Vector3 velocity;
 
     private int absorbValue;
-    private int damage;
 
     private Image brackets;
     private ThreatTriggerController[] cachedTrigger; // can store up to all 4 quadrants behind the player if need be
@@ -24,8 +23,6 @@ public class Bullet : MonoBehaviour {
 	void Awake () {
         brackets = GetComponentInChildren<Image>();
         absorbValue = 1;
-        damage = 50;
-
         cachedTrigger = new ThreatTriggerController[4];
 	}
 	
@@ -48,7 +45,7 @@ public class Bullet : MonoBehaviour {
         if (hit.gameObject.CompareTag("Player") && !hitScript.isShielded()) {
             // note that the 50 is a placeholder for real damage values later
             // and that the player's health is base 100 for future reference
-            hitScript.takeDamage(damage);
+            hitScript.takeDamage();
 		}
 
         // go through all cached triggers and remove the bullet from the count before destruction
@@ -120,10 +117,5 @@ public class Bullet : MonoBehaviour {
     public int getAbsorbValue()
     {
         return absorbValue;
-    }
-
-    public int getDamage()
-    {
-        return damage;
     }
 }

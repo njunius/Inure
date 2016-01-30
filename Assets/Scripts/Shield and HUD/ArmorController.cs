@@ -20,7 +20,7 @@ public class ArmorController : MonoBehaviour {
 
         Debug.Log(player.getMaxHullIntegrity());
 
-        currChunks = maxChunks = player.getMaxHullIntegrity() / 50; // this should be player.getMaxHullIntegrity() / gameController.getBulletDamage() or some variation to allow for dynamic sizing
+        currChunks = maxChunks = player.getMaxHullIntegrity();
 
         armorChunkTracker = new Image[maxChunks];
 
@@ -36,7 +36,7 @@ public class ArmorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        currChunks = player.getCurrHullIntegrity() / 50; // 50 should be bulletDamage. Currently bulletDamage cannot be properly initialized
+        currChunks = player.getCurrHullIntegrity();
 
        /* for(int i = 0; i < currChunks; ++i)
         {
