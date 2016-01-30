@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour {
     // player armor/health stats
     private int maxHullIntegrity;
     public int currHullIntegrity; //Changed to Public for outside scripting
-    private Image armorGauge;
 
     private Rigidbody rb;
 	private GameObject canvasOBJ, gameOverOBJ, pauseTxtOBJ, inureTxtOBJ; //UI GameObjects
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     public InputManager im;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         rb = GetComponent<Rigidbody>();
         
 		//Set the UI objects and assign components 
@@ -57,9 +56,8 @@ public class PlayerController : MonoBehaviour {
 		gameOver.enabled = false;
 
         shield = GetComponentInChildren<ShieldController>();
-        armorGauge = GameObject.FindGameObjectWithTag("Armor Gauge").GetComponent<Image>();
 
-        maxHullIntegrity = currHullIntegrity = 100;
+        maxHullIntegrity = currHullIntegrity = 2;
 
         if (GameObject.Find("GameController") == null)
         {
@@ -112,8 +110,6 @@ public class PlayerController : MonoBehaviour {
 			isFiring = false;
 		}
 
-        // Armor Gauge control
-        armorGauge.fillAmount = (float)currHullIntegrity / (float)maxHullIntegrity;
     }
 
     void FixedUpdate()
@@ -164,13 +160,13 @@ public class PlayerController : MonoBehaviour {
         return currHullIntegrity == 0;
     }
 
-    /* pre: damage is a positive number
-     * reduces the player's hull integrity by a specified amount
-     * NOTE: the player's health is base 100
+    /* 
+     * reduces the player's hull integrity by 1
+     * NOTE: the player's health is the number of hits that can be taken
      */
-    public void takeDamage(int damage)
+    public void takeDamage()
     {
-        currHullIntegrity -= damage;
+        --currHullIntegrity;
 
         if(currHullIntegrity < 0)
         {
@@ -178,10 +174,19 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    // returns the status of the player's shield
     public bool isShielded()
     {
         return shield.getShieldActive();
+    }
+
+    public int getMaxHullIntegrity()
+    {
+        return maxHullIntegrity;
+    }
+
+    public int getCurrHullIntegrity()
+    {
+        return currHullIntegrity;
     }
 
 	private void fireBullets() {
