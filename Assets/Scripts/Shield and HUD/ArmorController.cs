@@ -4,15 +4,11 @@ using System.Collections;
 
 public class ArmorController : MonoBehaviour {
 
-    public Bullet bullet;
+    //public Bullet bullet;
     private PlayerController player;
 
     public GameObject armorChunk;
     private Image[] armorChunkTracker;
-
-    private int playerMaxHull;
-    private int playerCurrHull;
-    private int bulletDamage;
 
     private int maxChunks;
     private int currChunks;
@@ -23,7 +19,9 @@ public class ArmorController : MonoBehaviour {
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-        currChunks = maxChunks = 100 / 50;
+        Debug.Log(player.getMaxHullIntegrity());
+
+        currChunks = maxChunks = 100 / 50; // this should be player.getMaxHullIntegrity() / bullet.getDamage() or some variation to allow for dynamic sizing
 
         armorChunkTracker = new Image[maxChunks];
 
@@ -39,12 +37,12 @@ public class ArmorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        currChunks = player.getCurrHullIntegrity() / 50;
+        currChunks = player.getCurrHullIntegrity() / 50; // 50 should be bulletDamage. Currently bulletDamage cannot be properly initialized
 
-        for(int i = 0; i < currChunks; ++i)
+       /* for(int i = 0; i < currChunks; ++i)
         {
             armorChunkTracker[i].color = chunkOn;
-        }
+        }*/
         for(int i = currChunks; i < maxChunks; ++i)
         {
             armorChunkTracker[i].color = chunkOff;
