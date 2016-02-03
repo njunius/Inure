@@ -174,6 +174,15 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    /*
+     * newHullIntegrity cannot be greater than maxHullIntegrity
+     * newHullIntegrity cannot be less than 0
+     */
+    public void setHullIntegrity(int newHullIntegrity)
+    {
+        currHullIntegrity = newHullIntegrity;
+    }
+
     public bool isShielded()
     {
         return shield.getShieldActive();
