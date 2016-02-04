@@ -58,7 +58,9 @@ public class Bullet : MonoBehaviour {
 
         }
 
-        Destroy (gameObject);
+        //Destroy (gameObject);
+		//BulletDestroy.Destroy();
+		gameObject.SetActive(false);
 	}
 
     void OnTriggerEnter(Collider volume)

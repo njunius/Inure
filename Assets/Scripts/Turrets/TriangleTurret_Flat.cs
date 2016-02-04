@@ -1,5 +1,5 @@
 ﻿/*
- * PointTurret.cs
+ * TriangleTurret_Flat.cs
  * 
  * Defines members specific to ArcTurret child of SimpleTurret:
  * - Fires six bullets in flat (horizontal) triangle shape toward player
@@ -106,32 +106,20 @@ public class TriangleTurret_Flat : SimpleTurret {
 
 		switch (numShots) {
 		case 0:
-			bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (aimDirNorm * (barrelList [2].relativeSpawnPoint)), zQuat);
-			newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
+			CreateBullet (endOfTurret + (aimDirNorm * (barrelList [2].relativeSpawnPoint)), aimDirNorm);
 			++numShots;
 
 			break;
 		case 1:
-			bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), zQuat);
-			newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-			bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (-1 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [3].relativeSpawnPoint)), zQuat);
-			newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
+			CreateBullet (endOfTurret + (rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), aimDirNorm);
+			CreateBullet (endOfTurret + (-1 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [3].relativeSpawnPoint)), aimDirNorm);
 			++numShots;
 
 			break;
 		case 2:
-			bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (2 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), zQuat);
-			newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-			bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (aimDirNorm * (barrelList [2].relativeSpawnPoint)), zQuat);
-			newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-			bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (-2 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [4].relativeSpawnPoint)), zQuat);
-			newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
+			CreateBullet (endOfTurret + (2 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimDirNorm);
+			CreateBullet (endOfTurret + (aimDirNorm * (barrelList [2].relativeSpawnPoint)), aimDirNorm);
+			CreateBullet (endOfTurret + (-2 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [4].relativeSpawnPoint)), aimDirNorm);
 			CancelInvoke ("singleBurst");
 			numShots = 0;
 

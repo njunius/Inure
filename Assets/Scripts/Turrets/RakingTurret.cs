@@ -74,14 +74,11 @@ public class RakingTurret : AlgorithmicTurret {
 
 		//create each bullet
 		for (int numBarrel = 0; numBarrel < NUM_BARRELS; ++numBarrel) {
+			Vector3 rotVector = Vector3.RotateTowards (aimDirNorm, rightNorm, numFire * MAX_SWIVEL * SWIVEL_PERCENTAGE, 0f);
 			if (numBarrel % 2 == 0) {
-				bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret - (rightNorm * TURRET_RADIUS) - (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), zQuat);
-				newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-				newBullet.setVars (bulletColor, Vector3.RotateTowards(aimDirNorm, rightNorm, numFire * MAX_SWIVEL * SWIVEL_PERCENTAGE,  0f) * (float)bulletVel);
+				CreateBullet (endOfTurret - (rightNorm * TURRET_RADIUS) - (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), rotVector);
 			} else {
-				bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (rightNorm * TURRET_RADIUS) + (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), zQuat);
-				newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-				newBullet.setVars (bulletColor, Vector3.RotateTowards(aimDirNorm, rightNorm, numFire * MAX_SWIVEL * SWIVEL_PERCENTAGE,  0f) * (float)bulletVel);
+				CreateBullet (endOfTurret + (rightNorm * TURRET_RADIUS) + (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), rotVector);
 			}
 		}
 

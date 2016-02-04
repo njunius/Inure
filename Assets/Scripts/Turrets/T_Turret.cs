@@ -1,5 +1,5 @@
 ﻿/*
- * PointTurret.cs
+ * T_Turret.cs
  * 
  * Defines members specific to T-Turret child of SimpleTurret:
  * - Fires seven bullets in 'T' shape toward player
@@ -95,15 +95,9 @@ public class T_Turret : SimpleTurret {
 
 			Vector3 aimDirNorm = gameObject.transform.forward;
 			aimDirNorm.Normalize ();
-			GameObject bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), zQuat);
-			Bullet newBullet = (Bullet)bulletObj.GetComponent(typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-			bulletObj = (GameObject) Instantiate (bulletPrefab, endOfTurret + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), zQuat);
-			newBullet = (Bullet)bulletObj.GetComponent(typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-			bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (-1 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), zQuat);
-			newBullet = (Bullet)bulletObj.GetComponent(typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
+			CreateBullet (endOfTurret + (rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimDirNorm);
+			CreateBullet (endOfTurret + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), aimDirNorm);
+			CreateBullet (endOfTurret + (-1 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimDirNorm);
 
 			CancelInvoke ("singleBurst");
 			numShots = 0;
@@ -111,9 +105,7 @@ public class T_Turret : SimpleTurret {
 		else {
 			Vector3 aimDirNorm = gameObject.transform.forward;
 			aimDirNorm.Normalize ();
-			GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, endOfTurret + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), zQuat);
-			Bullet newBullet = (Bullet)bulletObj.GetComponent(typeof(Bullet));
-			newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
+			CreateBullet (endOfTurret + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), aimDirNorm);
 			++numShots;
 		}
 	}
