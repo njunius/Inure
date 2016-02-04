@@ -13,13 +13,18 @@ public class PlayerController : MonoBehaviour {
     public float moveSpeed = 20.0f;
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
+    public Color bulletColor = Color.blue;
+	public float bulletVel = 40.0f;
+	public float fireRate = 0.2f;
+	public GameObject bulletPrefab;
+	private Vector3 frontOfShip;
+	private bool isFiring = false;
 
     public bool paused = false;
 
     // player armor/health stats
     private int maxHullIntegrity;
     public int currHullIntegrity; //Changed to Public for outside scripting
-    private Image armorGauge;
 
     private Rigidbody rb;
 	private GameObject canvasOBJ, gameOverOBJ, pauseTxtOBJ, inureTxtOBJ; //UI GameObjects
@@ -33,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     public InputManager im;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         rb = GetComponent<Rigidbody>();
         
 		//Set the UI objects and assign components 
@@ -51,9 +56,8 @@ public class PlayerController : MonoBehaviour {
 		gameOver.enabled = false;
 
         shield = GetComponentInChildren<ShieldController>();
-        armorGauge = GameObject.FindGameObjectWithTag("Armor Gauge").GetComponent<Image>();
 
-        maxHullIntegrity = currHullIntegrity = 100;
+        maxHullIntegrity = currHullIntegrity = 2;
 
         if (GameObject.Find("GameController") == null)
         {
@@ -66,6 +70,11 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		//find new point at front of ship for firing
+		Vector3 forwardNorm = gameObject.transform.forward;
+		forwardNorm.Normalize ();
+		frontOfShip = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
 
         //Toggles pausing the game
 
@@ -88,8 +97,19 @@ public class PlayerController : MonoBehaviour {
             shield.setShieldActive(true);
         }
 
-        // Armor Gauge control
-        armorGauge.fillAmount = (float)currHullIntegrity / (float)maxHullIntegrity;
+		// Shooting controls
+		if (im.getInputDown("Shoot") && !isFiring)
+		{
+			isFiring = true;
+			InvokeRepeating ("fireBullets", 0.0f, fireRate);
+		}
+
+		if (im.getInputUp ("Shoot"))
+		{
+			CancelInvoke ("fireBullets");
+			isFiring = false;
+		}
+
     }
 
     void FixedUpdate()
@@ -140,13 +160,13 @@ public class PlayerController : MonoBehaviour {
         return currHullIntegrity == 0;
     }
 
-    /* pre: damage is a positive number
-     * reduces the player's hull integrity by a specified amount
-     * NOTE: the player's health is base 100
+    /* 
+     * reduces the player's hull integrity by 1
+     * NOTE: the player's health is the number of hits that can be taken
      */
-    public void takeDamage(int damage)
+    public void takeDamage()
     {
-        currHullIntegrity -= damage;
+        --currHullIntegrity;
 
         if(currHullIntegrity < 0)
         {
@@ -154,9 +174,47 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    // returns the status of the player's shield
+    /*
+     * newHullIntegrity cannot be greater than maxHullIntegrity
+     * newHullIntegrity cannot be less than 0
+     */
+    public void setHullIntegrity(int newHullIntegrity)
+    {
+        currHullIntegrity = newHullIntegrity;
+    }
+
     public bool isShielded()
     {
         return shield.getShieldActive();
     }
+
+    public int getMaxHullIntegrity()
+    {
+        return maxHullIntegrity;
+    }
+
+    public int getCurrHullIntegrity()
+    {
+        return currHullIntegrity;
+    }
+
+	private void fireBullets() {
+		Vector3 aimDirNorm = gameObject.transform.forward;
+		aimDirNorm.Normalize ();
+		Vector3 realBulletVel = aimDirNorm * (float)bulletVel;
+		Vector3 shipVel = GetComponent<Rigidbody> ().velocity;
+		shipVel.Normalize ();
+
+		if (aimDirNorm != -1 * shipVel) {
+			realBulletVel += GetComponent<Rigidbody> ().velocity;
+		}
+
+		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.right, transform.localRotation);
+		PlayerBullet newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
+		newBullet.setVars (bulletColor, realBulletVel);
+
+		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip - transform.right, transform.localRotation);
+		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
+		newBullet.setVars (bulletColor, realBulletVel);
+	}
 }

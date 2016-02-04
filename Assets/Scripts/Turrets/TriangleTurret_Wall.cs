@@ -1,5 +1,5 @@
 ﻿/*
- * PointTurret.cs
+ * TriangleTurret_Wall.cs
  * 
  * Defines members specific to ArcTurret child of SimpleTurret:
  * - Fires six bullets in wall-like (vertical) triangle shape toward player
@@ -91,39 +91,16 @@ public class TriangleTurret_Wall : SimpleTurret {
 		//distance between barrels 1 and 2 (second row of barrels) - same as half width of base of triangle
 		float middleDist = Mathf.Tan(TRIANGLE_ANGLE / 2) * TRIANGLE_HEIGHT;
 
-		//top
-		GameObject bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (TRIANGLE_HEIGHT / 2 * upNorm) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), zQuat);
-		Bullet newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-		newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-
-		//center-left
-		bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (-1 * middleDist / 2 * rightNorm) + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), zQuat);
-		newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-		newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-
-		//center-right
-		bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (middleDist / 2 * rightNorm) + (aimDirNorm * (barrelList [2].relativeSpawnPoint)), zQuat);
-		newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-		newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-
-		//bottom-left
-		bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (-1 * middleDist * rightNorm) + (-1 * TRIANGLE_HEIGHT / 2 * upNorm) + (aimDirNorm * (barrelList [3].relativeSpawnPoint)), zQuat);
-		newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-		newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-
-		//bottom-center
-		bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (-1 * TRIANGLE_HEIGHT / 2 * upNorm) + (aimDirNorm * (barrelList [4].relativeSpawnPoint)), zQuat);
-		newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-		newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-
-		//bottom-right
-		bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (middleDist * rightNorm) + (-1 * TRIANGLE_HEIGHT / 2 * upNorm) + (aimDirNorm * (barrelList [5].relativeSpawnPoint)), zQuat);
-		newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-		newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
+		CreateBullet (endOfTurret + (TRIANGLE_HEIGHT / 2 * upNorm) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimDirNorm);
+		CreateBullet (endOfTurret + (-1 * middleDist / 2 * rightNorm) + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), aimDirNorm);
+		CreateBullet (endOfTurret + (middleDist / 2 * rightNorm) + (aimDirNorm * (barrelList [2].relativeSpawnPoint)), aimDirNorm);
+		CreateBullet (endOfTurret + (-1 * middleDist * rightNorm) + (-1 * TRIANGLE_HEIGHT / 2 * upNorm) + (aimDirNorm * (barrelList [3].relativeSpawnPoint)), aimDirNorm);
+		CreateBullet (endOfTurret + (-1 * TRIANGLE_HEIGHT / 2 * upNorm) + (aimDirNorm * (barrelList [4].relativeSpawnPoint)), aimDirNorm);
+		CreateBullet (endOfTurret + (middleDist * rightNorm) + (-1 * TRIANGLE_HEIGHT / 2 * upNorm) + (aimDirNorm * (barrelList [5].relativeSpawnPoint)), aimDirNorm);
 
 		//if the turret has made a complete rotation, reset the number of times it has been fired
 		if (numFire == 360 / ROTATION_ANGLE.z)
-			numFire = (int)ROTATION_ANGLE.z;
+			numFire = 1;
 		//else increase the number of times the turret has been fired
 		else
 			++numFire;

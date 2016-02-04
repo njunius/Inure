@@ -55,7 +55,7 @@ public class GateButton : MonoBehaviour
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, button_OG_Position, button_step);
-            //moving_gate.transform.position = Vector3.MoveTowards(moving_gate.transform.position, gate_OG_Position, gate_step);
+            moving_gate.transform.position = Vector3.MoveTowards(moving_gate.transform.position, gate_OG_Position, gate_step);
         }
     }
 

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HurtZone : MonoBehaviour {
 	public bool instaKill = false; //Whether the player is instantly killed
-	public int dmgRate = 50; //Damage done if instaKill == false
+	//public int dmgRate = 50; //Damage done if instaKill == false (commented due to new hullIntegrity system, see playercontroller)
 	/*// Use this for initialization
 	void Start () {
 	
@@ -14,11 +14,11 @@ public class HurtZone : MonoBehaviour {
 		GameObject tmp = other.gameObject;
 		//Debug.Log ("Entered Trigger!");
 
-		if (tmp.tag == "Player") {
+		if (tmp.CompareTag("Player")) {
 			if (instaKill)
-				tmp.GetComponent<PlayerController> ().currHullIntegrity = 0;
+				tmp.GetComponent<PlayerController> ().setHullIntegrity(0);
 			else {
-				tmp.GetComponent<PlayerController> ().currHullIntegrity -= dmgRate;
+				tmp.GetComponent<PlayerController> ().takeDamage();
 			}
 		}
 	}

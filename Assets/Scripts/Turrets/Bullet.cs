@@ -15,21 +15,19 @@ public class Bullet : MonoBehaviour {
 	//private Vector3 velocity;
 
     private int absorbValue;
-    private int damage;
 
     private Image brackets;
-    private ThreatTriggerController cachedTriggerLocation;
+    private ThreatTriggerController[] cachedTrigger; // can store up to all 4 quadrants behind the player if need be
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         brackets = GetComponentInChildren<Image>();
         absorbValue = 1;
-        damage = 50;
+        cachedTrigger = new ThreatTriggerController[4];
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
     }
 
     /*
@@ -43,18 +41,26 @@ public class Bullet : MonoBehaviour {
     }
 
     void OnCollisionEnter (Collision hit) {
-		if (hit.gameObject.CompareTag("Player") && !hit.gameObject.GetComponent<PlayerController>().isShielded()) {
+        PlayerController hitScript = hit.gameObject.GetComponent<PlayerController>();
+        if (hit.gameObject.CompareTag("Player") && !hitScript.isShielded()) {
             // note that the 50 is a placeholder for real damage values later
             // and that the player's health is base 100 for future reference
-            hit.gameObject.GetComponent<PlayerController>().takeDamage(damage);
+            hitScript.takeDamage();
 		}
-		if (!hit.gameObject.CompareTag("Projectile")) {
-            if(cachedTriggerLocation != null && cachedTriggerLocation.getNumBullets() > 1)
+
+        // go through all cached triggers and remove the bullet from the count before destruction
+        for(int i = 0; i < cachedTrigger.Length; ++i)
+        {
+            if (cachedTrigger[i] != null && cachedTrigger[i].getNumBullets() > 0)
             {
-                cachedTriggerLocation.decrementBulletCount();
+                cachedTrigger[i].decrementBulletCount();
             }
-			Destroy (gameObject);
-		}
+
+        }
+
+        //Destroy (gameObject);
+		//BulletDestroy.Destroy();
+		gameObject.SetActive(false);
 	}
 
     void OnTriggerEnter(Collider volume)
@@ -64,11 +70,28 @@ public class Bullet : MonoBehaviour {
             brackets.enabled = true;
         }
 
-        if (volume.gameObject.CompareTag("Threat Quadrant"))
+        if(volume.gameObject.CompareTag("Threat Quadrant"))
         {
-            cachedTriggerLocation = volume.gameObject.GetComponent<ThreatTriggerController>();
-            cachedTriggerLocation.incrementBulletCount();
+            ThreatTriggerController volumeScript = volume.gameObject.GetComponent<ThreatTriggerController>();
+            // check to see if a quadrant has already been cached
+            // if not add it
+            // increment the quadrant's count
+            for (int i = 0; i < cachedTrigger.Length; ++i)
+            {
+                if(cachedTrigger[i] == volumeScript)
+                {
+                    cachedTrigger[i].incrementBulletCount();
+                    break;
+                }
+                if(cachedTrigger[i] == null)
+                {
+                    cachedTrigger[i] = volumeScript;
+                    cachedTrigger[i].incrementBulletCount();
+                    break;
+                }
+            }
         }
+
     }
 
     void OnTriggerExit(Collider volume)
@@ -80,7 +103,16 @@ public class Bullet : MonoBehaviour {
 
         if (volume.gameObject.CompareTag("Threat Quadrant"))
         {
-            volume.gameObject.GetComponent<ThreatTriggerController>().decrementBulletCount();
+            ThreatTriggerController volumeScript = volume.gameObject.GetComponent<ThreatTriggerController>();
+            for (int i = 0; i < cachedTrigger.Length; ++i)
+            {
+                if(cachedTrigger[i] == volumeScript)
+                {
+                    cachedTrigger[i] = null;
+                    break;
+                }
+            }
+            volumeScript.decrementBulletCount();
         }
     }
 

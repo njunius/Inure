@@ -1,5 +1,5 @@
 ﻿/*
- * PointTurret.cs
+ * ArcTurret.cs
  * 
  * Defines members specific to ArcTurret child of SimpleTurret:
  * - Fires five bullets in arc toward player
@@ -24,29 +24,29 @@ public class ArcTurret : SimpleTurret {
 
 	// Use this for initialization
 	void Start () {
-		distFromCenter = gameObject.GetComponent<Renderer> ().bounds.extents.z;
+		distFromCenter = gameObject.GetComponent<Renderer> ().bounds.size.z;
 
 		bulletVel = Velocity.High;
 		bulletColor = Color.green;
-		fireRate = RateOfFire.Medium;
+		fireRate = RateOfFire.Extreme;
 		barrelList = new TurretBarrel[5];
 		//leftmost
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x * RELATIVE_SPAWNPOINT_MULTIPLIER,
-											(int)bulletVel);
+			(int)bulletVel);
 		//center-left
 		barrelList [1] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x * RELATIVE_SPAWNPOINT_MULTIPLIER,
-											(int)bulletVel);
+			(int)bulletVel);
 		//center
 		barrelList [2] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x * RELATIVE_SPAWNPOINT_MULTIPLIER,
-											(int)bulletVel);
+			(int)bulletVel);
 		//center-right
 		barrelList [3] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x * RELATIVE_SPAWNPOINT_MULTIPLIER,
-											(int)bulletVel);
+			(int)bulletVel);
 		//leftmost
 		barrelList [4] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x * RELATIVE_SPAWNPOINT_MULTIPLIER,
-											(int)bulletVel);
+			(int)bulletVel);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
@@ -64,13 +64,13 @@ public class ArcTurret : SimpleTurret {
 			//if not firing, start firing
 			if (!isFiring) {
 				isFiring = true;
-				InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+				InvokeRepeating ("Fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
 			}
 		}
 		//if the player is not within range, but the turret is firing, stop firing
 		else if (isFiring) {
 			isFiring = false;
-			CancelInvoke ("fire");
+			CancelInvoke ("Fire");
 		}
 	}
 
@@ -78,7 +78,7 @@ public class ArcTurret : SimpleTurret {
 	 * Description: Shoots five bullets with ArcTurrets specs
 	 * Post: A bullet has been fired from all TurretBarrels
 	 */
-	protected void fire () {
+	protected void Fire () {
 		Vector3 turretCenter = gameObject.GetComponent<Renderer> ().bounds.center;
 		Vector3 aimDirNorm = gameObject.transform.forward;
 		Vector3 leftNorm = gameObject.transform.right * -1;
@@ -87,15 +87,15 @@ public class ArcTurret : SimpleTurret {
 		leftNorm.Normalize ();
 		rightNorm.Normalize ();
 
-		createBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 0);
-		createBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 1);
-		createBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 2);
-		createBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 3);
-		createBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 4);
+		DetermineBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 0);
+		DetermineBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 1);
+		DetermineBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 2);
+		DetermineBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 3);
+		DetermineBullet (turretCenter, aimDirNorm, leftNorm, rightNorm, 4);
 
 		//if the turret has made a complete rotation, reset the number of times it has been fired
 		if (numFire == 360 / ROTATION_ANGLE.z)
-			numFire = (int)ROTATION_ANGLE.z;
+			numFire = 1;
 		//else increase the number of times the turret has been fired
 		else
 			++numFire;
@@ -110,39 +110,35 @@ public class ArcTurret : SimpleTurret {
 	 * - rightNorm: The normalized vector denoting the direction directly rightward from the ArcTurret GameObject
 	 * - bulletNum: The number denoting which of TurretBarrels 0 through 4 is creating a bullet
 	 */
-	private void createBullet (Vector3 turrCenter, Vector3 aimDirNormMid, Vector3 leftNorm, Vector3 rightNorm, int bulletNum) {
+	private void DetermineBullet (Vector3 turrCenter, Vector3 aimDirNormMid, Vector3 leftNorm, Vector3 rightNorm, int bulletNum) {
 		Vector3 newAimDirNorm = Vector3.zero;
 		GameObject bulletObj = null;
 		bool debugBool = false;
 
 		switch (bulletNum) {
 		case 0:
-			newAimDirNorm = Vector3.RotateTowards (aimDirNormMid, leftNorm, SEPARATION_ANGLE*2, 0f);
-			bulletObj = (GameObject) Instantiate (bulletPrefab, Vector3.RotateTowards (endOfTurret - turrCenter, leftNorm, SEPARATION_ANGLE*2, 0f) + turrCenter + (newAimDirNorm * (barrelList [0].relativeSpawnPoint)), zQuat);
+			newAimDirNorm = Vector3.RotateTowards (aimDirNormMid, leftNorm, SEPARATION_ANGLE * 2, 0f);
+			CreateBullet (Vector3.RotateTowards (endOfTurret - turrCenter, leftNorm, SEPARATION_ANGLE*2, 0f) + turrCenter + (newAimDirNorm * (barrelList [0].relativeSpawnPoint)), newAimDirNorm);
 			break;
 		case 1:
 			newAimDirNorm = Vector3.RotateTowards (aimDirNormMid, leftNorm, SEPARATION_ANGLE, 0f);
-			bulletObj = (GameObject) Instantiate (bulletPrefab, Vector3.RotateTowards (endOfTurret - turrCenter, leftNorm, SEPARATION_ANGLE, 0f) + turrCenter + (newAimDirNorm * (barrelList [1].relativeSpawnPoint)), zQuat);
+			CreateBullet (Vector3.RotateTowards (endOfTurret - turrCenter, leftNorm, SEPARATION_ANGLE, 0f) + turrCenter + (newAimDirNorm * (barrelList [1].relativeSpawnPoint)), newAimDirNorm);
 			break;
 		case 2:
 			newAimDirNorm = aimDirNormMid;
-			bulletObj = (GameObject) Instantiate (bulletPrefab, endOfTurret + (newAimDirNorm * (barrelList [2].relativeSpawnPoint)), zQuat);
+			CreateBullet (endOfTurret + (newAimDirNorm * (barrelList [2].relativeSpawnPoint)), newAimDirNorm);
 			break;
 		case 3:
 			newAimDirNorm = Vector3.RotateTowards (aimDirNormMid, rightNorm, SEPARATION_ANGLE, 0f);
-			bulletObj = (GameObject) Instantiate (bulletPrefab, Vector3.RotateTowards (endOfTurret - turrCenter, rightNorm, SEPARATION_ANGLE, 0f) + turrCenter + (newAimDirNorm * (barrelList [3].relativeSpawnPoint)), zQuat);
+			CreateBullet (Vector3.RotateTowards (endOfTurret - turrCenter, rightNorm, SEPARATION_ANGLE, 0f) + turrCenter + (newAimDirNorm * (barrelList [3].relativeSpawnPoint)), newAimDirNorm);
 			break;
 		case 4:
 			newAimDirNorm = Vector3.RotateTowards (aimDirNormMid, rightNorm, SEPARATION_ANGLE*2, 0f);
-			bulletObj = (GameObject) Instantiate (bulletPrefab, Vector3.RotateTowards (endOfTurret - turrCenter, rightNorm, SEPARATION_ANGLE*2, 0f) + turrCenter + (newAimDirNorm * (barrelList [4].relativeSpawnPoint)), zQuat);
+			CreateBullet (Vector3.RotateTowards (endOfTurret - turrCenter, rightNorm, SEPARATION_ANGLE*2, 0f) + turrCenter + (newAimDirNorm * (barrelList [4].relativeSpawnPoint)), newAimDirNorm);
 			break;
 		default:
 			debugBool = true;
 			break;
-		}
-		if (!debugBool) {
-			Bullet newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-			newBullet.setVars (bulletColor, newAimDirNorm * (float)bulletVel);
 		}
 	}
 }
