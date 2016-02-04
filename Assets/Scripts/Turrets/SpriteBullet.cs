@@ -16,6 +16,6 @@ public class SpriteBullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.LookAt(GameObject.FindWithTag("Camera Target").transform);
+		transform.LookAt(Camera.main.transform, Camera.main.transform.up);
 	}
 }
