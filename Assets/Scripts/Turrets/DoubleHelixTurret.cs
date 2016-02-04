@@ -64,15 +64,8 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 		Vector3 rightNorm = transform.right;
 		rightNorm.Normalize ();
 
-		//top
-		GameObject bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (-1 * rightNorm * BARREL_SEPARATION / 2) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), zQuat);
-		Bullet newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-		newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
-
-		//center-left
-		bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + (rightNorm * BARREL_SEPARATION / 2) + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), zQuat);
-		newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-		newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
+		CreateBullet (endOfTurret + (-1 * rightNorm * BARREL_SEPARATION / 2) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimDirNorm);
+		CreateBullet (endOfTurret + (rightNorm * BARREL_SEPARATION / 2) + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), aimDirNorm);
 
 		//rotate the turret by the given angle
 		transform.Rotate (ROTATION_ANGLE);

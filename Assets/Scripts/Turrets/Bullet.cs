@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour {
 
     private int absorbValue;
 
-    private Image brackets;
+    public Image brackets;
     private ThreatTriggerController[] cachedTrigger; // can store up to all 4 quadrants behind the player if need be
 
 	// Use this for initialization
@@ -58,7 +58,9 @@ public class Bullet : MonoBehaviour {
 
         }
 
-        Destroy (gameObject);
+        //Destroy (gameObject);
+		//BulletDestroy.Destroy();
+		gameObject.SetActive(false);
 	}
 
     void OnTriggerEnter(Collider volume)

@@ -18,7 +18,7 @@ public class PointTurret : SimpleTurret {
 	void Start () {
 		bulletVel = Velocity.Extreme;
 		bulletColor = Color.blue;
-		fireRate = RateOfFire.Medium;
+		fireRate = RateOfFire.Extreme;
 		barrelList = new TurretBarrel[1];
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x, 
 											(int)bulletVel);
@@ -54,8 +54,6 @@ public class PointTurret : SimpleTurret {
 	protected void fire () {
 		Vector3 aimDirNorm = gameObject.transform.forward;
 		aimDirNorm.Normalize ();
-		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, endOfTurret + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), zQuat);
-		Bullet newBullet = (Bullet)bulletObj.GetComponent(typeof(Bullet));
-		newBullet.setVars (bulletColor, aimDirNorm * (float)bulletVel);
+		CreateBullet (endOfTurret + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimDirNorm);
 	}
 }

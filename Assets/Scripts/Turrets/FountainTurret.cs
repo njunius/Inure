@@ -31,7 +31,7 @@ public class FountainTurret : AlgorithmicTurret {
 		bulletVel = Velocity.Low;
 		//orange
 		bulletColor = new Color(1f, 0.6f, 0f, 1f);
-		fireRate = RateOfFire.Extreme;
+		fireRate = RateOfFire.High;
 		barrelList = new TurretBarrel[NUM_BARRELS];
 
 		Vector3 forwardNorm = transform.forward;
@@ -86,9 +86,8 @@ public class FountainTurret : AlgorithmicTurret {
 		aimDirNorm = Vector3.RotateTowards (aimDirNorm, upNorm, MAX_SWIVEL * SWIVEL_PERCENTAGE * numFire, 0f);
 
 		for (int numBarrel = 0; numBarrel < NUM_BARRELS; ++numBarrel) {
-			bulletObj = (GameObject)Instantiate (bulletPrefab, endOfTurret + Quaternion.AngleAxis(360f / NUM_BARRELS * numBarrel, transform.forward) * bulletPosition, zQuat);
-			newBullet = (Bullet)bulletObj.GetComponent (typeof(Bullet));
-			newBullet.setVars (bulletColor, Quaternion.AngleAxis(360f / NUM_BARRELS * numBarrel, transform.forward) * aimDirNorm * (float)bulletVel);
+			Quaternion rotQuat = Quaternion.AngleAxis (360f / NUM_BARRELS * numBarrel, transform.forward);
+			CreateBullet (endOfTurret + rotQuat * bulletPosition, rotQuat * aimDirNorm);
 		}
 
 		if (rotatingOut) {
