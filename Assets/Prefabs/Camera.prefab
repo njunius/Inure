@@ -26,7 +26,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149596}
-  m_LocalRotation: {x: -0.02364701, y: 0, z: 0, w: 0.9997204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -15.6, y: 2.3799999, z: -3.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -48,7 +48,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.2
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -94,7 +94,19 @@ MonoBehaviour:
   cameraPositionOffset: {x: 0, y: 0, z: 0}
   cameraRotationOffset: {x: 0, y: 0, z: 0}
   defaultDistance: 4
+  currentDistance: 0
+  targetDistance: 0
   defaultHeight: -1
+  currentHeight: 0
+  targetHeight: 0
+  defaultSide: 0
+  currentSide: 0
+  targetSide: 0
+  clipNearDefault: 0.2
+  firstPersonPosition: {x: 0, y: 0, z: 0}
+  thirdPersonPosition: {x: 0, y: 0, z: 0}
+  gameController: {fileID: 0}
+  im: {fileID: 0}
 --- !u!124 &12497684
 Behaviour:
   m_ObjectHideFlags: 1
