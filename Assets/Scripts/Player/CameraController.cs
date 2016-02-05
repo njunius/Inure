@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum CameraMode { ThirdPerson, FirstPerson }
+
 public class CameraController : MonoBehaviour {
-    enum CameraMode {ThirdPerson, FirstPerson}
 
     CameraMode mode;
     private GameObject target;
@@ -259,6 +260,10 @@ public class CameraController : MonoBehaviour {
     void OnCollisionStay(Collision col)
     {
         Debug.Log("hey");
+    }
+
+    public CameraMode getMode(){
+        return mode;
     }
 }
 
