@@ -9,14 +9,12 @@ using System.Collections;
 
 public class BulletBracketController : MonoBehaviour {
 
-    private Transform player;
     private Image brackets;
 
     //private float maxDistFromPlayer;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         brackets = GetComponentInChildren<Image>();
 
         brackets.enabled = false;

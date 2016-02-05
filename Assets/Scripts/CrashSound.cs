@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletSound : MonoBehaviour
+public class CrashSound : MonoBehaviour
 {
     //public GameObject projectile;
-    public AudioClip shoot_sound;
-    public AudioClip machinegun_sound;
+    public AudioClip crash_sound;
 
     //private float bullet_speed = 2000f;
     private AudioSource source;
@@ -22,17 +21,19 @@ public class BulletSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (crashed)
         {
-            //Debug.Log("PLAYING FIRING SOUND!");
             float vol = Random.Range(vol_low_range, vol_high_range);
-            source.PlayOneShot(shoot_sound, vol);
+            source.PlayOneShot(crash_sound, vol);
+            crashed = false;
         }
-        if (Input.GetMouseButton(0))
+    }
+
+    void OnCollisionEnter(Collision hit)
+    {
+        if (hit.gameObject.tag == "Player")
         {
-            //Debug.Log("PLAYING machinegun SOUND!");
-            float vol = Random.Range(vol_low_range, vol_high_range);
-            source.PlayOneShot(machinegun_sound, vol);
+            crashed = true;
         }
     }
 }
