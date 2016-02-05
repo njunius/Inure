@@ -6,6 +6,7 @@ public class BulletSound : MonoBehaviour
 
     //public GameObject projectile;
     public AudioClip shoot_sound;
+    public AudioClip machinegun_sound;
 
     //private float bullet_speed = 2000f;
     private AudioSource source;
@@ -28,6 +29,12 @@ public class BulletSound : MonoBehaviour
             source.PlayOneShot(shoot_sound, vol);
             //GameObject shoot_this = Instantiate(projectile, transform.position, transform.rotation) as GameObject;
             //shoot_this.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, bullet_speed));
+        }
+        if (Input.GetMouseButton(0))
+        {
+            Debug.Log("PLAYING machinegun SOUND!");
+            float vol = Random.Range(vol_low_range, vol_high_range);
+            source.PlayOneShot(machinegun_sound, vol);
         }
     }
 }
