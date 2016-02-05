@@ -120,4 +120,16 @@ public class Bullet : MonoBehaviour {
     {
         return absorbValue;
     }
+
+	void OnEnable() {
+		Invoke ("Destroy", 10f);
+	}
+
+	public void Destroy() {
+		gameObject.SetActive (false);
+	}
+
+	void OnDisable() {
+		CancelInvoke ();
+	}
 }
