@@ -6,7 +6,6 @@ public class BulletSound : MonoBehaviour
     //public GameObject projectile;
     public AudioClip shoot_sound;
     public AudioClip machinegun_sound;
-    public AudioClip crash_sound;
 
     //private float bullet_speed = 2000f;
     private AudioSource source;
@@ -34,20 +33,6 @@ public class BulletSound : MonoBehaviour
             //Debug.Log("PLAYING machinegun SOUND!");
             float vol = Random.Range(vol_low_range, vol_high_range);
             source.PlayOneShot(machinegun_sound, vol);
-        }
-        if (crashed)
-        {
-            float vol = Random.Range(vol_low_range, vol_high_range);
-            source.PlayOneShot(crash_sound, vol);
-            crashed = false;
-        }
-    }
-
-    void OnCollisionDo(Collision hit)
-    {
-        if (hit.gameObject.tag == "Gate")
-        {
-            crashed = true;
         }
     }
 }
