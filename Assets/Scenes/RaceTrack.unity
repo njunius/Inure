@@ -449,6 +449,8 @@ GameObject:
   - 65: {fileID: 1083562429}
   - 23: {fileID: 1083562428}
   - 114: {fileID: 1083562427}
+  - 114: {fileID: 1083562433}
+  - 82: {fileID: 1083562432}
   m_Layer: 0
   m_Name: Moving Gate
   m_TagString: Gate
@@ -468,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Raise_Gate: 0
-  speed: 0.1
+  speed: 1
 --- !u!23 &1083562428
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -526,6 +528,93 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
+--- !u!82 &1083562432
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1083562426}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b00177400ce884a1f8777420c5b09e13, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &1083562433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1083562426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0491b2d2e44f1445989e4d8afac49d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crash_sound: {fileID: 8300000, guid: b00177400ce884a1f8777420c5b09e13, type: 3}
+  crashed: 0
 --- !u!1 &1085512953 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: 470f603a090cd7e42880856832926bb2, type: 3}
@@ -914,8 +1003,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1868071506}
-  - 82: {fileID: 1868071508}
   - 114: {fileID: 1868071507}
+  - 82: {fileID: 1868071508}
   m_Layer: 0
   m_Name: WepSoundSource
   m_TagString: Untagged
@@ -934,7 +1023,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1462145007}
-  m_RootOrder: 19
+  m_RootOrder: 14
 --- !u!114 &1868071507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,6 +1036,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shoot_sound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
+  machinegun_sound: {fileID: 8300000, guid: fde374191613b9c4a8dcbb263412ff0e, type: 3}
+  crashed: 0
 --- !u!82 &1868071508
 AudioSource:
   m_ObjectHideFlags: 0
