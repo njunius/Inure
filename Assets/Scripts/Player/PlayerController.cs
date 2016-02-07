@@ -126,6 +126,11 @@ public class PlayerController : MonoBehaviour {
 
         if (moveLongitudinal != 0)
         {
+            if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).z) != Mathf.Sign(moveLongitudinal))
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
+                                                               transform.InverseTransformDirection(rb.velocity).y, 0));
+            }
             rb.AddForce(transform.TransformDirection(Vector3.forward * moveLongitudinal));
         }
         else
@@ -136,6 +141,11 @@ public class PlayerController : MonoBehaviour {
 
         if (moveLateral != 0)
         {
+            if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).x) != Mathf.Sign(moveLateral))
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
+                                                                    transform.InverseTransformDirection(rb.velocity).z));
+            }
             rb.AddForce(transform.TransformDirection(Vector3.right * moveLateral));
         }
         else
@@ -146,6 +156,11 @@ public class PlayerController : MonoBehaviour {
 
         if (moveVertical != 0)
         {
+            if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).y) != Mathf.Sign(moveVertical))
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
+                                                               transform.InverseTransformDirection(rb.velocity).z));
+            }
             rb.AddForce(transform.TransformDirection(Vector3.up * moveVertical));
         }
         else

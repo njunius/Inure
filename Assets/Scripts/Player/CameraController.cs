@@ -255,7 +255,7 @@ public class CameraController : MonoBehaviour {
                 if (!hitFound)
                 {
 
-                    Debug.Log("No hit");
+                    //Debug.Log("No hit");
                     cameraPositionOffset = thirdPersonPosition;
                 }
             }
