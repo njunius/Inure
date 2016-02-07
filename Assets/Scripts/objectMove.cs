@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class objectMove : MonoBehaviour {
-	public static int numElements = 2;
-	public GameObject[] nodes = new GameObject[numElements];
+	//public static int numElements = 2;
+	public GameObject[] nodes = new GameObject[2];
 	public float speed = 1;
 	private float step = 0;
 	private int index = 1;
@@ -18,20 +18,10 @@ public class objectMove : MonoBehaviour {
 	
 	//Move the cube towards either the Start or End nodes
 	void FixedUpdate () {
-		/*if (isMovingTo2) {
-			transform.position = Vector3.MoveTowards (transform.position, node2.transform.position, speed);
-		} else {
-			transform.position = Vector3.MoveTowards (transform.position, node1.transform.position, speed);
-		}
 
-		if (closeEnough (gameObject, point2)) {
-			isMovingTo2 = !isMovingTo2;
-		}*/
-
-
-		if (closeEnough (gameObject, nodes [index]) && index + 1 < numElements) {
+		if (closeEnough (gameObject, nodes [index]) && index + 1 < nodes.Length) {
 			index++;
-		} else if (closeEnough (gameObject, nodes [index]) && index + 1 >= numElements) {
+		} else if (closeEnough (gameObject, nodes [index]) && index + 1 >= nodes.Length) {
 			index = 0;
 		}
 		transform.position = Vector3.MoveTowards (transform.position, nodes[index].transform.position, speed);
