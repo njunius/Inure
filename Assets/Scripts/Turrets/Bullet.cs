@@ -106,13 +106,16 @@ public class Bullet : MonoBehaviour {
             ThreatTriggerController volumeScript = volume.gameObject.GetComponent<ThreatTriggerController>();
             for (int i = 0; i < cachedTrigger.Length; ++i)
             {
-                if(cachedTrigger[i] == volumeScript)
+                if(cachedTrigger[i] != null)
+                {
+                    cachedTrigger[i].decrementBulletCount();
+                }
+                if (cachedTrigger[i] == volumeScript)
                 {
                     cachedTrigger[i] = null;
                     break;
                 }
             }
-            volumeScript.decrementBulletCount();
         }
     }
 
@@ -120,4 +123,16 @@ public class Bullet : MonoBehaviour {
     {
         return absorbValue;
     }
+
+	void OnEnable() {
+		Invoke ("Destroy", 10f);
+	}
+
+	public void Destroy() {
+		gameObject.SetActive (false);
+	}
+
+	void OnDisable() {
+		CancelInvoke ();
+	}
 }

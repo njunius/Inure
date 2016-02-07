@@ -7,23 +7,22 @@ public class GateController: MonoBehaviour
     float FinalHeight = 8f;
     Vector3 OG_Position;
     public float speed = 1f;
-    Vector3 finalPosition = Vector3.zero;
-    float step;
+    Vector3 finalPosition;
 
     // Use this for initialization
     void Start()
     {
-        OG_Position = transform.position;
-        step = speed * Time.deltaTime;
+        Vector3 OG_Position = transform.position;
         finalPosition = new Vector3(transform.position.x, FinalHeight, transform.position.z);
     }
 
     // Update is called once per frame
     void Update()
     {
+        float step = speed * Time.deltaTime;
         if (Raise_Gate)
         {
-            transform.position = Vector3.MoveTowards(transform.position, finalPosition, 10 * step);
+            transform.position = Vector3.MoveTowards(transform.position, finalPosition, step);
 
             if (transform.position == finalPosition)
             {
