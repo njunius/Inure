@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour {
         }
 
 		//Activate the game over sequence when death is true
-		if (isDead ()) 
+		/*if (isDead ()) 
 		{
 			//Show Game Over Screen
 			pauseTxt.enabled = false;
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour {
 			UICanvas.enabled = true;
 			//Destroy player
 			this.enabled = false;
-		}
+		}*/
 
     }
 

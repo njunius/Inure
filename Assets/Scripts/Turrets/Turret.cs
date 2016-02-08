@@ -14,9 +14,9 @@ using System.Collections;
 public class Turret : MonoBehaviour {
 
 	//higher number = higher velocity
-	protected enum Velocity {Low = 10, Medium = 10, High = 10, Extreme = 20};
+	protected enum Velocity {Low = 1, Medium = 4, High = 7, Extreme = 10};
 	//lower number = higher rate
-	protected enum RateOfFire {Low = 20, Medium = 10, High = 2, Extreme = 1};
+	protected enum RateOfFire {Low = 20, Medium = 10, High = 5, Extreme = 2};
 	protected Quaternion zQuat = new Quaternion (0f, 0f, 0f, 0f);
 
 	protected Vector3 turretPos;
