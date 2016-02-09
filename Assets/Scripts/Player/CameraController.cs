@@ -241,7 +241,7 @@ public class CameraController : MonoBehaviour {
                                     Mathf.Sqrt(defaultDistance * defaultDistance + defaultHeight * defaultHeight));
                 foreach (RaycastHit ray in hits)
                 {
-                    if (ray.transform.tag.Equals("Environment"))
+                    if (ray.transform.CompareTag("Environment"))
                     {
                         targetDistance = ray.distance - 0.25f;
                         float ratio = targetDistance / defaultDistance;
