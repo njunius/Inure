@@ -13,14 +13,7 @@ public class ThreatTriggerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    for(int i = 0; i < bulletList.Count; ++i)
-        {
-            if (!bulletList[i].activeSelf)
-            {
-                bulletList.RemoveAt(i);
-                --i;
-            }
-        }
+	    
 	}
 
     void OnTriggerEnter(Collider other)
@@ -35,12 +28,23 @@ public class ThreatTriggerController : MonoBehaviour {
     {
         if (other.CompareTag("Projectile"))
         {
-            bulletList.RemoveAt(bulletList.IndexOf(other.gameObject));
+            bulletList.Remove(other.gameObject);
         }
     }
 
     public int getNumBullets()
     {
         return bulletList.Count;
+    }
+
+    public void removeListElement(GameObject obj)
+    {
+        for(int i = 0; i < bulletList.Count; ++i)
+        {
+            if (bulletList[i].Equals(obj))
+            {
+                bulletList.Remove(obj);
+            }
+        }
     }
 }

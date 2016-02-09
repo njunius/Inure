@@ -80,7 +80,12 @@ public class Bullet : MonoBehaviour {
 		if (radar) {
 				radar.GetComponent<Radar3D> ().RemoveBlip (gameObject);
 		}
-		gameObject.SetActive (false);
+        GameObject[] threatQuadrants = GameObject.FindGameObjectsWithTag("Threat Quadrant");
+        for(int i = 0; i < threatQuadrants.Length; ++i)
+        {
+            threatQuadrants[i].GetComponent<ThreatTriggerController>().removeListElement(gameObject);
+        }
+        gameObject.SetActive (false);
 	}
 
 	void OnDisable() {
