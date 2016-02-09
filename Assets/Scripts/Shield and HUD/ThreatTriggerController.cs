@@ -1,32 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ThreatTriggerController : MonoBehaviour {
 
-    public int numBullets;
+    private List<GameObject> bulletList;
 
 	// Use this for initialization
 	void Start () {
-        numBullets = 0;
+        bulletList = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    for(int i = 0; i < bulletList.Count; ++i)
+        {
+            if (!bulletList[i].activeSelf)
+            {
+                bulletList.RemoveAt(i);
+                --i;
+            }
+        }
 	}
 
-    public void incrementBulletCount()
+    void OnTriggerEnter(Collider other)
     {
-        ++numBullets;
+        if (other.CompareTag("Projectile"))
+        {
+            bulletList.Add(other.gameObject);
+        }
     }
 
-    public void decrementBulletCount()
+    void OnTriggerExit(Collider other)
     {
-        --numBullets;
+        if (other.CompareTag("Projectile"))
+        {
+            bulletList.RemoveAt(bulletList.IndexOf(other.gameObject));
+        }
     }
 
     public int getNumBullets()
     {
-        return numBullets;
+        return bulletList.Count;
     }
 }
