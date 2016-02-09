@@ -44,6 +44,7 @@ public class ThreatTriggerController : MonoBehaviour {
             if (bulletList[i].Equals(obj))
             {
                 bulletList.Remove(obj);
+                break;
             }
         }
     }
