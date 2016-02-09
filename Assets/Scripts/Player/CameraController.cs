@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour {
     public float defaultDistance = 4.0f;
     public float currentDistance;
     public float targetDistance;
-    public float defaultHeight = -1.0f;
+    public float defaultHeight = -0.0f;
     public float currentHeight;
     public float targetHeight;
     public float defaultSide = 0.0f;
@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour {
     public Vector3 thirdPersonPosition;
 
     private Vector3 targetPrevPos;
+    private Transform targetPrevTransform;
     private bool locked;
     //public float clipNearCurrent = 
 
@@ -38,7 +39,7 @@ public class CameraController : MonoBehaviour {
         
         mode = CameraMode.ThirdPerson;
 
-        firstPersonPosition = new Vector3(0, 0, 0);
+        firstPersonPosition = new Vector3(0, -0.35f, 0);
         thirdPersonPosition = new Vector3(defaultSide, defaultHeight, defaultDistance);
 
         //Cursor.visible = false; // comment and uncomment this based on current needs
@@ -77,6 +78,10 @@ public class CameraController : MonoBehaviour {
                     
                     Renderer rend = target.GetComponent<Renderer>();
                     rend.enabled = false;
+					GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<RadarTrigger> ().enabled = false;
+                    cameraPositionOffset = firstPersonPosition;
+                    gameObject.GetComponent<Camera>().fieldOfView = 90;
+                    updateCamera();
 
                 }
                 else
@@ -84,17 +89,20 @@ public class CameraController : MonoBehaviour {
                     mode = CameraMode.ThirdPerson;
                     Renderer rend = target.GetComponent<Renderer>();
                     rend.enabled = true;
+					GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<RadarTrigger> ().enabled = true;
+                    cameraPositionOffset = thirdPersonPosition;
+                    gameObject.GetComponent<Camera>().fieldOfView = 60;
+                    updateCamera();
                 }
             }
 
-            if (mode == CameraMode.ThirdPerson)
+
+            if (!positionTarget.velocity.Equals(Vector3.zero) || !positionTarget.angularVelocity.Equals(Vector3.zero))
             {
-                cameraPositionOffset = thirdPersonPosition;
+                updateCamera();
             }
-            else
-            {
-                cameraPositionOffset = firstPersonPosition;
-            }
+
+
             /*
             currentDistance = cameraPositionOffset.z;
             currentHeight = cameraPositionOffset.y;
@@ -123,39 +131,8 @@ public class CameraController : MonoBehaviour {
             Debug.DrawLine(transform.position, Vector3.left);
 
             Vector3 hitNormal = new Vector3();
-            bool hitFound = false;
-            Vector3 hitPos = new Vector3();
-            allHits = Physics.SphereCastAll(transform.position, 0.5f, -transform.forward, 0.1f);
-            foreach (RaycastHit ray in allHits)
-            {
-                if (ray.transform.tag.Equals("Environment"))
-                {
-                    hitFound = true;
-                    hitNormal = ray.normal;
-                    hitPos = ray.point;
-                    break;
-
-                } 
-            }
-
-            if (hitFound && !locked)
-            {
-                Debug.Log("offset " + cameraPositionOffset);
-                Debug.Log("normal " + hitNormal);
-                cameraPositionOffset += hitNormal * 0.1f;
-                locked = true;
-            }
-            else if (!locked)
-            {
-                cameraPositionOffset = new Vector3(0.0f, defaultHeight, defaultDistance);
-            }
-            else
-            {
-                if (positionTarget.position != targetPrevPos)
-                {
-                    locked = false;
-                }
-            }
+            */
+            
 
 
             /*
@@ -197,31 +174,122 @@ public class CameraController : MonoBehaviour {
             //cameraPositionOffset.y = targetHeight; //Mathf.Lerp(targetHeight, currentHeight, Time.deltaTime * 0.1f);
             //cameraPositionOffset.x = targetSide;
 
-            // camera looks at the player properly
-
-            transform.rotation = positionTarget.rotation;
-            transform.Rotate(cameraRotationOffset);
-
-            // camera follows the player (this converts the target's position from world to local space, offsets the camera
-            // then converts back to world space for the camera's new position
-            Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
-
-            if (targetDistance < defaultDistance)
-            {
-                transform.position = nextPosition; // Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * 15f);
-            }
-            else
-            {
-                transform.position = nextPosition;
-            }
-
+            
 
             //transform.LookAt(lookAtTarget.transform);
 
-            targetPrevPos = positionTarget.position;
         }
         
     }
+
+    private void updateCamera()
+    {
+        if (mode == CameraMode.ThirdPerson)
+        {
+            Vector3 hitNormal;
+            bool hitFound = false;
+            Vector3 hitPos = new Vector3();
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.forward * 0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.forward * -0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.right * 0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.right * -0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.up * 0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.up * -0.5f));
+
+            //check if camera is near wall
+
+            //Debug.DrawRay(transform.position, Quaternion.AngleAxis(Camera.current.fieldOfView / 2, transform.up) * transform.forward, Color.blue);
+            //Debug.DrawRay(transform.position, Quaternion.AngleAxis(-Camera.current.fieldOfView / 2, transform.up) * transform.forward, Color.blue);
+
+
+            /*RaycastHit[] rays = Physics.RaycastAll(transform.position, Quaternion.AngleAxis(Camera.current.fieldOfView / 2, transform.up) * transform.forward, Camera.current.nearClipPlane);
+            foreach(RaycastHit ray in rays)
+            {
+                Debug.Log(ray.transform.tag);
+                if (ray.transform.tag.Equals("Environment"))
+                {
+                    Debug.Log("EnvSphr");
+                    //Debug.Log("hit");
+                    hitFound = true;
+                    hitNormal = ray.normal;
+                    hitPos = ray.point;
+                    break;
+
+                }
+            }*/
+
+            if (hitFound)
+            {
+                RaycastHit hit;
+                Debug.Log("found");
+                Debug.DrawRay(transform.position,hitPos, Color.red);
+                if (Physics.Raycast(transform.position, hitPos, out hit, 0.02f, 1 << 11))
+                {
+                    Debug.Log("line");
+                    Debug.Log(hit.distance);
+                    targetDistance -= hit.distance;
+                    float ratio = targetDistance / defaultDistance;
+                    targetHeight = ratio * defaultHeight;
+                    ratio -= ratio * 0.1f;
+                }
+                cameraPositionOffset.y = targetHeight;
+                cameraPositionOffset.z = targetDistance;
+            }
+            else
+            {
+                RaycastHit[] hits = Physics.RaycastAll(positionTarget.position, -1 * positionTarget.transform.position + transform.position,
+                                    Mathf.Sqrt(defaultDistance * defaultDistance + defaultHeight * defaultHeight));
+                foreach (RaycastHit ray in hits)
+                {
+                    if (ray.transform.CompareTag("Environment"))
+                    {
+                        targetDistance = ray.distance - 0.25f;
+                        float ratio = targetDistance / defaultDistance;
+                        targetHeight = ratio * defaultHeight;
+                        cameraPositionOffset.y = targetHeight;
+                        cameraPositionOffset.z = targetDistance;
+                        hitFound = true;
+                        break;
+                    }
+
+                }
+
+                if (!hitFound)
+                {
+
+                    //Debug.Log("No hit");
+                    cameraPositionOffset = thirdPersonPosition;
+                }
+            }
+        }
+        else
+        {
+            cameraPositionOffset = firstPersonPosition;
+        }
+        
+
+
+        // camera looks at the player properly
+
+        transform.rotation = positionTarget.rotation;
+        transform.Rotate(cameraRotationOffset);
+
+        // camera follows the player (this converts the target's position from world to local space, offsets the camera
+        // then converts back to world space for the camera's new position
+        Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
+
+        if (targetDistance < defaultDistance)
+        {
+            transform.position = nextPosition; //Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * 15f);
+        }
+        else
+        {
+            transform.position = nextPosition;
+        }
+
+    }
+
+
 
     void OnCollisionEnter(Collision col)
     {

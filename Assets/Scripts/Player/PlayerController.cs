@@ -100,6 +100,7 @@ public class PlayerController : MonoBehaviour {
 		// Shooting controls
 		if (im.getInputDown("Shoot") && !isFiring)
 		{
+            //Debug.Log("fire");
 			isFiring = true;
 			InvokeRepeating ("fireBullets", 0.0f, fireRate);
 		}
@@ -123,24 +124,118 @@ public class PlayerController : MonoBehaviour {
         float rotPitch = im.getInput("Pitch") * rotSpeed;
         float rotYaw = im.getInput("Yaw") * rotSpeed;
 
-
-        if (moveLongitudinal != 0 || moveLateral != 0 || moveVertical != 0)
+        if (moveLongitudinal != 0)
         {
-            rb.velocity = transform.TransformDirection(Vector3.forward * moveLongitudinal 
-                + Vector3.right * moveLateral + Vector3.up * moveVertical);
+            if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).z) != Mathf.Sign(moveLongitudinal))
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
+                                                               transform.InverseTransformDirection(rb.velocity).y, 0));
+            }
+            rb.AddForce(transform.TransformDirection(Vector3.forward * moveLongitudinal));
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
+                                                               transform.InverseTransformDirection(rb.velocity).y, 0));
         }
 
+        if (moveLateral != 0)
+        {
+            if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).x) != Mathf.Sign(moveLateral))
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
+                                                                    transform.InverseTransformDirection(rb.velocity).z));
+            }
+            rb.AddForce(transform.TransformDirection(Vector3.right * moveLateral));
+        }
+        else
+        {
+            rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
+                                                                    transform.InverseTransformDirection(rb.velocity).z));
+        }
+
+        if (moveVertical != 0)
+        {
+            if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).y) != Mathf.Sign(moveVertical))
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
+                                                               transform.InverseTransformDirection(rb.velocity).z));
+            }
+            rb.AddForce(transform.TransformDirection(Vector3.up * moveVertical));
+        }
+        else
+        {
+            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
+                                                               transform.InverseTransformDirection(rb.velocity).z));
+        }
+
+
+        /*if (moveLongitudinal == 0 && moveLateral == 0 && moveVertical == 0)
+        {
+            rb.velocity = Vector3.zero;
+        }*/
+
+        /*if (moveLateral != 0 || moveVertical != 0)
+        {
+            rb.AddForce(transform.TransformDirection(Vector3.forward * moveLongitudinal
+                + Vector3.right * moveLateral + Vector3.up * moveVertical));
+            //rb.velocity = transform.TransformDirection(Vector3.forward * moveLongitudinal 
+                //+ Vector3.right * moveLateral + Vector3.up * moveVertical);
+        }
+        else
+        {
+
+            rb.velocity = Vector3.zero;
+        }*/
+        if (rotPitch != 0)
+        {
+            rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch));
+        }
+        else
+        {
+            rb.angularVelocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.angularVelocity).y,
+                                                                    transform.InverseTransformDirection(rb.angularVelocity).z));
+            
+        }
+
+        if (rotYaw != 0)
+        {
+            rb.AddTorque(transform.TransformDirection(Vector3.up * rotYaw));
+        }
+        else
+        {
+            rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x, 0,
+                                                               transform.InverseTransformDirection(rb.angularVelocity).z));
+        }
+
+        if (rotRoll != 0)
+        {
+            rb.AddTorque(transform.TransformDirection(Vector3.forward * rotRoll));
+        }
+        else
+        {
+            rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
+                                                               transform.InverseTransformDirection(rb.angularVelocity).y, 0));
+            
+        }
         if (rotPitch != 0 || rotYaw != 0 || rotRoll != 0)
         {
-            rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
+            rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll));
+            //rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
+        }
+        else
+        {
+            rb.angularVelocity = Vector3.zero;
+        }
+
+
+        if (rb.velocity.magnitude > 20.0f)
+        {
+            rb.velocity = rb.velocity.normalized * 20.0f;
         }
 
 		//Activate the game over sequence when death is true
-		if (isDead ()) 
+		/*if (isDead ()) 
 		{
 			//Show Game Over Screen
 			pauseTxt.enabled = false;
@@ -150,7 +245,7 @@ public class PlayerController : MonoBehaviour {
 			UICanvas.enabled = true;
 			//Destroy player
 			this.enabled = false;
-		}
+		}*/
 
     }
 
