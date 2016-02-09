@@ -219,12 +219,12 @@ public class CameraController : MonoBehaviour {
             if (hitFound)
             {
                 RaycastHit hit;
-                Debug.Log("found");
-                Debug.DrawRay(transform.position,hitPos, Color.red);
+                //Debug.Log("found");
+                //Debug.DrawRay(transform.position,hitPos, Color.red);
                 if (Physics.Raycast(transform.position, hitPos, out hit, 0.02f, 1 << 11))
                 {
-                    Debug.Log("line");
-                    Debug.Log(hit.distance);
+                    //Debug.Log("line");
+                    //Debug.Log(hit.distance);
                     targetDistance -= hit.distance;
                     float ratio = targetDistance / defaultDistance;
                     targetHeight = ratio * defaultHeight;
@@ -289,11 +289,9 @@ public class CameraController : MonoBehaviour {
 
 
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Hi");
-        Debug.Log(col.gameObject.tag);
-        if (col.gameObject.tag.Equals("Environment"))
+        if (col.gameObject.CompareTag("Environment"))
         {
             Debug.Log("Hit Evironment");
             
@@ -301,9 +299,9 @@ public class CameraController : MonoBehaviour {
             {
                 if (contact.)
             }*/
-            Vector3 normal = col.contacts[0].normal;
+            //Vector3 normal = col.contacts[0].normal;
 
-            transform.position += normal * 0.5f;
+            //transform.position += normal * 0.5f;
             /*if (Vector3.Distance(positionTarget.position, transform.position) > 1.1f)
             {
                 targetDistance -= 0.5f;
