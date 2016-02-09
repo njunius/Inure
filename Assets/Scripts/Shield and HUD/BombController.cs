@@ -15,7 +15,7 @@ public class BombController : MonoBehaviour {
     private int maxBombCharge;
 
     private GameObject player;
-    private Image bombGauge;
+    private Image[] bombGauge;
     private PlayerController playerBehavior; // for use later when planting the bomb
 
 	// Use this for initialization
@@ -28,7 +28,13 @@ public class BombController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         playerBehavior = player.GetComponent<PlayerController>();
 
-        bombGauge = GameObject.FindGameObjectWithTag("Bomb Gauge").GetComponent<Image>();
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("Bomb Gauge");
+        bombGauge = new Image[temp.Length];
+
+        for(int i = 0; i < bombGauge.Length; ++i)
+        {
+            bombGauge[i] = temp[i].GetComponent<Image>();
+        }
 	}
 	
 	// Update is called once per frame
@@ -38,8 +44,11 @@ public class BombController : MonoBehaviour {
             transform.position = player.transform.position;
         }
 
-        bombGauge.fillAmount = (float)currBombCharge / (float)maxBombCharge;
-	}
+        for(int i = 0; i < bombGauge.Length; ++i)
+        {
+            bombGauge[i].fillAmount = (float)currBombCharge / (float)maxBombCharge;
+        }
+    }
 
     /*
     * pre: newCharge is a positive number

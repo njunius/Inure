@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
 
         shield = GetComponentInChildren<ShieldController>();
 
-        maxHullIntegrity = currHullIntegrity = 2;
+        maxHullIntegrity = currHullIntegrity = 5;
 
         if (GameObject.Find("GameController") == null)
         {

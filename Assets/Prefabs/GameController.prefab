@@ -178,6 +178,13 @@ MonoBehaviour:
       dead: 0
       sensitivity: 1
       invert: 0
+    - name: Camera Mode
+      bidirectional: 0
+      posAxis: joystick button 1
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
   - presetName: Joystick & Keyboard
     bindings:
     - name: Longitudinal
@@ -243,6 +250,13 @@ MonoBehaviour:
       dead: 0
       sensitivity: 1
       invert: 0
+    - name: Camera Mode
+      bidirectional: 0
+      posAxis: tab
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -264,6 +278,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[0].bindings.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[2].bindings.Array.size
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
@@ -817,6 +839,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[2].bindings.Array.data[8].bidirectional
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[9].name
+      value: Camera Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[1].bindings.Array.data[9].posAxis
+      value: joystick button 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[2].bindings.Array.data[9].name
+      value: Camera Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[2].bindings.Array.data[9].posAxis
+      value: tab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

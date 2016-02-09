@@ -18,7 +18,7 @@ public class ShieldController : MonoBehaviour {
     private float shieldDeltaChargeTimer; // timer for delaying each change in the shield value
 
     // Shield Gauge fields
-    private Image shieldGauge;
+    private Image[] shieldGauge;
     private GameObject bomb;
     private BombController bombBehavior;
     private float interpShieldValue;
@@ -37,7 +37,12 @@ public class ShieldController : MonoBehaviour {
 
         bomb = GameObject.FindGameObjectWithTag("Bomb");
         bombBehavior = bomb.GetComponent<BombController>();
-        shieldGauge = GameObject.FindGameObjectWithTag("Shield Gauge").GetComponent<Image>();
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("Shield Gauge");
+        shieldGauge = new Image[temp.Length];
+        for(int i = 0; i < shieldGauge.Length; ++i)
+        {
+            shieldGauge[i] = temp[i].GetComponent<Image>();
+        }
     }
 
     // Update is called once per frame
@@ -48,22 +53,26 @@ public class ShieldController : MonoBehaviour {
         {
             GetComponent<MeshRenderer>().enabled = true;
             GetComponent<CapsuleCollider>().enabled = true;
+
+            interpShieldValue += shieldDepleteAmount * Time.deltaTime;
+            for (int i = 0; i < shieldGauge.Length; ++i)
+            {
+                shieldGauge[i].fillAmount = interpShieldValue / (float)maxShieldCharge;
+            }
         }
         else
         {
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
-        }
 
-        if (shieldActive)
-        {
-            interpShieldValue += shieldDepleteAmount * Time.deltaTime;
-            shieldGauge.fillAmount = interpShieldValue / (float)maxShieldCharge;
-        }
-        else if (currShieldCharge < maxShieldCharge)
-        {
-            interpShieldValue += shieldRechargeAmount * Time.deltaTime;
-            shieldGauge.fillAmount = interpShieldValue / (float)maxShieldCharge;
+            if (currShieldCharge < maxShieldCharge)
+            {
+                interpShieldValue += shieldRechargeAmount * Time.deltaTime;
+                for (int i = 0; i < shieldGauge.Length; ++i)
+                {
+                    shieldGauge[i].fillAmount = interpShieldValue / (float)maxShieldCharge;
+                }
+            }
         }
 
     }
