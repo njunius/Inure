@@ -77,6 +77,7 @@ public class CameraController : MonoBehaviour {
                     
                     Renderer rend = target.GetComponent<Renderer>();
                     rend.enabled = false;
+					GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<RadarTrigger> ().enabled = false;
 
                 }
                 else
@@ -84,6 +85,7 @@ public class CameraController : MonoBehaviour {
                     mode = CameraMode.ThirdPerson;
                     Renderer rend = target.GetComponent<Renderer>();
                     rend.enabled = true;
+					GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<RadarTrigger> ().enabled = true;
                 }
             }
 

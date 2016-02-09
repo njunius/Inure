@@ -59,8 +59,8 @@ public class Bullet : MonoBehaviour {
         }
 
         //Destroy (gameObject);
-		//BulletDestroy.Destroy();
-		gameObject.SetActive(false);
+		Destroy();
+		//gameObject.SetActive(false);
 	}
 
     void OnTriggerEnter(Collider volume)
@@ -129,6 +129,11 @@ public class Bullet : MonoBehaviour {
 	}
 
 	public void Destroy() {
+		brackets.enabled = false;
+		GameObject radar = GameObject.FindGameObjectWithTag ("Radar3D");
+		if (radar) {
+				radar.GetComponent<Radar3D> ().RemoveBlip (gameObject);
+		}
 		gameObject.SetActive (false);
 	}
 
