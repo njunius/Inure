@@ -80,7 +80,7 @@ public class CameraController : MonoBehaviour {
                     rend.enabled = false;
 					GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<RadarTrigger> ().enabled = false;
                     cameraPositionOffset = firstPersonPosition;
-                    Camera.current.fieldOfView = 90;
+                    gameObject.GetComponent<Camera>().fieldOfView = 90;
                     updateCamera();
 
                 }
@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour {
                     rend.enabled = true;
 					GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<RadarTrigger> ().enabled = true;
                     cameraPositionOffset = thirdPersonPosition;
-                    Camera.current.fieldOfView = 60;
+                    gameObject.GetComponent<Camera>().fieldOfView = 60;
                     updateCamera();
                 }
             }
