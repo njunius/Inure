@@ -150,6 +150,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 490416}
   - 135: {fileID: 13520548}
+  - 114: {fileID: 11408092}
   m_Layer: 0
   m_Name: Warning Radius
   m_TagString: Warning Radius
@@ -241,6 +242,9 @@ GameObject:
   - 114: {fileID: 11474688}
   - 54: {fileID: 5468696}
   - 136: {fileID: 13694968}
+  - 136: {fileID: 13619226}
+  - 136: {fileID: 13651002}
+  - 136: {fileID: 13672028}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -395,7 +399,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.96, y: -5, z: -8.41}
+  m_LocalPosition: {x: 10, y: -10, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 482806}
@@ -407,7 +411,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 146416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.96, y: 5.01, z: -8.41}
+  m_LocalPosition: {x: 10, y: 10, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 482806}
@@ -431,7 +435,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.95, y: -5, z: -8.41}
+  m_LocalPosition: {x: -10, y: -10, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 482806}
@@ -443,7 +447,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 72.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428020}
@@ -481,7 +485,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.95, y: 5.01, z: -8.41}
+  m_LocalPosition: {x: -10, y: 10, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 482806}
@@ -574,9 +578,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160362}
   serializedVersion: 2
-  m_Mass: 1000
+  m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 10
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -637,7 +641,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 15}
+  m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6526608
 BoxCollider:
@@ -649,7 +653,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 15}
+  m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6534934
 BoxCollider:
@@ -661,7 +665,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 15}
+  m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6548606
 BoxCollider:
@@ -673,7 +677,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 15}
+  m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11403348
 MonoBehaviour:
@@ -708,6 +712,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackedQuadrant: {fileID: 11492124}
+--- !u!114 &11408092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 774b9318040c734499945e2205f90169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11417082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -976,7 +991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0775b59d8c85304499731e55cc4d1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBullets: 0
 --- !u!114 &11448956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -988,7 +1002,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0775b59d8c85304499731e55cc4d1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBullets: 0
 --- !u!114 &11451434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1000,7 +1013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0775b59d8c85304499731e55cc4d1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBullets: 0
 --- !u!114 &11452018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1126,7 +1138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba85496d1c93b74c936e2fb8a4a16e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 100
   rotSpeed: 180
   rollSpeed: 100
   bulletColor: {r: 0, g: 0, b: 1, a: 1}
@@ -1219,7 +1231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0775b59d8c85304499731e55cc4d1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBullets: 0
 --- !u!114 &11492626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1267,8 +1278,47 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &13619226
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.28
+  m_Height: 1.49
+  m_Direction: 2
+  m_Center: {x: 0.58, y: -0.3139953, z: -0.04}
+--- !u!136 &13651002
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.28
+  m_Height: 1.49
+  m_Direction: 2
+  m_Center: {x: -0.58, y: -0.3139953, z: -0.04}
+--- !u!136 &13672028
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.15
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.3139953, z: -0.5}
 --- !u!136 &13691722
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1291,10 +1341,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.79
+  m_Radius: 0.3
+  m_Height: 1
   m_Direction: 2
-  m_Center: {x: 0, y: -0.3, z: -0.1}
+  m_Center: {x: 0, y: -0.3, z: 0.35}
 --- !u!222 &22226468
 CanvasRenderer:
   m_ObjectHideFlags: 1
