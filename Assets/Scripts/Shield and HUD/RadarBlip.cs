@@ -1,10 +1,4 @@
-﻿/*
- * RadarBlip.cs
- * 
- * Encapsultes members of a single RadarBlip object: the original object being tracked and the blip object itself
- */
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class RadarBlip {
