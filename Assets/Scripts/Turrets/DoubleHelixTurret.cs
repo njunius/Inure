@@ -15,7 +15,7 @@ using System.Collections;
 
 public class DoubleHelixTurret : AlgorithmicTurret {
 
-	private float BARREL_SEPARATION = 4f;
+	public float BARREL_SEPARATION = 10f;
 
 	// Z-component must be a factor of 360
 	private Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
@@ -24,9 +24,9 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = Velocity.Low;
+		//bulletVel = Velocity.Extreme;
 		bulletColor = Color.red;
-		fireRate = RateOfFire.Extreme;
+		//fireRate = RateOfFire.High;
 		barrelList = new TurretBarrel[2];
 		Vector3 forwardNorm = transform.forward;
 		forwardNorm.Normalize ();
