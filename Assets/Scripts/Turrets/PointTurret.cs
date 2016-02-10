@@ -16,9 +16,9 @@ public class PointTurret : SimpleTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = Velocity.Extreme;
+		//bulletVel = Velocity.Extreme;
 		bulletColor = Color.blue;
-		fireRate = RateOfFire.Medium;
+		//fireRate = RateOfFire.Medium;
 		barrelList = new TurretBarrel[1];
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x, 
 											(int)bulletVel);
