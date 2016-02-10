@@ -59,7 +59,7 @@ public class LightBulletController : MonoBehaviour
         {
             if (cachedTrigger[i] != null && cachedTrigger[i].getNumBullets() > 0)
             {
-                cachedTrigger[i].decrementBulletCount();
+                //cachedTrigger[i].decrementBulletCount();
             }
 
         }
@@ -86,13 +86,13 @@ public class LightBulletController : MonoBehaviour
             {
                 if (cachedTrigger[i] == volumeScript)
                 {
-                    cachedTrigger[i].incrementBulletCount();
+                    //cachedTrigger[i].incrementBulletCount();
                     break;
                 }
                 if (cachedTrigger[i] == null)
                 {
                     cachedTrigger[i] = volumeScript;
-                    cachedTrigger[i].incrementBulletCount();
+                    //cachedTrigger[i].incrementBulletCount();
                     break;
                 }
             }
@@ -118,7 +118,7 @@ public class LightBulletController : MonoBehaviour
                     break;
                 }
             }
-            volumeScript.decrementBulletCount();
+            //volumeScript.decrementBulletCount();
         }
     }
 
