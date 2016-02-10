@@ -15,7 +15,7 @@ using System.Collections;
 
 public class DoubleHelixTurret : AlgorithmicTurret {
 
-	private float BARREL_SEPARATION = 10f;
+	public float BARREL_SEPARATION = 10f;
 
 	// Z-component must be a factor of 360
 	private Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
