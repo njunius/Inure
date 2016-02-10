@@ -1,11 +1,4 @@
-﻿/*
- * RadarTrigger.cs
- * 
- * Detects and reacts to bullets entering the Warning Radius, adding and
- * removing blips from the 3D Radar system
- */
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class RadarTrigger : MonoBehaviour {
