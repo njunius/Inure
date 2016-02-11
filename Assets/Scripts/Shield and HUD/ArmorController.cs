@@ -18,8 +18,6 @@ public class ArmorController : MonoBehaviour {
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-        Debug.Log(player.getMaxHullIntegrity());
-
         currChunks = maxChunks = player.getMaxHullIntegrity();
 
         armorChunkTracker = new Image[maxChunks];
