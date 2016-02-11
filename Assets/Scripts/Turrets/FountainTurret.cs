@@ -28,10 +28,10 @@ public class FountainTurret : AlgorithmicTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = Velocity.Low;
+		//bulletVel = Velocity.Low;
 		//orange
 		bulletColor = new Color(1f, 0.6f, 0f, 1f);
-		fireRate = RateOfFire.High;
+		//fireRate = RateOfFire.High;
 		barrelList = new TurretBarrel[NUM_BARRELS];
 
 		Vector3 forwardNorm = transform.forward;
