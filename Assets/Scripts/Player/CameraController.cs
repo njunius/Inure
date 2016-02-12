@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum CameraMode { ThirdPerson, FirstPerson }
+public enum CameraMode { ThirdPerson, FirstPerson, ThirdPersonLoose }
 
 public class CameraController : MonoBehaviour {
 
@@ -24,19 +24,21 @@ public class CameraController : MonoBehaviour {
 
     public Vector3 firstPersonPosition;
     public Vector3 thirdPersonPosition;
+    private float fadeDistance;
 
     private Vector3 targetPrevPos;
     private Transform targetPrevTransform;
     private bool locked;
     //public float clipNearCurrent = 
 
+
     public GameObject gameController;
     public InputManager im;
     // Use this for initialization
     void Start () {
-        
 
-        
+        fadeDistance = defaultDistance * 0.25f;
+
         mode = CameraMode.ThirdPerson;
 
         firstPersonPosition = new Vector3(0, -0.35f, 0);
@@ -92,16 +94,16 @@ public class CameraController : MonoBehaviour {
 					GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<RadarTrigger> ().enabled = true;
                     cameraPositionOffset = thirdPersonPosition;
                     gameObject.GetComponent<Camera>().fieldOfView = 60;
-                    updateCamera();
+                    //updateCamera();
                 }
             }
 
 
-            if (!positionTarget.velocity.Equals(Vector3.zero) || !positionTarget.angularVelocity.Equals(Vector3.zero))
+            /*if (!positionTarget.velocity.Equals(Vector3.zero) || !positionTarget.angularVelocity.Equals(Vector3.zero))
             {
                 updateCamera();
-            }
-
+            }*/
+            updateCamera();
 
             /*
             currentDistance = cameraPositionOffset.z;
@@ -132,7 +134,7 @@ public class CameraController : MonoBehaviour {
 
             Vector3 hitNormal = new Vector3();
             */
-            
+
 
 
             /*
@@ -174,7 +176,7 @@ public class CameraController : MonoBehaviour {
             //cameraPositionOffset.y = targetHeight; //Mathf.Lerp(targetHeight, currentHeight, Time.deltaTime * 0.1f);
             //cameraPositionOffset.x = targetSide;
 
-            
+
 
             //transform.LookAt(lookAtTarget.transform);
 
@@ -237,7 +239,8 @@ public class CameraController : MonoBehaviour {
             }
             else
             {
-                RaycastHit[] hits = Physics.RaycastAll(positionTarget.position, -1 * positionTarget.transform.position + transform.position,
+                Vector3 dirToCamera = transform.position - positionTarget.transform.position;
+                RaycastHit[] hits = Physics.RaycastAll(positionTarget.position, dirToCamera,
                                     Mathf.Sqrt(defaultDistance * defaultDistance + defaultHeight * defaultHeight));
                 foreach (RaycastHit ray in hits)
                 {
@@ -248,6 +251,23 @@ public class CameraController : MonoBehaviour {
                         targetHeight = ratio * defaultHeight;
                         cameraPositionOffset.y = targetHeight;
                         cameraPositionOffset.z = targetDistance;
+                        hitFound = true;
+                        break;
+                    }
+
+                }
+
+                Vector3 topOfScreen = transform.TransformDirection(new Vector3(0, defaultHeight, 0));
+                Vector3 localTargetPos = transform.InverseTransformPoint(positionTarget.position);
+                Vector3 rayBase = transform.TransformPoint(new Vector3(localTargetPos.x, localTargetPos.y, localTargetPos.z));
+                Debug.DrawRay(rayBase, transform.position - rayBase, Color.blue);
+                hits = Physics.RaycastAll(rayBase, transform.position - rayBase, defaultHeight + 0.2f);
+                foreach (RaycastHit ray in hits)
+                {
+                    if (ray.transform.CompareTag("Environment"))
+                    {
+                        targetHeight = ray.distance - 0.25f;
+                        cameraPositionOffset.y = targetHeight;
                         hitFound = true;
                         break;
                     }
@@ -266,16 +286,43 @@ public class CameraController : MonoBehaviour {
         {
             cameraPositionOffset = firstPersonPosition;
         }
-        
+
 
 
         // camera looks at the player properly
 
+        /*Quaternion nextRot = Quaternion.LookRotation(positionTarget.position - transform.position, -positionTarget.transform.forward);
+
+        if (Quaternion.Angle(transform.rotation, nextRot) < 0.01f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, nextRot, Time.deltaTime * 10.0f);
+        }
+        else
+        {
+            transform.rotation = nextRot;
+        }*/
+        
         transform.rotation = positionTarget.rotation;
         transform.Rotate(cameraRotationOffset);
 
+        //transform.LookAt(lookAtTarget);
+
         // camera follows the player (this converts the target's position from world to local space, offsets the camera
         // then converts back to world space for the camera's new position
+
+
+        /*Vector3 destination = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
+        
+        if (Vector3.Distance(transform.position, destination) > 0.01f)
+        {
+            Vector3 nextPosition = Vector3.MoveTowards(transform.position, transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset), 20 * Time.deltaTime);
+            transform.position = nextPosition;
+        }
+        else
+        {
+            transform.position = destination;
+        }*/
+
         Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
 
         if (targetDistance < defaultDistance)
@@ -285,6 +332,15 @@ public class CameraController : MonoBehaviour {
         else
         {
             transform.position = nextPosition;
+        }
+
+
+        float distance = Vector3.Distance(transform.position, positionTarget.position);
+        if (distance < fadeDistance)
+        {
+            Renderer r = target.GetComponent<Renderer>();
+            r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
+
         }
 
     }
