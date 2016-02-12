@@ -15,7 +15,9 @@ public class Bullet : MonoBehaviour {
 	//private Vector3 velocity;
 
     private int absorbValue;
+    private Color spriteColor;
 
+    public GameObject decal;
     public Image brackets;
 
 	// Use this for initialization
@@ -33,19 +35,27 @@ public class Bullet : MonoBehaviour {
 	 * post: color and velocity of bullet are set
 	 */
     public void setVars (Color bColor, Vector3 newVel) {
-		gameObject.GetComponent<Renderer> ().material.color = bColor;
+		gameObject.GetComponent<Renderer> ().material.color = spriteColor = bColor;
         gameObject.GetComponent<Rigidbody> ().velocity = newVel;
 
     }
 
     void OnCollisionEnter (Collision hit) {
-        PlayerController hitScript = hit.gameObject.GetComponent<PlayerController>();
-        if (hit.gameObject.CompareTag("Player") && !hitScript.isShielded()) {
-            hitScript.takeDamage();
-		}
-        //Destroy (gameObject);
-		Destroy();
-		//gameObject.SetActive(false);
+        PlayerController hitScript = hit.gameObject.GetComponentInParent<PlayerController>();
+        if (hit.gameObject.CompareTag("Player")) {
+            hit.collider.gameObject.GetComponent<CollisionHitDetector>().updateIndicators();
+            if (!hitScript.isShielded())
+            {
+                hitScript.takeDamage();
+            }
+            else
+            {
+               GameObject temp = (GameObject) Instantiate(decal, hit.contacts[0].point, Quaternion.FromToRotation(Vector3.up, hit.contacts[0].normal));
+               temp.GetComponent<ShieldDecalController>().setColor(spriteColor);
+                temp.transform.parent = hit.gameObject.transform;
+            }
+        }
+        Destroy();
 	}
 
     void OnTriggerEnter(Collider volume)
