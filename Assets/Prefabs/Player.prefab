@@ -252,7 +252,7 @@ GameObject:
   - 114: {fileID: 11472616}
   - 23: {fileID: 2392100}
   - 33: {fileID: 3354634}
-  - 136: {fileID: 13691722}
+  - 64: {fileID: 6444432}
   m_Layer: 10
   m_Name: Shield
   m_TagString: Shield
@@ -859,7 +859,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.6, y: 2.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428020}
@@ -1107,6 +1107,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &6444432
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136150}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_Mesh: {fileID: 4300006, guid: 11fc3834e3194b94f85ad5cda52ad7ad, type: 3}
 --- !u!65 &6518854
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2172,19 +2184,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &13691722
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136150}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.9693564
-  m_Height: 0.12119457
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.3139953, z: -0.10713363}
 --- !u!222 &22226468
 CanvasRenderer:
   m_ObjectHideFlags: 1
