@@ -18,3 +18,4 @@ public class BulletDestroy : MonoBehaviour {
 		CancelInvoke ();
 	}
 }
+// mother fucking work
