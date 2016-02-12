@@ -12,13 +12,11 @@ public class HurtZone : MonoBehaviour {
 	//If the player enters the trigger, damage them
 	void OnTriggerEnter(Collider other){
 		GameObject tmp = other.gameObject;
-		//Debug.Log ("Entered Trigger!");
-
-		if (tmp.CompareTag("Player")) {
+		if (tmp.CompareTag("Player Collider")) {
 			if (instaKill)
-				tmp.GetComponent<PlayerController> ().setHullIntegrity(0);
+				tmp.GetComponentInParent<PlayerController> ().setHullIntegrity(0);
 			else {
-				tmp.GetComponent<PlayerController> ().takeDamage();
+				tmp.GetComponentInParent<PlayerController> ().takeDamage();
 			}
 		}
 	}

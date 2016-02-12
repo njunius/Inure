@@ -52,7 +52,7 @@ public class ShieldController : MonoBehaviour {
         if (shieldActive)
         {
             GetComponent<MeshRenderer>().enabled = true;
-            GetComponent<CapsuleCollider>().enabled = true;
+            GetComponent<MeshCollider>().enabled = true;
 
             interpShieldValue += shieldDepleteAmount * Time.deltaTime;
             for (int i = 0; i < shieldGauge.Length; ++i)
@@ -63,7 +63,7 @@ public class ShieldController : MonoBehaviour {
         else
         {
             GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<CapsuleCollider>().enabled = false;
+            GetComponent<MeshCollider>().enabled = false;
 
             if (currShieldCharge < maxShieldCharge)
             {

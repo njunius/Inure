@@ -14,17 +14,17 @@ using System.Collections;
 public class Turret : MonoBehaviour {
 
 	//higher number = higher velocity
-	protected enum Velocity {Low = 1, Medium = 4, High = 7, Extreme = 10};
+	public enum Velocity {Low = 1, Medium = 4, High = 7, Extreme = 10, EuropeanExtreme = 30};
 	//lower number = higher rate
-	protected enum RateOfFire {Low = 20, Medium = 10, High = 5, Extreme = 2};
+	public enum RateOfFire {Low = 20, Medium = 10, High = 5, Extreme = 2};
 	protected Quaternion zQuat = new Quaternion (0f, 0f, 0f, 0f);
 
 	protected Vector3 turretPos;
 	protected Quaternion turretRot = new Quaternion(0, 0, 0, 0);
-	protected Velocity bulletVel;
+	public Velocity bulletVel;
 	protected Vector4 bulletColor;
 	protected TurretBarrel[] barrelList;
-	protected RateOfFire fireRate;
+	public RateOfFire fireRate;
 	protected float fireRateMultiplier = 0.1f;
 	protected bool isFiring = false;
 	protected float fireDelay = 0;
