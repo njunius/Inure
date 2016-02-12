@@ -10,120 +10,85 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class LightBulletController : MonoBehaviour
-{
+public class LightBulletController : MonoBehaviour {
 
-    //private Vector3 velocity;
+	//private Vector3 velocity;
 
-    private int absorbValue;
+	private int absorbValue;
 
-    public Image brackets;
-    private ThreatTriggerController[] cachedTrigger; // can store up to all 4 quadrants behind the player if need be
+	public Image brackets;
 
-    // Use this for initialization
-    void Awake()
-    {
-        brackets = GetComponentInChildren<Image>();
-        absorbValue = 1;
-        cachedTrigger = new ThreatTriggerController[4];
-    }
+	// Use this for initialization
+	void Awake () {
+		brackets = GetComponentInChildren<Image>();
+		absorbValue = 1;
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+	// Update is called once per frame
+	void Update () {
+	}
 
-    /*
+	/*
 	 * Description: Sets values for empty vars
 	 * post: color and velocity of bullet are set
 	 */
-    public void setVars(Color bColor, Vector3 newVel)
-    {
-        gameObject.GetComponent<Light>().color = bColor;
-        gameObject.GetComponent<Rigidbody>().velocity = newVel;
+	public void setVars (Color bColor, Vector3 newVel) {
+		gameObject.GetComponent<Light> ().color = bColor;
+		gameObject.GetComponent<Rigidbody> ().velocity = newVel;
 
-    }
+	}
 
-    void OnCollisionEnter(Collision hit)
-    {
-        PlayerController hitScript = hit.gameObject.GetComponent<PlayerController>();
-        if (hit.gameObject.CompareTag("Player") && !hitScript.isShielded())
-        {
-            // note that the 50 is a placeholder for real damage values later
-            // and that the player's health is base 100 for future reference
-            hitScript.takeDamage();
-        }
+	void OnCollisionEnter (Collision hit) {
+		PlayerController hitScript = hit.gameObject.GetComponent<PlayerController>();
+		if (hit.gameObject.CompareTag("Player") && !hitScript.isShielded()) {
+			hitScript.takeDamage();
+		}
+		//Destroy (gameObject);
+		Destroy();
+		//gameObject.SetActive(false);
+	}
 
-        // go through all cached triggers and remove the bullet from the count before destruction
-        for (int i = 0; i < cachedTrigger.Length; ++i)
-        {
-            if (cachedTrigger[i] != null && cachedTrigger[i].getNumBullets() > 0)
-            {
-                //cachedTrigger[i].decrementBulletCount();
-            }
+	void OnTriggerEnter(Collider volume)
+	{
+		if (volume.gameObject.CompareTag("Warning Radius"))
+		{
+			brackets.enabled = true;
+		}
 
-        }
+	}
 
-        //Destroy (gameObject);
-        //BulletDestroy.Destroy();
-        gameObject.SetActive(false);
-    }
+	void OnTriggerExit(Collider volume)
+	{
+		if (volume.gameObject.CompareTag("Warning Radius"))
+		{
+			brackets.enabled = false;
+		}
+	}
 
-    void OnTriggerEnter(Collider volume)
-    {
-        if (volume.gameObject.CompareTag("Warning Radius"))
-        {
-            brackets.enabled = true;
-        }
+	public int getAbsorbValue()
+	{
+		return absorbValue;
+	}
 
-        if (volume.gameObject.CompareTag("Threat Quadrant"))
-        {
-            ThreatTriggerController volumeScript = volume.gameObject.GetComponent<ThreatTriggerController>();
-            // check to see if a quadrant has already been cached
-            // if not add it
-            // increment the quadrant's count
-            for (int i = 0; i < cachedTrigger.Length; ++i)
-            {
-                if (cachedTrigger[i] == volumeScript)
-                {
-                    //cachedTrigger[i].incrementBulletCount();
-                    break;
-                }
-                if (cachedTrigger[i] == null)
-                {
-                    cachedTrigger[i] = volumeScript;
-                    //cachedTrigger[i].incrementBulletCount();
-                    break;
-                }
-            }
-        }
+	void OnEnable() {
+		Invoke ("Destroy", 20f);
+	}
 
-    }
+	public void Destroy() {
+		brackets.enabled = false;
+		GameObject radar = GameObject.FindGameObjectWithTag ("Radar3D");
+		if (radar) {
+			radar.GetComponent<Radar3D> ().RemoveBlip (gameObject);
+		}
+		GameObject[] threatQuadrants = GameObject.FindGameObjectsWithTag("Threat Quadrant");
+		for(int i = 0; i < threatQuadrants.Length; ++i)
+		{
+			threatQuadrants[i].GetComponent<ThreatTriggerController>().removeListElement(gameObject);
+		}
+		gameObject.SetActive (false);
+	}
 
-    void OnTriggerExit(Collider volume)
-    {
-        if (volume.gameObject.CompareTag("Warning Radius"))
-        {
-            brackets.enabled = false;
-        }
-
-        if (volume.gameObject.CompareTag("Threat Quadrant"))
-        {
-            ThreatTriggerController volumeScript = volume.gameObject.GetComponent<ThreatTriggerController>();
-            for (int i = 0; i < cachedTrigger.Length; ++i)
-            {
-                if (cachedTrigger[i] == volumeScript)
-                {
-                    cachedTrigger[i] = null;
-                    break;
-                }
-            }
-            //volumeScript.decrementBulletCount();
-        }
-    }
-
-    public int getAbsorbValue()
-    {
-        return absorbValue;
-    }
+	void OnDisable() {
+		CancelInvoke ();
+	}
 }

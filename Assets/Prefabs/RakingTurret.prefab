@@ -12,6 +12,7 @@ GameObject:
   - 65: {fileID: 6571210}
   - 23: {fileID: 2331856}
   - 114: {fileID: 11428292}
+  - 114: {fileID: 11419094}
   m_Layer: 0
   m_Name: RakingTurret
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -53.105343, y: 8.621468, z: 11.116618}
+  m_LocalPosition: {x: -66.7, y: 1.3, z: -20.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,6 +77,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11419094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158774}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4623529d3afb2f14baf0f0dd2e216899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 194514, guid: 83272a788fdf7664c84301dc9014b262, type: 2}
+  focusPoint: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
+  sensorRange: 5
+  fireOnlyWhenPlayerNear: 0
+  NUM_BARRELS: 4
+  TURRET_RADIUS: 4
+  MAX_SWIVEL: 1.0471976
+  SWIVEL_PERCENTAGE: 0.1
+  BULLET_SEPARATION: 0
 --- !u!114 &11428292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,11 +111,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 100204, guid: 2e80d5d9eb66a03468047b0ba2be3928, type: 2}
   focusPoint: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
+  sensorRange: 30
+  fireOnlyWhenPlayerNear: 0
   NUM_BARRELS: 4
   TURRET_RADIUS: 4
   MAX_SWIVEL: 1.0471976
   SWIVEL_PERCENTAGE: 0.1
   BULLET_SEPARATION: 0
+  ROTATION_ANGLE: {x: 0, y: 0, z: 15}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -104,7 +130,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 100204, guid: 2e80d5d9eb66a03468047b0ba2be3928, type: 2}
+      objectReference: {fileID: 194514, guid: 83272a788fdf7664c84301dc9014b262, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158774}

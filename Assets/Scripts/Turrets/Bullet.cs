@@ -71,7 +71,8 @@ public class Bullet : MonoBehaviour {
     }
 
 	void OnEnable() {
-		Invoke ("Destroy", 10f);
+		Invoke ("Destroy", 20f);
+		//GameObject.FindGameObjectWithTag ("Object Pooler").GetComponent<ObjectPooler> ().numActiveObj++;
 	}
 
 	public void Destroy() {
@@ -90,5 +91,6 @@ public class Bullet : MonoBehaviour {
 
 	void OnDisable() {
 		CancelInvoke ();
+		//GameObject.FindGameObjectWithTag ("Object Pooler").GetComponent<ObjectPooler> ().numActiveObj--;
 	}
 }

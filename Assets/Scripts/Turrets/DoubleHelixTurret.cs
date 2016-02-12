@@ -15,10 +15,10 @@ using System.Collections;
 
 public class DoubleHelixTurret : AlgorithmicTurret {
 
-	private float BARREL_SEPARATION = 4f;
+	public float BARREL_SEPARATION = 4f;
 
 	// Z-component must be a factor of 360
-	private Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
+	public Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
 
 	public Vector3 bulletPosition;
 
@@ -42,15 +42,20 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 	
 	// Update is called once per frame
 	void Update () {
+		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
+		if (distance < sensorRange || !fireOnlyWhenPlayerNear) {
+			Vector3 forwardNorm = transform.forward;
+			forwardNorm.Normalize ();
+			endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
 
-		Vector3 forwardNorm = transform.forward;
-		forwardNorm.Normalize ();
-		endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
-
-		//if not firing, start firing
-		if (!isFiring) {
-			isFiring = true;
-			InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+			//if not firing, start firing
+			if (!isFiring) {
+				isFiring = true;
+				InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+			}
+		} else if (fireOnlyWhenPlayerNear && isFiring) {
+			CancelInvoke ("fire");
+			isFiring = false;
 		}
 	}
 

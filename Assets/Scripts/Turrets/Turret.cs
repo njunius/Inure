@@ -14,7 +14,7 @@ using System.Collections;
 public class Turret : MonoBehaviour {
 
 	//higher number = higher velocity
-	protected enum Velocity {Low = 1, Medium = 4, High = 7, Extreme = 10};
+	protected enum Velocity {Low = 2, Medium = 4, High = 7, Extreme = 10};
 	//lower number = higher rate
 	protected enum RateOfFire {Low = 20, Medium = 10, High = 5, Extreme = 2};
 	protected Quaternion zQuat = new Quaternion (0f, 0f, 0f, 0f);
@@ -51,6 +51,7 @@ public class Turret : MonoBehaviour {
 
 		obj.transform.position = position;
 		obj.transform.rotation = transform.rotation;
+		//LightBulletController bulletObj = (LightBulletController)obj.GetComponent (typeof(LightBulletController));
 		Bullet bulletObj = (Bullet)obj.GetComponent (typeof(Bullet));
 		bulletObj.setVars (bulletColor, aimDirectionNorm * (float)bulletVel);
 		obj.SetActive (true);
