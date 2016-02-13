@@ -100,7 +100,6 @@ public class PlayerController : MonoBehaviour {
 		// Shooting controls
 		if (im.getInputDown("Shoot") && !isFiring)
 		{
-            //Debug.Log("fire");
 			isFiring = true;
 			InvokeRepeating ("fireBullets", 0.0f, fireRate);
 		}
@@ -304,11 +303,11 @@ public class PlayerController : MonoBehaviour {
 			realBulletVel += GetComponent<Rigidbody> ().velocity;
 		}
 
-		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.right, transform.localRotation);
+		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right, transform.localRotation);
 		PlayerBullet newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 
-		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip - transform.right, transform.localRotation);
+		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right, transform.localRotation);
 		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 	}

@@ -12,6 +12,7 @@ GameObject:
   - 65: {fileID: 6547246}
   - 23: {fileID: 2333088}
   - 114: {fileID: 11432858}
+  - 114: {fileID: 11491996}
   m_Layer: 0
   m_Name: T-Turret
   m_TagString: Untagged
@@ -82,12 +83,25 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189552}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d3fd4ecd8255854982ea5d11da8faae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 100204, guid: 2e80d5d9eb66a03468047b0ba2be3928, type: 2}
+  target: {fileID: 0}
+--- !u!114 &11491996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2709031a2270614cad663e7d572e6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 194514, guid: 83272a788fdf7664c84301dc9014b262, type: 2}
   target: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
@@ -99,7 +113,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 100204, guid: 2e80d5d9eb66a03468047b0ba2be3928, type: 2}
+      objectReference: {fileID: 194514, guid: 83272a788fdf7664c84301dc9014b262, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 189552}
