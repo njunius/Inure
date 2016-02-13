@@ -15,18 +15,18 @@ using System.Collections;
 
 public class DoubleHelixTurret : AlgorithmicTurret {
 
-	public float BARREL_SEPARATION = 10f;
+	public float BARREL_SEPARATION = 4f;
 
 	// Z-component must be a factor of 360
-	private Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
+	public Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
 
 	public Vector3 bulletPosition;
 
 	// Use this for initialization
 	void Start () {
-		//bulletVel = Velocity.Extreme;
+		bulletVel = Velocity.Low;
 		bulletColor = Color.red;
-		//fireRate = RateOfFire.High;
+		fireRate = RateOfFire.Extreme;
 		barrelList = new TurretBarrel[2];
 		Vector3 forwardNorm = transform.forward;
 		forwardNorm.Normalize ();
@@ -34,23 +34,28 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 
 		//left
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x, 
-											(int)bulletVel);
+			(int)bulletVel);
 		//right
 		barrelList [1] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x, 
-											(int)bulletVel);
+			(int)bulletVel);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
+		if (distance < sensorRange || !fireOnlyWhenPlayerNear) {
+			Vector3 forwardNorm = transform.forward;
+			forwardNorm.Normalize ();
+			endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
 
-		Vector3 forwardNorm = transform.forward;
-		forwardNorm.Normalize ();
-		endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
-
-		//if not firing, start firing
-		if (!isFiring) {
-			isFiring = true;
-			InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+			//if not firing, start firing
+			if (!isFiring) {
+				isFiring = true;
+				InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+			}
+		} else if (fireOnlyWhenPlayerNear && isFiring) {
+			CancelInvoke ("fire");
+			isFiring = false;
 		}
 	}
 
