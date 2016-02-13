@@ -12,14 +12,13 @@ GameObject:
   - 65: {fileID: 6571210}
   - 23: {fileID: 2331856}
   - 114: {fileID: 11428292}
-  - 114: {fileID: 11419094}
   m_Layer: 0
   m_Name: RakingTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &441152
 Transform:
   m_ObjectHideFlags: 1
@@ -77,27 +76,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11419094
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158774}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4623529d3afb2f14baf0f0dd2e216899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 194514, guid: 83272a788fdf7664c84301dc9014b262, type: 2}
-  focusPoint: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
-  sensorRange: 5
-  fireOnlyWhenPlayerNear: 0
-  NUM_BARRELS: 4
-  TURRET_RADIUS: 4
-  MAX_SWIVEL: 1.0471976
-  SWIVEL_PERCENTAGE: 0.1
-  BULLET_SEPARATION: 0
 --- !u!114 &11428292
 MonoBehaviour:
   m_ObjectHideFlags: 1
