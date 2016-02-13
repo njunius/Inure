@@ -11,7 +11,15 @@ public class turretTrigger : MonoBehaviour {
 			turretsInRoom [i].SetActive(false);
 		}
 	}
-	
+
+	void onTriggerEnter(Collider other){
+		if(other.CompareTag("Player Collider")){
+			for (int i = 0; i < turretsInRoom.Length; i++) {
+				turretsInRoom [i].SetActive(true);
+			}
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 	
