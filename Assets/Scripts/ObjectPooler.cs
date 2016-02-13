@@ -14,6 +14,7 @@ public class ObjectPooler : MonoBehaviour {
 	public GameObject pooledObject;
 	public int pooledAmount = 100;
 	public bool willGrow = false;
+	public int numActiveObj = 0;
 
 	public List<GameObject> pooledObjects;
 

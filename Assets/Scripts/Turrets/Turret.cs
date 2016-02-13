@@ -51,6 +51,7 @@ public class Turret : MonoBehaviour {
 
 		obj.transform.position = position;
 		obj.transform.rotation = transform.rotation;
+		//LightBulletController bulletObj = (LightBulletController)obj.GetComponent (typeof(LightBulletController));
 		Bullet bulletObj = (Bullet)obj.GetComponent (typeof(Bullet));
 		bulletObj.setVars (bulletColor, aimDirectionNorm * (float)bulletVel);
 		obj.SetActive (true);
