@@ -24,14 +24,14 @@ public class FountainTurret : AlgorithmicTurret {
 	private float curTurretRadius;
 	private int numFire = 0;
 	private bool rotatingOut = true;
-	private Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
+	public Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
 
 	// Use this for initialization
 	void Start () {
-		//bulletVel = Velocity.Low;
+		bulletVel = Velocity.Medium;
 		//orange
 		bulletColor = new Color(1f, 0.6f, 0f, 1f);
-		//fireRate = RateOfFire.High;
+		fireRate = RateOfFire.Medium;
 		barrelList = new TurretBarrel[NUM_BARRELS];
 
 		Vector3 forwardNorm = transform.forward;
@@ -42,29 +42,35 @@ public class FountainTurret : AlgorithmicTurret {
 
 		for (int numBarrel = 0; numBarrel < NUM_BARRELS; ++numBarrel) {
 			barrelList[numBarrel] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x, 
-														(int)bulletVel);
+				(int)bulletVel);
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		Vector3 forwardNorm = transform.forward;
-		forwardNorm.Normalize ();
-		endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
+		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
+		if (distance < sensorRange || !fireOnlyWhenPlayerNear) {
+			Vector3 forwardNorm = transform.forward;
+			forwardNorm.Normalize ();
+			endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
 
-		//if not firing, start firing
-		if (!isFiring) {
-			isFiring = true;
-			InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
-		}
+			//if not firing, start firing
+			if (!isFiring) {
+				isFiring = true;
+				InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+			}
 
-		float distBtwnPlayer = Vector3.Distance(GameObject.Find("Player").transform.position, transform.position);
+			float distBtwnPlayer = Vector3.Distance(GameObject.Find("Player").transform.position, transform.position);
 
-		if (distBtwnPlayer < 10f) {
-			float percMaxRad = distBtwnPlayer / 10;
-			curTurretRadius = Mathf.Max (percMaxRad * ORIG_TURRET_RADIUS, 2f);
-		} else {
-			curTurretRadius = ORIG_TURRET_RADIUS;
+			if (distBtwnPlayer < 10f) {
+				float percMaxRad = distBtwnPlayer / 10;
+				curTurretRadius = Mathf.Max (percMaxRad * ORIG_TURRET_RADIUS, 2f);
+			} else {
+				curTurretRadius = ORIG_TURRET_RADIUS;
+			}
+		} else if (fireOnlyWhenPlayerNear && isFiring) {
+			CancelInvoke ("fire");
+			isFiring = false;
 		}
 	}
 

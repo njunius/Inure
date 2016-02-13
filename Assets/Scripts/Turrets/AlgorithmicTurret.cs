@@ -14,12 +14,15 @@ using System.Collections;
 public class AlgorithmicTurret : Turret {
 
 	public Vector3 focusPoint;
+	public GameObject target;
+	public float sensorRange = 30f;
+	public bool fireOnlyWhenPlayerNear = true;
 
 	// Use this for initialization
 	void Start () {
 		focusPoint = transform.position + transform.forward;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		transform.LookAt (focusPoint);
