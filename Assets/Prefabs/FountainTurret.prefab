@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &467358
 Transform:
   m_ObjectHideFlags: 1
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.925, y: -1, z: 233.16}
+  m_LocalPosition: {x: -51.6, y: 3, z: -21.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,9 +87,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7cf0cba967c4e243ab074e873007d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 100204, guid: 2e80d5d9eb66a03468047b0ba2be3928, type: 2}
+  bulletPrefab: {fileID: 162266, guid: 81fd2edb6338185498e473261e181c21, type: 2}
   focusPoint: {x: 0, y: 0, z: 0}
-  NUM_BARRELS: 10
+  target: {fileID: 0}
+  sensorRange: 30
+  fireOnlyWhenPlayerNear: 0
+  NUM_BARRELS: 20
   ORIG_TURRET_RADIUS: 4
   MAX_SWIVEL: 1.0471976
   SWIVEL_PERCENTAGE: 0.1
@@ -103,7 +106,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 100204, guid: 2e80d5d9eb66a03468047b0ba2be3928, type: 2}
+      objectReference: {fileID: 194514, guid: 83272a788fdf7664c84301dc9014b262, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 149390}

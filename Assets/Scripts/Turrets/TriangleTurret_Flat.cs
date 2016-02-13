@@ -16,16 +16,16 @@ public class TriangleTurret_Flat : SimpleTurret {
 
 	private int numShots = 0;
 	private int numFire = 0;
-	private int BULLET_FREQUENCY = 150;
+	private float BULLET_FREQUENCY = 7f;
 	//multiplied by normalized vector on the local 
 	private float BARREL_SEPARATION = 0.25f;
 	private Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = Velocity.Low;
+		bulletVel = Velocity.Medium;
 		bulletColor = Color.magenta;
-		fireRate = RateOfFire.Medium;
+		fireRate = RateOfFire.Low;
 		barrelList = new TurretBarrel[5];
 
 		//leftmost
@@ -79,7 +79,7 @@ public class TriangleTurret_Flat : SimpleTurret {
 	 *       Turret's angle of rotation is increased or reset
 	 */
 	protected void fire () {
-		InvokeRepeating ("singleBurst", (float)fireDelay, (float)fireRate / BULLET_FREQUENCY);
+		InvokeRepeating ("singleBurst", (float)fireDelay, (float)fireRate * fireRateMultiplier / BULLET_FREQUENCY);
 
 		//if the turret has made a complete rotation, reset the number of times it has been fired
 		if (numFire == 360 / ROTATION_ANGLE.z)
