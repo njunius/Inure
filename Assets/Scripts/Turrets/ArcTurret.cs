@@ -14,11 +14,11 @@ using System.Collections;
 
 public class ArcTurret : SimpleTurret {
 
-	private float RELATIVE_SPAWNPOINT_MULTIPLIER = 1.5f;
-	private float SEPARATION_ANGLE = Mathf.PI/12;
+	public float RELATIVE_SPAWNPOINT_MULTIPLIER = 1.5f;
+	public float SEPARATION_ANGLE = Mathf.PI/12;
 
 	// Z-component must be a factor of 360
-	private Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
+	public Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
 	private int numFire = 0;
 	private float distFromCenter;
 
@@ -28,7 +28,7 @@ public class ArcTurret : SimpleTurret {
 
 		bulletVel = Velocity.High;
 		bulletColor = Color.green;
-		fireRate = RateOfFire.Extreme;
+		fireRate = RateOfFire.Medium;
 		barrelList = new TurretBarrel[5];
 		//leftmost
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x * RELATIVE_SPAWNPOINT_MULTIPLIER,

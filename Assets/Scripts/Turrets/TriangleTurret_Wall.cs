@@ -15,17 +15,17 @@ using System.Collections;
 public class TriangleTurret_Wall : SimpleTurret {
 
 	private int numFire = 0;
-	private Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
+	public Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
 
 	//angle between the rays from barrel 0 to barrel 3 and from barrel 0 to barrel 5
-	private const float TRIANGLE_ANGLE = Mathf.PI / 3f;
-	private float TRIANGLE_HEIGHT;
+	public const float TRIANGLE_ANGLE = Mathf.PI / 3f;
+	public float TRIANGLE_HEIGHT;
 
 	// Use this for initialization
 	void Start () {
-		//bulletVel = Velocity.Low;
+		bulletVel = Velocity.Medium;
 		bulletColor = Color.magenta;
-		//fireRate = RateOfFire.Medium;
+		fireRate = RateOfFire.Medium;
 		barrelList = new TurretBarrel[6];
 		TRIANGLE_HEIGHT = 3f * (float)bulletPrefab.GetComponent<Renderer> ().bounds.size.x;
 
@@ -48,7 +48,7 @@ public class TriangleTurret_Wall : SimpleTurret {
 		barrelList [5] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x, 
 			(int)bulletVel);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
