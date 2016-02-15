@@ -24,7 +24,7 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = Velocity.Low;
+		bulletVel = Velocity.High;
 		bulletColor = Color.red;
 		fireRate = RateOfFire.Extreme;
 		barrelList = new TurretBarrel[2];
