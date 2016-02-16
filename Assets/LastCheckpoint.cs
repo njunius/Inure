@@ -4,23 +4,27 @@ using System.Collections;
 public class LastCheckpoint : MonoBehaviour {
 
 	public Vector3 savedPOS;
-	public float shieldCharge;
+	public int shieldCharge;
 	public int bombCharge;
-	public float hullHealth;
+	public int hullHealth;
 
-	private PlayerController cont;
+	private PlayerController pController;
 	private BombController bomb;
 
-	// Use this for initialization
+	// Save the initial data upon spawning
 	void Start () {
 		savedPOS = gameObject.transform.position;
-		cont = gameObject.GetComponent<PlayerController> ();
+		pController = gameObject.GetComponent<PlayerController> ();
 		bomb = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>();
 		bombCharge = bomb.currBombCharge;
+		shieldCharge = pController.getShieldCharge();
+		hullHealth = pController.getCurrHullIntegrity();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public void setCheckPoint(int newShield, int newBomb, int newHull, Vector3 newPOS){
+		shieldCharge = newShield;
+		bombCharge = newBomb;
+		hullHealth = newHull;
+		savedPOS = newPOS;
 	}
 }

@@ -132,6 +132,14 @@ public class ShieldController : MonoBehaviour {
         return currShieldCharge == maxShieldCharge;
     }
 
+	public int getCurrShieldCharge (){
+		return currShieldCharge;
+	}
+
+	public void setCurrShieldCharge (int setShield){
+		currShieldCharge = setShield;
+	}
+
     public void setShieldActive(bool setActive)
     {
         shieldActive = setActive;

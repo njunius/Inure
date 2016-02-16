@@ -282,6 +282,14 @@ public class PlayerController : MonoBehaviour {
         return shield.getShieldActive();
     }
 
+	public int getShieldCharge(){
+		return shield.getCurrShieldCharge();
+	}
+
+	public void setShieldCharge(int setCharge){
+		shield.setCurrShieldCharge(setCharge);
+	}
+
     public int getMaxHullIntegrity()
     {
         return maxHullIntegrity;
