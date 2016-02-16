@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	public float bulletVel = 40.0f;
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
+	public bool fInvincible = false;
 	private Vector3 frontOfShip;
 	private bool isFiring = false;
 
@@ -234,19 +235,36 @@ public class PlayerController : MonoBehaviour {
         }
 
 		//Activate the game over sequence when death is true
-		/*if (isDead ()) 
+		if (isDead () && !fInvincible) 
 		{
-			//Show Game Over Screen
-			pauseTxt.enabled = false;
-			inureTxt.enabled = false;
-			Time.timeScale = 0.3f;
-			gameOver.enabled = true;
-			UICanvas.enabled = true;
-			//Destroy player
-			this.enabled = false;
-		}*/
+			killPlayer();
+		}
 
     }
+
+	//Transports the player to the specified coordinates
+	//Resets their stats to saved data
+	//Usually called by a button in the Canvas UI
+	public void reloadCheckP (LastCheckpoint savedData){
+		Debug.Log("Reloading!");
+		gameObject.transform.position = savedData.getCheckPOS();
+		gameObject.transform.rotation = savedData.getCheckROT();
+		currHullIntegrity = savedData.getHealth();
+		shield.setCurrShieldCharge(savedData.getShield());
+		GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
+	}
+
+	//Deactivates player controls and shows game over screen
+	private void killPlayer(){
+		//Show Game Over Screen
+		pauseTxt.enabled = false;
+		inureTxt.enabled = false;
+		Time.timeScale = 0.3f;
+		gameOver.enabled = true;
+		UICanvas.enabled = true;
+		//Destroy player
+		this.enabled = false;
+	}
 
     // returns true if the player's hull integrity has dropped to 0
     public bool isDead()
@@ -281,6 +299,14 @@ public class PlayerController : MonoBehaviour {
     {
         return shield.getShieldActive();
     }
+
+	public int getShieldCharge(){
+		return shield.getCurrShieldCharge();
+	}
+
+	public void setShieldCharge(int setCharge){
+		shield.setCurrShieldCharge(setCharge);
+	}
 
     public int getMaxHullIntegrity()
     {
