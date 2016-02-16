@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	public float bulletVel = 40.0f;
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
+	public bool fInvincible = false;
 	private Vector3 frontOfShip;
 	private bool isFiring = false;
 
@@ -234,7 +235,7 @@ public class PlayerController : MonoBehaviour {
         }
 
 		//Activate the game over sequence when death is true
-		/*if (isDead ()) 
+		if (isDead () && !fInvincible) 
 		{
 			//Show Game Over Screen
 			pauseTxt.enabled = false;
@@ -244,7 +245,7 @@ public class PlayerController : MonoBehaviour {
 			UICanvas.enabled = true;
 			//Destroy player
 			this.enabled = false;
-		}*/
+		}
 
     }
 
