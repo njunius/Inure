@@ -237,17 +237,28 @@ public class PlayerController : MonoBehaviour {
 		//Activate the game over sequence when death is true
 		if (isDead () && !fInvincible) 
 		{
-			//Show Game Over Screen
-			pauseTxt.enabled = false;
-			inureTxt.enabled = false;
-			Time.timeScale = 0.3f;
-			gameOver.enabled = true;
-			UICanvas.enabled = true;
-			//Destroy player
-			this.enabled = false;
+			killPlayer();
 		}
 
     }
+
+	//Transports the player to the specified coordinates
+	//Resets their stats to saved data
+	public void reloadCheckP (LastCheckpoint savedData){
+		
+	}
+
+	//Deactivates player controls and shows game over screen
+	private void killPlayer(){
+		//Show Game Over Screen
+		pauseTxt.enabled = false;
+		inureTxt.enabled = false;
+		Time.timeScale = 0.3f;
+		gameOver.enabled = true;
+		UICanvas.enabled = true;
+		//Destroy player
+		this.enabled = false;
+	}
 
     // returns true if the player's hull integrity has dropped to 0
     public bool isDead()

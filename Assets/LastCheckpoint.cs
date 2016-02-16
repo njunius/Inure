@@ -27,4 +27,12 @@ public class LastCheckpoint : MonoBehaviour {
 		hullHealth = newHull;
 		savedPOS = newPOS;
 	}
+
+	public int getShield (){ return shieldCharge;}
+
+	public int getBomb (){ return bombCharge;}
+
+	public int getHealth(){ return hullHealth;}
+
+	public Vector3 getCheckPOS(){ return savedPOS;}
 }
