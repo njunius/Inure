@@ -245,17 +245,20 @@ public class PlayerController : MonoBehaviour {
 	//Transports the player to the specified coordinates
 	//Resets their stats to saved data
 	//Usually called by a button in the Canvas UI
-	public void reloadCheckP (LastCheckpoint savedData){
+	public void reloadCheckP (LastCheckpoint savedData)
+	{
 		Debug.Log("Reloading!");
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
 		GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
+		savePlayer ();
 	}
 
 	//Deactivates player controls and shows game over screen
-	private void killPlayer(){
+	private void killPlayer()
+	{
 		//Show Game Over Screen
 		pauseTxt.enabled = false;
 		inureTxt.enabled = false;
@@ -264,6 +267,19 @@ public class PlayerController : MonoBehaviour {
 		UICanvas.enabled = true;
 		//Destroy player
 		this.enabled = false;
+	}
+
+	//Disable game over screen
+	public void savePlayer ()
+	{
+		//Show Pause Screen
+		pauseTxt.enabled = true;
+		inureTxt.enabled = true;
+		Time.timeScale = 1.0f;
+		gameOver.enabled = false;
+		UICanvas.enabled = false;
+		//save player
+		this.enabled = true;
 	}
 
     // returns true if the player's hull integrity has dropped to 0
