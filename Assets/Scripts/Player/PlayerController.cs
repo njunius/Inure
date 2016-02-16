@@ -245,7 +245,12 @@ public class PlayerController : MonoBehaviour {
 	//Transports the player to the specified coordinates
 	//Resets their stats to saved data
 	public void reloadCheckP (LastCheckpoint savedData){
-		
+		Debug.Log("Reloading!");
+		gameObject.transform.position = savedData.getCheckPOS();
+		gameObject.transform.rotation = savedData.getCheckROT();
+		currHullIntegrity = savedData.getHealth();
+		shield.setCurrShieldCharge(savedData.getShield());
+		GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
 	}
 
 	//Deactivates player controls and shows game over screen

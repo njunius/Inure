@@ -4,6 +4,7 @@ using System.Collections;
 public class LastCheckpoint : MonoBehaviour {
 
 	public Vector3 savedPOS;
+	public Quaternion savedROT;
 	public int shieldCharge;
 	public int bombCharge;
 	public int hullHealth;
@@ -14,18 +15,21 @@ public class LastCheckpoint : MonoBehaviour {
 	// Save the initial data upon spawning
 	void Start () {
 		savedPOS = gameObject.transform.position;
+		savedROT = gameObject.transform.rotation;
 		pController = gameObject.GetComponent<PlayerController> ();
 		bomb = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>();
 		bombCharge = bomb.currBombCharge;
 		shieldCharge = pController.getShieldCharge();
 		hullHealth = pController.getCurrHullIntegrity();
+
 	}
 	
-	public void setCheckPoint(int newShield, int newBomb, int newHull, Vector3 newPOS){
+	public void setCheckPoint(int newShield, int newBomb, int newHull, Vector3 newPOS, Quaternion newROT){
 		shieldCharge = newShield;
 		bombCharge = newBomb;
 		hullHealth = newHull;
 		savedPOS = newPOS;
+		savedROT = newROT;
 	}
 
 	public int getShield (){ return shieldCharge;}
@@ -35,4 +39,6 @@ public class LastCheckpoint : MonoBehaviour {
 	public int getHealth(){ return hullHealth;}
 
 	public Vector3 getCheckPOS(){ return savedPOS;}
+
+	public Quaternion getCheckROT(){ return savedROT;}
 }
