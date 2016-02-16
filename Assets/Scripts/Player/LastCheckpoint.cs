@@ -23,7 +23,8 @@ public class LastCheckpoint : MonoBehaviour {
 		hullHealth = pController.getCurrHullIntegrity();
 
 	}
-	
+
+	//This is usually called by PlayerController during a reload
 	public void setCheckPoint(int newShield, int newBomb, int newHull, Vector3 newPOS, Quaternion newROT){
 		shieldCharge = newShield;
 		bombCharge = newBomb;

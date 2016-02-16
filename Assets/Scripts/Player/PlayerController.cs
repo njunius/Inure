@@ -244,6 +244,7 @@ public class PlayerController : MonoBehaviour {
 
 	//Transports the player to the specified coordinates
 	//Resets their stats to saved data
+	//Usually called by a button in the Canvas UI
 	public void reloadCheckP (LastCheckpoint savedData){
 		Debug.Log("Reloading!");
 		gameObject.transform.position = savedData.getCheckPOS();

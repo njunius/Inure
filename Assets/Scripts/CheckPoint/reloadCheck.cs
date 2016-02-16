@@ -13,6 +13,7 @@ public class reloadCheck : MonoBehaviour {
 		savedData = player.GetComponent<LastCheckpoint>();
 	}
 
+	//Calls the player controller to reload the save
 	public void resetCheckP(){
 		pController.reloadCheckP(savedData);
 	}
