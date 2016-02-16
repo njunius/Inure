@@ -46,7 +46,7 @@ public class FirstPersonHitIndicatorController : MonoBehaviour {
     {
         if (!isHit)
         {
-            isHit = !isHit;
+            isHit = true;
         }
     }
 }

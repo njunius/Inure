@@ -40,9 +40,13 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter (Collision hit) {
         PlayerController hitScript = hit.gameObject.GetComponent<PlayerController>();
-        if (hit.gameObject.CompareTag("Player") && !hitScript.isShielded()) {
-            hitScript.takeDamage();
-		}
+        if (hit.gameObject.CompareTag("Player")) {
+            hit.collider.GetComponent<CollisionHitDetector>().updateIndicators();
+            if (!hitScript.isShielded())
+            {
+                hitScript.takeDamage();
+            }
+        }
         //Destroy (gameObject);
 		Destroy();
 		//gameObject.SetActive(false);
