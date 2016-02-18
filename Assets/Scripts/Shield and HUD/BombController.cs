@@ -27,7 +27,6 @@ public class BombController : MonoBehaviour {
         isPlanted = false;
         currBombCharge = 0;
         maxBombCharge = 100;
-        Vector3 pre_position = player.transform.position;
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerBehavior = player.GetComponent<PlayerController>();
@@ -50,15 +49,9 @@ public class BombController : MonoBehaviour {
             isPlanted = true;
         }
 
-        if (!isPlanted)
-        {
-            pre_position = player.transform.position;
-            Debug.Log("Bomb is still NOT PLANTED!");
-        }
-
         if (isPlanted)
         {
-            transform.position = pre_position;
+            transform.parent = null;
             Debug.Log("Bomb is PLANTED!");
         }
 
