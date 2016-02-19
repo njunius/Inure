@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 
-public class ButtonOverlayControl : MonoBehaviour {
+public class ButtonOverlayControl : MonoBehaviour, IPointerDownHandler {
 
-	// Use this for initialization
-	void Start () {
-	
+    private Canvas settingsOverlay;
+
+    // Use this for initialization
+    void Start () {
+        settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	public void OnPointerDown (PointerEventData eventData) {
+        settingsOverlay.enabled = true;
 	}
 }

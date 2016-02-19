@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+
+        Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
+
         rb = GetComponent<Rigidbody>();
         
 		//Set the UI objects and assign components 
