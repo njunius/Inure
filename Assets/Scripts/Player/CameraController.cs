@@ -31,7 +31,7 @@ public class CameraController : MonoBehaviour {
     private bool locked;
     //public float clipNearCurrent = 
 
-
+    private Vector3 velocity = Vector3.zero;
     public GameObject gameController;
     public InputManager im;
     // Use this for initialization
@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void LateUpdate() {
+    void FixedUpdate() {
         if (gameController == null)
         {
             gameController = GameObject.FindGameObjectWithTag("GameController");
@@ -74,27 +74,37 @@ public class CameraController : MonoBehaviour {
         {
             if (im.getInputDown("Camera Mode"))
             {
-                if (mode == CameraMode.ThirdPerson)
+                switch (mode)
                 {
-                    mode = CameraMode.FirstPerson;
-                    
-                    Renderer rend = target.GetComponent<Renderer>();
-                    rend.enabled = false;
-					GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<RadarTrigger> ().enabled = false;
-                    cameraPositionOffset = firstPersonPosition;
-                    gameObject.GetComponent<Camera>().fieldOfView = 90;
-                    updateCamera();
+                    case CameraMode.ThirdPerson:
+                        Debug.Log("Camera Mode: First Person");
+                        mode = CameraMode.FirstPerson;
 
-                }
-                else
-                {
-                    mode = CameraMode.ThirdPerson;
-                    Renderer rend = target.GetComponent<Renderer>();
-                    rend.enabled = true;
-					GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<RadarTrigger> ().enabled = true;
-                    cameraPositionOffset = thirdPersonPosition;
-                    gameObject.GetComponent<Camera>().fieldOfView = 60;
-                    //updateCamera();
+                        Renderer rend = target.GetComponent<Renderer>();
+                        rend.enabled = false;
+                        GameObject.FindGameObjectWithTag("Warning Radius").GetComponent<RadarTrigger>().enabled = false;
+                        cameraPositionOffset = firstPersonPosition;
+                        gameObject.GetComponent<Camera>().fieldOfView = 90;
+                        //updateCamera();
+                        break;
+                    case CameraMode.FirstPerson:
+                        Debug.Log("Camera Mode: Third Person Loose");
+                        
+                        rend = target.GetComponent<Renderer>();
+                        rend.enabled = true;
+                        GameObject.FindGameObjectWithTag("Warning Radius").GetComponent<RadarTrigger>().enabled = true;
+                        cameraPositionOffset = thirdPersonPosition;
+                        gameObject.GetComponent<Camera>().fieldOfView = 60;
+                        mode = CameraMode.ThirdPerson;
+                        updateCamera();
+                        mode = CameraMode.ThirdPersonLoose;
+                        break;
+
+                    case CameraMode.ThirdPersonLoose:
+                        Debug.Log("Camera Mode: Third Person Rigid");
+                        mode = CameraMode.ThirdPerson;
+                        break;
+
                 }
             }
 
@@ -281,10 +291,174 @@ public class CameraController : MonoBehaviour {
                     cameraPositionOffset = thirdPersonPosition;
                 }
             }
+            transform.rotation = positionTarget.rotation;
+            transform.Rotate(cameraRotationOffset);
+
+            Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
+
+            if (targetDistance < defaultDistance)
+            {
+                transform.position = nextPosition; //Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * 15f);
+            }
+            else
+            {
+                transform.position = nextPosition;
+            }
+
+
+            float distance = Vector3.Distance(transform.position, positionTarget.position);
+            if (distance < fadeDistance)
+            {
+                Renderer r = target.GetComponent<Renderer>();
+                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
+
+            }
+        }
+        else if (mode == CameraMode.ThirdPersonLoose)
+        {
+            Vector3 hitNormal;
+            bool hitFound = false;
+            Vector3 hitPos = new Vector3();
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.forward * 0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.forward * -0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.right * 0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.right * -0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.up * 0.5f));
+            Debug.DrawLine(transform.position, transform.TransformPoint(transform.up * -0.5f));
+
+            //check if camera is near wall
+
+            //Debug.DrawRay(transform.position, Quaternion.AngleAxis(Camera.current.fieldOfView / 2, transform.up) * transform.forward, Color.blue);
+            //Debug.DrawRay(transform.position, Quaternion.AngleAxis(-Camera.current.fieldOfView / 2, transform.up) * transform.forward, Color.blue);
+
+
+            /*RaycastHit[] rays = Physics.RaycastAll(transform.position, Quaternion.AngleAxis(Camera.current.fieldOfView / 2, transform.up) * transform.forward, Camera.current.nearClipPlane);
+            foreach(RaycastHit ray in rays)
+            {
+                Debug.Log(ray.transform.tag);
+                if (ray.transform.tag.Equals("Environment"))
+                {
+                    Debug.Log("EnvSphr");
+                    //Debug.Log("hit");
+                    hitFound = true;
+                    hitNormal = ray.normal;
+                    hitPos = ray.point;
+                    break;
+
+                }
+            }*/
+
+            if (hitFound)
+            {
+                RaycastHit hit;
+                Debug.Log("found");
+                Debug.DrawRay(transform.position, hitPos, Color.red);
+                if (Physics.Raycast(transform.position, hitPos, out hit, 0.02f, 1 << 11))
+                {
+                    Debug.Log("line");
+                    Debug.Log(hit.distance);
+                    targetDistance -= hit.distance;
+                    float ratio = targetDistance / defaultDistance;
+                    targetHeight = ratio * defaultHeight;
+                    ratio -= ratio * 0.1f;
+                }
+                cameraPositionOffset.y = targetHeight;
+                cameraPositionOffset.z = targetDistance;
+            }
+            else
+            {
+                Vector3 dirToCamera = transform.position - positionTarget.transform.position;
+                RaycastHit[] hits = Physics.RaycastAll(positionTarget.position, dirToCamera,
+                                    Mathf.Sqrt(defaultDistance * defaultDistance + defaultHeight * defaultHeight));
+                foreach (RaycastHit ray in hits)
+                {
+                    if (ray.transform.CompareTag("Environment"))
+                    {
+                        targetDistance = ray.distance - 0.25f;
+                        float ratio = targetDistance / defaultDistance;
+                        targetHeight = ratio * defaultHeight;
+                        cameraPositionOffset.y = targetHeight;
+                        cameraPositionOffset.z = targetDistance;
+                        hitFound = true;
+                        break;
+                    }
+
+                }
+
+                Vector3 topOfScreen = transform.TransformDirection(new Vector3(0, defaultHeight, 0));
+                Vector3 localTargetPos = transform.InverseTransformPoint(positionTarget.position);
+                Vector3 rayBase = transform.TransformPoint(new Vector3(localTargetPos.x, localTargetPos.y, localTargetPos.z));
+                Debug.DrawRay(rayBase, transform.position - rayBase, Color.blue);
+                hits = Physics.RaycastAll(rayBase, transform.position - rayBase, defaultHeight + 0.2f);
+                foreach (RaycastHit ray in hits)
+                {
+                    if (ray.transform.CompareTag("Environment"))
+                    {
+                        targetHeight = ray.distance - 0.25f;
+                        cameraPositionOffset.y = targetHeight;
+                        hitFound = true;
+                        break;
+                    }
+
+                }
+
+                if (!hitFound)
+                {
+
+                    //Debug.Log("No hit");
+                    cameraPositionOffset = thirdPersonPosition;
+                }
+            }
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, positionTarget.rotation, Time.deltaTime);
+            transform.Rotate(cameraRotationOffset);
+
+            Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
+            
+            if (targetDistance < defaultDistance)
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, nextPosition, ref velocity, 0.05f);
+            }
+            else
+            {
+                transform.position = nextPosition;
+            }
+
+
+            float distance = Vector3.Distance(transform.position, positionTarget.position);
+            if (distance < fadeDistance)
+            {
+                Renderer r = target.GetComponent<Renderer>();
+                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
+
+            }
         }
         else
         {
             cameraPositionOffset = firstPersonPosition;
+
+            transform.rotation = positionTarget.rotation;
+            transform.Rotate(cameraRotationOffset);
+
+            Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
+
+            if (targetDistance < defaultDistance)
+            {
+                transform.position = nextPosition; //Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * 15f);
+            }
+            else
+            {
+                transform.position = nextPosition;
+            }
+
+
+            float distance = Vector3.Distance(transform.position, positionTarget.position);
+            if (distance < fadeDistance)
+            {
+                Renderer r = target.GetComponent<Renderer>();
+                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
+
+            }
         }
 
 
@@ -302,8 +476,7 @@ public class CameraController : MonoBehaviour {
             transform.rotation = nextRot;
         }*/
         
-        transform.rotation = positionTarget.rotation;
-        transform.Rotate(cameraRotationOffset);
+        
 
         //transform.LookAt(lookAtTarget);
 
@@ -323,25 +496,6 @@ public class CameraController : MonoBehaviour {
             transform.position = destination;
         }*/
 
-        Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
-
-        if (targetDistance < defaultDistance)
-        {
-            transform.position = nextPosition; //Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * 15f);
-        }
-        else
-        {
-            transform.position = nextPosition;
-        }
-
-
-        float distance = Vector3.Distance(transform.position, positionTarget.position);
-        if (distance < fadeDistance)
-        {
-            Renderer r = target.GetComponent<Renderer>();
-            r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
-
-        }
 
     }
 
