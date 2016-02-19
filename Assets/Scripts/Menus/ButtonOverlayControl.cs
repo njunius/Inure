@@ -14,6 +14,6 @@ public class ButtonOverlayControl : MonoBehaviour, IPointerDownHandler {
 	
 	// Update is called once per frame
 	public void OnPointerDown (PointerEventData eventData) {
-        settingsOverlay.enabled = true;
+        settingsOverlay.enabled = !settingsOverlay.enabled;
 	}
 }
