@@ -28,10 +28,10 @@ public class FountainTurret : AlgorithmicTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = Velocity.Medium;
+		bulletVel = 4;
 		//orange
 		bulletColor = new Color(1f, 0.6f, 0f, 1f);
-		fireRate = RateOfFire.Medium;
+		fireRate = 10;
 		barrelList = new TurretBarrel[NUM_BARRELS];
 
 		Vector3 forwardNorm = transform.forward;
@@ -48,8 +48,7 @@ public class FountainTurret : AlgorithmicTurret {
 
 	// Update is called once per frame
 	void Update () {
-		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
-		if (distance < sensorRange || !fireOnlyWhenPlayerNear) {
+		if (isOn) {
 			Vector3 forwardNorm = transform.forward;
 			forwardNorm.Normalize ();
 			endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
@@ -57,7 +56,7 @@ public class FountainTurret : AlgorithmicTurret {
 			//if not firing, start firing
 			if (!isFiring) {
 				isFiring = true;
-				InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+				InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
 			}
 
 			float distBtwnPlayer = Vector3.Distance(GameObject.Find("Player").transform.position, transform.position);
@@ -68,7 +67,7 @@ public class FountainTurret : AlgorithmicTurret {
 			} else {
 				curTurretRadius = ORIG_TURRET_RADIUS;
 			}
-		} else if (fireOnlyWhenPlayerNear && isFiring) {
+		} else if (isFiring) {
 			CancelInvoke ("fire");
 			isFiring = false;
 		}

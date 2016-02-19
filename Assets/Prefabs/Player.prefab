@@ -544,6 +544,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &184242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 484494}
+  - 135: {fileID: 13535974}
+  m_Layer: 0
+  m_Name: PlayerTurretTrigger
+  m_TagString: Player Turret Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &185538
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +876,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 13.73, z: -19.42}
+  m_LocalPosition: {x: -16.78, y: 2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428020}
@@ -893,8 +909,21 @@ Transform:
   - {fileID: 474456}
   - {fileID: 460544}
   - {fileID: 495794}
+  - {fileID: 484494}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &484494
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.31, z: 0}
+  m_LocalScale: {x: 1.9049969, y: 1.9049958, z: 1.9049958}
+  m_Children: []
+  m_Father: {fileID: 482806}
+  m_RootOrder: 30
 --- !u!4 &490416
 Transform:
   m_ObjectHideFlags: 1
@@ -2201,6 +2230,18 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 20
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &13535974
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &22226468
 CanvasRenderer:

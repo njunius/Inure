@@ -28,10 +28,9 @@ public class RakingTurret : AlgorithmicTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = Velocity.Medium;
-		//orange
+		bulletVel = 4;
 		bulletColor = Color.yellow;
-		fireRate = RateOfFire.Extreme;
+		fireRate = 2;
 		barrelList = new TurretBarrel[NUM_BARRELS];
 		Vector3 forwardNorm = transform.forward;
 		forwardNorm.Normalize ();
@@ -46,8 +45,7 @@ public class RakingTurret : AlgorithmicTurret {
 
 	// Update is called once per frame
 	void Update () {
-		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
-		if (distance < sensorRange || !fireOnlyWhenPlayerNear) {
+		if (isOn) {
 			Vector3 forwardNorm = transform.forward;
 			forwardNorm.Normalize ();
 			endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
@@ -55,9 +53,9 @@ public class RakingTurret : AlgorithmicTurret {
 			//if not firing, start firing
 			if (!isFiring) {
 				isFiring = true;
-				InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+				InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
 			}
-		} else if (fireOnlyWhenPlayerNear && isFiring) {
+		} else if (isFiring) {
 			CancelInvoke ("fire");
 			isFiring = false;
 		}

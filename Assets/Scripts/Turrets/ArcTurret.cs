@@ -16,9 +16,9 @@ public class ArcTurret : SimpleTurret {
 
 	public float RELATIVE_SPAWNPOINT_MULTIPLIER = 1.5f;
 	public float SEPARATION_ANGLE = Mathf.PI/12;
-
 	// Z-component must be a factor of 360
 	public Vector3 ROTATION_ANGLE = new Vector3 (0f, 0f, 15f);
+
 	private int numFire = 0;
 	private float distFromCenter;
 
@@ -26,9 +26,9 @@ public class ArcTurret : SimpleTurret {
 	void Start () {
 		distFromCenter = gameObject.GetComponent<Renderer> ().bounds.size.z;
 
-		bulletVel = Velocity.High;
+		bulletVel = 7;
 		bulletColor = Color.green;
-		fireRate = RateOfFire.Medium;
+		fireRate = 10;
 		barrelList = new TurretBarrel[5];
 		//leftmost
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x * RELATIVE_SPAWNPOINT_MULTIPLIER,
@@ -49,9 +49,8 @@ public class ArcTurret : SimpleTurret {
 
 	// Update is called once per frame
 	void Update () {
-		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
 		//if the player is within the turret's range of sight, target the player and fire
-		if (distance < sensorRange) {
+		if (isOn) {
 			gameObject.transform.LookAt (target.transform);
 
 			//give appropriate rotation for the number of times the turret has fired
@@ -64,7 +63,7 @@ public class ArcTurret : SimpleTurret {
 			//if not firing, start firing
 			if (!isFiring) {
 				isFiring = true;
-				InvokeRepeating ("Fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+				InvokeRepeating ("Fire", fireDelay, fireRate * fireRateMultiplier);
 			}
 		}
 		//if the player is not within range, but the turret is firing, stop firing

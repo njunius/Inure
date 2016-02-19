@@ -16,9 +16,9 @@ public class PointTurret : SimpleTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = Velocity.Extreme;
+		bulletVel = 10;
 		bulletColor = Color.blue;
-		fireRate = RateOfFire.High;
+		fireRate = 5;
 		barrelList = new TurretBarrel[1];
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x, 
 			(int)bulletVel);
@@ -26,9 +26,8 @@ public class PointTurret : SimpleTurret {
 
 	// Update is called once per frame
 	void Update () {
-		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
 		//if the player is within the turret's range of sight, target the player and fire
-		if (distance < sensorRange) {
+		if (isOn) {
 			gameObject.transform.LookAt (target.transform);
 			//find new point at end of turret once required to target player
 			Vector3 forwardNorm = gameObject.transform.forward;
@@ -37,7 +36,7 @@ public class PointTurret : SimpleTurret {
 			//if not firing, start firing
 			if (!isFiring) {
 				isFiring = true;
-				InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+				InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
 			}
 		}
 		//if the player is not within range, but the turret is firing, stop firing
