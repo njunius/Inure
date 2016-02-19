@@ -58,7 +58,11 @@ public class Turret : MonoBehaviour {
 		obj.SetActive (true);
 	}
 
-	public void toggleTurret () {
-		isOn = !isOn;
+	public void TurnOn () {
+		isOn = true;
+	}
+
+	public void TurnOff () {
+		isOn = false;
 	}
 }
