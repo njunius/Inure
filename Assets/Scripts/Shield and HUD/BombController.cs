@@ -42,6 +42,7 @@ public class BombController : MonoBehaviour {
         if (!isArmed)
         {
             transform.position = player.transform.position;
+            transform.rotation = player.transform.rotation;
         }
 
         for (int i = 0; i < bombGauge.Length; ++i)
