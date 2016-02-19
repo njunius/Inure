@@ -43,15 +43,16 @@ public class BombController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        var distance = Vector3.Distance(gameObject.transform.position, target.transform.position);
-        if (distance < sensorRange)
+        transform.position = player.transform.position;
+
+        /*if (distance < sensorRange)
         {
             isPlanted = true;
-        }
+        }*/
 
         if (isPlanted)
         {
-            transform.parent = null;
+            //transform.parent = null;
             Debug.Log("Bomb is PLANTED!");
         }
 
