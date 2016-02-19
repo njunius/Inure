@@ -13,6 +13,9 @@ public class BombController : MonoBehaviour {
     private bool isPlanted;
     public int currBombCharge;
     private int maxBombCharge;
+    Vector3 pre_position;
+    public float sensorRange = 50f;
+    public GameObject target;
 
     private GameObject player;
     private Image[] bombGauge;
@@ -39,12 +42,21 @@ public class BombController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!isPlanted)
+
+        transform.position = player.transform.position;
+
+        /*if (distance < sensorRange)
         {
-            transform.position = player.transform.position;
+            isPlanted = true;
+        }*/
+
+        if (isPlanted)
+        {
+            //transform.parent = null;
+            Debug.Log("Bomb is PLANTED!");
         }
 
-        for(int i = 0; i < bombGauge.Length; ++i)
+        for (int i = 0; i < bombGauge.Length; ++i)
         {
             bombGauge[i].fillAmount = (float)currBombCharge / (float)maxBombCharge;
         }
