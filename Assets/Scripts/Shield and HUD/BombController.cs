@@ -10,12 +10,9 @@ using System.Collections;
 
 public class BombController : MonoBehaviour {
 
-    private bool isPlanted;
+    private bool isArmed;
     public int currBombCharge;
     private int maxBombCharge;
-    Vector3 pre_position;
-    public float sensorRange = 50f;
-    public GameObject target;
 
     private GameObject player;
     private Image[] bombGauge;
@@ -24,7 +21,7 @@ public class BombController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        isPlanted = false;
+        isArmed = false;
         currBombCharge = 0;
         maxBombCharge = 100;
 
@@ -42,18 +39,10 @@ public class BombController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        transform.position = player.transform.position;
-
-        /*if (distance < sensorRange)
+        if (!isArmed)
         {
-            isPlanted = true;
-        }*/
-
-        if (isPlanted)
-        {
-            //transform.parent = null;
-            Debug.Log("Bomb is PLANTED!");
+            transform.position = player.transform.position;
+            transform.rotation = player.transform.rotation;
         }
 
         for (int i = 0; i < bombGauge.Length; ++i)
@@ -79,5 +68,10 @@ public class BombController : MonoBehaviour {
     public bool isCharged()
     {
         return currBombCharge == maxBombCharge;
+    }
+
+    public void armBomb()
+    {
+        isArmed = true;
     }
 }
