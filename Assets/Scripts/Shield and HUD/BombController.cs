@@ -10,7 +10,7 @@ using System.Collections;
 
 public class BombController : MonoBehaviour {
 
-    private bool isPlanted;
+    private bool isArmed;
     public int currBombCharge;
     private int maxBombCharge;
 
@@ -21,7 +21,7 @@ public class BombController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        isPlanted = false;
+        isArmed = false;
         currBombCharge = 0;
         maxBombCharge = 100;
 
@@ -39,12 +39,13 @@ public class BombController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!isPlanted)
+        if (!isArmed)
         {
             transform.position = player.transform.position;
+            transform.rotation = player.transform.rotation;
         }
 
-        for(int i = 0; i < bombGauge.Length; ++i)
+        for (int i = 0; i < bombGauge.Length; ++i)
         {
             bombGauge[i].fillAmount = (float)currBombCharge / (float)maxBombCharge;
         }
@@ -67,5 +68,10 @@ public class BombController : MonoBehaviour {
     public bool isCharged()
     {
         return currBombCharge == maxBombCharge;
+    }
+
+    public void armBomb()
+    {
+        isArmed = true;
     }
 }

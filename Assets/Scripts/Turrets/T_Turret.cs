@@ -22,9 +22,9 @@ public class T_Turret : SimpleTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = Velocity.Extreme;
+		bulletVel = 10;
 		bulletColor = Color.cyan;
-		fireRate = RateOfFire.High;
+		fireRate = 5;
 		barrelList = new TurretBarrel[3];
 
 		//left
@@ -40,9 +40,8 @@ public class T_Turret : SimpleTurret {
 
 	// Update is called once per frame
 	void Update () {
-		var distance = Vector3.Distance (gameObject.transform.position, target.transform.position);
 		//if the player is within the turret's range of sight, target the player and fire
-		if (distance < sensorRange) {
+		if (isOn) {
 			if (numShots == 0) {
 				gameObject.transform.LookAt (target.transform);
 				//give appropriate rotation for the number of times the turret has fired
@@ -56,7 +55,7 @@ public class T_Turret : SimpleTurret {
 			//if not firing, start firing
 			if (!isFiring) {
 				isFiring = true;
-				InvokeRepeating ("fire", (float)fireDelay, (float)fireRate * fireRateMultiplier);
+				InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
 			}
 		}
 		//if the player is not within range, but the turret is firing, stop firing
@@ -72,7 +71,7 @@ public class T_Turret : SimpleTurret {
 	 *       Turret's angle of rotation is increased or reset
 	 */
 	protected void fire () {
-		InvokeRepeating ("singleBurst", (float)fireDelay, (float)fireRate * fireRateMultiplier / BULLET_FREQUENCY);
+		InvokeRepeating ("singleBurst", fireDelay, fireRate * fireRateMultiplier / BULLET_FREQUENCY);
 
 		//if the turret has made a complete rotation, reset the number of times it has been fired
 		if (numFire == 360 / ROTATION_ANGLE.z)
