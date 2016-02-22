@@ -10,7 +10,6 @@ GameObject:
   - 224: {fileID: 22451414}
   - 223: {fileID: 22367920}
   - 114: {fileID: 11419140}
-  - 114: {fileID: 11481106}
   m_Layer: 5
   m_Name: Right Hit
   m_TagString: Untagged
@@ -28,7 +27,6 @@ GameObject:
   - 224: {fileID: 22404266}
   - 223: {fileID: 22315278}
   - 114: {fileID: 11461678}
-  - 114: {fileID: 11491040}
   m_Layer: 5
   m_Name: ForwardHit
   m_TagString: Untagged
@@ -100,7 +98,6 @@ GameObject:
   - 224: {fileID: 22416202}
   - 223: {fileID: 22371240}
   - 114: {fileID: 11481894}
-  - 114: {fileID: 11439746}
   m_Layer: 5
   m_Name: Bottom Hit
   m_TagString: Untagged
@@ -136,7 +133,6 @@ GameObject:
   - 224: {fileID: 22493176}
   - 223: {fileID: 22338230}
   - 114: {fileID: 11411796}
-  - 114: {fileID: 11407784}
   - 114: {fileID: 11413082}
   - 114: {fileID: 11486164}
   m_Layer: 5
@@ -156,7 +152,6 @@ GameObject:
   - 224: {fileID: 22423854}
   - 223: {fileID: 22329690}
   - 114: {fileID: 11458676}
-  - 114: {fileID: 11408208}
   m_Layer: 5
   m_Name: Shield Gauge Canvas 1st Person
   m_TagString: Untagged
@@ -174,7 +169,6 @@ GameObject:
   - 224: {fileID: 22402788}
   - 223: {fileID: 22312978}
   - 114: {fileID: 11407774}
-  - 114: {fileID: 11459172}
   m_Layer: 5
   m_Name: Left Hit
   m_TagString: Untagged
@@ -210,11 +204,10 @@ GameObject:
   - 224: {fileID: 22402934}
   - 223: {fileID: 22388420}
   - 114: {fileID: 11428832}
-  - 114: {fileID: 11489708}
   - 114: {fileID: 11404196}
   m_Layer: 5
   m_Name: First Person HUD
-  m_TagString: Untagged
+  m_TagString: First Person HUD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,7 +365,6 @@ GameObject:
   - 224: {fileID: 22498502}
   - 223: {fileID: 22315556}
   - 114: {fileID: 11453356}
-  - 114: {fileID: 11408338}
   m_Layer: 5
   m_Name: Bomb Gauge Canvas 1st Person
   m_TagString: Untagged
@@ -458,6 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
+  blips: []
 --- !u!114 &11404276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -506,54 +499,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &11407784
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &11408208
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &11408338
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &11409254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -756,22 +701,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11439746
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &11440634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -977,22 +906,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11459172
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 163300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &11461678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1063,22 +976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9e5be9a4ee89742b86bac7a37da817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11481106
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &11481894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1177,38 +1074,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armorChunk: {fileID: 172470, guid: aafdfcade8743eb408ec5c4e99a37556, type: 2}
---- !u!114 &11489708
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &11491040
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &11494802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1515,7 +1380,7 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
@@ -1876,7 +1741,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172790}

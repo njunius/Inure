@@ -2,29 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ToggleTurret : MonoBehaviour {
+public class TurnTurretsOff : MonoBehaviour {
 
-	public List<GameObject> turretList = new List<GameObject> ();
+	GameObject[] allTurrets;
 
 	// Use this for initialization
 	void Start () {
-	
+		allTurrets = GameObject.FindGameObjectsWithTag ("Turret");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	void OnTriggerEnter (Collider other) {
 		if (other.gameObject.CompareTag ("Player Turret Trigger")) {
-			toggleTurrets ();
+			turnOff ();
 		}
 	}
 
-	void toggleTurrets () {
-		for (int numTurret = 0; numTurret < turretList.Count; ++numTurret) {
-			turretList [numTurret].GetComponent<Turret> ().toggleTurret ();
+	void turnOff () {
+		for (int numTurret = 0; numTurret < allTurrets.Length; ++numTurret) {
+			allTurrets [numTurret].GetComponent<Turret> ().TurnOff ();
 		}
 	}
 }
