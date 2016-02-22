@@ -411,6 +411,7 @@ public class CameraController : MonoBehaviour {
             }
 
             transform.rotation = Quaternion.Lerp(transform.rotation, positionTarget.rotation, Time.deltaTime);
+            transform.rotation = positionTarget.rotation;
             transform.Rotate(cameraRotationOffset);
 
             Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
