@@ -36,7 +36,7 @@ public class FountainTurret : AlgorithmicTurret {
 
 		Vector3 forwardNorm = transform.forward;
 		forwardNorm.Normalize ();
-		endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
+		endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * 2 * gameObject.GetComponent<Renderer> ().bounds.size.z);
 
 		curTurretRadius = ORIG_TURRET_RADIUS;
 
@@ -51,7 +51,7 @@ public class FountainTurret : AlgorithmicTurret {
 		if (isOn) {
 			Vector3 forwardNorm = transform.forward;
 			forwardNorm.Normalize ();
-			endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
+			endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * 2 * gameObject.GetComponent<Renderer> ().bounds.extents.z);
 
 			//if not firing, start firing
 			if (!isFiring) {
@@ -63,7 +63,7 @@ public class FountainTurret : AlgorithmicTurret {
 
 			if (distBtwnPlayer < 10f) {
 				float percMaxRad = distBtwnPlayer / 10;
-				curTurretRadius = Mathf.Max (percMaxRad * ORIG_TURRET_RADIUS, 2f);
+				curTurretRadius = Mathf.Max (percMaxRad * ORIG_TURRET_RADIUS, 0f);
 			} else {
 				curTurretRadius = ORIG_TURRET_RADIUS;
 			}

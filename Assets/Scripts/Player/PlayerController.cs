@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour {
     private int maxHullIntegrity;
     public int currHullIntegrity; //Changed to Public for outside scripting
 
+	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_TimeSlow"};
+	private string curPowerUp;
+
     private Rigidbody rb;
 	private GameObject canvasOBJ, gameOverOBJ, pauseTxtOBJ, inureTxtOBJ; //UI GameObjects
     private Canvas UICanvas; //Base user interface, pause menu here
@@ -44,6 +47,8 @@ public class PlayerController : MonoBehaviour {
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
+
+		curPowerUp = powerUpList[0];
         
 		//Set the UI objects and assign components 
 		//(Wall of text to be fixed in future updates)
@@ -355,5 +360,29 @@ public class PlayerController : MonoBehaviour {
 		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right, transform.localRotation);
 		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
+	}
+
+	public void EquipPowerUp (int numPowerUp) {
+		if (curPowerUp.CompareTo ("") != 0) {
+			Destroy(gameObject.GetComponent<PowerUp> ());
+		}
+		curPowerUp = powerUpList [numPowerUp];
+		if (curPowerUp.CompareTo ("") != 0) {
+			switch (numPowerUp) {
+			case 1:
+				gameObject.AddComponent<PowerUp_EMP> ();
+				break;
+			case 2:
+				gameObject.AddComponent<PowerUp_Shockwave> ();
+				break;
+			case 3:
+				gameObject.AddComponent<PowerUp_SlowTime> ();
+				break;
+			default:
+				Debug.Log ("New PowerUp is null");
+				break;
+			}
+
+		}
 	}
 }
