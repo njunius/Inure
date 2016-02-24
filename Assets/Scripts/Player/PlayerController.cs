@@ -326,9 +326,12 @@ public class PlayerController : MonoBehaviour {
         }
 
 		//become fInvincible for invulnSecs
-		timerTMP = invulnSecs;
-		fInvincible = true;
-
+		if(!fInvincible)
+		{
+			Debug.Log("reset timerTMP");
+			timerTMP = invulnSecs;
+			fInvincible = true;
+		}
 
 
     }
