@@ -13,7 +13,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class SimpleTurret : Turret {
+public class SimpleTurret : BulletTurret {
 
 	public GameObject target;
 	protected float sensorRange = 50;

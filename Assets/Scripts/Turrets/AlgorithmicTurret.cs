@@ -11,10 +11,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class AlgorithmicTurret : Turret {
+public class AlgorithmicTurret : BulletTurret {
 
 	public Vector3 focusPoint;
-	//public GameObject target;
+	public GameObject target;
 	//public float sensorRange = 30f;
 	//public bool fireOnlyWhenPlayerNear = true;
 
