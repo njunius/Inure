@@ -28,10 +28,8 @@ public class FountainTurret : AlgorithmicTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = 4;
 		//orange
 		bulletColor = new Color(1f, 0.6f, 0f, 1f);
-		fireRate = 10;
 		barrelList = new TurretBarrel[NUM_BARRELS];
 
 		Vector3 forwardNorm = transform.forward;

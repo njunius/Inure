@@ -22,9 +22,7 @@ public class T_Turret : SimpleTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = 10;
 		bulletColor = Color.cyan;
-		fireRate = 5;
 		barrelList = new TurretBarrel[3];
 
 		//left

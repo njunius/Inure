@@ -26,9 +26,7 @@ public class ArcTurret : SimpleTurret {
 	void Start () {
 		distFromCenter = gameObject.GetComponent<Renderer> ().bounds.size.z;
 
-		bulletVel = 7;
 		bulletColor = Color.green;
-		fireRate = 10;
 		barrelList = new TurretBarrel[5];
 		//leftmost
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x * RELATIVE_SPAWNPOINT_MULTIPLIER,

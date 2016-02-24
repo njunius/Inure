@@ -28,9 +28,7 @@ public class RakingTurret : AlgorithmicTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = 4;
 		bulletColor = Color.yellow;
-		fireRate = 2;
 		barrelList = new TurretBarrel[NUM_BARRELS];
 		Vector3 forwardNorm = transform.forward;
 		forwardNorm.Normalize ();

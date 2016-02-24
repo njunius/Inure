@@ -23,9 +23,7 @@ public class TriangleTurret_Flat : SimpleTurret {
 
 	// Use this for initialization
 	void Start () {
-		bulletVel = 4;
 		bulletColor = Color.magenta;
-		fireRate = 20;
 		barrelList = new TurretBarrel[5];
 
 		//leftmost
