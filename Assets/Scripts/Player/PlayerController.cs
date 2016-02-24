@@ -17,7 +17,10 @@ public class PlayerController : MonoBehaviour {
 	public float bulletVel = 40.0f;
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
-	public bool fInvincible = false;
+
+	public float invulnSecs = 1.0f;
+	public bool noGameOver = false;
+
 	private Vector3 frontOfShip;
 	private bool isFiring = false;
 
@@ -26,7 +29,7 @@ public class PlayerController : MonoBehaviour {
     // player armor/health stats
     private int maxHullIntegrity;
     public int currHullIntegrity; //Changed to Public for outside scripting
-
+	private bool fInvincible = false;
 	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_TimeSlow"};
 	private string curPowerUp;
 
@@ -36,7 +39,9 @@ public class PlayerController : MonoBehaviour {
 	private RawImage gameOver; //Game Over IMG
 	private Text pauseTxt, inureTxt;
 
-    private ShieldController shield;
+	private float timerTMP = 0;
+    
+	private ShieldController shield;
 
     public GameObject gameController;
     public InputManager im;
@@ -117,6 +122,16 @@ public class PlayerController : MonoBehaviour {
 		{
 			CancelInvoke ("fireBullets");
 			isFiring = false;
+		}
+
+		//Count down invulnerability
+		if(timerTMP > 0)
+		{
+			timerTMP -= Time.deltaTime;
+		}
+		else if(timerTMP <= 0)
+		{
+			fInvincible = false;
 		}
 
     }
@@ -243,7 +258,7 @@ public class PlayerController : MonoBehaviour {
         }
 
 		//Activate the game over sequence when death is true
-		if (isDead () && !fInvincible) 
+		if (isDead () && !noGameOver) 
 		{
 			killPlayer();
 		}
@@ -300,14 +315,22 @@ public class PlayerController : MonoBehaviour {
      * reduces the player's hull integrity by 1
      * NOTE: the player's health is the number of hits that can be taken
      */
-    public void takeDamage()
+	public void takeDamage()
     {
-        --currHullIntegrity;
+		if(!fInvincible)
+        	--currHullIntegrity;
 
         if(currHullIntegrity < 0)
         {
             currHullIntegrity = 0;
         }
+
+		//become fInvincible for invulnSecs
+		timerTMP = invulnSecs;
+		fInvincible = true;
+
+
+
     }
 
     /*
