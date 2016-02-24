@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum CameraMode { ThirdPerson, FirstPerson, ThirdPersonLoose }
+public enum CameraMode { ThirdPerson, FirstPerson }
 
 public class CameraController : MonoBehaviour {
 
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour {
         thisTransformCache = transform;
         fadeDistance = defaultDistance * 0.25f;
 
-        mode = CameraMode.ThirdPersonLoose;
+        mode = CameraMode.ThirdPerson;
 
         firstPersonPosition = new Vector3(0, -0.35f, 0);
         thirdPersonPosition = new Vector3(defaultSide, defaultHeight, defaultDistance);
@@ -68,7 +68,7 @@ public class CameraController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void LateUpdate() {
+    void FixedUpdate() {
         if (gameController == null)
         {
             gameController = GameObject.FindGameObjectWithTag("GameController");
@@ -106,11 +106,6 @@ public class CameraController : MonoBehaviour {
                         gameObject.GetComponent<Camera>().fieldOfView = 60;
                         mode = CameraMode.ThirdPerson;
                         updateCamera();
-                        mode = CameraMode.ThirdPersonLoose;
-                        break;
-
-                    case CameraMode.ThirdPersonLoose:
-                        Debug.Log("Camera Mode: Third Person Rigid");
                         mode = CameraMode.ThirdPerson;
                         break;
 
@@ -129,103 +124,16 @@ public class CameraController : MonoBehaviour {
         if (mode == CameraMode.ThirdPerson)
         {
             bool hitFound = false;
-            Vector3 hitPos = new Vector3();
-            
-            if (hitFound)
-            {
-                RaycastHit hit;
-                Debug.Log("found");
-                Debug.DrawRay(transform.position,hitPos, Color.red);
-                if (Physics.Raycast(transform.position, hitPos, out hit, 0.02f, 1 << 11))
-                {
-                    Debug.Log("line");
-                    Debug.Log(hit.distance);
-                    targetDistance -= hit.distance;
-                    float ratio = targetDistance / defaultDistance;
-                    targetHeight = ratio * defaultHeight;
-                    ratio -= ratio * 0.1f;
-                }
-                cameraPositionOffset.y = targetHeight;
-                cameraPositionOffset.z = targetDistance;
-            }
-            else
-            {
-                Vector3 dirToCamera = transform.position - lookAtTarget.position;
-                RaycastHit[] hits = Physics.RaycastAll(lookAtTarget.position, dirToCamera,
-                                    Mathf.Sqrt(defaultDistance * defaultDistance + defaultHeight * defaultHeight));
-                foreach (RaycastHit ray in hits)
-                {
-                    if (ray.transform.CompareTag("Environment"))
-                    {
-                        targetDistance = ray.distance - 0.25f;
-                        float ratio = targetDistance / defaultDistance;
-                        targetHeight = ratio * defaultHeight;
-                        cameraPositionOffset.y = targetHeight;
-                        cameraPositionOffset.z = targetDistance;
-                        hitFound = true;
-                        break;
-                    }
-
-                }
-
-                Vector3 topOfScreen = transform.TransformDirection(new Vector3(0, defaultHeight, 0));
-                Vector3 localTargetPos = transform.InverseTransformPoint(lookAtTarget.position);
-                Vector3 rayBase = transform.TransformPoint(new Vector3(localTargetPos.x, localTargetPos.y, localTargetPos.z));
-                Debug.DrawRay(rayBase, transform.position - rayBase, Color.blue);
-                hits = Physics.RaycastAll(rayBase, transform.position - rayBase, defaultHeight + 0.2f);
-                foreach (RaycastHit ray in hits)
-                {
-                    if (ray.transform.CompareTag("Environment"))
-                    {
-                        targetHeight = ray.distance - 0.25f;
-                        cameraPositionOffset.y = targetHeight;
-                        hitFound = true;
-                        break;
-                    }
-
-                }
-
-                if (!hitFound)
-                {
-                    cameraPositionOffset = thirdPersonPosition;
-                }
-            }
-            transform.rotation = lookAtTarget.rotation;
-            transform.Rotate(cameraRotationOffset);
-
-            Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(lookAtTarget.position) - cameraPositionOffset);
-
-            if (targetDistance < defaultDistance)
-            {
-                transform.position = nextPosition; //Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * 15f);
-            }
-            else
-            {
-                transform.position = nextPosition;
-            }
-
-
-            float distance = Vector3.Distance(transform.position, lookAtTarget.position);
-            if (distance < fadeDistance)
-            {
-                Renderer r = target.GetComponent<Renderer>();
-                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
-
-            }
-        }
-        else if (mode == CameraMode.ThirdPersonLoose)
-        {
-            bool hitFound = false;
             
             // Check for objects between ship and camera
-            Vector3 dirToCamera = transform.position - lookAtTarget.transform.position;
-            RaycastHit[] hits = Physics.RaycastAll(lookAtTarget.position, dirToCamera,
+            Vector3 dirToCamera = transform.position - target.transform.position;
+            RaycastHit[] hits = Physics.RaycastAll(target.transform.position, dirToCamera,
                                 Mathf.Sqrt(defaultDistance * defaultDistance + defaultHeight * defaultHeight));
             foreach (RaycastHit ray in hits)
             {
                 if (ray.transform.CompareTag("Environment"))
                 {
-                    targetDistance = ray.distance - 0.25f;
+                    targetDistance = ray.distance - 0.8f;
                     float ratio = targetDistance / defaultDistance;
                     targetHeight = ratio * defaultHeight;
                     cameraPositionOffset.y = targetHeight;
@@ -237,8 +145,8 @@ public class CameraController : MonoBehaviour {
             }
 
             Vector3 topOfScreen = transform.TransformDirection(new Vector3(0, defaultHeight, 0));
-            Vector3 localTargetPos = transform.InverseTransformPoint(lookAtTarget.position);
-            Vector3 rayBase = transform.TransformPoint(new Vector3(localTargetPos.x, localTargetPos.y, localTargetPos.z));
+            Vector3 localTargetPos = transform.InverseTransformPoint(target.transform.position);
+            Vector3 rayBase = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
             Debug.DrawRay(rayBase, transform.position - rayBase, Color.blue);
             hits = Physics.RaycastAll(rayBase, transform.position - rayBase, defaultHeight + 0.2f);
             foreach (RaycastHit ray in hits)
@@ -268,15 +176,24 @@ public class CameraController : MonoBehaviour {
 
             //Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
 
-            if (targetDistance > defaultDistance)
-            {
-                cameraPositionOffset.y = 0;
-            }
+            
 
             Vector3 nextPosition = target.transform.position - (target.transform.rotation * cameraPositionOffset);
+            /*currentDistance = Vector3.Distance(thisTransformCache.position, nextPosition);
+            Debug.Log(currentDistance);
+            if (currentDistance > 0.01f)
+            {
+                float shift = currentDistance;
+                if (shift > 1) shift = 1;
+                nextPosition = transform.TransformDirection(nextPosition.x, nextPosition.y - nextPosition.y / shift, nextPosition.z);
+            }*/
 
-
-            Vector3 currentPosition = Vector3.SmoothDamp(thisTransformCache.position, nextPosition, ref velocity, positionDamping, maxSpeed);
+            float snapSpeed = positionDamping;
+            if (hitFound)
+            {
+                snapSpeed = positionDamping * 0.25f;
+            }
+            Vector3 currentPosition = Vector3.SmoothDamp(thisTransformCache.position, nextPosition, ref velocity, snapSpeed, maxSpeed);
             thisTransformCache.position = currentPosition;
 
 
