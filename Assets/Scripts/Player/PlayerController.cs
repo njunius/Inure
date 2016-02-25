@@ -385,6 +385,21 @@ public class PlayerController : MonoBehaviour {
 		newBullet.setVars (bulletColor, realBulletVel);
 	}
 
+    public int getPowerupIndex()
+    {
+        int index = 0;
+        for(int i = 0; i < powerUpList.Length; ++i)
+        {
+            if(curPowerUp.CompareTo(powerUpList[i]) == 0)
+            {
+                index = i;
+                break;
+            }
+        }
+        return index;
+
+    }
+
 	public void EquipPowerUp (int numPowerUp) {
 		if (curPowerUp.CompareTo ("") != 0) {
 			Destroy(gameObject.GetComponent<PowerUp> ());
