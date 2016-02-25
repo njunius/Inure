@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 
     // player armor/health stats
     private int maxHullIntegrity;
-    public int currHullIntegrity; //Changed to Public for outside scripting
+    private int currHullIntegrity;
 	private bool fInvincible = false;
 	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_TimeSlow"};
 	private string curPowerUp;
@@ -317,22 +317,19 @@ public class PlayerController : MonoBehaviour {
      */
 	public void takeDamage()
     {
-		if(!fInvincible)
-        	--currHullIntegrity;
+        if (!fInvincible)
+        {
+            --currHullIntegrity;
 
-        if(currHullIntegrity < 0)
+            //become fInvincible for invulnSecs
+            timerTMP = invulnSecs;
+            fInvincible = true;
+        }
+
+        if (currHullIntegrity < 0)
         {
             currHullIntegrity = 0;
         }
-
-		//become fInvincible for invulnSecs
-		if(!fInvincible)
-		{
-			Debug.Log("reset timerTMP");
-			timerTMP = invulnSecs;
-			fInvincible = true;
-		}
-
 
     }
 
