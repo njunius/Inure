@@ -12,6 +12,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
     private Selectable button;
     private string key;
     private bool selected;
+    private bool delay;
     private Event controlBindEvent;
 
     public EventSystem events;
@@ -27,6 +28,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
         currentKey = gameObject.GetComponentInChildren<Text>();
         button = GetComponent<Selectable>();
 
+        delay = true;
         selected = false;
     }
 
@@ -51,8 +53,35 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
                 {
                     inputBindings[command].negAxis = key;
                 }
+
                 EventSystem.current.SetSelectedGameObject(null);
                 selected = false;
+
+                delay = true;
+
+            }
+            else if (controlBindEvent.isMouse && !delay)
+            {
+
+                key = controlBindEvent.button.ToString().ToLower();
+
+                if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
+                {
+                    inputBindings[command].posAxis = key;
+                }
+                else if (inputBindings[command].bidirectional && !positiveDirection)
+                {
+                    inputBindings[command].negAxis = key;
+                }
+
+                EventSystem.current.SetSelectedGameObject(null);
+                selected = false;
+
+                delay = true;
+            }
+            else if(controlBindEvent.isMouse && delay)
+            {
+                delay = false;
             }
 
         }
