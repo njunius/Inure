@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
 	private GameObject canvasOBJ, gameOverOBJ, pauseTxtOBJ, inureTxtOBJ; //UI GameObjects
     private Canvas UICanvas; //Base user interface, pause menu here
+    private Canvas settingsOverlay;
 	private RawImage gameOver; //Game Over IMG
 	private Text pauseTxt, inureTxt;
 
@@ -54,7 +55,9 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
 
 		curPowerUp = powerUpList[0];
-        
+
+        settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
+
 		//Set the UI objects and assign components 
 		//(Wall of text to be fixed in future updates)
 		canvasOBJ = GameObject.Find("Canvas");
@@ -100,9 +103,16 @@ public class PlayerController : MonoBehaviour {
         }
         else if (im.getInputDown("Pause") && paused)
         {
-            paused = !paused;
-            Time.timeScale = 1;
-            UICanvas.enabled = false;
+            if (!settingsOverlay.enabled)
+            {
+                paused = !paused;
+                Time.timeScale = 1;
+                UICanvas.enabled = false;
+            }
+            else if (settingsOverlay.enabled)
+            {
+                settingsOverlay.enabled = false;
+            }
         }
 
         // Shield Controls 
