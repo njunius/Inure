@@ -219,7 +219,7 @@ public class InputManager : MonoBehaviour {
         }
     }
 
-    Dictionary<string, InputBinding> getInputBindings()
+    public Dictionary<string, InputBinding> getInputBindings()
     {
         return inputPresets[0];
 
