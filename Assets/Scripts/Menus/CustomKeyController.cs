@@ -58,12 +58,17 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
                 selected = false;
 
                 delay = true;
-
             }
             else if (controlBindEvent.isMouse && !delay)
             {
 
-                key = controlBindEvent.button.ToString().ToLower();
+                // These must be hard coded due to button being a number and not the string needed for the InputManager
+                if(controlBindEvent.button == 0)
+                    key = "mouse 0";
+                else if(controlBindEvent.button == 1)
+                    key = "mouse 1";
+                else if(controlBindEvent.button == 2)
+                    key = "mouse 3";
 
                 if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
                 {
@@ -83,7 +88,6 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
             {
                 delay = false;
             }
-
         }
     }
 
