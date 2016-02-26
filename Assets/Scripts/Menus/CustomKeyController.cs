@@ -28,7 +28,6 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
         button = GetComponent<Selectable>();
 
         selected = false;
-
     }
 
     void OnGUI()
@@ -52,8 +51,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
                 {
                     inputBindings[command].negAxis = key;
                 }
-
-
+                EventSystem.current.SetSelectedGameObject(null);
                 selected = false;
             }
 
