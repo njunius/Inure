@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 
     // player armor/health stats
     private int maxHullIntegrity;
-    public int currHullIntegrity; //Changed to Public for outside scripting
+    private int currHullIntegrity;
 	private bool fInvincible = false;
 	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_TimeSlow"};
 	private string curPowerUp;
@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
 	private GameObject canvasOBJ, gameOverOBJ, pauseTxtOBJ, inureTxtOBJ; //UI GameObjects
     private Canvas UICanvas; //Base user interface, pause menu here
+    private Canvas settingsOverlay;
 	private RawImage gameOver; //Game Over IMG
 	private Text pauseTxt, inureTxt;
 
@@ -55,7 +56,9 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
 
 		curPowerUp = powerUpList[0];
-        
+
+        settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
+
 		//Set the UI objects and assign components 
 		//(Wall of text to be fixed in future updates)
 		canvasOBJ = GameObject.Find("Canvas");
@@ -101,9 +104,16 @@ public class PlayerController : MonoBehaviour {
         }
         else if (im.getInputDown("Pause") && paused)
         {
-            paused = !paused;
-            Time.timeScale = 1;
-            UICanvas.enabled = false;
+            if (!settingsOverlay.enabled)
+            {
+                paused = !paused;
+                Time.timeScale = 1;
+                UICanvas.enabled = false;
+            }
+            else if (settingsOverlay.enabled)
+            {
+                settingsOverlay.enabled = false;
+            }
         }
 
         // Shield Controls 
@@ -126,11 +136,13 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Count down invulnerability
-		if(timerTMP > 0)
+		if(fInvincible)
 		{
 			timerTMP -= Time.deltaTime;
+			Debug.Log("TimerTMP = " + timerTMP);
 		}
-		else if(timerTMP <= 0)
+
+		if(timerTMP <= 0)
 		{
 			fInvincible = false;
 		}
@@ -271,12 +283,32 @@ public class PlayerController : MonoBehaviour {
 	public void reloadCheckP (LastCheckpoint savedData)
 	{
 		Debug.Log("Reloading!");
+		//Teleport Player + Camera
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
+
+		GameObject.FindGameObjectWithTag("MainCamera").transform.position = savedData.getCheckCamPOS();
+		GameObject.FindGameObjectWithTag("MainCamera").transform.rotation = savedData.getCheckCamROT();
+
+		//Reset stats
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
 		GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
+
+		//Overwrite data
 		savePlayer ();
+
+		//Turn off turrets + Destroy bullets
+		GameObject[] allTurrets, allBullets;
+		allTurrets = GameObject.FindGameObjectsWithTag ("Turret");
+		allBullets = GameObject.FindGameObjectsWithTag ("Projectile");
+		for (int numTurret = 0; numTurret < allTurrets.Length; ++numTurret) {
+			allTurrets [numTurret].GetComponent<Turret> ().TurnOff ();
+		}
+
+		/*for (int numBullet = 0; numBullet < allBullets.Length; ++numBullet) {
+			Destroy(allBullets[numBullet]);
+		}*/
 	}
 
 	//Deactivates player controls and shows game over screen
@@ -317,22 +349,19 @@ public class PlayerController : MonoBehaviour {
      */
 	public void takeDamage()
     {
-		if(!fInvincible)
-        	--currHullIntegrity;
+        if (!fInvincible)
+        {
+            --currHullIntegrity;
 
-        if(currHullIntegrity < 0)
+            //become fInvincible for invulnSecs
+            timerTMP = invulnSecs;
+            fInvincible = true;
+        }
+
+        if (currHullIntegrity < 0)
         {
             currHullIntegrity = 0;
         }
-
-		//become fInvincible for invulnSecs
-		if(!fInvincible)
-		{
-			Debug.Log("reset timerTMP");
-			timerTMP = invulnSecs;
-			fInvincible = true;
-		}
-
 
     }
 
@@ -387,6 +416,21 @@ public class PlayerController : MonoBehaviour {
 		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 	}
+
+    public int getPowerupIndex()
+    {
+        int index = 0;
+        for(int i = 0; i < powerUpList.Length; ++i)
+        {
+            if(curPowerUp.CompareTo(powerUpList[i]) == 0)
+            {
+                index = i;
+                break;
+            }
+        }
+        return index;
+
+    }
 
 	public void EquipPowerUp (int numPowerUp) {
 		if (curPowerUp.CompareTo ("") != 0) {

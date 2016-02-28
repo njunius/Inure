@@ -113,6 +113,13 @@ MonoBehaviour:
       dead: 0
       sensitivity: 1
       invert: 0
+    - name: Use Powerup
+      bidirectional: 0
+      posAxis: r
+      negAxis: 
+      dead: 0
+      sensitivity: 1
+      invert: 0
   - presetName: Xbox 360 Controller
     bindings:
     - name: Longitudinal
@@ -278,7 +285,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[0].bindings.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[1].bindings.Array.size
@@ -855,6 +862,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: inspectorPresets.Array.data[2].bindings.Array.data[9].posAxis
       value: tab
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[10].name
+      value: Use Powerup
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: inspectorPresets.Array.data[0].bindings.Array.data[10].posAxis
+      value: r
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -206,6 +206,37 @@ public class InputManager : MonoBehaviour {
         return inspectorPresets[presetIndex].presetName;
     }
 
+
+    public void editInputBinding(string inputBinding, string newName, bool isNegative)
+    {
+        if (!isNegative)
+        {
+            inputPresets[0][inputBinding].posAxis = newName;
+        }
+        else
+        {
+            inputPresets[0][inputBinding].negAxis = newName;
+        }
+    }
+
+    public Dictionary<string, InputBinding> getInputBindings()
+    {
+        return inputPresets[0];
+
+        //inputPresets[0]["Vertical"].posAxis;
+        //inputPresets[0]["Vertical"].bidirectional;
+
+        /*foreach (InputBinding binding in inputPresets[0].Values)
+        {
+            binding.name;
+            binding.posAxis;
+            if (binding.bidirectional)
+            {
+                bidning.negAxis;
+            }
+            
+        }*/
+    }
 }
 
 [Serializable]
