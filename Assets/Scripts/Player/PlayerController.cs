@@ -283,16 +283,27 @@ public class PlayerController : MonoBehaviour {
 	public void reloadCheckP (LastCheckpoint savedData)
 	{
 		Debug.Log("Reloading!");
+		//Teleport Player + Camera
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
 
 		GameObject.FindGameObjectWithTag("MainCamera").transform.position = savedData.getCheckCamPOS();
 		GameObject.FindGameObjectWithTag("MainCamera").transform.rotation = savedData.getCheckCamROT();
 
+		//Reset stats
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
 		GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
+
+		//Overwrite data
 		savePlayer ();
+
+		//Turn off turrets
+		GameObject[] allTurrets;
+		allTurrets = GameObject.FindGameObjectsWithTag ("Turret");
+		for (int numTurret = 0; numTurret < allTurrets.Length; ++numTurret) {
+			allTurrets [numTurret].GetComponent<Turret> ().TurnOff ();
+		}
 	}
 
 	//Deactivates player controls and shows game over screen
