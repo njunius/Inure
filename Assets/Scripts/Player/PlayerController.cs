@@ -298,12 +298,17 @@ public class PlayerController : MonoBehaviour {
 		//Overwrite data
 		savePlayer ();
 
-		//Turn off turrets
-		GameObject[] allTurrets;
+		//Turn off turrets + Destroy bullets
+		GameObject[] allTurrets, allBullets;
 		allTurrets = GameObject.FindGameObjectsWithTag ("Turret");
+		allBullets = GameObject.FindGameObjectsWithTag ("Projectile");
 		for (int numTurret = 0; numTurret < allTurrets.Length; ++numTurret) {
 			allTurrets [numTurret].GetComponent<Turret> ().TurnOff ();
 		}
+
+		/*for (int numBullet = 0; numBullet < allBullets.Length; ++numBullet) {
+			Destroy(allBullets[numBullet]);
+		}*/
 	}
 
 	//Deactivates player controls and shows game over screen
