@@ -15,7 +15,7 @@ public class PowerUp_SlowTime : PowerUp {
 	// Use this for initialization
 	void Start () {
 		FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 50f;
-		effectField= (GameObject)Resources.Load("FieldSphere");
+		effectField= (GameObject)Resources.Load("FieldSphereSlowTime");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
 		effectField.GetComponent<Renderer> ().material.SetColor ("_Color", fieldColor);
 		effectField.SetActive (false);

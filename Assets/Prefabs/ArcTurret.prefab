@@ -12,13 +12,15 @@ GameObject:
   - 65: {fileID: 6564850}
   - 23: {fileID: 2354948}
   - 114: {fileID: 11440812}
+  - 114: {fileID: 11466296}
+  - 54: {fileID: 5454722}
   m_Layer: 0
   m_Name: ArcTurret
   m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &490520
 Transform:
   m_ObjectHideFlags: 1
@@ -64,6 +66,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112256}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &5454722
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112256}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6564850
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -87,13 +104,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b973afca44d25714ca93dffc641e6491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletVel: 7
   fireRate: 10
+  bulletVel: 7
   bulletPrefab: {fileID: 100204, guid: 2e80d5d9eb66a03468047b0ba2be3928, type: 2}
   target: {fileID: 0}
   RELATIVE_SPAWNPOINT_MULTIPLIER: 1.5
   SEPARATION_ANGLE: 0.2617994
   ROTATION_ANGLE: {x: 0, y: 0, z: 15}
+--- !u!114 &11466296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8338caec00d764daf1942c00239afe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

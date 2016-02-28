@@ -4,9 +4,12 @@ using System.Collections;
 public class Turret : MonoBehaviour {
 
 	protected bool isOn = false;
+	protected bool isEMP = false;
 	protected bool isFiring = false;
+	protected bool isSlowed = false;
 	public float fireRate;
 	protected float fireDelay = 0f;
+	private float effectDuration = 5f;
 
 	// Use this for initialization
 	void Start () {
@@ -24,5 +27,20 @@ public class Turret : MonoBehaviour {
 
 	public void TurnOff () {
 		isOn = false;
+	}
+
+	public bool GetIsEMP () {
+		Debug.Log ("Two");
+		return isEMP;
+	}
+
+	public void EMP () {
+		Debug.Log ("Four");
+		isEMP = true;
+		Invoke ("UnEMP", effectDuration);
+	}
+
+	private void UnEMP () {
+		isEMP = false;
 	}
 }

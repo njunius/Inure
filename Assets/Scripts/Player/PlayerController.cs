@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector3 frontOfShip;
 	private bool isFiring = false;
+	private bool isSlowed = false;
 
     public bool paused = false;
 
@@ -133,7 +134,6 @@ public class PlayerController : MonoBehaviour {
 		{
 			fInvincible = false;
 		}
-
     }
 
     void FixedUpdate()
@@ -410,5 +410,34 @@ public class PlayerController : MonoBehaviour {
 			}
 
 		}
+	}
+
+	public bool GetIsSlowed () {
+		return isSlowed;
+	}
+
+	public void SlowTime (float timeScale) {
+		Debug.Log ("In the trigger");
+		isSlowed = true;
+		gameObject.GetComponent<Rigidbody> ().mass /= timeScale;
+		gameObject.GetComponent<Rigidbody> ().velocity *= timeScale;
+		moveSpeed *= timeScale;
+		rotSpeed *= timeScale;
+		rollSpeed *= timeScale;
+		bulletVel *= timeScale;
+		fireRate /= timeScale;
+		invulnSecs /= timeScale;
+	}
+
+	public void QuickTime (float timeScale) {
+		Debug.Log ("Out the trigger");
+		isSlowed = false;
+		gameObject.GetComponent<Rigidbody> ().mass *= timeScale;
+		moveSpeed /= timeScale;
+		rotSpeed /= timeScale;
+		rollSpeed /= timeScale;
+		bulletVel /= timeScale;
+		fireRate *= timeScale;
+		invulnSecs *= timeScale;
 	}
 }

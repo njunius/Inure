@@ -18,13 +18,23 @@ public class PlayerBullet : MonoBehaviour {
 	 * post: color and velocity of bullet are set
 	 */
 	public void setVars (Color bColor, Vector3 newVel) {
-		gameObject.GetComponent<Renderer> ().material.color = bColor;
-		gameObject.GetComponent<Rigidbody> ().velocity = newVel;
+		if (bColor != null)
+			gameObject.GetComponent<Renderer> ().material.color = bColor;
+		if (newVel != null)
+			gameObject.GetComponent<Rigidbody> ().velocity = newVel;
 	}
 
 	void OnCollisionEnter (Collision hit) {
 		if (hit.gameObject.tag != "Player Projectile") {
 			Destroy (gameObject);
 		}
+	}
+
+	public void SlowTime (float timeScale) {
+		gameObject.GetComponent<Rigidbody> ().velocity *= timeScale;
+	}
+
+	public void QuickTime (float timeScale) {
+		gameObject.GetComponent<Rigidbody> ().velocity /= timeScale;
 	}
 }
