@@ -135,11 +135,13 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Count down invulnerability
-		if(timerTMP > 0)
+		if(fInvincible)
 		{
 			timerTMP -= Time.deltaTime;
+			Debug.Log("TimerTMP = " + timerTMP);
 		}
-		else if(timerTMP <= 0)
+
+		if(timerTMP <= 0)
 		{
 			fInvincible = false;
 		}
@@ -283,6 +285,10 @@ public class PlayerController : MonoBehaviour {
 		Debug.Log("Reloading!");
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
+
+		GameObject.FindGameObjectWithTag("MainCamera").transform.position = savedData.getCheckCamPOS();
+		GameObject.FindGameObjectWithTag("MainCamera").transform.rotation = savedData.getCheckCamROT();
+
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
 		GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
