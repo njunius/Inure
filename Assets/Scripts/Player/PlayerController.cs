@@ -135,11 +135,13 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Count down invulnerability
-		if(timerTMP > 0)
+		if(fInvincible)
 		{
 			timerTMP -= Time.deltaTime;
+			Debug.Log("TimerTMP = " + timerTMP);
 		}
-		else if(timerTMP <= 0)
+
+		if(timerTMP <= 0)
 		{
 			fInvincible = false;
 		}
@@ -281,12 +283,32 @@ public class PlayerController : MonoBehaviour {
 	public void reloadCheckP (LastCheckpoint savedData)
 	{
 		Debug.Log("Reloading!");
+		//Teleport Player + Camera
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
+
+		GameObject.FindGameObjectWithTag("MainCamera").transform.position = savedData.getCheckCamPOS();
+		GameObject.FindGameObjectWithTag("MainCamera").transform.rotation = savedData.getCheckCamROT();
+
+		//Reset stats
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
 		GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
+
+		//Overwrite data
 		savePlayer ();
+
+		//Turn off turrets + Destroy bullets
+		GameObject[] allTurrets, allBullets;
+		allTurrets = GameObject.FindGameObjectsWithTag ("Turret");
+		allBullets = GameObject.FindGameObjectsWithTag ("Projectile");
+		for (int numTurret = 0; numTurret < allTurrets.Length; ++numTurret) {
+			allTurrets [numTurret].GetComponent<Turret> ().TurnOff ();
+		}
+
+		/*for (int numBullet = 0; numBullet < allBullets.Length; ++numBullet) {
+			Destroy(allBullets[numBullet]);
+		}*/
 	}
 
 	//Deactivates player controls and shows game over screen
