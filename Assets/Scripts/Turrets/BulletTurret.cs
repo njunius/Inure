@@ -54,11 +54,19 @@ public class BulletTurret : Turret {
 		obj.SetActive (true);
 	}
 
-	/*public void TurnOn () {
-		isOn = true;
+	public bool GetIsSlowed () {
+		return isSlowed;
 	}
 
-	public void TurnOff () {
-		isOn = false;
-	}*/
+	public void SlowTime (float timeScale) {
+		isSlowed = true;
+		fireRate /= timeScale;
+		bulletVel /= timeScale;
+	}
+
+	public void QuickTime (float timeScale) {
+		isSlowed = false;
+		fireRate *= timeScale;
+		bulletVel *= timeScale;
+	}
 }

@@ -18,11 +18,11 @@ public class TurnTurretsOff : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.gameObject.CompareTag ("Player Turret Trigger")) {
-			turnOff ();
+			TurnOff ();
 		}
 	}
 
-	void turnOff () {
+	void TurnOff () {
 		for (int numTurret = 0; numTurret < allTurrets.Length; ++numTurret) {
 			allTurrets [numTurret].GetComponent<Turret> ().TurnOff ();
 		}

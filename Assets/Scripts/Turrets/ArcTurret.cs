@@ -48,26 +48,31 @@ public class ArcTurret : SimpleTurret {
 	// Update is called once per frame
 	void Update () {
 		//if the player is within the turret's range of sight, target the player and fire
-		if (isOn) {
-			gameObject.transform.LookAt (target.transform);
+		if (!isEMP) {
+			if (isOn) {
+				gameObject.transform.LookAt (target.transform);
 
-			//give appropriate rotation for the number of times the turret has fired
-			transform.Rotate (ROTATION_ANGLE * numFire);
+				//give appropriate rotation for the number of times the turret has fired
+				transform.Rotate (ROTATION_ANGLE * numFire);
 
-			//find new point at end of turret once required to target player
-			Vector3 forwardNorm = gameObject.transform.forward;
-			forwardNorm.Normalize ();
-			endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * distFromCenter);
-			//if not firing, start firing
-			if (!isFiring) {
-				isFiring = true;
-				InvokeRepeating ("Fire", fireDelay, fireRate * fireRateMultiplier);
+				//find new point at end of turret once required to target player
+				Vector3 forwardNorm = gameObject.transform.forward;
+				forwardNorm.Normalize ();
+				endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * distFromCenter);
+				//if not firing, start firing
+				if (!isFiring) {
+					isFiring = true;
+					InvokeRepeating ("Fire", fireDelay, fireRate * fireRateMultiplier);
+				}
 			}
-		}
-		//if the player is not within range, but the turret is firing, stop firing
-		else if (isFiring) {
+			//if the player is not within range, but the turret is firing, stop firing
+			else if (isFiring) {
+				isFiring = false;
+				CancelInvoke ("Fire");
+			}
+		} else {
+			CancelInvoke ("fire");
 			isFiring = false;
-			CancelInvoke ("Fire");
 		}
 	}
 

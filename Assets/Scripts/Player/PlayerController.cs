@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector3 frontOfShip;
 	private bool isFiring = false;
+	private bool isSlowed = false;
 
     public bool paused = false;
 
@@ -31,12 +32,13 @@ public class PlayerController : MonoBehaviour {
     private int maxHullIntegrity;
     private int currHullIntegrity;
 	private bool fInvincible = false;
-	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_TimeSlow"};
+	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_SlowTime"};
 	private string curPowerUp;
 
     private Rigidbody rb;
 	private GameObject canvasOBJ, gameOverOBJ, pauseTxtOBJ, inureTxtOBJ; //UI GameObjects
     private Canvas UICanvas; //Base user interface, pause menu here
+    private Canvas settingsOverlay;
 	private RawImage gameOver; //Game Over IMG
 	private Text pauseTxt, inureTxt;
 
@@ -58,7 +60,9 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
 
 		curPowerUp = powerUpList[0];
-        
+
+        settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
+
 		//Set the UI objects and assign components 
 		//(Wall of text to be fixed in future updates)
 		canvasOBJ = GameObject.Find("Canvas");
@@ -104,9 +108,16 @@ public class PlayerController : MonoBehaviour {
         }
         else if (im.getInputDown("Pause") && paused)
         {
-            paused = !paused;
-            Time.timeScale = 1;
-            UICanvas.enabled = false;
+            if (!settingsOverlay.enabled)
+            {
+                paused = !paused;
+                Time.timeScale = 1;
+                UICanvas.enabled = false;
+            }
+            else if (settingsOverlay.enabled)
+            {
+                settingsOverlay.enabled = false;
+            }
         }
 
         // Shield Controls 
@@ -128,16 +139,50 @@ public class PlayerController : MonoBehaviour {
 			isFiring = false;
 		}
 
+		if (im.getInputDown("Use Powerup") && curPowerUp != "")
+		{
+			PowerUp whichPowerUp = null;
+			switch (curPowerUp) {
+			case "PowerUp_EMP":
+				GetComponent<PowerUp_EMP> ().enabled = true;
+				GetComponent<PowerUp_EMP> ().Activate ();
+				whichPowerUp = GetComponent<PowerUp_EMP> ();
+				break;
+			case "PowerUp_Shockwave":
+				GetComponent<PowerUp_Shockwave> ().enabled = true;
+				GetComponent<PowerUp_Shockwave> ().Activate ();
+				whichPowerUp = GetComponent<PowerUp_Shockwave> ();
+				break;
+			case "PowerUp_SlowTime":
+				GetComponent<PowerUp_SlowTime> ().enabled = true;
+				GetComponent<PowerUp_SlowTime> ().Activate ();
+				whichPowerUp = GetComponent<PowerUp_SlowTime> ();
+				break;
+			default:
+				Debug.Log("Invalid powerup value");
+				break;
+			}
+
+			if (whichPowerUp != null) {
+				//whichPowerUp.enabled = false;
+			}
+
+			//gameObject.GetComponent<PowerUp> ().Activate ();
+			//Destroy(gameObject.GetComponent<PowerUp> ());
+			curPowerUp = "";
+		}
+
 		//Count down invulnerability
-		if(timerTMP > 0)
+		if(fInvincible)
 		{
 			timerTMP -= Time.deltaTime;
+			Debug.Log("TimerTMP = " + timerTMP);
 		}
-		else if(timerTMP <= 0)
+
+		if(timerTMP <= 0)
 		{
 			fInvincible = false;
 		}
-
     }
 
     void FixedUpdate()
@@ -268,12 +313,32 @@ public class PlayerController : MonoBehaviour {
 	public void reloadCheckP (LastCheckpoint savedData)
 	{
 		Debug.Log("Reloading!");
+		//Teleport Player + Camera
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
+
+		GameObject.FindGameObjectWithTag("MainCamera").transform.position = savedData.getCheckCamPOS();
+		GameObject.FindGameObjectWithTag("MainCamera").transform.rotation = savedData.getCheckCamROT();
+
+		//Reset stats
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
 		GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
+
+		//Overwrite data
 		savePlayer ();
+
+		//Turn off turrets + Destroy bullets
+		GameObject[] allTurrets, allBullets;
+		allTurrets = GameObject.FindGameObjectsWithTag ("Turret");
+		allBullets = GameObject.FindGameObjectsWithTag ("Projectile");
+		for (int numTurret = 0; numTurret < allTurrets.Length; ++numTurret) {
+			allTurrets [numTurret].GetComponent<Turret> ().TurnOff ();
+		}
+
+		/*for (int numBullet = 0; numBullet < allBullets.Length; ++numBullet) {
+			Destroy(allBullets[numBullet]);
+		}*/
 	}
 
 	//Deactivates player controls and shows game over screen
@@ -398,26 +463,57 @@ public class PlayerController : MonoBehaviour {
     }
 
 	public void EquipPowerUp (int numPowerUp) {
-		if (curPowerUp.CompareTo ("") != 0) {
-			Destroy(gameObject.GetComponent<PowerUp> ());
-		}
 		curPowerUp = powerUpList [numPowerUp];
 		if (curPowerUp.CompareTo ("") != 0) {
+			PowerUp[] components = gameObject.GetComponents<PowerUp> ();
 			switch (numPowerUp) {
 			case 1:
-				gameObject.AddComponent<PowerUp_EMP> ();
+				for (int numComp = 0; numComp < components.Length; ++numComp) {
+					components [numComp].enabled = false;
+				}
 				break;
 			case 2:
-				gameObject.AddComponent<PowerUp_Shockwave> ();
+				for (int numComp = 0; numComp < components.Length; ++numComp) {
+					components [numComp].enabled = false;
+				}
 				break;
 			case 3:
-				gameObject.AddComponent<PowerUp_SlowTime> ();
+				for (int numComp = 0; numComp < components.Length; ++numComp) {
+					components [numComp].enabled = false;
+				}
 				break;
 			default:
 				Debug.Log ("New PowerUp is null");
+				curPowerUp = "";
 				break;
 			}
-
 		}
+	}
+
+	public bool GetIsSlowed () {
+		return isSlowed;
+	}
+
+	public void SlowTime (float timeScale) {
+		isSlowed = true;
+		gameObject.GetComponent<Rigidbody> ().mass /= timeScale;
+		gameObject.GetComponent<Rigidbody> ().velocity *= timeScale;
+		moveSpeed *= timeScale;
+		rotSpeed *= timeScale;
+		rollSpeed *= timeScale;
+		bulletVel *= timeScale;
+		fireRate /= timeScale;
+		invulnSecs /= timeScale;
+	}
+
+	public void QuickTime (float timeScale) {
+		isSlowed = false;
+		gameObject.GetComponent<Rigidbody> ().mass *= timeScale;
+		moveSpeed /= timeScale;
+		rotSpeed /= timeScale;
+		rollSpeed /= timeScale;
+		bulletVel /= timeScale;
+		fireRate *= timeScale;
+		invulnSecs *= timeScale;
 	}
 }

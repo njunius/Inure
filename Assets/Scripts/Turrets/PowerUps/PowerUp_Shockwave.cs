@@ -12,8 +12,9 @@ public class PowerUp_Shockwave : PowerUp {
 	// Use this for initialization
 	void Start () {
 		FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 50f;
-		effectField= (GameObject)Resources.Load("FieldSphere");
+		effectField= (GameObject)Resources.Load("FieldSphereShockwave");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
+		effectField.GetComponent<Effect_Shockwave> ().IsPlayer ();
 		effectField.GetComponent<Renderer> ().material.SetColor ("_Color", fieldColor);
 		effectField.SetActive (false);
 	}

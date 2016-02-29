@@ -43,17 +43,22 @@ public class RakingTurret : AlgorithmicTurret {
 
 	// Update is called once per frame
 	void Update () {
-		if (isOn) {
-			Vector3 forwardNorm = transform.forward;
-			forwardNorm.Normalize ();
-			endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
+		if (!isEMP) {
+			if (isOn) {
+				Vector3 forwardNorm = transform.forward;
+				forwardNorm.Normalize ();
+				endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
 
-			//if not firing, start firing
-			if (!isFiring) {
-				isFiring = true;
-				InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
+				//if not firing, start firing
+				if (!isFiring) {
+					isFiring = true;
+					InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
+				}
+			} else if (isFiring) {
+				CancelInvoke ("fire");
+				isFiring = false;
 			}
-		} else if (isFiring) {
+		} else {
 			CancelInvoke ("fire");
 			isFiring = false;
 		}

@@ -46,27 +46,32 @@ public class TriangleTurret_Flat : SimpleTurret {
 	// Update is called once per frame
 	void Update () {
 		//if the player is within the turret's range of sight, target the player and fire
-		if (isOn) {
-			if (numShots == 0) {
-				gameObject.transform.LookAt (target.transform);
-				//give appropriate rotation for the number of times the turret has fired
-				transform.Rotate (ROTATION_ANGLE * numFire);
+		if (!isEMP) {
+			if (isOn) {
+				if (numShots == 0) {
+					gameObject.transform.LookAt (target.transform);
+					//give appropriate rotation for the number of times the turret has fired
+					transform.Rotate (ROTATION_ANGLE * numFire);
 
-				//find new point at end of turret once required to target player
-				Vector3 forwardNorm = gameObject.transform.forward;
-				forwardNorm.Normalize ();
-				endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
+					//find new point at end of turret once required to target player
+					Vector3 forwardNorm = gameObject.transform.forward;
+					forwardNorm.Normalize ();
+					endOfTurret = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
+				}
+				//if not firing, start firing
+				if (!isFiring) {
+					isFiring = true;
+					InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
+				}
 			}
-			//if not firing, start firing
-			if (!isFiring) {
-				isFiring = true;
-				InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
+			//if the player is not within range, but the turret is firing, stop firing
+			else if (isFiring) {
+				isFiring = false;
+				CancelInvoke ("fire");
 			}
-		}
-		//if the player is not within range, but the turret is firing, stop firing
-		else if (isFiring) {
-			isFiring = false;
+		} else {
 			CancelInvoke ("fire");
+			isFiring = false;
 		}
 	}
 

@@ -33,8 +33,10 @@ public class Bullet : MonoBehaviour {
 	 * post: color and velocity of bullet are set
 	 */
     public void setVars (Color bColor, Vector3 newVel) {
-		gameObject.GetComponent<Renderer> ().material.color = bColor;
-        gameObject.GetComponent<Rigidbody> ().velocity = newVel;
+		if (bColor != Color.clear)
+			gameObject.GetComponent<Renderer> ().material.color = bColor;
+		if(newVel != null)
+        	gameObject.GetComponent<Rigidbody> ().velocity = newVel;
 
     }
 
@@ -96,5 +98,13 @@ public class Bullet : MonoBehaviour {
 	void OnDisable() {
 		CancelInvoke ();
 		//GameObject.FindGameObjectWithTag ("Object Pooler").GetComponent<ObjectPooler> ().numActiveObj--;
+	}
+
+	public void SlowTime (float timeScale) {
+		gameObject.GetComponent<Rigidbody> ().velocity *= timeScale;
+	}
+
+	public void QuickTime (float timeScale) {
+		gameObject.GetComponent<Rigidbody> ().velocity /= timeScale;
 	}
 }
