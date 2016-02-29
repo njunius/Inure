@@ -11,6 +11,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     public float moveSpeed = 20.0f;
+    public float maxSpeed = 500.0f;
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
     public Color bulletColor = Color.blue;
@@ -42,6 +43,9 @@ public class PlayerController : MonoBehaviour {
 	private float timerTMP = 0;
     
 	private ShieldController shield;
+
+    public GameObject lockOnTarget;
+    public bool targetLocked = false;
 
     public GameObject gameController;
     public InputManager im;
@@ -192,69 +196,62 @@ public class PlayerController : MonoBehaviour {
                                                                transform.InverseTransformDirection(rb.velocity).z));
         }
 
-
-        /*if (moveLongitudinal == 0 && moveLateral == 0 && moveVertical == 0)
+        if (!targetLocked)
         {
-            rb.velocity = Vector3.zero;
-        }*/
+            if (rotPitch != 0)
+            {
+                //rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch));
+            }
+            else
+            {
+                rb.angularVelocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.angularVelocity).y,
+                                                                        transform.InverseTransformDirection(rb.angularVelocity).z));
 
-        /*if (moveLateral != 0 || moveVertical != 0)
-        {
-            rb.AddForce(transform.TransformDirection(Vector3.forward * moveLongitudinal
-                + Vector3.right * moveLateral + Vector3.up * moveVertical));
-            //rb.velocity = transform.TransformDirection(Vector3.forward * moveLongitudinal 
-                //+ Vector3.right * moveLateral + Vector3.up * moveVertical);
+            }
+
+            if (rotYaw != 0)
+            {
+                //rb.AddTorque(transform.TransformDirection(Vector3.up * rotYaw));
+            }
+            else
+            {
+                rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x, 0,
+                                                                   transform.InverseTransformDirection(rb.angularVelocity).z));
+            }
+
+            if (rotRoll != 0)
+            {
+                //rb.AddTorque(transform.TransformDirection(Vector3.forward * rotRoll));
+            }
+            else
+            {
+                rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
+                                                                   transform.InverseTransformDirection(rb.angularVelocity).y, 0));
+
+            }
+            if (rotPitch != 0 || rotYaw != 0 || rotRoll != 0)
+            {
+                //rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll));
+                rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
+            }
+            else
+            {
+                rb.angularVelocity = Vector3.zero;
+            }
         }
         else
         {
-
-            rb.velocity = Vector3.zero;
-        }*/
-        if (rotPitch != 0)
-        {
-            rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch));
+            if (lockOnTarget != null)
+            {
+                transform.LookAt(lockOnTarget.transform);
+            }
         }
-        else
-        {
-            rb.angularVelocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.angularVelocity).y,
-                                                                    transform.InverseTransformDirection(rb.angularVelocity).z));
-            
-        }
-
-        if (rotYaw != 0)
-        {
-            rb.AddTorque(transform.TransformDirection(Vector3.up * rotYaw));
-        }
-        else
-        {
-            rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x, 0,
-                                                               transform.InverseTransformDirection(rb.angularVelocity).z));
-        }
-
-        if (rotRoll != 0)
-        {
-            rb.AddTorque(transform.TransformDirection(Vector3.forward * rotRoll));
-        }
-        else
-        {
-            rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
-                                                               transform.InverseTransformDirection(rb.angularVelocity).y, 0));
-            
-        }
-        if (rotPitch != 0 || rotYaw != 0 || rotRoll != 0)
-        {
-            //rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll));
-            rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
-        }
-        else
-        {
-            rb.angularVelocity = Vector3.zero;
-        }
+        
 
 
-        if (rb.velocity.magnitude > 20.0f)
+        if (rb.velocity.magnitude > maxSpeed)
         {
-            rb.velocity = rb.velocity.normalized * 20.0f;
+            rb.velocity = rb.velocity.normalized * maxSpeed;
         }
 
 		//Activate the game over sequence when death is true

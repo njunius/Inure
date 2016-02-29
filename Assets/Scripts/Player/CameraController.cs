@@ -17,8 +17,12 @@ public class CameraController : MonoBehaviour {
     public float currentHeight;
     public float targetHeight;
     public float defaultSide = 0.0f;
+    public float minDistPercent = 0.8f;
+    public float minHeightPercent = 0.25f;
+
     private float currentSide;
     private float targetSide;
+    
 
     public float positionDamping = 2.0f;
     public float rotationDamping = 2.0f;
@@ -41,7 +45,7 @@ public class CameraController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         thisTransformCache = transform;
-        fadeDistance = defaultDistance * 0.25f;
+        fadeDistance = defaultDistance * 0.5f;
 
         mode = CameraMode.ThirdPerson;
 
@@ -133,7 +137,7 @@ public class CameraController : MonoBehaviour {
             {
                 if (ray.transform.CompareTag("Environment"))
                 {
-                    targetDistance = ray.distance - 0.8f;
+                    targetDistance = ray.distance - minDistPercent;
                     float ratio = targetDistance / defaultDistance;
                     targetHeight = ratio * defaultHeight;
                     cameraPositionOffset.y = targetHeight;
@@ -153,7 +157,7 @@ public class CameraController : MonoBehaviour {
             {
                 if (ray.transform.CompareTag("Environment"))
                 {
-                    targetHeight = ray.distance - 0.25f;
+                    targetHeight = ray.distance - minHeightPercent;
                     cameraPositionOffset.y = targetHeight;
                     hitFound = true;
                     break;
@@ -199,13 +203,13 @@ public class CameraController : MonoBehaviour {
 
             Quaternion nextRotation = Quaternion.LookRotation(lookAtTarget.position - thisTransformCache.position, lookAtTarget.transform.up);
             thisTransformCache.rotation = nextRotation;
-            /*float distance = Vector3.Distance(transform.position, positionTarget.position);
+            float distance = Vector3.Distance(transform.position, rayBase);
             if (distance < fadeDistance)
             {
                 Renderer r = target.GetComponent<Renderer>();
                 r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
 
-            }*/
+            }
 
         }
         else

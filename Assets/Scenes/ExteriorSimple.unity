@@ -1,0 +1,5040 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+SceneSettings:
+  m_ObjectHideFlags: 0
+  m_PVSData: 
+  m_PVSObjectsArray: []
+  m_PVSPortalsArray: []
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SkyboxMaterial: {fileID: 2100000, guid: 33dcb4a01d373914389cb37d30f416ef, type: 2}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_GIWorkflowMode: 0
+  m_LightmapsMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_TemporalCoherenceThreshold: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 1
+  m_LightmapEditorSettings:
+    serializedVersion: 3
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_TextureWidth: 1024
+    m_TextureHeight: 1024
+    m_AOMaxDistance: 1
+    m_Padding: 2
+    m_CompAOExponent: 0
+    m_LightmapParameters: {fileID: 0}
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
+  m_LightingDataAsset: {fileID: 0}
+  m_RuntimeCPUUsage: 25
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    accuratePlacement: 0
+    minRegionArea: 2
+    cellSize: 0.16666667
+    manualCellSize: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &89339492 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1987209087}
+--- !u!64 &89339493
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89339492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &89339494
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89339492}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &89339495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89339492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &89339498 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1987209087}
+--- !u!1 &111693926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 111693927}
+  m_Layer: 0
+  m_Name: DebrisField
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &111693927
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 111693926}
+  m_LocalRotation: {x: -0.20061456, y: 0.01964852, z: 0.095394984, w: 0.97481674}
+  m_LocalPosition: {x: 496, y: 575, z: -6577}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1518822531}
+  - {fileID: 696809302}
+  - {fileID: 1539069643}
+  - {fileID: 1465304236}
+  - {fileID: 766233324}
+  - {fileID: 1713540260}
+  - {fileID: 643122813}
+  - {fileID: 2023773423}
+  - {fileID: 1980213434}
+  - {fileID: 158935520}
+  - {fileID: 740181682}
+  - {fileID: 829946844}
+  - {fileID: 126816726}
+  - {fileID: 666910819}
+  - {fileID: 2110523153}
+  - {fileID: 1470905433}
+  - {fileID: 1786335973}
+  - {fileID: 1382090471}
+  - {fileID: 143940556}
+  - {fileID: 255216590}
+  - {fileID: 503786078}
+  - {fileID: 595011232}
+  - {fileID: 1057740559}
+  - {fileID: 1573472492}
+  - {fileID: 698523135}
+  - {fileID: 89339498}
+  - {fileID: 2072192104}
+  - {fileID: 1935732714}
+  - {fileID: 1462730311}
+  - {fileID: 2054200267}
+  - {fileID: 1620905674}
+  - {fileID: 1475244214}
+  - {fileID: 221518024}
+  - {fileID: 973348466}
+  - {fileID: 470120511}
+  - {fileID: 310968643}
+  - {fileID: 892356334}
+  - {fileID: 435677709}
+  - {fileID: 1456150834}
+  - {fileID: 443002690}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+--- !u!1 &126816720 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1674850882}
+--- !u!54 &126816721
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126816720}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &126816722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126816720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &126816725
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126816720}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &126816726 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1674850882}
+--- !u!1001 &143166745
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.022545
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 335.5747
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -474.99094
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.16002488
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.1168595
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.18499854
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96255463
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &143940550 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 656640003}
+--- !u!54 &143940551
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 143940550}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &143940552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 143940550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &143940555
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 143940550}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &143940556 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 656640003}
+--- !u!1 &158935514 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1531093627}
+--- !u!54 &158935515
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 158935514}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &158935516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 158935514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &158935519
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 158935514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &158935520 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1531093627}
+--- !u!1 &221518018 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 290561042}
+--- !u!64 &221518019
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 221518018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &221518020
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 221518018}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &221518021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 221518018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &221518024 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 290561042}
+--- !u!1 &238418087 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+  m_PrefabInternal: {fileID: 1403494061}
+--- !u!54 &238418088
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 238418087}
+  serializedVersion: 2
+  m_Mass: 1000
+  m_Drag: Infinity
+  m_AngularDrag: 10
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &238418089
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 238418087}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 4fb1a27d98c5d62469b3e6cf473c5909, type: 3}
+--- !u!4 &238418092 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+  m_PrefabInternal: {fileID: 1403494061}
+--- !u!1 &255216584 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1474552693}
+--- !u!54 &255216585
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 255216584}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &255216586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 255216584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &255216589
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 255216584}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &255216590 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1474552693}
+--- !u!1001 &268287377
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 139.83861
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 248.50293
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -265.6115
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.23738828
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.28918034
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.05030163
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92600834
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &290561042
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -205
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 577
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -431
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.036203
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.11887926
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.014286736
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9921457
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &310968637 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 2109200777}
+--- !u!64 &310968638
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 310968637}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &310968639
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 310968637}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &310968640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 310968637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &310968643 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 2109200777}
+--- !u!1001 &315102796
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 407608, guid: b2d47dd46c9e30d46a09a293e77e19d4, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407608, guid: b2d47dd46c9e30d46a09a293e77e19d4, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407608, guid: b2d47dd46c9e30d46a09a293e77e19d4, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407608, guid: b2d47dd46c9e30d46a09a293e77e19d4, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407608, guid: b2d47dd46c9e30d46a09a293e77e19d4, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407608, guid: b2d47dd46c9e30d46a09a293e77e19d4, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407608, guid: b2d47dd46c9e30d46a09a293e77e19d4, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 407608, guid: b2d47dd46c9e30d46a09a293e77e19d4, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b2d47dd46c9e30d46a09a293e77e19d4, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &410504477
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -282
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 432
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 311
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.12602948
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.413206
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.08629066
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.89773685
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &428070108
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -138.84146
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 107.30028
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 293.80896
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.12070813
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.071607605
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.11531188
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9833642
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &432459123
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -198
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 268
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 377
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.10793913
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.17763487
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.08773924
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.974216
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &435677703 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1450612976}
+--- !u!64 &435677704
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 435677703}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &435677705
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 435677703}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &435677706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 435677703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &435677709 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1450612976}
+--- !u!1 &443002684 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1514249105}
+--- !u!64 &443002685
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443002684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &443002686
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443002684}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &443002687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443002684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &443002690 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1514249105}
+--- !u!1 &470120505 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 983868598}
+--- !u!64 &470120506
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 470120505}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &470120507
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 470120505}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &470120508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 470120505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &470120511 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 983868598}
+--- !u!1 &503786072 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1997237269}
+--- !u!64 &503786073
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 503786072}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &503786074
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 503786072}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &503786075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 503786072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &503786078 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1997237269}
+--- !u!1001 &529917153
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -99
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 157
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.17847028
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.34616354
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.24727674
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8872279
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &584626724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 584626725}
+  m_Layer: 0
+  m_Name: EntranceTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &584626725
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 584626724}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3293, y: -33088, z: 217119}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 238418092}
+  m_RootOrder: 2
+--- !u!1001 &587671111
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -569.40967
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 58.907562
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 833.986
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.08150475
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.4348277
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.81677437
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.3703534
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &595011226 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1831099112}
+--- !u!64 &595011227
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 595011226}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &595011228
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 595011226}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &595011229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 595011226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &595011232 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1831099112}
+--- !u!1001 &610420968
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22402934, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c3c9e1a488abed747a8b3e7b422625a3, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &643122807 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 268287377}
+--- !u!54 &643122808
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 643122807}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &643122809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 643122807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &643122812
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 643122807}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &643122813 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 268287377}
+--- !u!1001 &656640003
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -353
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 272
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.081252
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.39431214
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.070265904
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9126767
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &666910813 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1436694062}
+--- !u!54 &666910814
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 666910813}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &666910815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 666910813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &666910818
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 666910813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &666910819 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1436694062}
+--- !u!1 &696809296 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 428070108}
+--- !u!54 &696809297
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 696809296}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &696809298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 696809296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &696809301
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 696809296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &696809302 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 428070108}
+--- !u!1 &698523129 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 587671111}
+--- !u!64 &698523130
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 698523129}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &698523131
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 698523129}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &698523132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 698523129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &698523135 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 587671111}
+--- !u!1001 &701337038
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 79.7944
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 434.66068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -415.25775
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.1951649
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.15000351
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.20215587
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.94791496
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &713773870
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425068, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a545769e75c303340920d6e1ffd28752, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &729567844
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -26
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -375
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.07176013
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.12913282
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.06564284
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9868466
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &740181676 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 529917153}
+--- !u!54 &740181677
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 740181676}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &740181678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 740181676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &740181681
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 740181676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &740181682 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 529917153}
+--- !u!1001 &758128417
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 263
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 157
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.12065253
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.15741
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.09248701
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9757619
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &764649223
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494962, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a2ca0d27cf986694ea03f4e39bbfc58c, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &766233318 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1860200309}
+--- !u!54 &766233319
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 766233318}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &766233320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 766233318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &766233323
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 766233318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &766233324 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1860200309}
+--- !u!1001 &779901606
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 73.53943
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 134.79857
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -340.8494
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.19858748
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.25880754
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.041560147
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.94438046
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &807184281
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -151
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 463
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 359
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.025637424
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.22191489
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.04920905
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97348607
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &829946838 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 410504477}
+--- !u!54 &829946839
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829946838}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &829946840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829946838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &829946843
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829946838}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &829946844 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 410504477}
+--- !u!1001 &833678854
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 138
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -73
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.35759544
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5008256
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.28089553
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.73647606
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &892356328 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 729567844}
+--- !u!64 &892356329
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 892356328}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &892356330
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 892356328}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &892356331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 892356328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &892356334 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 729567844}
+--- !u!1 &973348460 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1484200458}
+--- !u!64 &973348461
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 973348460}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &973348462
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 973348460}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &973348463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 973348460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &973348466 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1484200458}
+--- !u!1001 &983868598
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -144
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 802
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.2947159
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6028617
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.62455446
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.3995399
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1057740553 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 143166745}
+--- !u!64 &1057740554
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1057740553}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &1057740555
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1057740553}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1057740556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1057740553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &1057740559 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 143166745}
+--- !u!1001 &1065346163
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25.599735
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 360.3999
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -486.9195
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.1294359
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.026666312
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.113251
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.98473835
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1105368943
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -289.86093
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -79.09221
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 870.9398
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.17048594
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.4955485
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7619739
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.38047618
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1113106365
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -854
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 392
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 626
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.15132575
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.25934857
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.9026674
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.3082699
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1173063988
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 469728, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 566.3774
+      objectReference: {fileID: 0}
+    - target: {fileID: 469728, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 911
+      objectReference: {fileID: 0}
+    - target: {fileID: 469728, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -7616
+      objectReference: {fileID: 0}
+    - target: {fileID: 469728, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.079547405
+      objectReference: {fileID: 0}
+    - target: {fileID: 469728, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.08205492
+      objectReference: {fileID: 0}
+    - target: {fileID: 469728, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.0066142804
+      objectReference: {fileID: 0}
+    - target: {fileID: 469728, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.99342614
+      objectReference: {fileID: 0}
+    - target: {fileID: 469728, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439552, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+      propertyPath: lockOnTarget
+      value: 
+      objectReference: {fileID: 584626724}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ce721135809bb1a40bd097c06e24bd4e, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1242648383
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 404202, guid: dee311f01f3ddfb4299a82fd4356b12e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 404202, guid: dee311f01f3ddfb4299a82fd4356b12e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.796
+      objectReference: {fileID: 0}
+    - target: {fileID: 404202, guid: dee311f01f3ddfb4299a82fd4356b12e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 404202, guid: dee311f01f3ddfb4299a82fd4356b12e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404202, guid: dee311f01f3ddfb4299a82fd4356b12e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404202, guid: dee311f01f3ddfb4299a82fd4356b12e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404202, guid: dee311f01f3ddfb4299a82fd4356b12e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 404202, guid: dee311f01f3ddfb4299a82fd4356b12e, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: dee311f01f3ddfb4299a82fd4356b12e, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1284471757
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -108.91413
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 258.60193
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -541.14026
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.094013825
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.009184361
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.09696346
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9907952
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1308097503
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 74
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 287
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.06906384
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.1135263
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.09951331
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9861233
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1382090465 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1942787116}
+--- !u!54 &1382090466
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1382090465}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1382090467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1382090465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &1382090470
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1382090465}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &1382090471 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1942787116}
+--- !u!1001 &1391031328
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 328
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 357
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.2071648
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.045071825
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.19292097
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.95803595
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1403494061
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2736
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 866.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1168
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9723699
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.2334455
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.026175618
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.02617562
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.02617562
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 4fb1a27d98c5d62469b3e6cf473c5909, type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7f06831952d4df7468dc66eb3dc096da, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1436694062
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 201
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.39434576
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.51484305
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.29295114
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7025723
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1450612976
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -282
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 468
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -483
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0024696682
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.15698227
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.029365001
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.98716176
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1456150828 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1764089391}
+--- !u!64 &1456150829
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1456150828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &1456150830
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1456150828}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1456150831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1456150828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &1456150834 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1764089391}
+--- !u!1 &1462730305 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 807184281}
+--- !u!64 &1462730306
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1462730305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &1462730307
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1462730305}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1462730308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1462730305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &1462730311 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 807184281}
+--- !u!1 &1465304230 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 779901606}
+--- !u!54 &1465304231
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1465304230}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1465304232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1465304230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &1465304235
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1465304230}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &1465304236 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 779901606}
+--- !u!1 &1470905427 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 2030066446}
+--- !u!54 &1470905428
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1470905427}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1470905429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1470905427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &1470905432
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1470905427}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &1470905433 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 2030066446}
+--- !u!1001 &1474552693
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -159
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.13956761
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.32328552
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.22775418
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9078191
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1475244208 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1391031328}
+--- !u!64 &1475244209
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475244208}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &1475244210
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475244208}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1475244211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475244208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &1475244214 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1391031328}
+--- !u!1001 &1484200458
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 473
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -296
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.10957254
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.1648961
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.057665475
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97850806
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (34)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1514249105
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -29.646729
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 205.88156
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -53.896732
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.105850875
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.14947109
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.110077634
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9769017
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1518822525 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1958073174}
+--- !u!54 &1518822526
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1518822525}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1518822527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1518822525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &1518822530
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1518822525}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &1518822531 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1958073174}
+--- !u!1001 &1528209963
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 166.7509
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 343.4413
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -144.96973
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.32510915
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.38783702
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.12792979
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.85294807
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1531093627
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 149
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 117
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0027482107
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.103062615
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.039771933
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9938756
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1539069637 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1284471757}
+--- !u!54 &1539069638
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1539069637}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1539069639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1539069637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &1539069642
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1539069637}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &1539069643 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1284471757}
+--- !u!1 &1547909414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1547909415}
+  - 108: {fileID: 1547909416}
+  m_Layer: 0
+  m_Name: Point light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1547909415
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1547909414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4217, y: -32752, z: 218347}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 238418092}
+  m_RootOrder: 1
+--- !u!108 &1547909416
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1547909414}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_Type: 2
+  m_Color: {r: 0.90689653, g: 0, b: 0, a: 1}
+  m_Intensity: 1.2
+  m_Range: 817.44
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_AreaSize: {x: 1, y: 1}
+--- !u!1 &1573472486 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1726053396}
+--- !u!64 &1573472487
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1573472486}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &1573472488
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1573472486}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1573472489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1573472486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &1573472492 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1726053396}
+--- !u!1 &1620905668 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1308097503}
+--- !u!64 &1620905669
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1620905668}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &1620905670
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1620905668}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1620905671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1620905668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &1620905674 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1308097503}
+--- !u!1001 &1674850882
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 261
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 139
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -271
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.22440276
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.3288865
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.36521274
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.84148484
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1713540254 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1105368943}
+--- !u!54 &1713540255
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1713540254}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1713540256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1713540254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &1713540259
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1713540254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &1713540260 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1105368943}
+--- !u!1001 &1726053396
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 100.84681
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 226.57831
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -218.24113
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.28710964
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.36252433
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.11829267
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.87872124
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1764089391
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 172
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 267
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.24712826
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.07811231
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.19527276
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.945883
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1786335967 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 833678854}
+--- !u!54 &1786335968
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1786335967}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1786335969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1786335967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &1786335972
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1786335967}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &1786335973 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 833678854}
+--- !u!1001 &1792593648
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 238418092}
+    m_Modifications:
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -4276.599
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -32805
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 219517.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.08611794
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.99628496
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 98.99259
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 83.27202
+      objectReference: {fileID: 0}
+    - target: {fileID: 409670, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 113.66962
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0be3ead5169d33f4681b90462b843e01, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1831099112
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -256.62677
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 341.7409
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 336.037
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.019093355
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.19497779
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.058510445
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9788747
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1860200309
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -269.88986
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -292.6922
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 792.3382
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.18732391
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.53533137
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.73074144
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.37993053
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1935732708 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 701337038}
+--- !u!64 &1935732709
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1935732708}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &1935732710
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1935732708}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1935732711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1935732708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &1935732714 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 701337038}
+--- !u!1001 &1942787116
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -355
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.19019158
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.3040927
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.34535852
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8672267
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (18)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1958073174
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &1980213428 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 432459123}
+--- !u!54 &1980213429
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1980213428}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1980213430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1980213428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &1980213433
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1980213428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &1980213434 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 432459123}
+--- !u!1001 &1987209087
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -570.9006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 283.48544
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 874.13025
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.064086005
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.3917103
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.8422442
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.3648024
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &1992968715
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 474756, guid: bbed4b888c7c02645934fe551cc877b9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 560
+      objectReference: {fileID: 0}
+    - target: {fileID: 474756, guid: bbed4b888c7c02645934fe551cc877b9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 842
+      objectReference: {fileID: 0}
+    - target: {fileID: 474756, guid: bbed4b888c7c02645934fe551cc877b9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -7731
+      objectReference: {fileID: 0}
+    - target: {fileID: 474756, guid: bbed4b888c7c02645934fe551cc877b9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.09226143
+      objectReference: {fileID: 0}
+    - target: {fileID: 474756, guid: bbed4b888c7c02645934fe551cc877b9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474756, guid: bbed4b888c7c02645934fe551cc877b9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474756, guid: bbed4b888c7c02645934fe551cc877b9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.9957348
+      objectReference: {fileID: 0}
+    - target: {fileID: 474756, guid: bbed4b888c7c02645934fe551cc877b9, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bbed4b888c7c02645934fe551cc877b9, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1997237269
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -73.13338
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 166.38869
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 106.50972
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.08108957
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.12650077
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.077506796
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9856038
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &2017098536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2017098538}
+  - 108: {fileID: 2017098537}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &2017098537
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2017098536}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_Type: 1
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_AreaSize: {x: 1, y: 1}
+--- !u!4 &2017098538
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2017098536}
+  m_LocalRotation: {x: 0.40821794, y: -0.23456973, z: 0.109381676, w: 0.87542605}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!1 &2023773417 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1065346163}
+--- !u!54 &2023773418
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023773417}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2023773419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023773417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &2023773422
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023773417}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &2023773423 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1065346163}
+--- !u!1001 &2030066446
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -906
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 171
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 602
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13507986
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.30383468
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.8851855
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.32539925
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &2054200261 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 758128417}
+--- !u!64 &2054200262
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2054200261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &2054200263
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2054200261}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2054200264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2054200261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &2054200267 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 758128417}
+--- !u!1 &2072192098 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1528209963}
+--- !u!64 &2072192099
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2072192098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!54 &2072192100
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2072192098}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2072192101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2072192098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!4 &2072192104 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1528209963}
+--- !u!1001 &2109200777
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 111693927}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 91
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -329
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 672
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.31093353
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6364839
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.58737624
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.39140484
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_RootOrder
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_Name
+      value: Sol Starfighter Basic Model Upscaled NegZFor Yup (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &2110523147 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1113106365}
+--- !u!54 &2110523148
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2110523147}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2110523149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2110523147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc93c2017f4a2945ad44c80085ae903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce: 0
+  maxForce: 0.00005
+  minSpin: 0
+  maxSpin: 100
+  generalDirection: {x: 0, y: 0, z: 0}
+  spinDirection: {x: 0, y: 0, z: 0}
+--- !u!64 &2110523152
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2110523147}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+--- !u!4 &2110523153 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 8f2b4d770c9354e4c8fd8449969d6586, type: 3}
+  m_PrefabInternal: {fileID: 1113106365}
