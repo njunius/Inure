@@ -425,6 +425,9 @@ GameObject:
   - 54: {fileID: 5468696}
   - 114: {fileID: 11436088}
   - 114: {fileID: 11477066}
+  - 114: {fileID: 11468226}
+  - 114: {fileID: 11438382}
+  - 114: {fileID: 11418668}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1432,6 +1435,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11418668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160362}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ba0eee22a99754b80ba1c0343411ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11422040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1559,8 +1573,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31bde68dfb6e634d88c4447bc0412fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savedPOS: {x: 0, y: 0, z: 0}
-  savedROT: {x: 0, y: 0, z: 0, w: 0}
+  savedPlayerPOS: {x: 0, y: 0, z: 0}
+  savedCamPOS: {x: 0, y: 0, z: 0}
+  savedPlayerROT: {x: 0, y: 0, z: 0, w: 0}
+  savedCamROT: {x: 0, y: 0, z: 0, w: 0}
   shieldCharge: 0
   bombCharge: 0
   hullHealth: 0
@@ -1585,6 +1601,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11438382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160362}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802eaf87db8aa13429b5154c00c2d389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11443164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1741,6 +1768,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11468226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160362}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66aa6a1a62e91d04ea32ddee54a99bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11470440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1834,7 +1872,6 @@ MonoBehaviour:
   invulnSecs: 1
   noGameOver: 0
   paused: 0
-  currHullIntegrity: 0
   gameController: {fileID: 153720, guid: 651bc947edafe5c4f990209597d0068d, type: 2}
   im: {fileID: 0}
 --- !u!114 &11477066

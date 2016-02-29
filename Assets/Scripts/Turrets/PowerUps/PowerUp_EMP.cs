@@ -9,13 +9,18 @@ public class PowerUp_EMP : PowerUp {
 	private Color fieldColor = new Color (0.988f, 0.992f, 0.541f, 0.294f);
 	private bool isGrowing = false;
 
-	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 50f;
 		effectField= (GameObject)Resources.Load("FieldSphereEMP");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
+		effectField.GetComponent<Effect_EMP> ().IsPlayer ();
 		effectField.GetComponent<Renderer> ().material.SetColor ("_Color", fieldColor);
 		effectField.SetActive (false);
+	}
+
+	// Use this for initialization
+	void Start () {
+		
 	}
 	
 	// Update is called once per frame
@@ -40,5 +45,9 @@ public class PowerUp_EMP : PowerUp {
 		effectField.transform.localScale = Vector3.zero;
 		effectField.SetActive(false);
 		isActive = false;
+	}
+
+	void OnDisable () {
+		Destroy (effectField);
 	}
 }

@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     private int maxHullIntegrity;
     private int currHullIntegrity;
 	private bool fInvincible = false;
-	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_TimeSlow"};
+	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_SlowTime"};
 	private string curPowerUp;
 
     private Rigidbody rb;
@@ -133,6 +133,39 @@ public class PlayerController : MonoBehaviour {
 		{
 			CancelInvoke ("fireBullets");
 			isFiring = false;
+		}
+
+		if (im.getInputDown("Use Powerup") && curPowerUp != "")
+		{
+			PowerUp whichPowerUp = null;
+			switch (curPowerUp) {
+			case "PowerUp_EMP":
+				GetComponent<PowerUp_EMP> ().enabled = true;
+				GetComponent<PowerUp_EMP> ().Activate ();
+				whichPowerUp = GetComponent<PowerUp_EMP> ();
+				break;
+			case "PowerUp_Shockwave":
+				GetComponent<PowerUp_Shockwave> ().enabled = true;
+				GetComponent<PowerUp_Shockwave> ().Activate ();
+				whichPowerUp = GetComponent<PowerUp_Shockwave> ();
+				break;
+			case "PowerUp_SlowTime":
+				GetComponent<PowerUp_SlowTime> ().enabled = true;
+				GetComponent<PowerUp_SlowTime> ().Activate ();
+				whichPowerUp = GetComponent<PowerUp_SlowTime> ();
+				break;
+			default:
+				Debug.Log("Invalid powerup value");
+				break;
+			}
+
+			if (whichPowerUp != null) {
+				//whichPowerUp.enabled = false;
+			}
+
+			//gameObject.GetComponent<PowerUp> ().Activate ();
+			//Destroy(gameObject.GetComponent<PowerUp> ());
+			curPowerUp = "";
 		}
 
 		//Count down invulnerability
@@ -433,26 +466,30 @@ public class PlayerController : MonoBehaviour {
     }
 
 	public void EquipPowerUp (int numPowerUp) {
-		if (curPowerUp.CompareTo ("") != 0) {
-			Destroy(gameObject.GetComponent<PowerUp> ());
-		}
 		curPowerUp = powerUpList [numPowerUp];
 		if (curPowerUp.CompareTo ("") != 0) {
+			PowerUp[] components = gameObject.GetComponents<PowerUp> ();
 			switch (numPowerUp) {
 			case 1:
-				gameObject.AddComponent<PowerUp_EMP> ();
+				for (int numComp = 0; numComp < components.Length; ++numComp) {
+					components [numComp].enabled = false;
+				}
 				break;
 			case 2:
-				gameObject.AddComponent<PowerUp_Shockwave> ();
+				for (int numComp = 0; numComp < components.Length; ++numComp) {
+					components [numComp].enabled = false;
+				}
 				break;
 			case 3:
-				gameObject.AddComponent<PowerUp_SlowTime> ();
+				for (int numComp = 0; numComp < components.Length; ++numComp) {
+					components [numComp].enabled = false;
+				}
 				break;
 			default:
 				Debug.Log ("New PowerUp is null");
+				curPowerUp = "";
 				break;
 			}
-
 		}
 	}
 
@@ -461,7 +498,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void SlowTime (float timeScale) {
-		Debug.Log ("In the trigger");
 		isSlowed = true;
 		gameObject.GetComponent<Rigidbody> ().mass /= timeScale;
 		gameObject.GetComponent<Rigidbody> ().velocity *= timeScale;
@@ -474,7 +510,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void QuickTime (float timeScale) {
-		Debug.Log ("Out the trigger");
 		isSlowed = false;
 		gameObject.GetComponent<Rigidbody> ().mass *= timeScale;
 		moveSpeed /= timeScale;

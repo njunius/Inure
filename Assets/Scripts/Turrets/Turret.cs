@@ -30,12 +30,10 @@ public class Turret : MonoBehaviour {
 	}
 
 	public bool GetIsEMP () {
-		Debug.Log ("Two");
 		return isEMP;
 	}
 
 	public void EMP () {
-		Debug.Log ("Four");
 		isEMP = true;
 		Invoke ("UnEMP", effectDuration);
 	}

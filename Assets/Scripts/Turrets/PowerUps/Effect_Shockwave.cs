@@ -5,6 +5,7 @@ public class Effect_Shockwave : MonoBehaviour {
 
 	private float velMultiplier = 4f;
 	private float effectDuration = 2f;
+	private bool isPlayer = false;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,7 @@ public class Effect_Shockwave : MonoBehaviour {
 			}
 		} else if (other.gameObject.CompareTag ("Player Projectile")) {
 			other.gameObject.GetComponent<PlayerBullet> ().setVars (Color.clear, Vector3.Normalize (other.gameObject.transform.position - gameObject.transform.position) * velMultiplier);
-		} else if (other.gameObject.CompareTag ("Player Turret Trigger")) {
+		} else if (!isPlayer && other.gameObject.CompareTag ("Player Turret Trigger")) {
 			GameObject playerObj = other.gameObject.transform.parent.gameObject;
 			playerObj.GetComponent<PlayerController> ().enabled = false;
 			playerObj.GetComponent<Rigidbody> ().velocity = Vector3.Normalize (other.gameObject.transform.position - gameObject.transform.position) * velMultiplier;
@@ -34,5 +35,9 @@ public class Effect_Shockwave : MonoBehaviour {
 
 	private void EnablePlayer () {
 		GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerController> ().enabled = true;
+	}
+
+	public void IsPlayer () {
+		isPlayer = true;
 	}
 }
