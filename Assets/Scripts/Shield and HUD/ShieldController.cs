@@ -21,6 +21,8 @@ public class ShieldController : MonoBehaviour {
     private Image[] shieldGauge;
     private GameObject bomb;
     private BombController bombBehavior;
+    private MeshRenderer shieldMesh;
+    private Collider shieldCollider;
     private float interpShieldValue;
 
     // Use this for initialization
@@ -34,6 +36,9 @@ public class ShieldController : MonoBehaviour {
         shieldRechargeAmount = 5;
         shieldDeltaChargeTimer = 0.0f;
         interpShieldValue = 100.0f;
+
+        shieldMesh = GetComponent<MeshRenderer>();
+        shieldCollider = GetComponent<Collider>();
 
         bomb = GameObject.FindGameObjectWithTag("Bomb");
         bombBehavior = bomb.GetComponent<BombController>();
@@ -51,8 +56,8 @@ public class ShieldController : MonoBehaviour {
         // enables and disables the effect and collision volume based on the player's state
         if (shieldActive)
         {
-            GetComponent<MeshRenderer>().enabled = true;
-            GetComponent<MeshCollider>().enabled = true;
+            shieldMesh.enabled = true;
+            shieldCollider.enabled = true;
 
             interpShieldValue += shieldDepleteAmount * Time.deltaTime;
             for (int i = 0; i < shieldGauge.Length; ++i)
@@ -62,8 +67,8 @@ public class ShieldController : MonoBehaviour {
         }
         else
         {
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<MeshCollider>().enabled = false;
+            shieldMesh.enabled = false;
+            shieldCollider.enabled = false;
 
             if (currShieldCharge < maxShieldCharge)
             {
