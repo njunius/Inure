@@ -9,16 +9,15 @@ using System.Collections;
 
 public class BulletBracketController : MonoBehaviour {
 
-    private Image brackets;
+    private Renderer brackets;
 
     //private float maxDistFromPlayer;
 
     void Start()
     {
-        brackets = GetComponentInChildren<Image>();
+        brackets = GetComponent<SpriteRenderer>();
 
         brackets.enabled = false;
-        //maxDistFromPlayer = 10.0f; // To be adjusted later
     }
 
 	// Update is called once per frame
