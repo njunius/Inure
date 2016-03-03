@@ -140,15 +140,12 @@ public class CameraController : MonoBehaviour {
             {
                 if (ray.transform.CompareTag("Environment"))
                 {
-                    Debug.Log("Camera hit 1");
                     targetDistance = ray.distance - minDistPercent;
-                    Debug.Log(targetDistance);
                     if (targetDistance < maxDistPercent)
                     {
                         targetDistance = maxDistPercent;
                     }
-                    Debug.Log(targetDistance);
-                    float ratio = targetDistance / defaultDistance;
+                    float ratio = (2*targetDistance) / (3*defaultDistance);
                     targetHeight = ratio * defaultHeight;
                     cameraPositionOffset.y = targetHeight;
                     cameraPositionOffset.z = targetDistance;
