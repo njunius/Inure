@@ -13,7 +13,9 @@ public class PowerUp_EMP : PowerUp {
 		FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 50f;
 		effectField= (GameObject)Resources.Load("FieldSphereEMP");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
-		effectField.GetComponent<Effect_EMP> ().IsPlayer ();
+		if (gameObject.CompareTag ("Player")) {
+			effectField.GetComponent<Effect_Shockwave> ().IsPlayer ();
+		}
 		effectField.GetComponent<Renderer> ().material.SetColor ("_Color", fieldColor);
 		effectField.SetActive (false);
 	}
