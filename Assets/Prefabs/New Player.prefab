@@ -34,6 +34,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &109222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 469436}
+  - 120: {fileID: 12022776}
+  - 114: {fileID: 11488520}
+  m_Layer: 0
+  m_Name: Targeting Laser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &119672
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,6 +751,7 @@ Transform:
   - {fileID: 22499704}
   - {fileID: 22478544}
   - {fileID: 22462808}
+  - {fileID: 469436}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &465756
@@ -760,6 +778,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 457814}
   m_RootOrder: 16
+--- !u!4 &469436
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3.609}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 457814}
+  m_RootOrder: 25
 --- !u!4 &473376
 Transform:
   m_ObjectHideFlags: 1
@@ -1740,6 +1770,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11488520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b432fd89b5ed6244ba59d3b8b206e8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11489084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1825,6 +1866,45 @@ MonoBehaviour:
   targetLocked: 0
   gameController: {fileID: 153720, guid: 651bc947edafe5c4f990209597d0068d, type: 2}
   im: {fileID: 0}
+--- !u!120 &12022776
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109222}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 65ff989905753ec4aa27dd6f995c9b25, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 0.6
+    endWidth: 0.6
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4278190335
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4278190080
+  m_UseWorldSpace: 1
 --- !u!135 &13519454
 SphereCollider:
   m_ObjectHideFlags: 1

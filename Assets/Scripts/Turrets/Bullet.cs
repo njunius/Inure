@@ -7,7 +7,6 @@
  */
 
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
@@ -16,16 +15,16 @@ public class Bullet : MonoBehaviour {
 
     private int absorbValue;
 
-    public Image brackets;
+    public Renderer brackets;
 
 	// Use this for initialization
 	void Awake () {
-        brackets = GetComponentInChildren<Image>();
         absorbValue = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
     }
 
     /*
