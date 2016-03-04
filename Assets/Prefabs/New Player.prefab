@@ -1862,7 +1862,6 @@ MonoBehaviour:
   invulnSecs: 1
   noGameOver: 0
   paused: 0
-  fInvincible: 0
   lockOnTarget: {fileID: 0}
   targetLocked: 0
   gameController: {fileID: 153720, guid: 651bc947edafe5c4f990209597d0068d, type: 2}
@@ -1928,7 +1927,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13674508
 CapsuleCollider:
@@ -2425,6 +2424,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Radius
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

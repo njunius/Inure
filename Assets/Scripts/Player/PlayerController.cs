@@ -98,6 +98,24 @@ public class PlayerController : MonoBehaviour {
 		forwardNorm.Normalize ();
 		frontOfShip = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
 
+        //Activate the game over sequence when death is true
+        if (isDead() && !noGameOver)
+        {
+            killPlayer();
+        }
+
+        //Count down invulnerability
+        if (fInvincible)
+        {
+            timerTMP -= Time.deltaTime;
+            Debug.Log(Time.deltaTime);
+        }
+
+        if (timerTMP <= 0)
+        {
+            fInvincible = false;
+        }
+
         //Toggles pausing the game
 
         if (im.getInputDown("Pause") && !paused)
@@ -170,17 +188,6 @@ public class PlayerController : MonoBehaviour {
 			//gameObject.GetComponent<PowerUp> ().Activate ();
 			//Destroy(gameObject.GetComponent<PowerUp> ());
 			curPowerUp = "";
-		}
-
-		//Count down invulnerability
-		if(fInvincible)
-		{
-			timerTMP -= Time.deltaTime;
-		}
-
-		if(timerTMP <= 0)
-		{
-			fInvincible = false;
 		}
     }
 
@@ -309,23 +316,6 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
 
-		//Activate the game over sequence when death is true
-		if (isDead () && !noGameOver) 
-		{
-			killPlayer();
-		}
-
-		//Count down invulnerability
-		if(fInvincible)
-		{
-			timerTMP -= Time.deltaTime;
-			//Debug.Log("TimerTMP = " + timerTMP);
-		}
-
-		if(timerTMP <= 0)
-		{
-			fInvincible = false;
-		}
     }
 
 	//Transports the player to the specified coordinates
