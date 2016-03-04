@@ -126,6 +126,38 @@ public class CameraController : MonoBehaviour {
         
     }
 
+    void LateUpdate()
+    {
+        if (mode == CameraMode.FirstPerson)
+        {
+            cameraPositionOffset = firstPersonPosition;
+
+            transform.rotation = lookAtTarget.rotation;
+            transform.Rotate(cameraRotationOffset);
+
+            Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(lookAtTarget.position) - cameraPositionOffset);
+
+            if (targetDistance < defaultDistance)
+            {
+                transform.position = nextPosition; //Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * 15f);
+            }
+            else
+            {
+                transform.position = nextPosition;
+            }
+
+
+            float distance = Vector3.Distance(transform.position, lookAtTarget.position);
+            if (distance < fadeDistance)
+            {
+                Renderer r = target.GetComponent<Renderer>();
+                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
+
+            }
+
+        }
+    }
+
     private void updateCamera()
     {
         if (mode == CameraMode.ThirdPerson)
@@ -210,34 +242,7 @@ public class CameraController : MonoBehaviour {
             }
 
         }
-        else
-        {
-            cameraPositionOffset = firstPersonPosition;
-
-            transform.rotation = lookAtTarget.rotation;
-            transform.Rotate(cameraRotationOffset);
-
-            Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(lookAtTarget.position) - cameraPositionOffset);
-
-            if (targetDistance < defaultDistance)
-            {
-                transform.position = nextPosition; //Vector3.Lerp(transform.position, nextPosition, Time.deltaTime * 15f);
-            }
-            else
-            {
-                transform.position = nextPosition;
-            }
-
-
-            float distance = Vector3.Distance(transform.position, lookAtTarget.position);
-            if (distance < fadeDistance)
-            {
-                Renderer r = target.GetComponent<Renderer>();
-                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
-
-            }
-
-        }
+        
 
 
 

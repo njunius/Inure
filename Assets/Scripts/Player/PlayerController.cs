@@ -288,7 +288,18 @@ public class PlayerController : MonoBehaviour {
         {
             if (lockOnTarget != null)
             {
-                transform.LookAt(lockOnTarget.transform);
+                transform.LookAt(lockOnTarget.transform, transform.up);
+
+            }
+            if (rotRoll != 0)
+            {
+                rb.angularVelocity = transform.TransformDirection(Vector3.left + Vector3.up + Vector3.forward * rotRoll);
+            }
+            else
+            {
+                rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
+                                                                   transform.InverseTransformDirection(rb.angularVelocity).y, 0));
+
             }
         }
         
