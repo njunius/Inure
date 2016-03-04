@@ -116,8 +116,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107622}
-  m_LocalRotation: {x: 0.09226143, y: 0, z: 0, w: 0.9957348}
-  m_LocalPosition: {x: 560, y: 842, z: -7731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -68.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 439262}
@@ -140,7 +140,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.1
   far clip plane: 16000
   field of view: 60
   orthographic: 0
@@ -299,8 +299,10 @@ MonoBehaviour:
   currentHeight: 0
   targetHeight: 0
   defaultSide: 0
-  minDistPercent: -1.65
+  minDistPercent: 2.5
   minHeightPercent: 0.25
+  maxDistPercent: 5.5
+  maxHeightPercent: 0.25
   positionDamping: 0.08
   rotationDamping: 8
   maxSpeed: 200

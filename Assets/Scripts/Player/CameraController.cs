@@ -19,6 +19,9 @@ public class CameraController : MonoBehaviour {
     public float defaultSide = 0.0f;
     public float minDistPercent = 0.8f;
     public float minHeightPercent = 0.25f;
+    public float maxDistPercent = 0.2f;
+    public float maxHeightPercent = 0.25f;
+
 
     private float currentSide;
     private float targetSide;
@@ -138,7 +141,11 @@ public class CameraController : MonoBehaviour {
                 if (ray.transform.CompareTag("Environment"))
                 {
                     targetDistance = ray.distance - minDistPercent;
-                    float ratio = targetDistance / defaultDistance;
+                    if (targetDistance < maxDistPercent)
+                    {
+                        targetDistance = maxDistPercent;
+                    }
+                    float ratio = (2*targetDistance) / (3*defaultDistance);
                     targetHeight = ratio * defaultHeight;
                     cameraPositionOffset.y = targetHeight;
                     cameraPositionOffset.z = targetDistance;
@@ -157,6 +164,7 @@ public class CameraController : MonoBehaviour {
             {
                 if (ray.transform.CompareTag("Environment"))
                 {
+                    Debug.Log("Camera hit 2");
                     targetHeight = ray.distance - minHeightPercent;
                     cameraPositionOffset.y = targetHeight;
                     hitFound = true;
@@ -172,25 +180,10 @@ public class CameraController : MonoBehaviour {
                 cameraPositionOffset = thirdPersonPosition;
             }
 
-            /*transform.rotation = Quaternion.Lerp(transform.rotation, positionTarget.rotation, Time.deltaTime);
-            transform.rotation = positionTarget.rotation;
-            transform.Rotate(cameraRotationOffset);*/
-
-            
-
-            //Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(positionTarget.position) - cameraPositionOffset);
-
             
 
             Vector3 nextPosition = target.transform.position - (target.transform.rotation * cameraPositionOffset);
-            /*currentDistance = Vector3.Distance(thisTransformCache.position, nextPosition);
-            Debug.Log(currentDistance);
-            if (currentDistance > 0.01f)
-            {
-                float shift = currentDistance;
-                if (shift > 1) shift = 1;
-                nextPosition = transform.TransformDirection(nextPosition.x, nextPosition.y - nextPosition.y / shift, nextPosition.z);
-            }*/
+
 
             float snapSpeed = positionDamping;
             if (hitFound)
@@ -209,6 +202,11 @@ public class CameraController : MonoBehaviour {
                 Renderer r = target.GetComponent<Renderer>();
                 r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
 
+            }
+            else
+            {
+                Renderer r = target.GetComponent<Renderer>();
+                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, 255);
             }
 
         }
@@ -238,6 +236,7 @@ public class CameraController : MonoBehaviour {
                 r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
 
             }
+
         }
 
 

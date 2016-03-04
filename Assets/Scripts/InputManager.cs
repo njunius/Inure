@@ -140,7 +140,7 @@ public class InputManager : MonoBehaviour {
         }
         InputBinding input = inputPresets[presetIndex][name];
 
-        if (Input.GetButtonUp(input.posAxis))
+        if (Input.GetButtonUp(input.posAxis) || Input.GetButtonUp(input.posAxisAlt1) || Input.GetButtonUp(input.posAxisAlt2))
         {
             return true;
         }
@@ -249,6 +249,10 @@ public class InputBinding
     public float dead;                  //Dead zone
     public float sensitivity;           //Multipier for sensitivity
     public bool invert;                 //Invert input values.
+    public string posAxisAlt1;              //Unity input for positive direction
+    public string negAxisAlt1;
+    public string posAxisAlt2;              //Unity input for positive direction
+    public string negAxisAlt2;
 
     public InputBinding()
     {
@@ -259,7 +263,11 @@ public class InputBinding
         dead = 0.1f;
         sensitivity = 1;
         invert = false;
-    }
+        posAxisAlt1 = "";
+        negAxisAlt1 = "";
+        posAxisAlt2 = "";
+        negAxisAlt2 = "";
+}
 }
 
 [Serializable]
