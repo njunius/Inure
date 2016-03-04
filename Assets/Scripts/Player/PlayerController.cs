@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     // player armor/health stats
     private int maxHullIntegrity;
     private int currHullIntegrity;
-	public bool fInvincible = false;
+	private bool fInvincible = false;
 	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_SlowTime"};
 	private string curPowerUp;
 
@@ -172,7 +172,16 @@ public class PlayerController : MonoBehaviour {
 			curPowerUp = "";
 		}
 
+		//Count down invulnerability
+		if(fInvincible)
+		{
+			timerTMP -= Time.deltaTime;
+		}
 
+		if(timerTMP <= 0)
+		{
+			fInvincible = false;
+		}
     }
 
     void FixedUpdate()

@@ -36,7 +36,6 @@ public class Bullet : MonoBehaviour {
 			gameObject.GetComponent<Renderer> ().material.color = bColor;
 		if(newVel != null)
         	gameObject.GetComponent<Rigidbody> ().velocity = newVel;
-
     }
 
     void OnCollisionEnter (Collision hit) {
