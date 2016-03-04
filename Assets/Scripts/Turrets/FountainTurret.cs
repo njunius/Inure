@@ -58,7 +58,7 @@ public class FountainTurret : AlgorithmicTurret {
 					InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
 				}
 
-				float distBtwnPlayer = Vector3.Distance (GameObject.Find ("Player").transform.position, transform.position);
+				float distBtwnPlayer = Vector3.Distance (GameObject.FindGameObjectWithTag ("Player").transform.position, transform.position);
 
 				if (distBtwnPlayer < 10f) {
 					float percMaxRad = distBtwnPlayer / 10;

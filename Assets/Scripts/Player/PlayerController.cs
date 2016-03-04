@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     // player armor/health stats
     private int maxHullIntegrity;
     private int currHullIntegrity;
-	private bool fInvincible = false;
+	public bool fInvincible = false;
 	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_SlowTime"};
 	private string curPowerUp;
 
@@ -172,17 +172,7 @@ public class PlayerController : MonoBehaviour {
 			curPowerUp = "";
 		}
 
-		//Count down invulnerability
-		if(fInvincible)
-		{
-			timerTMP -= Time.deltaTime;
-			Debug.Log("TimerTMP = " + timerTMP);
-		}
 
-		if(timerTMP <= 0)
-		{
-			fInvincible = false;
-		}
     }
 
     void FixedUpdate()
@@ -316,6 +306,17 @@ public class PlayerController : MonoBehaviour {
 			killPlayer();
 		}
 
+		//Count down invulnerability
+		if(fInvincible)
+		{
+			timerTMP -= Time.deltaTime;
+			Debug.Log("TimerTMP = " + timerTMP);
+		}
+
+		if(timerTMP <= 0)
+		{
+			fInvincible = false;
+		}
     }
 
 	//Transports the player to the specified coordinates
