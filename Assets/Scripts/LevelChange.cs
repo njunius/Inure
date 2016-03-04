@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class LevelChange : MonoBehaviour {
@@ -7,7 +8,8 @@ public class LevelChange : MonoBehaviour {
 		Debug.Log ("Collided!");
 		if(other.CompareTag("Player Collider")){
 			Debug.Log ("Is Player!");
-			Application.LoadLevel (levelName);
+            //SceneManager.LoadScene(levelName);
+            Application.LoadLevel (levelName);
 		}
 	}
 

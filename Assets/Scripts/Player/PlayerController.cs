@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour {
 		if(fInvincible)
 		{
 			timerTMP -= Time.deltaTime;
-			Debug.Log("TimerTMP = " + timerTMP);
+			//Debug.Log("TimerTMP = " + timerTMP);
 		}
 
 		if(timerTMP <= 0)
