@@ -19,13 +19,13 @@ public class Effect_Shockwave : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag ("Projectile")) {
-			if (other.gameObject.GetComponent<Bullet> ()) {
+			/*if (other.gameObject.GetComponent<Bullet> ()) {
 				other.gameObject.GetComponent<Bullet> ().setVars (Color.clear, Vector3.Normalize (other.gameObject.transform.position - gameObject.transform.position) * velMultiplier);
-			}
-
-			/*if (other.gameObject.GetComponent<LightBulletController> ()) {
-				other.gameObject.GetComponent<LightBulletController> ().setVars (Color.clear, Vector3.Normalize (other.gameObject.transform.position - gameObject.transform.position) * velMultiplier);
 			}*/
+
+			if (other.gameObject.GetComponent<LightBulletController> ()) {
+				other.gameObject.GetComponent<LightBulletController> ().setVars (Color.clear, Vector3.Normalize (other.gameObject.transform.position - gameObject.transform.position) * velMultiplier);
+			}
 		} else if (other.gameObject.CompareTag ("Player Projectile")) {
 			other.gameObject.GetComponent<PlayerBullet> ().setVars (Color.clear, Vector3.Normalize (other.gameObject.transform.position - gameObject.transform.position) * velMultiplier);
 		} else if (!isPlayer && other.gameObject.CompareTag ("Player Turret Trigger")) {

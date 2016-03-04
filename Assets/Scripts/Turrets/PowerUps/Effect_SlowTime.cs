@@ -28,8 +28,8 @@ public class Effect_SlowTime : MonoBehaviour {
 				bulTur.SlowTime (timeScale);
 			}
 		} else if (other.gameObject.CompareTag ("Projectile")) {
-			other.gameObject.GetComponent<Bullet> ().SlowTime (timeScale);
-			//other.gameObject.GetComponent<LightBulletController> ().SlowTime (timeScale);
+			//other.gameObject.GetComponent<Bullet> ().SlowTime (timeScale);
+			other.gameObject.GetComponent<LightBulletController> ().SlowTime (timeScale);
 		} else if (other.gameObject.CompareTag ("Player Projectile")) {
 			other.gameObject.GetComponent<PlayerBullet> ().SlowTime (timeScale);
 		}
@@ -48,8 +48,8 @@ public class Effect_SlowTime : MonoBehaviour {
 				bulTur.QuickTime (timeScale);
 			}
 		} else if (other.gameObject.CompareTag ("Projectile")) {
-			other.gameObject.GetComponent<Bullet> ().QuickTime (timeScale);
-			//other.gameObject.GetComponent<LightBulletController> ().QuickTime (timeScale);
+			//other.gameObject.GetComponent<Bullet> ().QuickTime (timeScale);
+			other.gameObject.GetComponent<LightBulletController> ().QuickTime (timeScale);
 		} else if (other.gameObject.CompareTag ("Player Projectile")) {
 			other.gameObject.GetComponent<PlayerBullet> ().QuickTime (timeScale);
 		}

@@ -37,8 +37,8 @@ public class RadarTrigger : MonoBehaviour {
 	void OnTriggerExit(Collider other) {
 		if (other.gameObject.CompareTag ("Projectile")) {
 			radar.RemoveBlip (other.gameObject);
-			//other.GetComponent<LightBulletController> ().brackets.enabled = false;
-			other.GetComponent<Bullet> ().brackets.enabled = false;
+			other.GetComponent<LightBulletController> ().brackets.enabled = false;
+			//other.GetComponent<Bullet> ().brackets.enabled = false;
 		}
 	}
 }
