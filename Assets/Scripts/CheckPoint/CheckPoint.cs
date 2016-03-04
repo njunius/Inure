@@ -26,12 +26,13 @@ public class CheckPoint : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.CompareTag("Player Collider")){
 			
-			bombCharge = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge;
+
 			shieldCharge = pController.getShieldCharge();
 			hullHealth = pController.getCurrHullIntegrity();
 			pData.setCheckPoint(shieldCharge, bombCharge, hullHealth, savedPOS, savedROT);
 
 			transform.GetChild(0).GetComponent<Light>().color = Color.red;
+			bombCharge = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge;
 		}
 	}
 }
