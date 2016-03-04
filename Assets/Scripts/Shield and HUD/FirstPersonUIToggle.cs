@@ -8,6 +8,7 @@ public class FirstPersonUIToggle : MonoBehaviour {
     private Canvas[] firstPersonHUD;
 	private Renderer radar3D;
 	public GameObject[] blips;
+    private LineRenderer laserSight;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +16,7 @@ public class FirstPersonUIToggle : MonoBehaviour {
         firstPersonHUD = GetComponentsInChildren<Canvas>();
 		radar3D = GameObject.FindGameObjectWithTag("Radar3D").GetComponent<Renderer>();
 		blips = GameObject.FindGameObjectsWithTag("Blip");
+        laserSight = GameObject.FindGameObjectWithTag("Laser Sight").GetComponent<LineRenderer>();
 
     }
 
@@ -25,6 +27,7 @@ public class FirstPersonUIToggle : MonoBehaviour {
 	    if(camera.getMode() == CameraMode.ThirdPerson)
         {
 			radar3D.enabled = false;
+            laserSight.enabled = true;
 
 			for (int i = 0; i < blips.Length; ++i) 
 			{
@@ -39,6 +42,7 @@ public class FirstPersonUIToggle : MonoBehaviour {
         else
         {
 			radar3D.enabled = true;
+            laserSight.enabled = false;
 
 			for (int i = 0; i < blips.Length; ++i) 
 			{
