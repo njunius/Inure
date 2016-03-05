@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PowerUp_SlowTime : PowerUp {
 
-	private float MAX_FIELD_SIZE = 10f;
+	private float MAX_FIELD_SIZE = 30f;
 	private float FIELD_EXPANSION_PER_FRAME;
 	private float LIFETIME = 5;
 	private float FIELD_COMPRESSION_PER_FRAME = 0.1f;
