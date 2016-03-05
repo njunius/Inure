@@ -7,7 +7,7 @@ public class LevelChange : MonoBehaviour {
 		Debug.Log ("Collided!");
 		if(other.CompareTag("Player Collider")){
 			Debug.Log ("Is Player!");
-			Application.LoadLevel (levelName);
+            Application.LoadLevel (levelName);
 		}
 	}
 

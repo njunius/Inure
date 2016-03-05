@@ -16,11 +16,11 @@ public class LightBulletController : MonoBehaviour {
 
 	private int absorbValue;
 
-	public Image brackets;
+	public Renderer brackets;
 
 	// Use this for initialization
 	void Awake () {
-		brackets = GetComponentInChildren<Image>();
+		brackets = GetComponentInChildren<Renderer>();
 		absorbValue = 1;
 	}
 
@@ -33,8 +33,10 @@ public class LightBulletController : MonoBehaviour {
 	 * post: color and velocity of bullet are set
 	 */
 	public void setVars (Color bColor, Vector3 newVel) {
-		gameObject.GetComponent<Light> ().color = bColor;
-		gameObject.GetComponent<Rigidbody> ().velocity = newVel;
+		if (bColor != Color.clear)
+			gameObject.GetComponent<Light> ().color = bColor;
+		if(newVel != null)
+			gameObject.GetComponent<Rigidbody> ().velocity = newVel;
 
 	}
 
@@ -90,5 +92,13 @@ public class LightBulletController : MonoBehaviour {
 
 	void OnDisable() {
 		CancelInvoke ();
+	}
+
+	public void SlowTime (float timeScale) {
+		gameObject.GetComponent<Rigidbody> ().velocity *= timeScale;
+	}
+
+	public void QuickTime (float timeScale) {
+		gameObject.GetComponent<Rigidbody> ().velocity /= timeScale;
 	}
 }

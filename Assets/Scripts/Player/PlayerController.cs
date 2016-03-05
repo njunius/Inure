@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     // player armor/health stats
     private int maxHullIntegrity;
     private int currHullIntegrity;
-	public bool fInvincible = false;
+	private bool fInvincible = false;
 	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_SlowTime"};
 	private string curPowerUp;
 
@@ -97,6 +97,24 @@ public class PlayerController : MonoBehaviour {
 		Vector3 forwardNorm = gameObject.transform.forward;
 		forwardNorm.Normalize ();
 		frontOfShip = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
+
+        //Activate the game over sequence when death is true
+        if (isDead() && !noGameOver)
+        {
+            killPlayer();
+        }
+
+        //Count down invulnerability
+        if (fInvincible)
+        {
+            timerTMP -= Time.deltaTime;
+            Debug.Log(Time.deltaTime);
+        }
+
+        if (timerTMP <= 0)
+        {
+            fInvincible = false;
+        }
 
         //Toggles pausing the game
 
@@ -171,8 +189,6 @@ public class PlayerController : MonoBehaviour {
 			//Destroy(gameObject.GetComponent<PowerUp> ());
 			curPowerUp = "";
 		}
-
-
     }
 
     void FixedUpdate()
@@ -278,7 +294,18 @@ public class PlayerController : MonoBehaviour {
         {
             if (lockOnTarget != null)
             {
-                transform.LookAt(lockOnTarget.transform);
+                transform.LookAt(lockOnTarget.transform, transform.up);
+
+            }
+            if (rotRoll != 0)
+            {
+                rb.angularVelocity = transform.TransformDirection(Vector3.left + Vector3.up + Vector3.forward * rotRoll);
+            }
+            else
+            {
+                rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
+                                                                   transform.InverseTransformDirection(rb.angularVelocity).y, 0));
+
             }
         }
         
@@ -289,23 +316,6 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
 
-		//Activate the game over sequence when death is true
-		if (isDead () && !noGameOver) 
-		{
-			killPlayer();
-		}
-
-		//Count down invulnerability
-		if(fInvincible)
-		{
-			timerTMP -= Time.deltaTime;
-			Debug.Log("TimerTMP = " + timerTMP);
-		}
-
-		if(timerTMP <= 0)
-		{
-			fInvincible = false;
-		}
     }
 
 	//Transports the player to the specified coordinates
