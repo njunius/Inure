@@ -19,8 +19,8 @@ public class LastCheckpoint : MonoBehaviour {
 		savedCamPOS = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
 		savedCamROT = GameObject.FindGameObjectWithTag("MainCamera").transform.rotation;
 		pController = gameObject.GetComponent<PlayerController> ();
-		bomb = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>();
-		bombCharge = bomb.currBombCharge;
+		//bomb = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>();
+		//bombCharge = bomb.currBombCharge;
 		shieldCharge = pController.getShieldCharge();
 		hullHealth = pController.getCurrHullIntegrity();
 
