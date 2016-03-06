@@ -22,6 +22,7 @@ public class BulletTurret : Turret {
 	//higher number = higher velocity
 	public float bulletVel;
 	protected Vector4 bulletColor;
+	public float bulletLifeTime = 20f;
 	protected TurretBarrel[] barrelList;
 	//lower number = higher rate
 	protected float fireRateMultiplier = 0.1f;
@@ -38,7 +39,7 @@ public class BulletTurret : Turret {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 
 	protected void CreateBullet (Vector3 position, Vector3 aimDirectionNorm) {
@@ -51,6 +52,7 @@ public class BulletTurret : Turret {
 		//LightBulletController bulletObj = (LightBulletController)obj.GetComponent (typeof(LightBulletController));
 		Bullet bulletObj = (Bullet)obj.GetComponent (typeof(Bullet));
 		bulletObj.setVars (bulletColor, aimDirectionNorm * (float)bulletVel);
+		bulletObj.setLifeTime (bulletLifeTime);
 		obj.SetActive (true);
 	}
 

@@ -46,16 +46,19 @@ public class InputManager : MonoBehaviour {
         {
             //Switch to keyboard and mouse
             presetIndex = 0;
+            Debug.Log("Keyboard and Mouse");
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             //switch to gamepad
             presetIndex = 1;
+            Debug.Log("Xbox 360 Controller");
         }
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             //switch to joystick
             presetIndex = 2;
+            Debug.Log("Keyboard and Joystick");
         }
     }
 
@@ -79,27 +82,35 @@ public class InputManager : MonoBehaviour {
         }
         InputBinding input = inputPresets[presetIndex][name];
 
+        input.PreviousValue = input.CurrentValue;
+
         posAxis = Input.GetAxis(input.posAxis);
         //Debug.Log(posAxis);
 
         if (input.bidirectional)
         {
-            negAxis = Input.GetAxis(input.negAxis);
-        }
-
-        if (input.bidirectional && Math.Abs(negAxis) > posAxis)
-        {
-            value = -1 * negAxis;
+            negAxis = -1 * Input.GetAxis(input.negAxis);
+            value = posAxis + negAxis;
         }
         else
         {
             value = posAxis;
         }
 
+        /*if (input.bidirectional && Math.Abs(negAxis) > posAxis)
+        {
+            value = -1 * negAxis;
+        }
+        else
+        {
+            value = posAxis;
+        }*/
+
 
         if (Math.Abs(value) <= input.dead)
         {
             value = 0;
+            input.CurrentValue = value;
             return value;
         }
 
@@ -110,6 +121,7 @@ public class InputManager : MonoBehaviour {
         }
         /*if (value != 0)
             Debug.Log(name + value);*/
+        input.CurrentValue = value;
         return value;
     }
 
@@ -123,8 +135,11 @@ public class InputManager : MonoBehaviour {
         }
         InputBinding input = inputPresets[presetIndex][name];
 
+        input.PreviousValue = input.CurrentValue;
+
         if ((presetIndex != 1 && Input.GetButtonDown(input.posAxis)) || (presetIndex == 1 && Input.GetKeyDown(input.posAxis)))
         {
+            input.CurrentValue = 1;
             return true;
         }
         return false;
@@ -139,12 +154,30 @@ public class InputManager : MonoBehaviour {
             return false;
         }
         InputBinding input = inputPresets[presetIndex][name];
+        input.PreviousValue = input.CurrentValue;
 
         if (Input.GetButtonUp(input.posAxis) || Input.GetButtonUp(input.posAxisAlt1) || Input.GetButtonUp(input.posAxisAlt2))
         {
+            input.CurrentValue = 0;
             return true;
         }
         return false;
+    }
+
+    public bool getInputUpEnhanced(string name)
+    {
+        if (!inputPresets[presetIndex].ContainsKey(name))
+        {
+            //Debug.Log(name + " not bound.");
+            return false;
+        }
+        InputBinding input = inputPresets[presetIndex][name];
+        if ((input.PreviousValue == 0 || input.CurrentValue == 0) && (input.PreviousValue != 0 && input.CurrentValue != 0))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void inspectorToDicts()
@@ -206,22 +239,21 @@ public class InputManager : MonoBehaviour {
         return inspectorPresets[presetIndex].presetName;
     }
 
-
     public void editInputBinding(string inputBinding, string newName, bool isNegative)
     {
         if (!isNegative)
         {
-            inputPresets[0][inputBinding].posAxis = newName;
+            inputPresets[presetIndex][inputBinding].posAxis = newName;
         }
         else
         {
-            inputPresets[0][inputBinding].negAxis = newName;
+            inputPresets[presetIndex][inputBinding].negAxis = newName;
         }
     }
 
     public Dictionary<string, InputBinding> getInputBindings()
     {
-        return inputPresets[0];
+        return inputPresets[presetIndex];
 
         //inputPresets[0]["Vertical"].posAxis;
         //inputPresets[0]["Vertical"].bidirectional;
@@ -237,6 +269,21 @@ public class InputManager : MonoBehaviour {
             
         }*/
     }
+
+    public void setInputSensitivity(string inputBinding, float sensitivity)
+    {
+        float range = inputPresets[presetIndex][inputBinding].maxSensitivity - inputPresets[presetIndex][inputBinding].minSensitivity;
+        float amount = range * sensitivity;
+        inputPresets[presetIndex][inputBinding].sensitivity = inputPresets[presetIndex][inputBinding].minSensitivity + amount;
+    }
+
+    public float getInputSensitivity(string inputBinding)
+    {
+        float range = inputPresets[presetIndex][inputBinding].maxSensitivity - inputPresets[presetIndex][inputBinding].minSensitivity;
+        float amount = inputPresets[presetIndex][inputBinding].sensitivity - inputPresets[presetIndex][inputBinding].minSensitivity;
+
+        return amount / range;
+    }
 }
 
 [Serializable]
@@ -248,11 +295,16 @@ public class InputBinding
     public string negAxis;              //Unity input for negative direction
     public float dead;                  //Dead zone
     public float sensitivity;           //Multipier for sensitivity
+    public float minSensitivity;
+    public float maxSensitivity;
     public bool invert;                 //Invert input values.
     public string posAxisAlt1;              //Unity input for positive direction
     public string negAxisAlt1;
     public string posAxisAlt2;              //Unity input for positive direction
     public string negAxisAlt2;
+
+    private float previousValue;
+    private float currentValue;
 
     public InputBinding()
     {
@@ -267,7 +319,22 @@ public class InputBinding
         negAxisAlt1 = "";
         posAxisAlt2 = "";
         negAxisAlt2 = "";
-}
+
+        previousValue = 0;
+
+    }
+
+    public float PreviousValue
+    {
+        set { this.previousValue = value; }
+        get { return this.previousValue; }
+    }
+
+    public float CurrentValue
+    {
+        set { this.currentValue = value; }
+        get { return this.currentValue; }
+    }
 }
 
 [Serializable]

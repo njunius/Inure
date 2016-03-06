@@ -6,7 +6,7 @@ public class PowerUp_Shockwave : PowerUp {
 	private float MAX_FIELD_SIZE = 10f;
 	private float FIELD_EXPANSION_PER_FRAME;
 	private GameObject effectField;
-	private Color fieldColor = new Color (0.988f, 0.541f, 0.541f, 0.35f);
+	private Color fieldColor = new Color (0.988f, 0.541f, 0.541f, 0.5f);
 	private bool isGrowing = false;
 
 	// Use this for initialization
