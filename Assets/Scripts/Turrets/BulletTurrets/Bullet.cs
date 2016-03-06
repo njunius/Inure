@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour {
 	//private Vector3 velocity;
 
     private int absorbValue;
+	private float lifeTime;
 
     public Renderer brackets;
 
@@ -37,6 +38,10 @@ public class Bullet : MonoBehaviour {
 		if(newVel != null)
         	gameObject.GetComponent<Rigidbody> ().velocity = newVel;
     }
+
+	public void setLifeTime (float time) {
+		lifeTime = time;
+	}
 
     void OnCollisionEnter (Collision hit) {
         PlayerController hitScript = hit.gameObject.GetComponent<PlayerController>();
@@ -75,7 +80,7 @@ public class Bullet : MonoBehaviour {
     }
 
 	void OnEnable() {
-		Invoke ("Destroy", 20f);
+		Invoke ("Destroy", lifeTime);
 		//GameObject.FindGameObjectWithTag ("Object Pooler").GetComponent<ObjectPooler> ().numActiveObj++;
 	}
 

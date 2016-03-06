@@ -8,7 +8,7 @@ public class PowerUp_SlowTime : PowerUp {
 	private float LIFETIME = 5;
 	private float FIELD_COMPRESSION_PER_FRAME = 0.1f;
 	private GameObject effectField;
-	private Color fieldColor = new Color (0.988f, 0.541f, 0.992f, 0.35f);
+	private Color fieldColor = new Color (0.988f, 0.541f, 0.992f, 0.5f);
 	private bool isGrowing = false;
 	private bool isShrinking = false;
 
