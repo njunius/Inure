@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour {
     private List<Dictionary<string, InputBinding>> inputPresets;
     private bool isOnWindows = false;
 
-    private int presetIndex = 1;
+    private int presetIndex = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -82,27 +82,35 @@ public class InputManager : MonoBehaviour {
         }
         InputBinding input = inputPresets[presetIndex][name];
 
+        input.PreviousValue = input.CurrentValue;
+
         posAxis = Input.GetAxis(input.posAxis);
         //Debug.Log(posAxis);
 
         if (input.bidirectional)
         {
-            negAxis = Input.GetAxis(input.negAxis);
-        }
-
-        if (input.bidirectional && Math.Abs(negAxis) > posAxis)
-        {
-            value = -1 * negAxis;
+            negAxis = -1 * Input.GetAxis(input.negAxis);
+            value = posAxis + negAxis;
         }
         else
         {
             value = posAxis;
         }
 
+        /*if (input.bidirectional && Math.Abs(negAxis) > posAxis)
+        {
+            value = -1 * negAxis;
+        }
+        else
+        {
+            value = posAxis;
+        }*/
+
 
         if (Math.Abs(value) <= input.dead)
         {
             value = 0;
+            input.CurrentValue = value;
             return value;
         }
 
@@ -113,6 +121,7 @@ public class InputManager : MonoBehaviour {
         }
         /*if (value != 0)
             Debug.Log(name + value);*/
+        input.CurrentValue = value;
         return value;
     }
 
@@ -126,8 +135,11 @@ public class InputManager : MonoBehaviour {
         }
         InputBinding input = inputPresets[presetIndex][name];
 
+        input.PreviousValue = input.CurrentValue;
+
         if ((presetIndex != 1 && Input.GetButtonDown(input.posAxis)) || (presetIndex == 1 && Input.GetKeyDown(input.posAxis)))
         {
+            input.CurrentValue = 1;
             return true;
         }
         return false;
@@ -142,12 +154,30 @@ public class InputManager : MonoBehaviour {
             return false;
         }
         InputBinding input = inputPresets[presetIndex][name];
+        input.PreviousValue = input.CurrentValue;
 
         if (Input.GetButtonUp(input.posAxis) || Input.GetButtonUp(input.posAxisAlt1) || Input.GetButtonUp(input.posAxisAlt2))
         {
+            input.CurrentValue = 0;
             return true;
         }
         return false;
+    }
+
+    public bool getInputUpEnhanced(string name)
+    {
+        if (!inputPresets[presetIndex].ContainsKey(name))
+        {
+            //Debug.Log(name + " not bound.");
+            return false;
+        }
+        InputBinding input = inputPresets[presetIndex][name];
+        if ((input.PreviousValue == 0 || input.CurrentValue == 0) && (input.PreviousValue != 0 && input.CurrentValue != 0))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void inspectorToDicts()
@@ -273,6 +303,9 @@ public class InputBinding
     public string posAxisAlt2;              //Unity input for positive direction
     public string negAxisAlt2;
 
+    private float previousValue;
+    private float currentValue;
+
     public InputBinding()
     {
         name = "";
@@ -286,7 +319,22 @@ public class InputBinding
         negAxisAlt1 = "";
         posAxisAlt2 = "";
         negAxisAlt2 = "";
-}
+
+        previousValue = 0;
+
+    }
+
+    public float PreviousValue
+    {
+        set { this.previousValue = value; }
+        get { return this.previousValue; }
+    }
+
+    public float CurrentValue
+    {
+        set { this.currentValue = value; }
+        get { return this.currentValue; }
+    }
 }
 
 [Serializable]
