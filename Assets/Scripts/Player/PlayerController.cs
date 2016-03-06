@@ -202,6 +202,24 @@ public class PlayerController : MonoBehaviour {
         float rotPitch = im.getInput("Pitch") * rotSpeed;
         float rotYaw = im.getInput("Yaw") * rotSpeed;
 
+        if (im.getInputUpEnhanced("Longitudinal"))
+        {
+            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
+                                                               transform.InverseTransformDirection(rb.velocity).y, 0));
+        }
+
+        if (im.getInputUpEnhanced("Lateral"))
+        {
+            rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
+                                                                    transform.InverseTransformDirection(rb.velocity).z));
+        }
+        if (im.getInputUpEnhanced("Vertical"))
+        {
+            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
+                                                               transform.InverseTransformDirection(rb.velocity).z));
+        }
+
+
         if (moveLongitudinal != 0)
         {
             if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).z) != Mathf.Sign(moveLongitudinal))
@@ -211,11 +229,11 @@ public class PlayerController : MonoBehaviour {
             }
             rb.AddForce(transform.TransformDirection(Vector3.forward * moveLongitudinal));
         }
-        else
+        /*else
         {
             rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
                                                                transform.InverseTransformDirection(rb.velocity).y, 0));
-        }
+        }*/
 
         if (moveLateral != 0)
         {
@@ -226,11 +244,11 @@ public class PlayerController : MonoBehaviour {
             }
             rb.AddForce(transform.TransformDirection(Vector3.right * moveLateral));
         }
-        else
+        /*else
         {
             rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
                                                                     transform.InverseTransformDirection(rb.velocity).z));
-        }
+        }*/
 
         if (moveVertical != 0)
         {
@@ -241,10 +259,15 @@ public class PlayerController : MonoBehaviour {
             }
             rb.AddForce(transform.TransformDirection(Vector3.up * moveVertical));
         }
-        else
+        /*else
         {
             rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
                                                                transform.InverseTransformDirection(rb.velocity).z));
+        }*/
+
+        if (moveLongitudinal == 0 && moveLateral == 0 && moveVertical == 0)
+        {
+            rb.velocity = Vector3.zero;
         }
 
         if (!targetLocked)

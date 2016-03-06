@@ -172,7 +172,10 @@ public class InputManager : MonoBehaviour {
             return false;
         }
         InputBinding input = inputPresets[presetIndex][name];
-        if ((input.PreviousValue == 0 || input.CurrentValue == 0) && (input.PreviousValue != 0 && input.CurrentValue != 0))
+        //Debug.Log(name + " cur: " + input.CurrentValue);
+        //Debug.Log(name + " prev: " + input.PreviousValue);
+        if ((input.PreviousValue == 0 && input.CurrentValue != 0) || (input.CurrentValue == 0 && input.PreviousValue == 0) || 
+            (input.CurrentValue != 0 && input.PreviousValue != 0))
         {
             return false;
         }
