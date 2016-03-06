@@ -47,8 +47,11 @@ public class ArcTurret : SimpleTurret {
 
 	// Update is called once per frame
 	void Update () {
+		if (!isDead && health == 0) {
+			Die ();
+		}
 		//if the player is within the turret's range of sight, target the player and fire
-		if (!isEMP) {
+		else if (!isEMP) {
 			if (isOn) {
 				gameObject.transform.LookAt (target.transform);
 
@@ -71,7 +74,7 @@ public class ArcTurret : SimpleTurret {
 				CancelInvoke ("Fire");
 			}
 		} else {
-			CancelInvoke ("fire");
+			CancelInvoke ("Fire");
 			isFiring = false;
 		}
 	}
@@ -142,5 +145,12 @@ public class ArcTurret : SimpleTurret {
 			debugBool = true;
 			break;
 		}
+	}
+
+	private void Die () {
+		isDead = true;
+		isFiring = false;
+		isOn = false;
+		CancelInvoke ("Fire");
 	}
 }

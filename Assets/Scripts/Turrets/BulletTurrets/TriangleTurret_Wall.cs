@@ -49,8 +49,11 @@ public class TriangleTurret_Wall : SimpleTurret {
 
 	// Update is called once per frame
 	void Update () {
+		if (!isDead && health == 0) {
+			Die ();
+		}
 		//if the player is within the turret's range of sight, target the player and fire
-		if (!isEMP) {
+		else if (!isEMP) {
 			if (isOn) {
 				gameObject.transform.LookAt (target.transform);
 
@@ -64,16 +67,16 @@ public class TriangleTurret_Wall : SimpleTurret {
 				//if not firing, start firing
 				if (!isFiring) {
 					isFiring = true;
-					InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
+					InvokeRepeating ("Fire", fireDelay, fireRate * fireRateMultiplier);
 				}
 			}
 			//if the player is not within range, but the turret is firing, stop firing
 			else if (isFiring) {
 				isFiring = false;
-				CancelInvoke ("fire");
+				CancelInvoke ("Fire");
 			}
 		} else {
-			CancelInvoke ("fire");
+			CancelInvoke ("Fire");
 			isFiring = false;
 		}
 	}
@@ -82,7 +85,7 @@ public class TriangleTurret_Wall : SimpleTurret {
 	 * Description: Shoots six bullets in a triangle shape
 	 * Post: A bullet has been fired from all TurretBarrels
 	 */
-	protected void fire() {
+	protected void Fire() {
 		Vector3 aimDirNorm = gameObject.transform.forward;
 		aimDirNorm.Normalize ();
 		Vector3 rightNorm = transform.right;
@@ -108,5 +111,10 @@ public class TriangleTurret_Wall : SimpleTurret {
 			++numFire;
 	}
 
-
+	private void Die () {
+		isDead = true;
+		isFiring = false;
+		isOn = false;
+		CancelInvoke ("Fire");
+	}
 }

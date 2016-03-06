@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11455148}
   m_Layer: 0
   m_Name: EMP_Turret
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,8 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b0880062b127140b54a67539a521fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 3
   healthDecrement: 10
+  fireRate: 3
   reward: {fileID: 180342, guid: 467f3de319b43c2418e59b660c226484, type: 2}
 --- !u!114 &11496850
 MonoBehaviour:
@@ -108,7 +108,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Turret
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 140682}

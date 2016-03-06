@@ -46,7 +46,9 @@ public class FountainTurret : AlgorithmicTurret {
 
 	// Update is called once per frame
 	void Update () {
-		if (!isEMP) {
+		if (!isDead && health == 0) {
+			Die ();
+		}else if (!isEMP) {
 			if (isOn) {
 				Vector3 forwardNorm = transform.forward;
 				forwardNorm.Normalize ();
@@ -55,7 +57,7 @@ public class FountainTurret : AlgorithmicTurret {
 				//if not firing, start firing
 				if (!isFiring) {
 					isFiring = true;
-					InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
+					InvokeRepeating ("Fire", fireDelay, fireRate * fireRateMultiplier);
 				}
 
 				float distBtwnPlayer = Vector3.Distance (GameObject.FindGameObjectWithTag ("Player").transform.position, transform.position);
@@ -67,11 +69,11 @@ public class FountainTurret : AlgorithmicTurret {
 					curTurretRadius = ORIG_TURRET_RADIUS;
 				}
 			} else if (isFiring) {
-				CancelInvoke ("fire");
+				CancelInvoke ("Fire");
 				isFiring = false;
 			}
 		} else {
-			CancelInvoke ("fire");
+			CancelInvoke ("Fire");
 			isFiring = false;
 		}
 	}
@@ -80,7 +82,7 @@ public class FountainTurret : AlgorithmicTurret {
 	 * Description: Shoots bullets equally distributed around the turret while the barrels swivel away from and back toward the center
 	 * Post: A bullet has been fired from all TurretBarrels at an angle determined by MAX_SWIVEL and SWIVEL_PERCENTAGE
 	 */
-	protected void fire() {
+	protected void Fire() {
 		Vector3 aimDirNorm = transform.forward;
 		aimDirNorm.Normalize ();
 		Vector3 rightNorm = transform.right;
@@ -112,5 +114,12 @@ public class FountainTurret : AlgorithmicTurret {
 
 		//rotate the turret by the given angle
 		//transform.Rotate (ROTATION_ANGLE);
+	}
+
+	private void Die () {
+		isDead = true;
+		isFiring = false;
+		isOn = false;
+		CancelInvoke ("Fire");
 	}
 }

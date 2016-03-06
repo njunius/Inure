@@ -6,7 +6,6 @@ public class BulletDestroy : MonoBehaviour {
 	private static BulletDestroy destroyer;
 
 	void OnEnable() {
-		Debug.Log ("WHY U NO INVOKE");
 		Invoke ("Destroy", 2f);
 	}
 

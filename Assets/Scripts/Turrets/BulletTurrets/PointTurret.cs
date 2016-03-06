@@ -24,8 +24,11 @@ public class PointTurret : SimpleTurret {
 
 	// Update is called once per frame
 	void Update () {
+		if (!isDead && health == 0) {
+			Die ();
+		}
 		//if the player is within the turret's range of sight, target the player and fire
-		if (!isEMP) {
+		else if (!isEMP) {
 			if (isOn) {
 				gameObject.transform.LookAt (target.transform);
 				//find new point at end of turret once required to target player
@@ -35,16 +38,16 @@ public class PointTurret : SimpleTurret {
 				//if not firing, start firing
 				if (!isFiring) {
 					isFiring = true;
-					InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
+					InvokeRepeating ("Fire", fireDelay, fireRate * fireRateMultiplier);
 				}
 			}
 			//if the player is not within range, but the turret is firing, stop firing
 			else if (isFiring) {
 				isFiring = false;
-				CancelInvoke ("fire");
+				CancelInvoke ("Fire");
 			}
 		} else {
-			CancelInvoke ("fire");
+			CancelInvoke ("Fire");
 			isFiring = false;
 		}
 	}
@@ -53,9 +56,16 @@ public class PointTurret : SimpleTurret {
 	 * Description: Creates new bullet with specifics
 	 * Post: new bullet is created with defined color and velocity
 	 */
-	protected void fire () {
+	protected void Fire () {
 		Vector3 aimDirNorm = gameObject.transform.forward;
 		aimDirNorm.Normalize ();
 		CreateBullet (endOfTurret + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimDirNorm);
+	}
+
+	private void Die () {
+		isDead = true;
+		isFiring = false;
+		isOn = false;
+		CancelInvoke ("Fire");
 	}
 }

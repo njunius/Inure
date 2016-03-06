@@ -39,7 +39,7 @@ public class BulletTurret : Turret {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 
 	protected void CreateBullet (Vector3 position, Vector3 aimDirectionNorm) {

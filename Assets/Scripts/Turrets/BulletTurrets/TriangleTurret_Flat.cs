@@ -45,8 +45,11 @@ public class TriangleTurret_Flat : SimpleTurret {
 
 	// Update is called once per frame
 	void Update () {
+		if (!isDead && health == 0) {
+			Die ();
+		}
 		//if the player is within the turret's range of sight, target the player and fire
-		if (!isEMP) {
+		else if (!isEMP) {
 			if (isOn) {
 				if (numShots == 0) {
 					gameObject.transform.LookAt (target.transform);
@@ -61,16 +64,16 @@ public class TriangleTurret_Flat : SimpleTurret {
 				//if not firing, start firing
 				if (!isFiring) {
 					isFiring = true;
-					InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
+					InvokeRepeating ("Fire", fireDelay, fireRate * fireRateMultiplier);
 				}
 			}
 			//if the player is not within range, but the turret is firing, stop firing
 			else if (isFiring) {
 				isFiring = false;
-				CancelInvoke ("fire");
+				CancelInvoke ("Fire");
 			}
 		} else {
-			CancelInvoke ("fire");
+			CancelInvoke ("Fire");
 			isFiring = false;
 		}
 	}
@@ -80,8 +83,8 @@ public class TriangleTurret_Flat : SimpleTurret {
 	 * Post: singleBurst() is set to be called repeatedly
 	 *       Turret's angle of rotation is increased or reset
 	 */
-	protected void fire () {
-		InvokeRepeating ("singleBurst", fireDelay, fireRate * fireRateMultiplier / BULLET_FREQUENCY);
+	protected void Fire () {
+		InvokeRepeating ("SingleBurst", fireDelay, fireRate * fireRateMultiplier / BULLET_FREQUENCY);
 
 		//if the turret has made a complete rotation, reset the number of times it has been fired
 		if (numFire == 360 / ROTATION_ANGLE.z)
@@ -98,7 +101,7 @@ public class TriangleTurret_Flat : SimpleTurret {
 	 *       If numShots is equal to 1, one bullet is fired from each barrel directly beside the central barrel
 	 *       If numShots is equal to 2, one bullet is fired from each of the end barrels, and numShots is reset
 	 */
-	protected void singleBurst() {
+	protected void SingleBurst() {
 		Vector3 aimDirNorm = gameObject.transform.forward;
 		aimDirNorm.Normalize ();
 		Vector3 rightNorm = transform.right;
@@ -122,12 +125,20 @@ public class TriangleTurret_Flat : SimpleTurret {
 			CreateBullet (endOfTurret + (2 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimDirNorm);
 			CreateBullet (endOfTurret + (aimDirNorm * (barrelList [2].relativeSpawnPoint)), aimDirNorm);
 			CreateBullet (endOfTurret + (-2 * rightNorm * BARREL_SEPARATION) + (aimDirNorm * (barrelList [4].relativeSpawnPoint)), aimDirNorm);
-			CancelInvoke ("singleBurst");
+			CancelInvoke ("SingleBurst");
 			numShots = 0;
 
 			break;
 		default:
 			break;
 		}
+	}
+
+	private void Die () {
+		isDead = true;
+		isFiring = false;
+		isOn = false;
+		CancelInvoke ("Fire");
+		CancelInvoke ("SingleBurst");
 	}
 }
