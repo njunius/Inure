@@ -3,9 +3,6 @@ using System.Collections;
 
 public class PowerUp_Turret : Turret {
 
-	protected float health = 100;
-	public float healthDecrement = 10f;
-	protected bool isDead = false;
 	protected PowerUp powerUp;
 	public GameObject reward;
 
@@ -24,12 +21,6 @@ public class PowerUp_Turret : Turret {
 		} else if (!isOn) {
 			isFiring = false;
 			CancelInvoke ("Fire");
-		}
-	}
-
-	private void OnCollisionEnter (Collision collision) {
-		if (collision.gameObject.name == "PlayerBullet(Clone)") {
-			health = Mathf.Max (health - healthDecrement, 0f);
 		}
 	}
 

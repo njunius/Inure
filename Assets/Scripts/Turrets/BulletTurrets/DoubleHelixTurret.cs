@@ -40,7 +40,9 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 
 	// Update is called once per frame
 	void Update () {
-		if (!isEMP) {
+		if (!isDead && health == 0) {
+			Die ();
+		} else if (!isEMP) {
 			if (isOn) {
 				Vector3 forwardNorm = transform.forward;
 				forwardNorm.Normalize ();
@@ -49,14 +51,14 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 				//if not firing, start firing
 				if (!isFiring) {
 					isFiring = true;
-					InvokeRepeating ("fire", fireDelay, fireRate * fireRateMultiplier);
+					InvokeRepeating ("Fire", fireDelay, fireRate * fireRateMultiplier);
 				}
 			} else if (isFiring) {
-				CancelInvoke ("fire");
+				CancelInvoke ("Fire");
 				isFiring = false;
 			}
 		} else {
-			CancelInvoke ("fire");
+			CancelInvoke ("Fire");
 			isFiring = false;
 		}
 	}
@@ -65,7 +67,7 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 	 * Description: Shoots two bullets in straight, parallel lines
 	 * Post: A bullet has been fired from both TurretBarrels
 	 */
-	protected void fire() {
+	protected void Fire() {
 		Vector3 aimDirNorm = transform.forward;
 		aimDirNorm.Normalize ();
 		Vector3 rightNorm = transform.right;
@@ -76,5 +78,12 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 
 		//rotate the turret by the given angle
 		transform.Rotate (ROTATION_ANGLE);
+	}
+
+	private void Die () {
+		isDead = true;
+		isFiring = false;
+		isOn = false;
+		CancelInvoke ("Fire");
 	}
 }
