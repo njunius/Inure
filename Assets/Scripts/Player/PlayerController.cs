@@ -334,7 +334,7 @@ public class PlayerController : MonoBehaviour {
 		//Reset stats
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
-		GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
+		//GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
 
 		//Overwrite data
 		savePlayer ();
