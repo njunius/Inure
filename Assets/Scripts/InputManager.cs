@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour {
     private List<Dictionary<string, InputBinding>> inputPresets;
     private bool isOnWindows = false;
 
-    private int presetIndex = 0;
+    private int presetIndex = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -46,16 +46,19 @@ public class InputManager : MonoBehaviour {
         {
             //Switch to keyboard and mouse
             presetIndex = 0;
+            Debug.Log("Keyboard and Mouse");
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             //switch to gamepad
             presetIndex = 1;
+            Debug.Log("Xbox 360 Controller");
         }
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             //switch to joystick
             presetIndex = 2;
+            Debug.Log("Keyboard and Joystick");
         }
     }
 
@@ -206,22 +209,21 @@ public class InputManager : MonoBehaviour {
         return inspectorPresets[presetIndex].presetName;
     }
 
-
     public void editInputBinding(string inputBinding, string newName, bool isNegative)
     {
         if (!isNegative)
         {
-            inputPresets[0][inputBinding].posAxis = newName;
+            inputPresets[presetIndex][inputBinding].posAxis = newName;
         }
         else
         {
-            inputPresets[0][inputBinding].negAxis = newName;
+            inputPresets[presetIndex][inputBinding].negAxis = newName;
         }
     }
 
     public Dictionary<string, InputBinding> getInputBindings()
     {
-        return inputPresets[0];
+        return inputPresets[presetIndex];
 
         //inputPresets[0]["Vertical"].posAxis;
         //inputPresets[0]["Vertical"].bidirectional;
@@ -237,6 +239,21 @@ public class InputManager : MonoBehaviour {
             
         }*/
     }
+
+    public void setInputSensitivity(string inputBinding, float sensitivity)
+    {
+        float range = inputPresets[presetIndex][inputBinding].maxSensitivity - inputPresets[presetIndex][inputBinding].minSensitivity;
+        float amount = range * sensitivity;
+        inputPresets[presetIndex][inputBinding].sensitivity = inputPresets[presetIndex][inputBinding].minSensitivity + amount;
+    }
+
+    public float getInputSensitivity(string inputBinding)
+    {
+        float range = inputPresets[presetIndex][inputBinding].maxSensitivity - inputPresets[presetIndex][inputBinding].minSensitivity;
+        float amount = inputPresets[presetIndex][inputBinding].sensitivity - inputPresets[presetIndex][inputBinding].minSensitivity;
+
+        return amount / range;
+    }
 }
 
 [Serializable]
@@ -248,6 +265,8 @@ public class InputBinding
     public string negAxis;              //Unity input for negative direction
     public float dead;                  //Dead zone
     public float sensitivity;           //Multipier for sensitivity
+    public float minSensitivity;
+    public float maxSensitivity;
     public bool invert;                 //Invert input values.
     public string posAxisAlt1;              //Unity input for positive direction
     public string negAxisAlt1;
