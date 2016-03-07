@@ -231,14 +231,14 @@ public class CameraController : MonoBehaviour {
             float distance = Vector3.Distance(transform.position, rayBase);
             if (distance < fadeDistance)
             {
-                Renderer r = target.GetComponent<Renderer>();
+                Renderer r = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
                 r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
 
             }
             else
             {
-                Renderer r = target.GetComponent<Renderer>();
-                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, 255);
+                Renderer r = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
+                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, 1);
             }
 
         }

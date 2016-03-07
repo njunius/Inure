@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 frontOfShip;
 	private bool isFiring = false;
 	private bool isSlowed = false;
+    private bool invincibleFlashing = false;
 
     public bool paused = false;
 
@@ -49,8 +50,13 @@ public class PlayerController : MonoBehaviour {
     public GameObject lockOnTarget;
     public bool targetLocked = false;
 
+    public GameObject mesh;
+    private Color originalColor;
+
     public GameObject gameController;
     public InputManager im;
+
+    private bool wallSlide = true;
 
     // Use this for initialization
     void Awake () {
@@ -58,8 +64,9 @@ public class PlayerController : MonoBehaviour {
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
+        originalColor = mesh.GetComponent<Renderer>().material.color;
 
-		curPowerUp = powerUpList[0];
+        curPowerUp = powerUpList[0];
 
         settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
 
@@ -88,33 +95,64 @@ public class PlayerController : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         im = gameController.GetComponent<InputManager>();
 
-    }
-	
-	// Update is called once per frame
-	void Update () {
 
-		//find new point at front of ship for firing
-		Vector3 forwardNorm = gameObject.transform.forward;
+    }
+
+    // Update is called once per frame
+    void Update () {
+        //find new point at front of ship for firing
+        Vector3 forwardNorm = gameObject.transform.forward;
 		forwardNorm.Normalize ();
-		frontOfShip = gameObject.GetComponent<Renderer> ().bounds.center + (forwardNorm * gameObject.GetComponent<Renderer> ().bounds.extents.z);
+		frontOfShip = mesh.GetComponent<Renderer>().bounds.center + (forwardNorm * mesh.GetComponent<Renderer>().bounds.extents.z);
 
         //Activate the game over sequence when death is true
         if (isDead() && !noGameOver)
         {
             killPlayer();
         }
-
         //Count down invulnerability
         if (fInvincible)
         {
             timerTMP -= Time.deltaTime;
-            Debug.Log(Time.deltaTime);
+            //Debug.Log(Time.deltaTime);
+            if (timerTMP / invulnSecs < .8)
+            {
+                if (!invincibleFlashing)
+                {
+                    resetMeshRotation();
+                    Renderer r = mesh.GetComponent<Renderer>();
+                    r.material.color = originalColor;
+                    invincibleFlashing = true;
+                }
+                else
+                {
+                    Renderer r = mesh.GetComponent<Renderer>();
+                    //Debug.Log(Time.time);
+                    //Debug.Log(Mathf.Sin(Time.time));
+                    if (r.enabled)
+                    {
+                        r.enabled = false;
+                    }
+                    else
+                    {
+                        r.enabled = true;
+                    }
+                    
+                }
+                
+            }
+
+            if (timerTMP <= 0)
+            {
+                Debug.Log("Timer Off");
+                fInvincible = false;
+                invincibleFlashing = false;
+                Renderer r = mesh.GetComponent<Renderer>();
+                r.material.color = originalColor;
+                r.enabled = true;
+            }
         }
 
-        if (timerTMP <= 0)
-        {
-            fInvincible = false;
-        }
 
         //Toggles pausing the game
 
@@ -157,7 +195,7 @@ public class PlayerController : MonoBehaviour {
 			isFiring = false;
 		}
 
-		if (im.getInputDown("Use Powerup") && curPowerUp != "")
+        if (im.getInputDown("Use Powerup") && curPowerUp != "")
 		{
 			PowerUp whichPowerUp = null;
 			switch (curPowerUp) {
@@ -189,6 +227,17 @@ public class PlayerController : MonoBehaviour {
 			//Destroy(gameObject.GetComponent<PowerUp> ());
 			curPowerUp = "";
 		}
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (wallSlide)
+            {
+                wallSlide = false;
+            }
+            else
+            {
+                wallSlide = true;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -202,22 +251,26 @@ public class PlayerController : MonoBehaviour {
         float rotPitch = im.getInput("Pitch") * rotSpeed;
         float rotYaw = im.getInput("Yaw") * rotSpeed;
 
-        if (im.getInputUpEnhanced("Longitudinal"))
+        if (wallSlide)
         {
-            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
-                                                               transform.InverseTransformDirection(rb.velocity).y, 0));
-        }
+            if (im.getInputUpEnhanced("Longitudinal"))
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
+                                                                   transform.InverseTransformDirection(rb.velocity).y, 0));
+            }
 
-        if (im.getInputUpEnhanced("Lateral"))
-        {
-            rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
-                                                                    transform.InverseTransformDirection(rb.velocity).z));
+            if (im.getInputUpEnhanced("Lateral"))
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
+                                                                        transform.InverseTransformDirection(rb.velocity).z));
+            }
+            if (im.getInputUpEnhanced("Vertical"))
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
+                                                                   transform.InverseTransformDirection(rb.velocity).z));
+            }
         }
-        if (im.getInputUpEnhanced("Vertical"))
-        {
-            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
-                                                               transform.InverseTransformDirection(rb.velocity).z));
-        }
+        
 
 
         if (moveLongitudinal != 0)
@@ -229,11 +282,11 @@ public class PlayerController : MonoBehaviour {
             }
             rb.AddForce(transform.TransformDirection(Vector3.forward * moveLongitudinal));
         }
-        /*else
+        else if (!wallSlide)
         {
             rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
                                                                transform.InverseTransformDirection(rb.velocity).y, 0));
-        }*/
+        }
 
         if (moveLateral != 0)
         {
@@ -244,11 +297,11 @@ public class PlayerController : MonoBehaviour {
             }
             rb.AddForce(transform.TransformDirection(Vector3.right * moveLateral));
         }
-        /*else
+        else if (!wallSlide)
         {
-            rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
+            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x / 2, transform.InverseTransformDirection(rb.velocity).y,
                                                                     transform.InverseTransformDirection(rb.velocity).z));
-        }*/
+        }
 
         if (moveVertical != 0)
         {
@@ -259,11 +312,11 @@ public class PlayerController : MonoBehaviour {
             }
             rb.AddForce(transform.TransformDirection(Vector3.up * moveVertical));
         }
-        /*else
+        else if (!wallSlide)
         {
-            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
+            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, transform.InverseTransformDirection(rb.velocity).y / 2,
                                                                transform.InverseTransformDirection(rb.velocity).z));
-        }*/
+        }
 
         if (moveLongitudinal == 0 && moveLateral == 0 && moveVertical == 0)
         {
@@ -333,10 +386,10 @@ public class PlayerController : MonoBehaviour {
         }
         
 
-
         if (rb.velocity.magnitude > maxSpeed)
         {
             rb.velocity = rb.velocity.normalized * maxSpeed;
+
         }
 
     }
@@ -374,6 +427,12 @@ public class PlayerController : MonoBehaviour {
 			Destroy(allBullets[numBullet]);
 		}*/
 	}
+
+
+    private void resetMeshRotation()
+    {
+        mesh.transform.rotation = transform.rotation;
+    }
 
 	//Deactivates player controls and shows game over screen
 	private void killPlayer()
@@ -420,6 +479,8 @@ public class PlayerController : MonoBehaviour {
             //become fInvincible for invulnSecs
             timerTMP = invulnSecs;
             fInvincible = true;
+            Renderer r = mesh.GetComponent<Renderer>();
+            r.material.color = new Color(255, 20, 20, r.material.color.a / 255.0f);
         }
 
         if (currHullIntegrity < 0)
