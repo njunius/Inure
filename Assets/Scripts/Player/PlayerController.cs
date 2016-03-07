@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour {
         //find new point at front of ship for firing
         Vector3 forwardNorm = gameObject.transform.forward;
 		forwardNorm.Normalize ();
-		frontOfShip = mesh.GetComponent<Renderer>().bounds.center + (forwardNorm * mesh.GetComponent<Renderer>().bounds.extents.z);
+		frontOfShip = mesh.GetComponent<Renderer>().bounds.center + (forwardNorm * mesh.GetComponent<Renderer>().bounds.extents.z * 1.15f);
 
         //Activate the game over sequence when death is true
         if (isDead() && !noGameOver)
@@ -182,13 +182,13 @@ public class PlayerController : MonoBehaviour {
             }
 
             // Shooting controls
-            if (im.getInputDown("Shoot") && !isFiring)
+            if (im.getInput("Shoot") > 0.3f && !isFiring)
             {
                 isFiring = true;
                 InvokeRepeating("fireBullets", 0.0f, fireRate);
             }
 
-            if (im.getInputUp("Shoot"))
+            if (im.getInputUpEnhanced("Shoot"))
             {
                 CancelInvoke("fireBullets");
                 isFiring = false;
@@ -534,11 +534,11 @@ public class PlayerController : MonoBehaviour {
 			realBulletVel += GetComponent<Rigidbody> ().velocity;
 		}
 
-		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right, transform.localRotation);
+		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 2.8f - transform.up * 2.1f, transform.localRotation);
 		PlayerBullet newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 
-		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right, transform.localRotation);
+		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right * 2.8f - transform.up * 2.1f, transform.localRotation);
 		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 	}

@@ -52,7 +52,7 @@ public class CameraController : MonoBehaviour {
 
         mode = CameraMode.ThirdPerson;
 
-        firstPersonPosition = new Vector3(0, -0.35f, 0);
+        firstPersonPosition = new Vector3(0, 0, 0);
         thirdPersonPosition = new Vector3(defaultSide, defaultHeight, defaultDistance);
 
         //Cursor.visible = false; // comment and uncomment this based on current needs
@@ -82,48 +82,49 @@ public class CameraController : MonoBehaviour {
             im = gameController.GetComponent<InputManager>();
             return;
         }
-        else
+
+        if (!target)
         {
-            if (!target)
-            {
-                return;
-            }
-            if (im.getInputDown("Camera Mode"))
-            {
-                switch (mode)
-                {
-                    case CameraMode.ThirdPerson:
-                        Debug.Log("Camera Mode: First Person");
-                        mode = CameraMode.FirstPerson;
-
-                        Renderer rend = target.GetComponent<Renderer>();
-                        rend.enabled = false;
-                        GameObject.FindGameObjectWithTag("Warning Radius").GetComponent<RadarTrigger>().enabled = false;
-                        cameraPositionOffset = firstPersonPosition;
-                        gameObject.GetComponent<Camera>().fieldOfView = 90;
-                        //updateCamera();
-                        break;
-                    case CameraMode.FirstPerson:
-                        Debug.Log("Camera Mode: Third Person Loose");
-                        
-                        rend = target.GetComponent<Renderer>();
-                        rend.enabled = true;
-                        GameObject.FindGameObjectWithTag("Warning Radius").GetComponent<RadarTrigger>().enabled = true;
-                        cameraPositionOffset = thirdPersonPosition;
-                        gameObject.GetComponent<Camera>().fieldOfView = 60;
-                        mode = CameraMode.ThirdPerson;
-                        updateCamera();
-                        mode = CameraMode.ThirdPerson;
-                        break;
-
-                }
-            }
-
-
-            updateCamera();
-
+            return;
         }
         
+
+
+        updateCamera();
+
+        
+    }
+
+    void Update()
+    {
+        if (im.getInputDown("Camera Mode"))
+        {
+            switch (mode)
+            {
+                case CameraMode.ThirdPerson:
+                    Debug.Log("Camera Mode: First Person");
+                    mode = CameraMode.FirstPerson;
+
+                    Renderer rend = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
+                    rend.enabled = false;
+                    GameObject.FindGameObjectWithTag("Warning Radius").GetComponent<RadarTrigger>().enabled = false;
+                    cameraPositionOffset = firstPersonPosition;
+                    gameObject.GetComponent<Camera>().fieldOfView = 90;
+                    //updateCamera();
+                    break;
+                case CameraMode.FirstPerson:
+                    mode = CameraMode.ThirdPerson;
+                    Debug.Log("Camera Mode: Third Person");
+                    rend = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
+                    rend.enabled = true;
+                    GameObject.FindGameObjectWithTag("Warning Radius").GetComponent<RadarTrigger>().enabled = true;
+                    cameraPositionOffset = thirdPersonPosition;
+                    gameObject.GetComponent<Camera>().fieldOfView = 60;
+                    
+                    break;
+
+            }
+        }
     }
 
     void LateUpdate()
