@@ -108,7 +108,6 @@ public class PlayerController : MonoBehaviour {
         if (fInvincible)
         {
             timerTMP -= Time.deltaTime;
-            Debug.Log(Time.deltaTime);
         }
 
         if (timerTMP <= 0)
@@ -138,57 +137,62 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        // Shield Controls 
-        if (im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
+        if (!paused)
         {
-            shield.setShieldActive(true);
-        }
+            // Shield Controls 
+            if (im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
+            {
+                shield.setShieldActive(true);
+            }
 
-		// Shooting controls
-		if (im.getInputDown("Shoot") && !isFiring)
-		{
-			isFiring = true;
-			InvokeRepeating ("fireBullets", 0.0f, fireRate);
-		}
+            // Shooting controls
+            if (im.getInputDown("Shoot") && !isFiring)
+            {
+                isFiring = true;
+                InvokeRepeating("fireBullets", 0.0f, fireRate);
+            }
 
-		if (im.getInputUp ("Shoot"))
-		{
-			CancelInvoke ("fireBullets");
-			isFiring = false;
-		}
+            if (im.getInputUp("Shoot"))
+            {
+                CancelInvoke("fireBullets");
+                isFiring = false;
+            }
 
-		if (im.getInputDown("Use Powerup") && curPowerUp != "")
-		{
-			PowerUp whichPowerUp = null;
-			switch (curPowerUp) {
-			case "PowerUp_EMP":
-				GetComponent<PowerUp_EMP> ().enabled = true;
-				GetComponent<PowerUp_EMP> ().Activate ();
-				whichPowerUp = GetComponent<PowerUp_EMP> ();
-				break;
-			case "PowerUp_Shockwave":
-				GetComponent<PowerUp_Shockwave> ().enabled = true;
-				GetComponent<PowerUp_Shockwave> ().Activate ();
-				whichPowerUp = GetComponent<PowerUp_Shockwave> ();
-				break;
-			case "PowerUp_SlowTime":
-				GetComponent<PowerUp_SlowTime> ().enabled = true;
-				GetComponent<PowerUp_SlowTime> ().Activate ();
-				whichPowerUp = GetComponent<PowerUp_SlowTime> ();
-				break;
-			default:
-				Debug.Log("Invalid powerup value");
-				break;
-			}
+            if (im.getInputDown("Use Powerup") && curPowerUp != "")
+            {
+                PowerUp whichPowerUp = null;
+                switch (curPowerUp)
+                {
+                    case "PowerUp_EMP":
+                        GetComponent<PowerUp_EMP>().enabled = true;
+                        GetComponent<PowerUp_EMP>().Activate();
+                        whichPowerUp = GetComponent<PowerUp_EMP>();
+                        break;
+                    case "PowerUp_Shockwave":
+                        GetComponent<PowerUp_Shockwave>().enabled = true;
+                        GetComponent<PowerUp_Shockwave>().Activate();
+                        whichPowerUp = GetComponent<PowerUp_Shockwave>();
+                        break;
+                    case "PowerUp_SlowTime":
+                        GetComponent<PowerUp_SlowTime>().enabled = true;
+                        GetComponent<PowerUp_SlowTime>().Activate();
+                        whichPowerUp = GetComponent<PowerUp_SlowTime>();
+                        break;
+                    default:
+                        Debug.Log("Invalid powerup value");
+                        break;
+                }
 
-			if (whichPowerUp != null) {
-				//whichPowerUp.enabled = false;
-			}
+                if (whichPowerUp != null)
+                {
+                    //whichPowerUp.enabled = false;
+                }
 
-			//gameObject.GetComponent<PowerUp> ().Activate ();
-			//Destroy(gameObject.GetComponent<PowerUp> ());
-			curPowerUp = "";
-		}
+                //gameObject.GetComponent<PowerUp> ().Activate ();
+                //Destroy(gameObject.GetComponent<PowerUp> ());
+                curPowerUp = "";
+            }
+        }        
     }
 
     void FixedUpdate()
@@ -323,7 +327,6 @@ public class PlayerController : MonoBehaviour {
 	//Usually called by a button in the Canvas UI
 	public void reloadCheckP (LastCheckpoint savedData)
 	{
-		Debug.Log("Reloading!");
 		//Teleport Player + Camera
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
