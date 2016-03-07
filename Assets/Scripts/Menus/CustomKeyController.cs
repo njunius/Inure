@@ -120,6 +120,5 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         selected = true;
-        return;
     }
 }
