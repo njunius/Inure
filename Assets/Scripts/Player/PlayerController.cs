@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour {
                     resetMeshRotation();
                     Renderer r = mesh.GetComponent<Renderer>();
                     r.material.color = originalColor;
+                    r.material.DisableKeyword("_Emmisive");
                     invincibleFlashing = true;
                 }
                 else
@@ -484,7 +485,8 @@ public class PlayerController : MonoBehaviour {
             timerTMP = invulnSecs;
             fInvincible = true;
             Renderer r = mesh.GetComponent<Renderer>();
-            r.material.color = new Color(255, 20, 20, r.material.color.a / 255.0f);
+            r.material.color = new Color(255, 255, 255, r.material.color.a);
+            r.material.EnableKeyword("_Emmisive");
         }
 
         if (currHullIntegrity < 0)
