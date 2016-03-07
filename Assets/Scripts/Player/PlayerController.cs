@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour {
         if (fInvincible)
         {
             timerTMP -= Time.deltaTime;
-            //Debug.Log(Time.deltaTime);
             if (timerTMP / invulnSecs < .8)
             {
                 if (!invincibleFlashing)
@@ -127,8 +126,6 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     Renderer r = mesh.GetComponent<Renderer>();
-                    //Debug.Log(Time.time);
-                    //Debug.Log(Mathf.Sin(Time.time));
                     if (r.enabled)
                     {
                         r.enabled = false;
@@ -144,7 +141,6 @@ public class PlayerController : MonoBehaviour {
 
             if (timerTMP <= 0)
             {
-                Debug.Log("Timer Off");
                 fInvincible = false;
                 invincibleFlashing = false;
                 Renderer r = mesh.GetComponent<Renderer>();
@@ -218,7 +214,6 @@ public class PlayerController : MonoBehaviour {
                         whichPowerUp = GetComponent<PowerUp_SlowTime>();
                         break;
                     default:
-                        Debug.Log("Invalid powerup value");
                         break;
                 }
 
@@ -414,7 +409,7 @@ public class PlayerController : MonoBehaviour {
 		//Reset stats
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
-		//GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge = savedData.getBomb();
+		//GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().setBombCharge(savedData.getBomb());
 
 		//Overwrite data
 		savePlayer ();
@@ -582,7 +577,6 @@ public class PlayerController : MonoBehaviour {
 				}
 				break;
 			default:
-				Debug.Log ("New PowerUp is null");
 				curPowerUp = "";
 				break;
 			}

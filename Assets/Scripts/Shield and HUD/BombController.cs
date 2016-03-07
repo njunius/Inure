@@ -16,7 +16,6 @@ public class BombController : MonoBehaviour {
 
     private GameObject player;
     private Image[] bombGauge;
-    private PlayerController playerBehavior; // for use later when planting the bomb
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +25,6 @@ public class BombController : MonoBehaviour {
         maxBombCharge = 100;
 
         player = GameObject.FindGameObjectWithTag("Player");
-        playerBehavior = player.GetComponent<PlayerController>();
 
         GameObject[] temp = GameObject.FindGameObjectsWithTag("Bomb Gauge");
         bombGauge = new Image[temp.Length];
@@ -60,6 +58,12 @@ public class BombController : MonoBehaviour {
         currBombCharge += newCharge;
         if (currBombCharge > maxBombCharge)
             currBombCharge = maxBombCharge;
+    }
+
+    // use only when reloading checkpoints
+    public void setBombCharge(int charge)
+    {
+        currBombCharge = charge;
     }
 
     /*
