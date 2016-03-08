@@ -400,6 +400,11 @@ public class PlayerController : MonoBehaviour {
 	//Usually called by a button in the Canvas UI
 	public void reloadCheckP (LastCheckpoint savedData)
 	{
+        if (paused)
+        {
+            paused = false;
+        }
+
 		//Teleport Player + Camera
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
