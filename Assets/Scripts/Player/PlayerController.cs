@@ -440,7 +440,7 @@ public class PlayerController : MonoBehaviour {
 		//Show Game Over Screen
 		pauseTxt.enabled = false;
 		inureTxt.enabled = false;
-		Time.timeScale = 0.3f;
+        Time.timeScale = 0.3f;
 		gameOver.enabled = true;
 		UICanvas.enabled = true;
 		//Destroy player
