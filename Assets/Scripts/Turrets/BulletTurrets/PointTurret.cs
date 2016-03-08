@@ -67,5 +67,44 @@ public class PointTurret : SimpleTurret {
 		isFiring = false;
 		isOn = false;
 		CancelInvoke ("Fire");
+		InvokeRepeating ("DeathBullet", 0f, 0.05f);
+	}
+
+	private void DeathBullets () {
+		Vector3 aimDirNorm = gameObject.transform.forward;
+		aimDirNorm.Normalize ();
+		Vector3 upNorm = gameObject.transform.up;
+		upNorm.Normalize ();
+		Vector3 rightNorm = gameObject.transform.right;
+		rightNorm.Normalize ();
+
+		for (int numBullet = 0; numBullet < 10; ++numBullet) {
+			float randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			Vector3 aimRotNorm = Vector3.RotateTowards(aimDirNorm, rightNorm, randomRads, 0);
+			randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			aimRotNorm = Vector3.RotateTowards(aimRotNorm, upNorm, randomRads, 0);
+			aimRotNorm = aimRotNorm;
+			CreateBullet (endOfTurret + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimRotNorm * 2f);
+		}
+	}
+
+	private void DeathBullet () {
+		Vector3 aimDirNorm = gameObject.transform.forward;
+		aimDirNorm.Normalize ();
+		Vector3 upNorm = gameObject.transform.up;
+		upNorm.Normalize ();
+		Vector3 rightNorm = gameObject.transform.right;
+		rightNorm.Normalize ();
+
+		float randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+		Vector3 aimRotNorm = Vector3.RotateTowards(aimDirNorm, rightNorm, randomRads, 0);
+		randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+		aimRotNorm = Vector3.RotateTowards(aimRotNorm, upNorm, randomRads, 0);
+		CreateBullet (endOfTurret + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimRotNorm * 2f);
+
+		++numDeathBullet;
+		if (numDeathBullet == 10) {
+			CancelInvoke ("DeathBullet");
+		}
 	}
 }

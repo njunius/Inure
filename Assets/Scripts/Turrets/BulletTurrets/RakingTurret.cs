@@ -78,16 +78,18 @@ public class RakingTurret : AlgorithmicTurret {
 		Vector3 upNorm = transform.up;
 		upNorm.Normalize ();
 
-		GameObject bulletObj;
-		Bullet newBullet;
-
 		//create each bullet
 		for (int numBarrel = 0; numBarrel < NUM_BARRELS; ++numBarrel) {
-			Vector3 rotVector = Vector3.RotateTowards (aimDirNorm, rightNorm, numFire * MAX_SWIVEL * SWIVEL_PERCENTAGE, 0f);
+			Quaternion rotQuat = Quaternion.AngleAxis (360f / NUM_BARRELS * numBarrel, transform.forward);
+			float randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			Vector3 aimRotNorm = Vector3.RotateTowards(aimDirNorm, rightNorm, randomRads, 0);
+			randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			aimRotNorm = Vector3.RotateTowards(aimRotNorm, upNorm, randomRads, 0);
+			Vector3 rotVector = Vector3.RotateTowards (aimRotNorm, rightNorm, numFire * MAX_SWIVEL * SWIVEL_PERCENTAGE, 0f);
 			if (numBarrel % 2 == 0) {
-				CreateBullet (endOfTurret - (rightNorm * TURRET_RADIUS) - (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), rotVector);
+				CreateBullet (endOfTurret - (rightNorm * TURRET_RADIUS) - (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), rotVector * 2);
 			} else {
-				CreateBullet (endOfTurret + (rightNorm * TURRET_RADIUS) + (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), rotVector);
+				CreateBullet (endOfTurret + (rightNorm * TURRET_RADIUS) + (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), rotVector * 2);
 			}
 		}
 
@@ -109,5 +111,34 @@ public class RakingTurret : AlgorithmicTurret {
 		isFiring = false;
 		isOn = false;
 		CancelInvoke ("Fire");
+		InvokeRepeating ("DeathBullet", 0f, 0.05f);
+	}
+
+	private void DeathBullet () {
+		Vector3 aimDirNorm = transform.forward;
+		aimDirNorm.Normalize ();
+		Vector3 rightNorm = transform.right;
+		rightNorm.Normalize ();
+		Vector3 upNorm = transform.up;
+		upNorm.Normalize ();
+
+		for (int numBarrel = 0; numBarrel < NUM_BARRELS; ++numBarrel) {
+			Quaternion rotQuat = Quaternion.AngleAxis (360f / NUM_BARRELS * numBarrel, transform.forward);
+			float randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			Vector3 aimRotNorm = Vector3.RotateTowards(aimDirNorm, rightNorm, randomRads, 0);
+			randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			aimRotNorm = Vector3.RotateTowards(aimRotNorm, upNorm, randomRads, 0);
+			Vector3 rotVector = Vector3.RotateTowards (aimRotNorm, rightNorm, numFire * MAX_SWIVEL * SWIVEL_PERCENTAGE, 0f);
+			if (numBarrel % 2 == 0) {
+				CreateBullet (endOfTurret - (rightNorm * TURRET_RADIUS) - (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), rotVector * 2f);
+			} else {
+				CreateBullet (endOfTurret + (rightNorm * TURRET_RADIUS) + (Mathf.Floor (numBarrel / 2) * (BULLET_WIDTH + BULLET_SEPARATION) * rightNorm), rotVector * 2f);
+			}
+		}
+
+		++numDeathBullet;
+		if (numDeathBullet == 10) {
+			CancelInvoke ("DeathBullet");
+		}
 	}
 }
