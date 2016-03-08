@@ -4,7 +4,7 @@ using System.Collections;
 
 public class FirstPersonUIToggle : MonoBehaviour {
 
-    public CameraController camera;
+    public CameraController cameraRef;
     private Canvas[] firstPersonHUD;
 	private Renderer radar3D;
 	public GameObject[] blips;
@@ -12,7 +12,7 @@ public class FirstPersonUIToggle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        camera = Camera.main.GetComponent<CameraController>();
+        cameraRef = Camera.main.GetComponent<CameraController>();
         firstPersonHUD = GetComponentsInChildren<Canvas>();
 		radar3D = GameObject.FindGameObjectWithTag("Radar3D").GetComponent<Renderer>();
 		blips = GameObject.FindGameObjectsWithTag("Blip");
@@ -24,7 +24,7 @@ public class FirstPersonUIToggle : MonoBehaviour {
     void Update () {
 		blips = GameObject.FindGameObjectsWithTag ("Blip");
 
-	    if(camera.getMode() == CameraMode.ThirdPerson)
+	    if(cameraRef.getMode() == CameraMode.ThirdPerson)
         {
 			radar3D.enabled = false;
             laserSight.enabled = true;

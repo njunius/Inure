@@ -27,6 +27,7 @@ public class BulletTurret : Turret {
 	//lower number = higher rate
 	protected float fireRateMultiplier = 0.1f;
 	protected Vector3 endOfTurret;
+	protected float numDeathBullet = 0;
 
 	protected float despawnDist; //UNDEFINED
 

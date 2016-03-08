@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class ShieldController : MonoBehaviour {
     // shield fields
     private bool shieldActive;
-    private int maxShieldCharge, currShieldCharge;
+    public int maxShieldCharge, currShieldCharge;
     private int shieldRechargeAmount; // used for recharging the shield to full
     private int shieldDepleteAmount; // used for draining shield charge when player activates the shield
     private float shieldChargeDelay; // delay in number of seconds
@@ -143,6 +143,13 @@ public class ShieldController : MonoBehaviour {
 
 	public void setCurrShieldCharge (int setShield){
 		currShieldCharge = setShield;
+
+        interpShieldValue = (float)currShieldCharge;
+
+        for(int i = 0; i < shieldGauge.Length; ++i)
+        {
+            shieldGauge[i].fillAmount = currShieldCharge;
+        }
 	}
 
     public void setShieldActive(bool setActive)

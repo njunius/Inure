@@ -90,8 +90,6 @@ public class FountainTurret : AlgorithmicTurret {
 		Vector3 upNorm = transform.up;
 		upNorm.Normalize ();
 
-		GameObject bulletObj;
-		Bullet newBullet;
 		Vector3 bulletPosition = upNorm * curTurretRadius;
 		aimDirNorm = Vector3.RotateTowards (aimDirNorm, upNorm, MAX_SWIVEL * SWIVEL_PERCENTAGE * numFire, 0f);
 
@@ -121,5 +119,32 @@ public class FountainTurret : AlgorithmicTurret {
 		isFiring = false;
 		isOn = false;
 		CancelInvoke ("Fire");
+		InvokeRepeating ("DeathBullet", 0f, 0.05f);
+	}
+
+	private void DeathBullet () {
+		Vector3 aimDirNorm = gameObject.transform.forward;
+		aimDirNorm.Normalize ();
+		Vector3 upNorm = gameObject.transform.up;
+		upNorm.Normalize ();
+		Vector3 rightNorm = gameObject.transform.right;
+		rightNorm.Normalize ();
+
+		Vector3 bulletPosition = upNorm * curTurretRadius;
+		aimDirNorm = Vector3.RotateTowards (aimDirNorm, upNorm, MAX_SWIVEL * SWIVEL_PERCENTAGE * numFire, 0f);
+
+		for (int numBarrel = 0; numBarrel < NUM_BARRELS; ++numBarrel) {
+			Quaternion rotQuat = Quaternion.AngleAxis (360f / NUM_BARRELS * numBarrel, transform.forward);
+			float randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			Vector3 aimRotNorm = Vector3.RotateTowards(aimDirNorm, rightNorm, randomRads, 0);
+			randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			aimRotNorm = Vector3.RotateTowards(aimRotNorm, upNorm, randomRads, 0);
+			CreateBullet (endOfTurret + rotQuat * bulletPosition, rotQuat * aimRotNorm * 2f);
+		}
+
+		++numDeathBullet;
+		if (numDeathBullet == 10) {
+			CancelInvoke ("DeathBullet");
+		}
 	}
 }

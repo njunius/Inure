@@ -393,6 +393,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &159628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 447412}
+  - 33: {fileID: 3395318}
+  - 23: {fileID: 2313046}
+  m_Layer: 0
+  m_Name: Sol Starfighter Advanced Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &164700
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,8 +506,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457814}
-  - 33: {fileID: 3318116}
-  - 23: {fileID: 2393390}
   - 114: {fileID: 11494722}
   - 54: {fileID: 5435628}
   - 114: {fileID: 11484552}
@@ -704,6 +719,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 457814}
   m_RootOrder: 3
+--- !u!4 &447412
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 457814}
+  m_RootOrder: 26
 --- !u!4 &448748
 Transform:
   m_ObjectHideFlags: 1
@@ -722,8 +749,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180074}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 1591.8, y: 9.06, z: 139.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 478726}
@@ -752,6 +779,7 @@ Transform:
   - {fileID: 22478544}
   - {fileID: 22462808}
   - {fileID: 469436}
+  - {fileID: 447412}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &465756
@@ -888,14 +916,14 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!23 &2393390
+--- !u!23 &2313046
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180074}
+  m_GameObject: {fileID: 159628}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 6242ed40c21663c45b6415f989b2b7ee, type: 2}
@@ -914,13 +942,6 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3318116
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180074}
-  m_Mesh: {fileID: 4300000, guid: 4e68c23923d9d434ebcff74ed62ed2ba, type: 3}
 --- !u!33 &3325188
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -928,6 +949,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150804}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &3395318
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159628}
+  m_Mesh: {fileID: 4300000, guid: 4e68c23923d9d434ebcff74ed62ed2ba, type: 3}
 --- !u!54 &5435628
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -936,7 +964,7 @@ Rigidbody:
   m_GameObject: {fileID: 180074}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -1864,6 +1892,7 @@ MonoBehaviour:
   paused: 0
   lockOnTarget: {fileID: 0}
   targetLocked: 0
+  mesh: {fileID: 159628}
   gameController: {fileID: 153720, guid: 651bc947edafe5c4f990209597d0068d, type: 2}
   im: {fileID: 0}
 --- !u!120 &12022776
@@ -2441,6 +2470,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: maxSpeed
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Drag
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

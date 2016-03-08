@@ -152,5 +152,32 @@ public class ArcTurret : SimpleTurret {
 		isFiring = false;
 		isOn = false;
 		CancelInvoke ("Fire");
+		InvokeRepeating ("DeathBullet", 0f, 0.05f);
+	}
+
+	private void DeathBullet () {
+		Vector3 turretCenter = gameObject.GetComponent<Renderer> ().bounds.center;
+		Vector3 aimDirNorm = gameObject.transform.forward;
+		Vector3 leftNorm = gameObject.transform.right * -1;
+		Vector3 rightNorm = gameObject.transform.right;
+		Vector3 upNorm = gameObject.transform.up;
+		aimDirNorm.Normalize ();
+		leftNorm.Normalize ();
+		rightNorm.Normalize ();
+		upNorm.Normalize ();
+
+		for (int numBullet = 0; numBullet < 5; ++numBullet) {
+			float randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			Vector3 aimRotNorm = Vector3.RotateTowards(aimDirNorm, rightNorm, randomRads, 0);
+			randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+			aimRotNorm = Vector3.RotateTowards(aimRotNorm, upNorm, randomRads, 0);
+			aimRotNorm = aimRotNorm;
+			DetermineBullet (turretCenter, aimRotNorm * 2f, leftNorm, rightNorm, numBullet);
+		}
+
+		++numDeathBullet;
+		if (numDeathBullet == 10) {
+			CancelInvoke ("DeathBullet");
+		}
 	}
 }

@@ -156,7 +156,7 @@ public class InputManager : MonoBehaviour {
         InputBinding input = inputPresets[presetIndex][name];
         input.PreviousValue = input.CurrentValue;
 
-        if (Input.GetButtonUp(input.posAxis) || Input.GetButtonUp(input.posAxisAlt1) || Input.GetButtonUp(input.posAxisAlt2))
+        if (Input.GetButtonUp(input.posAxis)) //  || Input.GetButtonUp(input.posAxisAlt1) || Input.GetButtonUp(input.posAxisAlt2
         {
             input.CurrentValue = 0;
             return true;
@@ -172,7 +172,10 @@ public class InputManager : MonoBehaviour {
             return false;
         }
         InputBinding input = inputPresets[presetIndex][name];
-        if ((input.PreviousValue == 0 || input.CurrentValue == 0) && (input.PreviousValue != 0 && input.CurrentValue != 0))
+        //Debug.Log(name + " cur: " + input.CurrentValue);
+        //Debug.Log(name + " prev: " + input.PreviousValue);
+        if ((input.PreviousValue == 0 && input.CurrentValue != 0) || (input.CurrentValue == 0 && input.PreviousValue == 0) || 
+            (input.CurrentValue != 0 && input.PreviousValue != 0))
         {
             return false;
         }

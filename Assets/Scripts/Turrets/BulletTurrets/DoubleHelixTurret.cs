@@ -85,5 +85,32 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 		isFiring = false;
 		isOn = false;
 		CancelInvoke ("Fire");
+		InvokeRepeating ("DeathBullet", 0f, 0.05f);
+	}
+
+	private void DeathBullet () {
+		Vector3 aimDirNorm = gameObject.transform.forward;
+		aimDirNorm.Normalize ();
+		Vector3 upNorm = gameObject.transform.up;
+		upNorm.Normalize ();
+		Vector3 rightNorm = gameObject.transform.right;
+		rightNorm.Normalize ();
+
+		float randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+		Vector3 leftRotNorm = Vector3.RotateTowards(aimDirNorm, rightNorm, randomRads, 0);
+		randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+		leftRotNorm = Vector3.RotateTowards(leftRotNorm, upNorm, randomRads, 0);
+		randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+		Vector3 rightRotNorm = Vector3.RotateTowards(aimDirNorm, rightNorm, randomRads, 0);
+		randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+		rightRotNorm = Vector3.RotateTowards(rightRotNorm, upNorm, randomRads, 0);
+		randomRads = Random.Range (-1 * Mathf.PI / 24, Mathf.PI / 24);
+		CreateBullet (endOfTurret + (-1 * rightNorm * BARREL_SEPARATION / 2) + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), leftRotNorm * 2f);
+		CreateBullet (endOfTurret + (rightNorm * BARREL_SEPARATION / 2) + (aimDirNorm * (barrelList [1].relativeSpawnPoint)), rightRotNorm * 2f);
+
+		++numDeathBullet;
+		if (numDeathBullet == 10) {
+			CancelInvoke ("DeathBullet");
+		}
 	}
 }
