@@ -41,6 +41,19 @@ public class ArmorController : MonoBehaviour {
 	void Update () {
         currChunks = player.getCurrHullIntegrity();
 
+        /*for(int i = 0; i < maxChunks; ++i)
+        {
+            if((maxChunks - currChunks == i || currChunks == i) && currChunks != maxChunks)
+            {
+                armorChunkTracker[i].color = chunkOff;
+            }
+            else
+            {
+                armorChunkTracker[i].color = chunkOn;
+            }
+
+        }*/
+
         for(int i = 0; i < currChunks; ++i)
         {
             armorChunkTracker[i].color = chunkOn;
