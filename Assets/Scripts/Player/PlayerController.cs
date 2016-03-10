@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject gameController;
     public InputManager im;
 
-    private bool wallSlide = true;
+    public bool wallSlide = true;
 
     // Use this for initialization
     void Awake () {
@@ -391,6 +391,10 @@ public class PlayerController : MonoBehaviour {
         {
             rb.velocity = rb.velocity.normalized * maxSpeed;
 
+        }
+        if (rb.velocity.magnitude < 0.01f)
+        {
+            rb.velocity = Vector3.zero;
         }
 
     }

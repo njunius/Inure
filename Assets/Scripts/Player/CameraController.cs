@@ -40,6 +40,7 @@ public class CameraController : MonoBehaviour {
     private Vector3 targetPrevPos;
     private Transform targetPrevTransform;
     private bool locked;
+
     //public float clipNearCurrent = 
 
     private Vector3 velocity = Vector3.zero;
@@ -167,8 +168,15 @@ public class CameraController : MonoBehaviour {
             
             // Check for objects between ship and camera
             Vector3 dirToCamera = transform.position - target.transform.position;
-            RaycastHit[] hits = Physics.RaycastAll(target.transform.position, dirToCamera,
-                                Mathf.Sqrt(defaultDistance * defaultDistance + defaultHeight * defaultHeight));
+            int layer = 1 << 11;
+
+            RaycastHit[] hits = Physics.SphereCastAll(target.transform.position, 2.8f, dirToCamera,
+                                Mathf.Sqrt(defaultDistance * defaultDistance + defaultHeight * defaultHeight), layer);
+
+            Vector3 cameraPlaneCenter = transform.InverseTransformDirection(transform.position);
+            float clipPlane = Camera.main.nearClipPlane;
+            cameraPlaneCenter.z = Camera.main.nearClipPlane;
+
             foreach (RaycastHit ray in hits)
             {
                 if (ray.transform.CompareTag("Environment"))
@@ -211,7 +219,34 @@ public class CameraController : MonoBehaviour {
 
                 //Debug.Log("No hit");
                 cameraPositionOffset = thirdPersonPosition;
+                float forwardVelocity = target.transform.InverseTransformVector(target.GetComponent<Rigidbody>().velocity).z;
+                if (forwardVelocity > 0.01f)
+                {
+
+                    //Debug.Log(forwardVelocity);
+                    if (forwardVelocity < 70)
+                    {
+                        float diff = 70 - forwardVelocity;
+                        if (diff < 0) diff = 0;
+                        cameraPositionOffset.y = (Mathf.Pow(diff / 70, 0.5f)) * cameraPositionOffset.y;
+                        if (cameraPositionOffset.y > 0)
+                        {
+                            cameraPositionOffset.y = 0;
+                        }
+
+                    }
+                    else
+                    {
+                        cameraPositionOffset.y = 0;
+                    }
+
+
+                    //cameraPositionOffset.z += 2 * (forwardVelocity / 90);
+                    //Debug.Log("Dist: " + curDist);
+                }
             }
+
+            
 
             
 
@@ -225,6 +260,7 @@ public class CameraController : MonoBehaviour {
             }
             Vector3 currentPosition = Vector3.SmoothDamp(thisTransformCache.position, nextPosition, ref velocity, snapSpeed, maxSpeed);
             thisTransformCache.position = currentPosition;
+            currentHeight = Mathf.Abs(currentPosition.y - transform.TransformVector(target.transform.position).y);
 
 
             Quaternion nextRotation = Quaternion.LookRotation(lookAtTarget.position - thisTransformCache.position, lookAtTarget.transform.up);
