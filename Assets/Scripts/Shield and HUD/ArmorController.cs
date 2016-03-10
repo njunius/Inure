@@ -11,6 +11,7 @@ public class ArmorController : MonoBehaviour {
 
     private int maxChunks;
     private int currChunks;
+
     private Color chunkOn;
     private Color chunkOff;
 
@@ -28,7 +29,11 @@ public class ArmorController : MonoBehaviour {
             temp.transform.SetParent(gameObject.transform);
             armorChunkTracker[i] = temp.GetComponent<Image>();
             chunkOn = armorChunkTracker[i].color;
-            chunkOff = new Color(armorChunkTracker[i].color.r, armorChunkTracker[i].color.g, armorChunkTracker[i].color.b, 0.0f);
+            chunkOff = new Color(chunkOn.r, chunkOn.g, chunkOn.b, 0.0f);
+            if(i % 2 != 0)
+            {
+                armorChunkTracker[i].gameObject.transform.Rotate(new Vector3(180, 0, 0));
+            }
         }
 	}
 	
