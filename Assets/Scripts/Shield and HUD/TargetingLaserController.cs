@@ -28,7 +28,7 @@ public class TargetingLaserController : MonoBehaviour {
             laserSight.SetPosition(1, drawPoints.GetPoint(1000.0f));
         }
 
-        laserSight.material.mainTextureOffset = new Vector2(0, Time.time);
+        laserSight.material.mainTextureOffset = new Vector2(-Time.time / 5, 0);
 
 	}
 }

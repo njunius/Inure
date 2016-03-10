@@ -6,31 +6,42 @@ public class fakeOutTrigger : MonoBehaviour {
 	public float maximum = -98;
 	public float speed = 10;
 
-	private GameObject door;
-	private bool slam = false;
+	public GameObject door;
+
+	private bool slam = false, hasClosed = false;
+
 	private GameObject light;
+	private GameObject target;
 
 	// Use this for initialization
 	void Start () {
-		door = GameObject.FindGameObjectWithTag("Gate");
+		//door = GameObject.FindGameObjectWithTag("Gate");
+		target = gameObject.transform.GetChild(0).gameObject;
 		light = door.transform.GetChild(1).gameObject;
 	}
 
 	void OnTriggerEnter (Collider other) {
-		if (other.gameObject.CompareTag ("Player Collider")) {
+		if (other.gameObject.CompareTag ("Player Collider") && !hasClosed) {
 			slam = true;
 		}
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		if(slam && door.transform.position.z < maximum){
-			door.transform.Translate(0, 0, speed * Time.deltaTime);
+
+		if(slam){
+			door.transform.position = 
+				Vector3.MoveTowards(door.transform.position, target.transform.position, 
+					speed * Time.deltaTime);
 		}
 
-		if(door.transform.position.z >= maximum){
+		if(Vector3.Distance(door.transform.position, target.transform.position) < 1){
 			slam = false;
+			hasClosed = true;
 			light.GetComponent<Light>().enabled = true;
 		}
+		
+
+
 	}
 }
