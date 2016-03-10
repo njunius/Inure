@@ -19,7 +19,7 @@ public class Radar3D : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		triggerRadius = GameObject.FindGameObjectWithTag ("Warning Radius").GetComponent<SphereCollider> ().radius;
+		triggerRadius = GameObject.FindGameObjectWithTag ("Radar Trigger").GetComponent<SphereCollider> ().radius;
 		radarRadius = gameObject.GetComponent<Renderer> ().bounds.extents.x;
 		Debug.Log (radarRadius);
 	}
