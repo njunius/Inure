@@ -108,7 +108,7 @@ public class CameraController : MonoBehaviour {
 
                     Renderer rend = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
                     rend.enabled = false;
-                    GameObject.FindGameObjectWithTag("Warning Radius").GetComponent<RadarTrigger>().enabled = false;
+                    GameObject.FindGameObjectWithTag("Radar Trigger").GetComponent<RadarTrigger>().enabled = false;
                     cameraPositionOffset = firstPersonPosition;
                     gameObject.GetComponent<Camera>().fieldOfView = 90;
                     //updateCamera();
@@ -118,7 +118,7 @@ public class CameraController : MonoBehaviour {
                     Debug.Log("Camera Mode: Third Person");
                     rend = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
                     rend.enabled = true;
-                    GameObject.FindGameObjectWithTag("Warning Radius").GetComponent<RadarTrigger>().enabled = true;
+                    GameObject.FindGameObjectWithTag("Radar Trigger").GetComponent<RadarTrigger>().enabled = true;
                     cameraPositionOffset = thirdPersonPosition;
                     gameObject.GetComponent<Camera>().fieldOfView = 60;
                     
