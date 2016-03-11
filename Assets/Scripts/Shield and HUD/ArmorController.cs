@@ -11,6 +11,7 @@ public class ArmorController : MonoBehaviour {
 
     private int maxChunks;
     private int currChunks;
+    private int arrayMidpoint;
 
     private Color chunkOn;
     private Color chunkOff;
@@ -20,6 +21,8 @@ public class ArmorController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         currChunks = maxChunks = player.getMaxHullIntegrity();
+
+        arrayMidpoint = maxChunks / 2;
 
         armorChunkTracker = new Image[maxChunks];
 
@@ -41,26 +44,27 @@ public class ArmorController : MonoBehaviour {
 	void Update () {
         currChunks = player.getCurrHullIntegrity();
 
-        /*for(int i = 0; i < maxChunks; ++i)
-        {
-            if((maxChunks - currChunks == i || currChunks == i) && currChunks != maxChunks)
-            {
-                armorChunkTracker[i].color = chunkOff;
-            }
-            else
-            {
-                armorChunkTracker[i].color = chunkOn;
-            }
-
-        }*/
-
-        for(int i = 0; i < currChunks; ++i)
-        {
-            armorChunkTracker[i].color = chunkOn;
-        }
-        for(int i = currChunks; i < maxChunks; ++i)
+        for(int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
         {
             armorChunkTracker[i].color = chunkOff;
         }
-	}
+
+        for (int i = arrayMidpoint - currChunks / 2; i < arrayMidpoint + currChunks / 2; ++i)
+        {
+            armorChunkTracker[i].color = chunkOn;
+        }
+
+        for(int i = arrayMidpoint + currChunks / 2; i < maxChunks; ++i)
+        {
+            if (currChunks % 2 == 0)
+            {
+                armorChunkTracker[i].color = chunkOff;
+            }
+        }
+
+        if(currChunks == maxChunks)
+        {
+            armorChunkTracker[armorChunkTracker.Length - 1].color = chunkOn;
+        }
+    }
 }
