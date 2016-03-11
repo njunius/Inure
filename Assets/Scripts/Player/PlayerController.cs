@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
     public Color bulletColor = Color.blue;
-	public float bulletVel = 40.0f;
+	public float bulletVel = 10000.0f;
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
 
