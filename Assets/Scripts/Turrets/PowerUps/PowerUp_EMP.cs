@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PowerUp_EMP : PowerUp {
 
-	private float MAX_FIELD_SIZE = 10f;
+	private float MAX_FIELD_SIZE = 40f;
 	private float FIELD_EXPANSION_PER_FRAME;
 	private GameObject effectField;
 	private Color fieldColor = new Color (0.988f, 0.992f, 0.541f, 0.5f);

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Effect_SlowTime : MonoBehaviour {
 
-	private float timeScale = 0.5f;
+	private float timeScale = 0.2f;
 
 	// Use this for initialization
 	void Start () {

@@ -132,12 +132,12 @@ public class CameraController : MonoBehaviour {
     {
         if (mode == CameraMode.FirstPerson)
         {
-            cameraPositionOffset = firstPersonPosition;
+            transform.position = target.transform.position;
 
             transform.rotation = lookAtTarget.rotation;
             transform.Rotate(cameraRotationOffset);
 
-            Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(lookAtTarget.position) - cameraPositionOffset);
+            /*Vector3 nextPosition = transform.TransformPoint(transform.InverseTransformPoint(lookAtTarget.position) - cameraPositionOffset);
 
             if (targetDistance < defaultDistance)
             {
@@ -152,10 +152,10 @@ public class CameraController : MonoBehaviour {
             float distance = Vector3.Distance(transform.position, lookAtTarget.position);
             if (distance < fadeDistance)
             {
-                Renderer r = target.GetComponent<Renderer>();
+                Renderer r = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
                 r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
 
-            }
+            }*/
 
         }
     }
@@ -219,11 +219,12 @@ public class CameraController : MonoBehaviour {
 
                 //Debug.Log("No hit");
                 cameraPositionOffset = thirdPersonPosition;
+                /* Code for lowering camera when player has forward velocity.
                 float forwardVelocity = target.transform.InverseTransformVector(target.GetComponent<Rigidbody>().velocity).z;
                 if (forwardVelocity > 0.01f)
                 {
 
-                    //Debug.Log(forwardVelocity);
+                    
                     if (forwardVelocity < 70)
                     {
                         float diff = 70 - forwardVelocity;
@@ -243,7 +244,7 @@ public class CameraController : MonoBehaviour {
 
                     //cameraPositionOffset.z += 2 * (forwardVelocity / 90);
                     //Debug.Log("Dist: " + curDist);
-                }
+                }*/
             }
 
             
