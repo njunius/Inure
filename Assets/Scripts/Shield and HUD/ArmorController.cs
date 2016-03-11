@@ -49,7 +49,7 @@ public class ArmorController : MonoBehaviour {
             armorChunkTracker[i].color = chunkOff;
         }
 
-        for (int i = arrayMidpoint - currChunks / 2; i < arrayMidpoint + currChunks / 2; ++i)
+        for (int i = arrayMidpoint - currChunks / 2; i < arrayMidpoint + currChunks / 2 + 1; ++i)
         {
             armorChunkTracker[i].color = chunkOn;
         }
