@@ -66,5 +66,10 @@ public class ArmorController : MonoBehaviour {
         {
             armorChunkTracker[armorChunkTracker.Length - 1].color = chunkOn;
         }
+
+        if(currChunks == 1)
+        {
+            armorChunkTracker[arrayMidpoint].color = chunkOn;
+        }
     }
 }
