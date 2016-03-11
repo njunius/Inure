@@ -118,7 +118,6 @@ public class PlayerController : MonoBehaviour {
             {
                 if (!invincibleFlashing)
                 {
-                    resetMeshRotation();
                     Renderer r = mesh.GetComponent<Renderer>();
                     r.material.color = originalColor;
                     r.material.DisableKeyword("_Emmisive");
