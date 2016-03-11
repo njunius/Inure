@@ -58,6 +58,9 @@ public class PlayerController : MonoBehaviour {
 
     public bool wallSlide = true;
 
+    private bool turned = false;
+    private Vector3 localPrevVel = Vector3.zero;
+
     // Use this for initialization
     void Awake () {
 
@@ -326,32 +329,21 @@ public class PlayerController : MonoBehaviour {
 
         if (!targetLocked)
         {
-            if (rotPitch != 0)
-            {
-                //rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch));
-            }
-            else
+            localPrevVel = transform.InverseTransformVector(rb.velocity);
+            if (rotPitch == 0)
             {
                 rb.angularVelocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.angularVelocity).y,
                                                                         transform.InverseTransformDirection(rb.angularVelocity).z));
 
             }
 
-            if (rotYaw != 0)
-            {
-                //rb.AddTorque(transform.TransformDirection(Vector3.up * rotYaw));
-            }
-            else
+            if (rotYaw == 0)
             {
                 rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x, 0,
                                                                    transform.InverseTransformDirection(rb.angularVelocity).z));
             }
 
-            if (rotRoll != 0)
-            {
-                //rb.AddTorque(transform.TransformDirection(Vector3.forward * rotRoll));
-            }
-            else
+            if (rotRoll == 0)
             {
                 rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
                                                                    transform.InverseTransformDirection(rb.angularVelocity).y, 0));
@@ -361,11 +353,15 @@ public class PlayerController : MonoBehaviour {
             {
                 //rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll));
                 rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
+                turned = true;
             }
             else
             {
                 rb.angularVelocity = Vector3.zero;
+                turned = false;
             }
+
+            
         }
         else
         {
@@ -397,6 +393,14 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = Vector3.zero;
         }
 
+    }
+
+    void LateUpdate()
+    {
+        if (!targetLocked && turned)
+        {
+            rb.velocity = (rb.velocity + 2 * transform.TransformVector(localPrevVel)) / 3;
+        }
     }
 
 	//Transports the player to the specified coordinates
