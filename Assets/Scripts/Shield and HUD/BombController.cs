@@ -11,6 +11,7 @@ using System.Collections;
 public class BombController : MonoBehaviour {
 
     private bool isArmed;
+    private bool hasRigidbody;
     public int currBombCharge;
     private int maxBombCharge;
 
@@ -21,10 +22,13 @@ public class BombController : MonoBehaviour {
 	void Start () {
 
         isArmed = false;
+        hasRigidbody = false;
         currBombCharge = 0;
         maxBombCharge = 100;
 
         player = GameObject.FindGameObjectWithTag("Player");
+
+        //transform.parent = player.transform;
 
         GameObject[] temp = GameObject.FindGameObjectsWithTag("Bomb Gauge");
         bombGauge = new Image[temp.Length];
@@ -37,10 +41,15 @@ public class BombController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!isArmed)
+
+        if (isArmed && !hasRigidbody)
         {
-            transform.position = player.transform.position;
-            transform.rotation = player.transform.rotation;
+            transform.parent = null;
+            Rigidbody temp = gameObject.AddComponent<Rigidbody>();
+            temp.useGravity = false;
+            temp.angularDrag = 1;
+
+            hasRigidbody = true;
         }
 
         for (int i = 0; i < bombGauge.Length; ++i)
