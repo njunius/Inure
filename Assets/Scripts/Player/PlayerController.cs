@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
     public Color bulletColor = Color.blue;
-	public float bulletVel = 40.0f;
+	public float bulletVel = 80.0f;
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
 
@@ -58,6 +58,9 @@ public class PlayerController : MonoBehaviour {
 
     public bool wallSlide = true;
 
+    private bool turned = false;
+    private Vector3 localPrevVel = Vector3.zero;
+
     // Use this for initialization
     void Awake () {
 
@@ -95,7 +98,7 @@ public class PlayerController : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         im = gameController.GetComponent<InputManager>();
 
-
+        
     }
 
     // Update is called once per frame
@@ -118,7 +121,6 @@ public class PlayerController : MonoBehaviour {
             {
                 if (!invincibleFlashing)
                 {
-                    resetMeshRotation();
                     Renderer r = mesh.GetComponent<Renderer>();
                     r.material.color = originalColor;
                     r.material.DisableKeyword("_Emmisive");
@@ -158,9 +160,11 @@ public class PlayerController : MonoBehaviour {
             paused = !paused;
             Time.timeScale = 0;
             UICanvas.enabled = true;
+            Cursor.visible = true;
         }
         else if (im.getInputDown("Pause") && paused)
         {
+            Cursor.visible = false;
             if (!settingsOverlay.enabled)
             {
                 paused = !paused;
@@ -175,6 +179,7 @@ public class PlayerController : MonoBehaviour {
 
         if (!paused)
         {
+            if (Cursor.visible && !gameOver.enabled) Cursor.visible = false;
             // Shield Controls 
             if (im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
             {
@@ -326,32 +331,21 @@ public class PlayerController : MonoBehaviour {
 
         if (!targetLocked)
         {
-            if (rotPitch != 0)
-            {
-                //rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch));
-            }
-            else
+            localPrevVel = transform.InverseTransformVector(rb.velocity);
+            if (rotPitch == 0)
             {
                 rb.angularVelocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.angularVelocity).y,
                                                                         transform.InverseTransformDirection(rb.angularVelocity).z));
 
             }
 
-            if (rotYaw != 0)
-            {
-                //rb.AddTorque(transform.TransformDirection(Vector3.up * rotYaw));
-            }
-            else
+            if (rotYaw == 0)
             {
                 rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x, 0,
                                                                    transform.InverseTransformDirection(rb.angularVelocity).z));
             }
 
-            if (rotRoll != 0)
-            {
-                //rb.AddTorque(transform.TransformDirection(Vector3.forward * rotRoll));
-            }
-            else
+            if (rotRoll == 0)
             {
                 rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
                                                                    transform.InverseTransformDirection(rb.angularVelocity).y, 0));
@@ -361,11 +355,15 @@ public class PlayerController : MonoBehaviour {
             {
                 //rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll));
                 rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
+                turned = true;
             }
             else
             {
                 rb.angularVelocity = Vector3.zero;
+                turned = false;
             }
+
+            
         }
         else
         {
@@ -397,6 +395,14 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = Vector3.zero;
         }
 
+    }
+
+    void LateUpdate()
+    {
+        if (!targetLocked && turned)
+        {
+            rb.velocity = (rb.velocity + 2 * transform.TransformVector(localPrevVel)) / 3;
+        }
     }
 
 	//Transports the player to the specified coordinates
@@ -446,15 +452,17 @@ public class PlayerController : MonoBehaviour {
 	//Deactivates player controls and shows game over screen
 	private void killPlayer()
 	{
-		//Show Game Over Screen
-		pauseTxt.enabled = false;
+        Cursor.visible = true;
+        //Show Game Over Screen
+        pauseTxt.enabled = false;
 		inureTxt.enabled = false;
         Time.timeScale = 0.3f;
 		gameOver.enabled = true;
 		UICanvas.enabled = true;
 		//Destroy player
 		this.enabled = false;
-	}
+        
+    }
 
 	//Disable game over screen
 	public void savePlayer ()
@@ -543,11 +551,11 @@ public class PlayerController : MonoBehaviour {
 			realBulletVel += GetComponent<Rigidbody> ().velocity;
 		}
 
-		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 2.8f - transform.up * 2.1f, transform.localRotation);
+		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
 		PlayerBullet newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 
-		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right * 2.8f - transform.up * 2.1f, transform.localRotation);
+		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
 		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 	}

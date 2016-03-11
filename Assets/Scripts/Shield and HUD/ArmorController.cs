@@ -11,6 +11,8 @@ public class ArmorController : MonoBehaviour {
 
     private int maxChunks;
     private int currChunks;
+    private int arrayMidpoint;
+
     private Color chunkOn;
     private Color chunkOff;
 
@@ -20,6 +22,8 @@ public class ArmorController : MonoBehaviour {
 
         currChunks = maxChunks = player.getMaxHullIntegrity();
 
+        arrayMidpoint = maxChunks / 2;
+
         armorChunkTracker = new Image[maxChunks];
 
         for (int i = 0; i < maxChunks; ++i)
@@ -28,7 +32,11 @@ public class ArmorController : MonoBehaviour {
             temp.transform.SetParent(gameObject.transform);
             armorChunkTracker[i] = temp.GetComponent<Image>();
             chunkOn = armorChunkTracker[i].color;
-            chunkOff = new Color(armorChunkTracker[i].color.r, armorChunkTracker[i].color.g, armorChunkTracker[i].color.b, 0.0f);
+            chunkOff = new Color(chunkOn.r, chunkOn.g, chunkOn.b, 0.0f);
+            if(i % 2 != 0)
+            {
+                armorChunkTracker[i].gameObject.transform.Rotate(new Vector3(180, 0, 0));
+            }
         }
 	}
 	
@@ -36,13 +44,32 @@ public class ArmorController : MonoBehaviour {
 	void Update () {
         currChunks = player.getCurrHullIntegrity();
 
-        for(int i = 0; i < currChunks; ++i)
-        {
-            armorChunkTracker[i].color = chunkOn;
-        }
-        for(int i = currChunks; i < maxChunks; ++i)
+        for(int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
         {
             armorChunkTracker[i].color = chunkOff;
         }
-	}
+
+        for (int i = arrayMidpoint - currChunks / 2; i < arrayMidpoint + currChunks / 2 + 1; ++i)
+        {
+            armorChunkTracker[i].color = chunkOn;
+        }
+
+        for(int i = arrayMidpoint + currChunks / 2; i < maxChunks; ++i)
+        {
+            if (currChunks % 2 == 0)
+            {
+                armorChunkTracker[i].color = chunkOff;
+            }
+        }
+
+        if(currChunks == maxChunks)
+        {
+            armorChunkTracker[armorChunkTracker.Length - 1].color = chunkOn;
+        }
+
+        if(currChunks == 1)
+        {
+            armorChunkTracker[arrayMidpoint].color = chunkOn;
+        }
+    }
 }

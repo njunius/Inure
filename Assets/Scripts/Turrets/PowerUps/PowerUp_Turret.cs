@@ -33,6 +33,6 @@ public class PowerUp_Turret : Turret {
 		isFiring = false;
 		isOn = false;
 		CancelInvoke ("Fire");
-		Instantiate (reward, transform.position + transform.up, transform.rotation);
+		Instantiate (reward, transform.position + new Vector3 (0, gameObject.GetComponent<Renderer> ().bounds.size.y * 1.5f, 0), transform.rotation);
 	}
 }
