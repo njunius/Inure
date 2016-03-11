@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
     public Color bulletColor = Color.blue;
-	public float bulletVel = 10000.0f;
+	public float bulletVel = 80.0f;
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
 
@@ -551,11 +551,11 @@ public class PlayerController : MonoBehaviour {
 			realBulletVel += GetComponent<Rigidbody> ().velocity;
 		}
 
-		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 2.8f - transform.up * 2.1f, transform.localRotation);
+		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
 		PlayerBullet newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 
-		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right * 2.8f - transform.up * 2.1f, transform.localRotation);
+		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
 		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 	}
