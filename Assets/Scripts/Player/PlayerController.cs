@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         im = gameController.GetComponent<InputManager>();
 
-
+        
     }
 
     // Update is called once per frame
@@ -160,9 +160,11 @@ public class PlayerController : MonoBehaviour {
             paused = !paused;
             Time.timeScale = 0;
             UICanvas.enabled = true;
+            Cursor.visible = true;
         }
         else if (im.getInputDown("Pause") && paused)
         {
+            Cursor.visible = false;
             if (!settingsOverlay.enabled)
             {
                 paused = !paused;
@@ -177,6 +179,7 @@ public class PlayerController : MonoBehaviour {
 
         if (!paused)
         {
+            if (Cursor.visible && !gameOver.enabled) Cursor.visible = false;
             // Shield Controls 
             if (im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
             {
@@ -449,15 +452,17 @@ public class PlayerController : MonoBehaviour {
 	//Deactivates player controls and shows game over screen
 	private void killPlayer()
 	{
-		//Show Game Over Screen
-		pauseTxt.enabled = false;
+        Cursor.visible = true;
+        //Show Game Over Screen
+        pauseTxt.enabled = false;
 		inureTxt.enabled = false;
         Time.timeScale = 0.3f;
 		gameOver.enabled = true;
 		UICanvas.enabled = true;
 		//Destroy player
 		this.enabled = false;
-	}
+        
+    }
 
 	//Disable game over screen
 	public void savePlayer ()
