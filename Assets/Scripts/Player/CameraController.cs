@@ -274,8 +274,6 @@ public class CameraController : MonoBehaviour {
                 Renderer r = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
                 r.material = shipTransparent;
                 r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
-                Debug.Log(distance / fadeDistance);
-
             }
             else
             {
