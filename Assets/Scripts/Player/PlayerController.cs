@@ -19,7 +19,11 @@ public class PlayerController : MonoBehaviour {
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
 
-	public float invulnSecs = 1.0f;
+    public GameObject bulletSpawns;
+    public Transform[] bulletSpawnLocations;
+    int bulletSpawnLocIndex;
+
+    public float invulnSecs = 1.0f;
 	public bool noGameOver = false;
 
 	private Vector3 frontOfShip;
@@ -90,6 +94,18 @@ public class PlayerController : MonoBehaviour {
         shield = GetComponentInChildren<ShieldController>();
 
         maxHullIntegrity = currHullIntegrity = 5;
+
+        Transform[] temp = bulletSpawns.GetComponentsInChildren<Transform>();
+        bulletSpawnLocations = new Transform[temp.Length - 1];
+        bulletSpawnLocIndex = 0;
+        for(int i = 0; i < temp.Length; ++i)
+        {
+            if(temp[i].gameObject.GetInstanceID() != bulletSpawns.GetInstanceID())
+            {
+                bulletSpawnLocations[bulletSpawnLocIndex] = temp[i];
+                ++bulletSpawnLocIndex;
+            }
+        }
 
         if (GameObject.Find("GameController") == null)
         {
@@ -541,7 +557,17 @@ public class PlayerController : MonoBehaviour {
     }
 
 	private void fireBullets() {
-		Vector3 aimDirNorm = gameObject.transform.forward;
+
+        // make direction and velocity vectors local for easy addition of components
+        Vector3 localForward = transform.InverseTransformDirection(transform.forward);
+        Vector3 localVelocity = new Vector3(0, 0, transform.InverseTransformDirection(rb.velocity).z);
+        //GameObject newShot = (GameObject)Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+        //Debug.Log(transform.InverseTransformDirection(rb.velocity));
+        //Debug.Log(transform.InverseTransformDirection(transform.forward));
+        // add constant forward velocity to newShot and add the player's forward velocity component
+        //newShot.GetComponent<Rigidbody>().velocity = transform.TransformDirection(localForward * 40 + localVelocity);
+
+        /*Vector3 aimDirNorm = gameObject.transform.forward;
 		aimDirNorm.Normalize ();
 		Vector3 realBulletVel = aimDirNorm * (float)bulletVel;
 		Vector3 shipVel = GetComponent<Rigidbody> ().velocity;
@@ -549,15 +575,22 @@ public class PlayerController : MonoBehaviour {
 
 		if (aimDirNorm != -1 * shipVel) {
 			realBulletVel += GetComponent<Rigidbody> ().velocity;
-		}
+		}*/
 
-		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
+        for(int i = 0; i < bulletSpawnLocations.Length; ++i)
+        {
+            GameObject shotObj = (GameObject)Instantiate(bulletPrefab, bulletSpawnLocations[i].position, bulletSpawnLocations[i].rotation);
+            PlayerBullet newShot = (PlayerBullet)shotObj.GetComponent(typeof(PlayerBullet));
+            newShot.setVars(bulletColor, transform.TransformDirection(localForward * (float) bulletVel + localVelocity));
+        }
+
+		/*GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
 		PlayerBullet newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 
 		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
 		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
-		newBullet.setVars (bulletColor, realBulletVel);
+		newBullet.setVars (bulletColor, realBulletVel);*/
 	}
 
     public int getPowerupIndex()
