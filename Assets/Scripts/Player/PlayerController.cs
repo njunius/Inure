@@ -61,9 +61,14 @@ public class PlayerController : MonoBehaviour {
     private bool turned = false;
     private Vector3 localPrevVel = Vector3.zero;
 
+    public AudioClip playerBulletSound;
+    private AudioSource source;
+    private float volLowRange = 0.7f;
+    private float volHighRange = 1.0f;
+
     // Use this for initialization
     void Awake () {
-
+        source = GetComponent<AudioSource>();
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
@@ -551,7 +556,10 @@ public class PlayerController : MonoBehaviour {
 			realBulletVel += GetComponent<Rigidbody> ().velocity;
 		}
 
-		GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
+        float vol = Random.Range(volLowRange, volHighRange);
+        source.PlayOneShot(playerBulletSound, vol);
+
+        GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
 		PlayerBullet newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);
 
