@@ -3,23 +3,30 @@ using System.Collections;
 
 public class LightController : MonoBehaviour
 {
-    public float duration = 1.0F;
-    public Light lt;
+    public int i = 0;
+    public GameObject[] all_lights;
+    public float lifetime = 0f;
+    public float timeLimit = 0.4f;
     void Start()
     {
-        lt = GetComponent<Light>();
-        GameObject[] allLights = GameObject.FindGameObjectsWithTag("GLight");
+        for(int j = 0; j < all_lights.Length; j++)
+        {
+            all_lights[j].GetComponent<Light>().intensity = 0;
+        }
     }
     void Update()
     {
-        float phi = Time.time / duration * 0.6f * Mathf.PI;
-        float amplitude = Mathf.Cos(phi) * 0.9F + 0.9F;
-        lt.intensity = amplitude;
+        lifetime += Time.deltaTime;
+       
+        if (lifetime > timeLimit && i < all_lights.Length)
+        {
+            lifetime = 0;
+            all_lights[i].GetComponent<LightControllerIndiv>().activated = true;
+            i++;
+        }
+        if (i >= all_lights.Length)
+        {
+            i = 0;
+        }
     }
 }
-
-/*foreach (GameObject i in "GLight")
-        {
-            i.SetActive(false);
-        }
-*/
