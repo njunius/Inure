@@ -3,11 +3,12 @@ using System.Collections;
 
 public class LightControllerIndiv : MonoBehaviour
 {
-    public float duration = 2.0f;
+    public float duration = 0f;
     public float lifetime = 0f;
     public bool activated = false;
-	// Use this for initialization
-	void Start ()
+    public float timeLimit = 0f;
+    // Use this for initialization
+    void Start ()
     {
 	
 	}
@@ -21,7 +22,7 @@ public class LightControllerIndiv : MonoBehaviour
         {
             lifetime += Time.deltaTime;
             phi = lifetime / duration * 0.6f * Mathf.PI;
-            amplitude = Mathf.Cos(phi) * 1.4f + 0.5f;
+            amplitude = Mathf.Cos(phi) * 1.6f + 0.1f;
             GetComponent<Light>().intensity = amplitude;
         }
 	}
