@@ -31,7 +31,8 @@ public class CheckPoint : MonoBehaviour {
 			hullHealth = pController.getCurrHullIntegrity();
 			pData.setCheckPoint(shieldCharge, bombCharge, hullHealth, savedPOS, savedROT);
 
-			transform.GetChild(0).GetComponent<Light>().color = Color.red;
+			transform.GetChild(1).GetComponent<Light>().color = Color.red;
+			transform.GetChild(2).GetComponent<Light>().color = Color.red;
 			bombCharge = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge;
 		}
 	}
