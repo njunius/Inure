@@ -14,6 +14,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
     private bool selected;
     private bool delay;
     private Event controlBindEvent;
+    private Canvas settingsScreen;
 
     public EventSystem events;
     public Text currentKey;
@@ -27,68 +28,10 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
         inputs = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
         currentKey = gameObject.GetComponentInChildren<Text>();
         button = GetComponent<Selectable>();
+        settingsScreen = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
 
         delay = true;
         selected = false;
-    }
-
-    void OnGUI()
-    {
-
-        controlBindEvent = Event.current;
-
-        if (selected && controlBindEvent != null)
-        {
-
-            if (controlBindEvent.isKey)
-            {
-
-                key = controlBindEvent.keyCode.ToString().ToLower();
-
-                if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
-                {
-                    inputBindings[command].posAxis = key;
-                }
-                else if (inputBindings[command].bidirectional && !positiveDirection)
-                {
-                    inputBindings[command].negAxis = key;
-                }
-
-                EventSystem.current.SetSelectedGameObject(null);
-                selected = false;
-
-                delay = true;
-            }
-            else if (controlBindEvent.isMouse && !delay)
-            {
-
-                // These must be hard coded due to button being a number and not the string needed for the InputManager
-                if(controlBindEvent.button == 0)
-                    key = "mouse 0";
-                else if(controlBindEvent.button == 1)
-                    key = "mouse 1";
-                else if(controlBindEvent.button == 2)
-                    key = "mouse 3";
-
-                if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
-                {
-                    inputBindings[command].posAxis = key;
-                }
-                else if (inputBindings[command].bidirectional && !positiveDirection)
-                {
-                    inputBindings[command].negAxis = key;
-                }
-
-                EventSystem.current.SetSelectedGameObject(null);
-                selected = false;
-
-                delay = true;
-            }
-            else if(controlBindEvent.isMouse && delay)
-            {
-                delay = false;
-            }
-        }
     }
 
     // Update is called once per frame
@@ -101,7 +44,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
 
         }
 
-        if (inputBindings != null)
+        if (inputBindings != null && settingsScreen.enabled)
         {
             if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
             {
@@ -112,9 +55,37 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
                 key = inputBindings[command].negAxis;
             }
 
+            foreach(KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
+            {
+                if (Input.GetKeyDown(vKey))
+                {
+                    if(selected && !delay)
+                    {
+                        if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
+                        {
+                            inputBindings[command].posAxis = vKey.ToString().ToLower();
+                        }
+                        else if (inputBindings[command].bidirectional && !positiveDirection)
+                        {
+                            inputBindings[command].negAxis = vKey.ToString().ToLower();
+                        }
+                        EventSystem.current.SetSelectedGameObject(null);
+                        selected = false;
+                        delay = true;
+                    }
+                    break;
+                }
+            }
+
+            if(selected && delay)
+            {
+                delay = false;
+            }
+
+            currentKey.text = key.ToUpper();
+
         }
 
-        currentKey.text = key.ToUpper();
     }
 
     public void OnPointerDown(PointerEventData eventData)
