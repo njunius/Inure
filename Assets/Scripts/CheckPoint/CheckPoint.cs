@@ -28,7 +28,7 @@ public class CheckPoint : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.CompareTag("Player Collider")){
 			
-			if(!hasHealed){
+			if(!hasHealed && pController.getCurrHullIntegrity() < pController.getMaxHullIntegrity()){
 				pController.setHullIntegrity(pController.getCurrHullIntegrity() + heal_player);
 				hasHealed = true;
 			}
