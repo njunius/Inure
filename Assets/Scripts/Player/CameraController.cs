@@ -10,6 +10,8 @@ public class CameraController : MonoBehaviour {
     private Transform lookAtTarget;
     public Vector3 cameraPositionOffset;
     public Vector3 cameraRotationOffset;
+    public Material shipOpaque;
+    public Material shipTransparent;
     public float defaultDistance = 4.0f;
     public float currentDistance;
     public float targetDistance;
@@ -270,13 +272,14 @@ public class CameraController : MonoBehaviour {
             if (distance < fadeDistance)
             {
                 Renderer r = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
+                r.material = shipTransparent;
                 r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, distance / fadeDistance);
-
             }
             else
             {
                 Renderer r = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
-                r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, 1);
+                r.material = shipOpaque;
+                //r.material.color = new Color(r.material.color.r, r.material.color.g, r.material.color.b, 1);
             }
 
         }
