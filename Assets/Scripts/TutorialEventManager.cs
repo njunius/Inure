@@ -3,13 +3,15 @@ using System.Collections;
 
 public class TutorialEventManager : MonoBehaviour {
     public PlayerController player;
-    public int eventIndex = 0;
+    public int eventIndex = 1;
     private float eventTimer = 0;
     public GameObject door1Upper;
     public GameObject door1Lower;
+    public GameObject door2Upper;
+    public GameObject door2Lower;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         eventTimer = 4;
         refresh();
 	}
@@ -29,9 +31,6 @@ public class TutorialEventManager : MonoBehaviour {
 
             switch (eventIndex)
             {
-                case 1:
-                    refresh();
-                    break;
                 case 2:
                     if (door1Upper.GetComponent<TutorialDoors>().open)
                     {
@@ -62,18 +61,22 @@ public class TutorialEventManager : MonoBehaviour {
         switch (eventIndex)
         {
             case 0:         //Scene ends with hull indicatiors activated.
-                eventIndex++;
+                
+
                 
                 Debug.Log("Event 0");
                 break;
             case 1:
                 player.verticalEnginesEnabled = true;
+                
                 Debug.Log("Event 1");
                 break;
 
             case 2:         //Doors open
                 door1Lower.GetComponent<TutorialDoors>().activate();
                 door1Upper.GetComponent<TutorialDoors>().activate();
+                door2Lower.GetComponent<TutorialDoors>().activate();
+                door2Upper.GetComponent<TutorialDoors>().activate();
                 Debug.Log("Event 2");
                 break;
             case 3:         //Player can lift off. Display vertical controls
