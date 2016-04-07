@@ -7,9 +7,11 @@ public class CheckPoint : MonoBehaviour {
 	public int shieldCharge;
 	public int bombCharge;
 	public int hullHealth;
+	public int heal_player = 1;
 
 	private LastCheckpoint pData;
 	private PlayerController pController;
+	private bool hasHealed = false;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +28,10 @@ public class CheckPoint : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.CompareTag("Player Collider")){
 			
+			if(!hasHealed && pController.getCurrHullIntegrity() < pController.getMaxHullIntegrity()){
+				pController.setHullIntegrity(pController.getCurrHullIntegrity() + heal_player);
+				hasHealed = true;
+			}
 
 			shieldCharge = pController.getShieldCharge();
 			hullHealth = pController.getCurrHullIntegrity();
