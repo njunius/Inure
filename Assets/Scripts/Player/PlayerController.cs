@@ -695,4 +695,14 @@ public class PlayerController : MonoBehaviour {
 		fireRate *= timeScale;
 		invulnSecs *= timeScale;
 	}
+
+    public void freezeRotation()
+    {
+        rb.freezeRotation = true;
+    }
+
+    public void unFreezeRotation()
+    {
+        rb.freezeRotation = false;
+    }
 }

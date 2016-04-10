@@ -45,6 +45,7 @@ public class TutorialEventManager : MonoBehaviour {
         else if (GameObject.FindGameObjectWithTag("Player") != null)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            player.freezeRotation();
             player.rotateEnabled = false;
             player.verticalEnginesEnabled = true;
             player.longitudinalEnginesEnabled = false;
@@ -87,6 +88,7 @@ public class TutorialEventManager : MonoBehaviour {
             case 4:         //Player can move forward.
                 eventIndex = 3;
                 player.rotateEnabled = true;
+                player.unFreezeRotation();
                 Debug.Log("Event 4");
                 break;
             case 5:         //Player can move lateral
