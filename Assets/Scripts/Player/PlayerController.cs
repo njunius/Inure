@@ -379,6 +379,7 @@ public class PlayerController : MonoBehaviour {
         if (!targetLocked)
         {
             localPrevVel = transform.InverseTransformVector(rb.velocity);
+            //localPrevVel = rb.velocity;
             if (rotPitch == 0)
             {
                 rb.angularVelocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.angularVelocity).y,
@@ -448,7 +449,12 @@ public class PlayerController : MonoBehaviour {
     {
         if (!targetLocked && turned)
         {
+            Debug.Log("Vel");
+            Debug.Log(rb.velocity);
+            Debug.Log(localPrevVel);
             rb.velocity = (rb.velocity + 2 * transform.TransformVector(localPrevVel)) / 3;
+            //rb.velocity = (rb.velocity + 2 * localPrevVel) / 3;
+            Debug.Log(rb.velocity);
         }
     }
 
