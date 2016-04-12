@@ -65,9 +65,21 @@ public class PlayerController : MonoBehaviour {
     private bool turned = false;
     private Vector3 localPrevVel = Vector3.zero;
 
+    public AudioClip playerBulletSound;
+    private AudioSource source;
+    private float volLowRange = 0.7f;
+    private float volHighRange = 1.0f;
+
+    public bool rotateEnabled = true;
+    public bool verticalEnginesEnabled = true;
+    public bool longitudinalEnginesEnabled = true;
+    public bool lateralEnginesEnabled = true;
+    public bool weaponsEnabled = true;
+    public bool sheildEnabled = true;
+
     // Use this for initialization
     void Awake () {
-
+        source = GetComponent<AudioSource>();
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
@@ -272,6 +284,25 @@ public class PlayerController : MonoBehaviour {
         float rotRoll = im.getInput("Roll") * rollSpeed;
         float rotPitch = im.getInput("Pitch") * rotSpeed;
         float rotYaw = im.getInput("Yaw") * rotSpeed;
+
+        if (!verticalEnginesEnabled)
+        {
+            moveVertical = 0;
+        }
+        if (!longitudinalEnginesEnabled)
+        {
+            moveLongitudinal = 0;
+        }
+        if (!lateralEnginesEnabled)
+        {
+            moveLateral = 0;
+        }
+
+
+        if (!rotateEnabled)
+        {
+            rotRoll = rotPitch = rotYaw = 0;
+        }
 
         if (wallSlide)
         {
@@ -577,6 +608,9 @@ public class PlayerController : MonoBehaviour {
 			realBulletVel += GetComponent<Rigidbody> ().velocity;
 		}*/
 
+        float vol = Random.Range(volLowRange, volHighRange);
+        source.PlayOneShot(playerBulletSound, vol);
+
         for(int i = 0; i < bulletSpawnLocations.Length; ++i)
         {
             GameObject shotObj = (GameObject)Instantiate(bulletPrefab, bulletSpawnLocations[i].position, bulletSpawnLocations[i].rotation);
@@ -661,4 +695,14 @@ public class PlayerController : MonoBehaviour {
 		fireRate *= timeScale;
 		invulnSecs *= timeScale;
 	}
+
+    public void freezeRotation()
+    {
+        rb.freezeRotation = true;
+    }
+
+    public void unFreezeRotation()
+    {
+        rb.freezeRotation = false;
+    }
 }

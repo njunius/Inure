@@ -12,9 +12,13 @@ public class PowerUp_SlowTime : PowerUp {
 	private bool isGrowing = false;
 	private bool isShrinking = false;
 
-	// Use this for initialization
-	void Start () {
-		FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 50f;
+    public AudioClip slowTimeSound;
+    private AudioSource source;
+
+    // Use this for initialization
+    void Start () {
+        source = GetComponent<AudioSource>();
+        FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 50f;
 		effectField= (GameObject)Resources.Load("FieldSphereSlowTime");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
 		effectField.GetComponent<Renderer> ().material.SetColor ("_Color", fieldColor);
@@ -25,7 +29,8 @@ public class PowerUp_SlowTime : PowerUp {
 	void Update () {
 		if (isActive) {
 			if (!effectField.activeSelf) {
-				effectField.SetActive (true);
+                source.PlayOneShot(slowTimeSound, 0.6f);
+                effectField.SetActive (true);
 				isGrowing = true;
 			}
 			if (isGrowing) {
