@@ -8,8 +8,10 @@ public class PowerUp_EMP : PowerUp {
 	private GameObject effectField;
 	private Color fieldColor = new Color (0.988f, 0.992f, 0.541f, 0.5f);
 	private bool isGrowing = false;
+    public AudioClip EMPSound;
+    private AudioSource source;
 
-	void OnEnable () {
+    void OnEnable () {
 		FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 50f;
 		effectField= (GameObject)Resources.Load("FieldSphereEMP");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
@@ -22,8 +24,8 @@ public class PowerUp_EMP : PowerUp {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        source = GetComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,7 +33,8 @@ public class PowerUp_EMP : PowerUp {
 			if (!effectField.activeSelf) {
 				effectField.SetActive(true);
 				isGrowing = true;
-			}
+                source.PlayOneShot(EMPSound, 0.6f);
+            }
 			if (isGrowing) {
 				float scaleVal = Mathf.Min (effectField.transform.lossyScale.x + FIELD_EXPANSION_PER_FRAME, MAX_FIELD_SIZE);
 				effectField.transform.localScale = new Vector3 (scaleVal, scaleVal, scaleVal);

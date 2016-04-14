@@ -813,6 +813,7 @@ GameObject:
   - 114: {fileID: 11421326}
   - 114: {fileID: 11420736}
   - 114: {fileID: 11472190}
+  - 82: {fileID: 8284940}
   m_Layer: 0
   m_Name: New Player
   m_TagString: Player
@@ -1866,6 +1867,80 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 50, y: 50, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &8284940
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180074}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9f5e116a2349b3842a82d3cf2c8b3953, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 60
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!108 &10831726
 Light:
   m_ObjectHideFlags: 1
@@ -2085,6 +2160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802eaf87db8aa13429b5154c00c2d389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shockwaveSound: {fileID: 0}
 --- !u!114 &11421326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2096,6 +2172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66aa6a1a62e91d04ea32ddee54a99bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowTimeSound: {fileID: 0}
 --- !u!114 &11425490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2545,6 +2622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ba0eee22a99754b80ba1c0343411ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EMPSound: {fileID: 0}
 --- !u!114 &11473712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2771,6 +2849,7 @@ MonoBehaviour:
   mainThrusterRight: {fileID: 19817216}
   thrusterLeft: {fileID: 196892}
   thrusterRight: {fileID: 163192}
+  playerBulletSound: {fileID: 8300000, guid: 9f5e116a2349b3842a82d3cf2c8b3953, type: 3}
 --- !u!114 &11498090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6541,6 +6620,34 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: bulletVel
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerBulletSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9f5e116a2349b3842a82d3cf2c8b3953, type: 3}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9f5e116a2349b3842a82d3cf2c8b3953, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Priority
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
