@@ -13,7 +13,7 @@ public class BombDetach : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        int distance = Vector3.Distance(core, transform.position);
+        //int distance = Vector3.Distance(core, transform.position);
         if (distance < 10)
         {
             transform.parent = null;
