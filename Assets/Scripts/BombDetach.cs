@@ -5,28 +5,46 @@ public class BombDetach : MonoBehaviour
 {
     // GameObject bomb;
     bool detached = false;
-    Vector3 offset = new Vector3 (0, -1.139f, -4.079f);
+    bool counter_on = false;
+    float count_down = 60;
+    //bool countOn = false;
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.name == "ReactorDetail")
         {
             detached = true;
-            Debug.Log("Bomb is detached!");
-            col.transform.parent = null;
+            //countOn = true;
         }
     }
     // Use this for initialization
     void Start ()
     {
-        // bomb = GameObject.FindGameObjectWithTag("Bomb");
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (!detached)
+        if (detached)
         {
-            transform.position = transform.parent.position + offset;
+            transform.parent = null;
+            counter_on = true;
         }
+        if (counter_on)
+        {
+            count_down -= Time.deltaTime;
+            //Debug.Log(count_down);
+            if (count_down <= 0)
+            {
+                Debug.Log("Game Over!");
+            }
+        }
+        /*
+        if(countOn)
+        {
+            Debug.Log("Countdown initiated.");
+            countOn = false;
+        }
+        */
     }
 }
