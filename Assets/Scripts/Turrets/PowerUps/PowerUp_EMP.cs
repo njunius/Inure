@@ -14,7 +14,7 @@ public class PowerUp_EMP : PowerUp {
 		effectField= (GameObject)Resources.Load("FieldSphereEMP");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
 		if (gameObject.CompareTag ("Player")) {
-			effectField.GetComponent<Effect_Shockwave> ().IsPlayer ();
+			effectField.GetComponent<Effect_EMP> ().IsPlayer ();
 		}
 		effectField.GetComponent<Renderer> ().material.SetColor ("_Color", fieldColor);
 		effectField.SetActive (false);

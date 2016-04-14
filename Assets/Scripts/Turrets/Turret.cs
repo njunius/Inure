@@ -49,6 +49,25 @@ public class Turret : MonoBehaviour {
 	private void OnCollisionEnter (Collision collision) {
 		if (collision.gameObject.name == "PlayerBullet(Clone)") {
 			health = Mathf.Max (health - healthDecrement, 0f);
+			GameObject newSparks = (GameObject)Instantiate (Resources.Load ("Particle Systems/Flare"), transform.position, Quaternion.identity);//collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].point - transform.position));
+			//newSparks.transform.parent = gameObject.transform;
+			//newSparks.GetComponent<ParticleSystem> ().Play ();
+			newSparks.SetActive(true);
+
+			StartCoroutine (TurnOffSparks (newSparks, 3f));
 		}
+	}
+
+	private IEnumerator TurnOffSparks (GameObject particles, float delayTime) {
+
+		yield return new WaitForSeconds (delayTime);
+		particles.GetComponent<ParticleSystem> ().Stop ();
+		//particles.SetActive (false);
+		yield return new WaitForSeconds (delayTime);
+		Destroy (particles);
+	}
+
+	protected void Explode() {
+		GameObject newSparks = (GameObject)Instantiate (Resources.Load ("Particle Systems/TurretExplosion"), transform.position, Quaternion.identity);
 	}
 }
