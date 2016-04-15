@@ -3,20 +3,33 @@ using System.Collections;
 
 public class BombDetach : MonoBehaviour
 {
-    GameObject core;
-	// Use this for initialization
-	void Start ()
+    bool detached = false;
+    float count_down = 10;
+    void OnTriggerEnter(Collider col)
     {
-        core = GameObject.FindGameObjectWithTag("Core");
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		float distance = Vector3.Distance(core.transform.position, transform.position);
-        if (distance < 10f)
+        if (col.gameObject.name == "ReactorDetail")
         {
-            transform.parent = null;
+            gameObject.transform.parent = null;
+            detached = true;
+        }
+    }
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (detached)
+        {
+            count_down -= Time.deltaTime;
+            //Debug.Log(count_down);
+            if (count_down <= 0)
+            {
+                Debug.Log("Game Over!");
+            }
         }
     }
 }
