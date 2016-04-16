@@ -26,7 +26,7 @@ GameObject:
   - 4: {fileID: 423262}
   - 33: {fileID: 3308004}
   - 23: {fileID: 2312484}
-  - 64: {fileID: 6407408}
+  - 136: {fileID: 13683216}
   m_Layer: 0
   m_Name: GlowGlobe
   m_TagString: Untagged
@@ -93,18 +93,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171750}
   m_Mesh: {fileID: 4300000, guid: 8e72fad0a902a6b4ea12dff92c1e4dbe, type: 3}
---- !u!64 &6407408
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171750}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: 8e72fad0a902a6b4ea12dff92c1e4dbe, type: 3}
 --- !u!108 &10829896
 Light:
   m_ObjectHideFlags: 1
@@ -138,6 +126,19 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!136 &13683216
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171750}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.043999992
+  m_Height: 0.022807207
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0.043999992}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
