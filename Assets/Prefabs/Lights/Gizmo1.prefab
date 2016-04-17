@@ -97,6 +97,7 @@ GameObject:
   - 4: {fileID: 458732}
   - 33: {fileID: 3376734}
   - 23: {fileID: 2375626}
+  - 65: {fileID: 6529866}
   m_Layer: 0
   m_Name: Gizmo-Base
   m_TagString: Untagged
@@ -124,8 +125,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154654}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5000001, w: 0.49999994}
-  m_LocalPosition: {x: -1799.8, y: -1100.02, z: -427.6}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 104.8, y: -6.062, z: -172.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 458732}
@@ -191,7 +192,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 220884f19b72d934aa89f1aa683132ba, type: 2}
+  - {fileID: 2100000, guid: 02c8dd9a3ef88f14eb0910d6236307a1, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -217,7 +218,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 220884f19b72d934aa89f1aa683132ba, type: 2}
+  - {fileID: 2100000, guid: 02c8dd9a3ef88f14eb0910d6236307a1, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -243,7 +244,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 220884f19b72d934aa89f1aa683132ba, type: 2}
+  - {fileID: 2100000, guid: 02c8dd9a3ef88f14eb0910d6236307a1, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -280,6 +281,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107004}
   m_Mesh: {fileID: 4300002, guid: 5aa4b21c6287efb40995e17033b0a4e1, type: 3}
+--- !u!65 &6529866
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1.9999998, z: 0.4924}
+  m_Center: {x: -1, y: 0.9999999, z: 0.24620023}
 --- !u!65 &6531400
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -425,7 +438,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154654}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.12
   m_Height: 2.79
