@@ -6313,7 +6313,7 @@ Transform:
   m_Children:
   - {fileID: 472468499}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
 --- !u!23 &106878396
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9716,36 +9716,6 @@ GameObject:
 Transform:
   m_PrefabParentObject: {fileID: 423262, guid: f96fa4ad36d648a489cfd21d23e0ab88, type: 2}
   m_PrefabInternal: {fileID: 1761012866}
---- !u!1 &188366345 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 175410, guid: 4edd572593adb5b4da209d9c5e24938c, type: 2}
-  m_PrefabInternal: {fileID: 1506604825}
---- !u!54 &188366347
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 188366345}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &188366351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 188366345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e34cbea0925cb87469070720d07a8d3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &189761449
 Prefab:
   m_ObjectHideFlags: 0
@@ -22814,6 +22784,22 @@ MonoBehaviour:
   lifetime: 0
   activated: 0
   timeLimit: 0
+--- !u!1 &454888610 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100036, guid: 961cd0b2c75974c47882241c439e3607, type: 3}
+  m_PrefabInternal: {fileID: 1445598789}
+--- !u!64 &454888611
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 454888610}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 961cd0b2c75974c47882241c439e3607, type: 3}
 --- !u!1001 &455019851
 Prefab:
   m_ObjectHideFlags: 0
@@ -27740,7 +27726,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 470435076}
   - {fileID: 2121401319}
@@ -27780,7 +27765,6 @@ MonoBehaviour:
   - {fileID: 908919518}
   - {fileID: 983218021}
   - {fileID: 983218020}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!4 &564788950
 Transform:
@@ -31117,7 +31101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 1868205531}
   - {fileID: 1021292032}
@@ -31149,7 +31132,6 @@ MonoBehaviour:
   - {fileID: 136096896}
   - {fileID: 1893269099}
   - {fileID: 238796768}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!4 &613270174 stripped
 Transform:
@@ -32147,7 +32129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 1222413817}
   - {fileID: 1799207460}
@@ -32177,7 +32158,6 @@ MonoBehaviour:
   - {fileID: 826903522}
   - {fileID: 1662977045}
   - {fileID: 1662977044}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!1001 &636519586
 Prefab:
@@ -34675,6 +34655,48 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 431630, guid: fad74aea1a120684297e0943003b8e36, type: 2}
   m_PrefabInternal: {fileID: 680792549}
+--- !u!1001 &682547394
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 482680, guid: 27d38a2b05834fe4ba17fe6d61355803, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -678.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 482680, guid: 27d38a2b05834fe4ba17fe6d61355803, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -128.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 482680, guid: 27d38a2b05834fe4ba17fe6d61355803, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1246.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 482680, guid: 27d38a2b05834fe4ba17fe6d61355803, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 482680, guid: 27d38a2b05834fe4ba17fe6d61355803, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 482680, guid: 27d38a2b05834fe4ba17fe6d61355803, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 482680, guid: 27d38a2b05834fe4ba17fe6d61355803, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 482680, guid: 27d38a2b05834fe4ba17fe6d61355803, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 27d38a2b05834fe4ba17fe6d61355803, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &683719243
 Prefab:
   m_ObjectHideFlags: 0
@@ -40647,7 +40669,7 @@ Transform:
   - {fileID: 460329774}
   - {fileID: 1841943634}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1001 &819071344
 Prefab:
   m_ObjectHideFlags: 0
@@ -46744,7 +46766,7 @@ Transform:
   - {fileID: 106878350}
   - {fileID: 106878347}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
 --- !u!1001 &936323834
 Prefab:
   m_ObjectHideFlags: 0
@@ -58845,7 +58867,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 489748438}
   - {fileID: 666689786}
@@ -58897,7 +58918,6 @@ MonoBehaviour:
   - {fileID: 1896416173}
   - {fileID: 1491649670}
   - {fileID: 1491649669}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!1001 &1165453766
 Prefab:
@@ -61122,7 +61142,7 @@ Transform:
   - {fileID: 883329987}
   - {fileID: 1834908198}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1001 &1226772583
 Prefab:
   m_ObjectHideFlags: 0
@@ -62759,7 +62779,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 976924400}
   - {fileID: 976924399}
@@ -62775,7 +62794,6 @@ MonoBehaviour:
   - {fileID: 485428452}
   - {fileID: 1261236806}
   - {fileID: 1261236805}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!1001 &1252906337
 Prefab:
@@ -65015,7 +65033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 767490526}
   - {fileID: 767490525}
@@ -65041,7 +65058,6 @@ MonoBehaviour:
   - {fileID: 1972211299}
   - {fileID: 1675189335}
   - {fileID: 1675189333}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!4 &1311727324
 Transform:
@@ -68329,7 +68345,7 @@ Transform:
   - {fileID: 1781617259}
   - {fileID: 482997249}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &1385906701 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 102586, guid: 131277d26bcf3e24bb13079df67e85f5, type: 2}
@@ -70873,7 +70889,7 @@ Transform:
   - {fileID: 1623332238}
   - {fileID: 895636324}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &1439650773 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 189552, guid: 68ace85d9aa8e544bb9da7273e84e54a, type: 2}
@@ -71104,6 +71120,14 @@ Prefab:
     - target: {fileID: 400036, guid: 961cd0b2c75974c47882241c439e3607, type: 3}
       propertyPath: m_LocalScale.z
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 100036, guid: 961cd0b2c75974c47882241c439e3607, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 100036, guid: 961cd0b2c75974c47882241c439e3607, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 961cd0b2c75974c47882241c439e3607, type: 3}
@@ -74390,34 +74414,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 11494722, guid: 4edd572593adb5b4da209d9c5e24938c, type: 2}
-      propertyPath: moveSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 11494722, guid: 4edd572593adb5b4da209d9c5e24938c, type: 2}
-      propertyPath: maxSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 6576076, guid: 4edd572593adb5b4da209d9c5e24938c, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6576076, guid: 4edd572593adb5b4da209d9c5e24938c, type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 457814, guid: 4edd572593adb5b4da209d9c5e24938c, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 457814, guid: 4edd572593adb5b4da209d9c5e24938c, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 457814, guid: 4edd572593adb5b4da209d9c5e24938c, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4edd572593adb5b4da209d9c5e24938c, type: 2}
   m_IsPrefabParent: 0
@@ -77546,7 +77542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 401798969}
   - {fileID: 401798968}
@@ -77588,7 +77583,6 @@ MonoBehaviour:
   - {fileID: 640080520}
   - {fileID: 809137257}
   - {fileID: 809137256}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!1001 &1573570515
 Prefab:
@@ -83885,7 +83879,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 435000010}
   - {fileID: 1494267976}
@@ -83899,7 +83892,6 @@ MonoBehaviour:
   - {fileID: 1034193322}
   - {fileID: 454600460}
   - {fileID: 454600459}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!1001 &1697470515
 Prefab:
@@ -93825,7 +93817,7 @@ Transform:
   - {fileID: 455785595}
   - {fileID: 530952135}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &1885204216
 GameObject:
   m_ObjectHideFlags: 0
@@ -96624,7 +96616,7 @@ Transform:
   - {fileID: 1090756168}
   - {fileID: 1495211373}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1001 &1954691155
 Prefab:
   m_ObjectHideFlags: 0
@@ -96830,7 +96822,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &1962214967 stripped
 Transform:
   m_PrefabParentObject: {fileID: 431630, guid: fad74aea1a120684297e0943003b8e36, type: 2}
@@ -97982,7 +97974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 892212340}
   - {fileID: 892212339}
@@ -98094,7 +98085,6 @@ MonoBehaviour:
   - {fileID: 453188751}
   - {fileID: 1543047088}
   - {fileID: 1543047087}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!1001 &1990927975
 Prefab:
@@ -104121,7 +104111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 998036771}
   - {fileID: 998036770}
@@ -104141,7 +104130,6 @@ MonoBehaviour:
   - {fileID: 1485972799}
   - {fileID: 1995088201}
   - {fileID: 1995088200}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!1001 &2096723592
 Prefab:
@@ -106038,7 +106026,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffc5c1360fbfe944b7bbaad4a98340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i: 0
   all_lights:
   - {fileID: 303141364}
   - {fileID: 830206123}
@@ -106072,7 +106059,6 @@ MonoBehaviour:
   - {fileID: 529075572}
   - {fileID: 750703960}
   - {fileID: 1358879472}
-  lifetime: 0
   timeLimit: 0.4
 --- !u!4 &2136485660
 Transform:
