@@ -18,8 +18,9 @@ public class EscapeGame : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "New Player")
+        if (other.gameObject.tag == "Player")
         {
+            Debug.Log("Escaped!");
             bd.set_escape(true);
         }
     }
