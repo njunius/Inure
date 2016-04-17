@@ -3,12 +3,12 @@ using System.Collections;
 
 public class EscapeGame : MonoBehaviour
 {
-    BombDetach bd = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombDetach>();
+    BombDetach bd;
 	// Use this for initialization
 	void Start ()
     {
-	    
-	}
+        bd = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombDetach>();
+    }
 	
 	// Update is called once per frame
 	void Update ()

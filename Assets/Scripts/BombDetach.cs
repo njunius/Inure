@@ -6,12 +6,12 @@ public class BombDetach : MonoBehaviour
     private bool detached = false;
     private float count_down = 60;
     private bool escaped = false;
-    PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    PlayerController pc;
 
     // Use this for initialization
     void Start()
     {
-
+        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
