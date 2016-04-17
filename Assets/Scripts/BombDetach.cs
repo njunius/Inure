@@ -6,7 +6,8 @@ public class BombDetach : MonoBehaviour
     private bool detached = false;
     private float count_down = 60;
     private bool escaped = false;
-    
+    PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
     // Use this for initialization
     void Start()
     {
@@ -22,6 +23,7 @@ public class BombDetach : MonoBehaviour
             if (count_down <= 0 && !escaped)
             {
                 Debug.Log("Game Over!");
+                pc.setHullIntegrity(0);
             }
             else if(count_down <= 0 && escaped)
             {
