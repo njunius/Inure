@@ -22,7 +22,7 @@ public class BombDetach : MonoBehaviour
             count_down -= Time.deltaTime;
             if (count_down <= 0 && !escaped)
             {
-                Debug.Log("Game Over!");
+                //Debug.Log("Game Over!");
                 pc.setHullIntegrity(0);
             }
             else if(count_down <= 0 && escaped)
