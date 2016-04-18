@@ -4,9 +4,9 @@ using System.Collections;
 public class LevelChange : MonoBehaviour {
 	public string levelName = "01-Entrance";
 	void OnTriggerEnter(Collider other) {
-		Debug.Log ("Collided!");
+		//Debug.Log ("Collided!");
 		if(other.CompareTag("Player Collider")){
-			Debug.Log ("Is Player!");
+			//Debug.Log ("Is Player!");
             Application.LoadLevel (levelName);
 		}
 	}

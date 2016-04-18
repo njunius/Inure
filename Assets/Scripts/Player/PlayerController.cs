@@ -10,8 +10,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-    public float moveSpeed = 20.0f;
-    public float maxSpeed = 500.0f;
+    public float moveSpeed = 200.0f;
+    public float maxSpeed = 200.0f;
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
     public Color bulletColor = Color.blue;
@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour {
     private Vector3 localPrevVel = Vector3.zero;
 
     public AudioClip playerBulletSound;
+    public AudioClip hullRestoreSound;
     private AudioSource source;
     private float volLowRange = 0.7f;
     private float volHighRange = 1.0f;
@@ -76,6 +77,8 @@ public class PlayerController : MonoBehaviour {
     public bool lateralEnginesEnabled = true;
     public bool weaponsEnabled = true;
     public bool sheildEnabled = true;
+
+    public bool tutorialMode = false;
 
     // Use this for initialization
     void Awake () {
@@ -107,6 +110,11 @@ public class PlayerController : MonoBehaviour {
 
         maxHullIntegrity = currHullIntegrity = 5;
 
+        if (tutorialMode)
+        {
+            currHullIntegrity = 0;
+        }
+
         Transform[] temp = bulletSpawns.GetComponentsInChildren<Transform>();
         bulletSpawnLocations = new Transform[temp.Length - 1];
         bulletSpawnLocIndex = 0;
@@ -137,7 +145,7 @@ public class PlayerController : MonoBehaviour {
 		frontOfShip = mesh.GetComponent<Renderer>().bounds.center + (forwardNorm * mesh.GetComponent<Renderer>().bounds.extents.z * 1.15f);
 
         //Activate the game over sequence when death is true
-        if (isDead() && !noGameOver)
+        if (!tutorialMode && isDead() && !noGameOver)
         {
             killPlayer();
         }
@@ -221,7 +229,7 @@ public class PlayerController : MonoBehaviour {
                 InvokeRepeating("fireBullets", 0.0f, fireRate);
             }
 
-            if (im.getInputUpEnhanced("Shoot"))
+            if (weaponsEnabled && im.getInputUpEnhanced("Shoot"))
             {
                 CancelInvoke("fireBullets");
                 isFiring = false;
@@ -378,8 +386,8 @@ public class PlayerController : MonoBehaviour {
 
         if (!targetLocked)
         {
-            localPrevVel = transform.InverseTransformVector(rb.velocity);
-            //localPrevVel = rb.velocity;
+            //localPrevVel = transform.InverseTransformVector(rb.velocity);
+            localPrevVel = rb.velocity;
             if (rotPitch == 0)
             {
                 rb.angularVelocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.angularVelocity).y,
@@ -449,12 +457,13 @@ public class PlayerController : MonoBehaviour {
     {
         if (!targetLocked && turned)
         {
-            Debug.Log("Vel");
-            Debug.Log(rb.velocity);
-            Debug.Log(localPrevVel);
-            rb.velocity = (rb.velocity + 2 * transform.TransformVector(localPrevVel)) / 3;
+            //Debug.Log("Vel");
+            //Debug.Log(rb.velocity);
+            //Debug.Log(localPrevVel);
+            //float vm = rb.velocity.magnitude;
+            //rb.velocity = (rb.velocity - 0.9f * localPrevVel).normalized * vm;
             //rb.velocity = (rb.velocity + 2 * localPrevVel) / 3;
-            Debug.Log(rb.velocity);
+            //Debug.Log(rb.velocity);
         }
     }
 
@@ -591,6 +600,13 @@ public class PlayerController : MonoBehaviour {
     public int getCurrHullIntegrity()
     {
         return currHullIntegrity;
+    }
+
+    public void restoreHullPoint()
+    {
+        currHullIntegrity++;
+        source.PlayOneShot(hullRestoreSound);
+
     }
 
 	private void fireBullets() {
