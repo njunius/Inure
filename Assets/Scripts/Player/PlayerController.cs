@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour {
     private bool turned = false;
     private Vector3 localPrevVel = Vector3.zero;
 
+	public ParticleSystem mainThrusterLeft;
+	public ParticleSystem mainThrusterRight;
+	public GameObject thrusterLeft;
+	public GameObject thrusterRight;
+
     public AudioClip playerBulletSound;
     public AudioClip hullRestoreSound;
     private AudioSource source;
@@ -133,8 +138,6 @@ public class PlayerController : MonoBehaviour {
         }
         gameController = GameObject.FindGameObjectWithTag("GameController");
         im = gameController.GetComponent<InputManager>();
-
-        
     }
 
     // Update is called once per frame
@@ -332,10 +335,14 @@ public class PlayerController : MonoBehaviour {
             }
         }
         
-
-
-        if (moveLongitudinal != 0)
+		if (moveLongitudinal == 0) {
+			TurnOffThruster ("main");
+		}
+		else if (moveLongitudinal != 0)
         {
+			if (moveLongitudinal > 0) {
+				TurnOnThruster ("main");
+			}
             if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).z) != Mathf.Sign(moveLongitudinal))
             {
                 rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
@@ -716,6 +723,38 @@ public class PlayerController : MonoBehaviour {
 		bulletVel /= timeScale;
 		fireRate *= timeScale;
 		invulnSecs *= timeScale;
+	}
+
+	private void TurnOnThruster (string name) {
+		switch (name) {
+		case "main":
+			if (!mainThrusterLeft.isPlaying) {
+				//thrusterLeft.SetActive (true);
+				mainThrusterLeft.Play ();
+				//thrusterRight.SetActive (true);
+				mainThrusterRight.Play ();
+				//mainThrusterLeft.startLifetime = mainThrusterLeft.startLifetime;
+				//mainThrusterRight.startLifetime = mainThrusterRight.startLifetime;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void TurnOffThruster (string name) {
+		switch (name) {
+		case "main":
+			if (mainThrusterLeft.isPlaying) {
+				mainThrusterLeft.Stop ();
+				//thrusterLeft.SetActive (false);
+				mainThrusterRight.Stop ();
+				//thrusterRight.SetActive (false);
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
     public void freezeRotation()

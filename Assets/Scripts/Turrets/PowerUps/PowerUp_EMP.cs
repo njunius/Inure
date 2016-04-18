@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PowerUp_EMP : PowerUp {
 
-	private float MAX_FIELD_SIZE = 40f;
+	private float MAX_FIELD_SIZE = 120f;
 	private float FIELD_EXPANSION_PER_FRAME;
 	private GameObject effectField;
 	private Color fieldColor = new Color (0.988f, 0.992f, 0.541f, 0.5f);
@@ -16,7 +16,7 @@ public class PowerUp_EMP : PowerUp {
 		effectField= (GameObject)Resources.Load("FieldSphereEMP");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
 		if (gameObject.CompareTag ("Player")) {
-			effectField.GetComponent<Effect_Shockwave> ().IsPlayer ();
+			effectField.GetComponent<Effect_EMP> ().IsPlayer ();
 		}
 		effectField.GetComponent<Renderer> ().material.SetColor ("_Color", fieldColor);
 		effectField.SetActive (false);

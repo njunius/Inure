@@ -43,10 +43,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 440500}
   - 108: {fileID: 10839818}
-  - 114: {fileID: 11447158}
-  - 114: {fileID: 11410306}
   m_Layer: 0
-  m_Name: light
+  m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,10 +76,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 470938}
   - 108: {fileID: 10845776}
-  - 114: {fileID: 11497216}
-  - 114: {fileID: 11475984}
   m_Layer: 0
-  m_Name: Halo
+  m_Name: Point Halo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,8 +120,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154654}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5000001, w: 0.49999994}
-  m_LocalPosition: {x: -1799.8, y: -1100.02, z: -427.6}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 104.8, y: -6.062, z: -172.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 458732}
@@ -302,8 +298,8 @@ Light:
   serializedVersion: 6
   m_Type: 2
   m_Color: {r: 0.04557132, g: 0.882353, b: 0.015686296, a: 1}
-  m_Intensity: 1.46
-  m_Range: 27.07
+  m_Intensity: 2.33
+  m_Range: 8.3
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -358,66 +354,6 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11410306
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144623154830ca34ca628aa405762be5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 1
-  lifetime: 0
-  activated: 0
-  timeLimit: 0
---- !u!114 &11447158
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144623154830ca34ca628aa405762be5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 1
-  lifetime: 0
-  activated: 0
-  timeLimit: 0
---- !u!114 &11475984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144623154830ca34ca628aa405762be5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 1
-  lifetime: 0
-  activated: 0
-  timeLimit: 0
---- !u!114 &11497216
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144623154830ca34ca628aa405762be5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 1
-  lifetime: 0
-  activated: 0
-  timeLimit: 0
 --- !u!136 &13637730
 CapsuleCollider:
   m_ObjectHideFlags: 1
