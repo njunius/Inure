@@ -117,20 +117,25 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
             case 8:         //Player can lift off. Display vertical controls
                 source.PlayOneShot(Accelerators);
-                subtitles.text = "Press " + im.getPosInputName("Longitudinal").ToUpper() + " " + im.getNegInputName("Longitudinal").ToUpper() + " " + im.getPosInputName("Lateral").ToUpper() + " " + im.getNegInputName("Lateral").ToUpper() + " to accelerate in Longitudinal or Lateral.";
+                subtitles.text = "Press " + im.getPosInputName("Longitudinal").ToUpper() + im.getNegInputName("Longitudinal").ToUpper() + im.getNegInputName("Lateral").ToUpper() + im.getPosInputName("Lateral").ToUpper() + " to accelerate in Longitudinal or Lateral.";
                 player.longitudinalEnginesEnabled = true;
                 player.lateralEnginesEnabled = true;
                 break;
-            case 9:         //Player can move forward.
+
+            case 9:
+                subtitles.text = "";
+                break;
+
+            case 10:         //Player can move forward.
                 source.PlayOneShot(Rotators);
                 subtitles.text = "Use Mouse to rotate Pitch and Yaw.  Use " + im.getPosInputName("Roll").ToUpper() + " and " + im.getNegInputName("Roll").ToUpper() + " to Roll.";
                 player.rotateEnabled = true;
                 player.unFreezeRotation();
                 break;
-            case 10:
+            case 11:
                 subtitles.text = "";
                 break;
-            case 11:
+            case 12:
                 source.PlayOneShot(Weapons);
                 subtitles.text = "Use Left Mouse Button to fire.";
                 player.weaponsEnabled = true;

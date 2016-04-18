@@ -1726,8 +1726,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180074}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: -2029, y: -1099.9998, z: -1520.0996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 478726}
@@ -2206,8 +2206,8 @@ Rigidbody:
   m_GameObject: {fileID: 180074}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_Drag: 1.5
+  m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -3456,12 +3456,14 @@ MonoBehaviour:
   thrusterLeft: {fileID: 196892}
   thrusterRight: {fileID: 163192}
   playerBulletSound: {fileID: 8300000, guid: 9f5e116a2349b3842a82d3cf2c8b3953, type: 3}
+  hullRestoreSound: {fileID: 0}
   rotateEnabled: 1
   verticalEnginesEnabled: 1
   longitudinalEnginesEnabled: 1
   lateralEnginesEnabled: 1
   weaponsEnabled: 1
   sheildEnabled: 1
+  tutorialMode: 0
 --- !u!114 &11498090
 MonoBehaviour:
   m_ObjectHideFlags: 1
