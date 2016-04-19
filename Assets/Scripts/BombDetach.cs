@@ -6,27 +6,62 @@ public class BombDetach : MonoBehaviour
     private bool detached = false;
     private float count_down = 60;
     private bool escaped = false;
-    
+    private bool stopChecking = false;
+    //private int counter = 0;
+    PlayerController pc;
+
     // Use this for initialization
     void Start()
     {
-
+        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //counter++;
         if (detached)
         {
             count_down -= Time.deltaTime;
-            if (count_down <= 0 && !escaped)
+            if(count_down <= 0)
             {
-                Debug.Log("Game Over!");
+                if(escaped)
+                {
+                    //Debug.Log("if " + counter + ": " + stopChecking);
+                    if (!stopChecking)
+                    {
+                        //Debug.Log("if " + counter + ": " + stopChecking);
+                        stopChecking = true;
+                        //Debug.Log("if " + counter + ": " + stopChecking);
+                        //Debug.Log(escaped);
+                        Debug.Log("You Win!");
+                        count_down = 0.00f;
+                        detached = false;
+                    }
+                }
+                else
+                {
+                    //Debug.Log("else " + counter + ": " + stopChecking);
+                    if (!stopChecking)
+                    {
+                        //Debug.Log("else " + counter + ": " + stopChecking);
+                        stopChecking = true;
+                        //Debug.Log("else " + counter + ": " + stopChecking);
+                        //Debug.Log("Game Over!");
+                        pc.setHullIntegrity(0);
+                    }
+                }
             }
-            else if(count_down <= 0 && escaped)
+            /*if (count_down <= 0 && escaped)
             {
+                Debug.Log(escaped);
                 Debug.Log("You Win!");
             }
+            else if (count_down <= 0 && !escaped)
+            {
+                //Debug.Log("Game Over!");
+                pc.setHullIntegrity(0);
+            }*/
         }
     }
 

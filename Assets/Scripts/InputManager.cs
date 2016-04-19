@@ -183,6 +183,28 @@ public class InputManager : MonoBehaviour {
         return true;
     }
 
+    public string getPosInputName(string name)
+    {
+        if (!inputPresets[presetIndex].ContainsKey(name))
+        {
+            Debug.Log(name + " not bound.");
+            return "";
+        }
+        InputBinding input = inputPresets[presetIndex][name];
+        return input.posAxis;
+    }
+
+    public string getNegInputName(string name)
+    {
+        if (!inputPresets[presetIndex].ContainsKey(name))
+        {
+            Debug.Log(name + " not bound.");
+            return "";
+        }
+        InputBinding input = inputPresets[presetIndex][name];
+        return input.negAxis;
+    }
+
     public void inspectorToDicts()
     {
         if (inputPresets == null)

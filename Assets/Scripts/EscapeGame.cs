@@ -3,12 +3,12 @@ using System.Collections;
 
 public class EscapeGame : MonoBehaviour
 {
-    BombDetach bd = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombDetach>();
+    BombDetach bd;
 	// Use this for initialization
 	void Start ()
     {
-	    
-	}
+        bd = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombDetach>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -18,7 +18,7 @@ public class EscapeGame : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "New Player")
+        if (other.gameObject.tag == "Player Collider")
         {
             bd.set_escape(true);
         }
