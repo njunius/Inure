@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BombDetach : MonoBehaviour
 {
-    private bool detached = false;
+    public bool detached = false;
     private float count_down = 60;
     private bool escaped = false;
     private bool stopChecking = false;
@@ -35,8 +35,6 @@ public class BombDetach : MonoBehaviour
                         //Debug.Log("if " + counter + ": " + stopChecking);
                         //Debug.Log(escaped);
                         Debug.Log("You Win!");
-                        count_down = 0.00f;
-                        detached = false;
                     }
                 }
                 else

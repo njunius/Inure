@@ -48,8 +48,19 @@ public class CameraController : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
     public GameObject gameController;
     public InputManager im;
+
+    private bool isShaking = false;
+    public float shakeFreq = 0.2f;
+    public float shakeAmount = 0.7f;
+
+    private BombDetach bd;
+
+    private float lastShake = 0;
+    private float shakeDuration = 0;
+
     // Use this for initialization
     void Start () {
+        bd = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombDetach>();
         thisTransformCache = transform;
         fadeDistance = defaultDistance * 0.5f;
 
@@ -100,6 +111,11 @@ public class CameraController : MonoBehaviour {
 
     void Update()
     {
+
+        if (!isShaking && bd.detached)
+        {
+            isShaking = true;
+        }
         if (im.getInputDown("Camera Mode"))
         {
             switch (mode)
@@ -285,7 +301,17 @@ public class CameraController : MonoBehaviour {
         }
         
 
+        if (isShaking && lastShake >= shakeDuration)
+        {
+            thisTransformCache.position += (Vector3)Random.insideUnitCircle * shakeAmount;
 
+            shakeDuration = shakeFreq + Random.Range(-0.05f, 0.05f);
+            lastShake = 0;
+        }
+        else if (isShaking)
+        {
+            lastShake += Time.deltaTime;
+        }
 
 
     }
