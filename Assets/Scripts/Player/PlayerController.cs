@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 
     public AudioClip playerBulletSound;
     public AudioClip hullRestoreSound;
-    private AudioSource source;
+    private AudioSource[] sources;
     private float volLowRange = 0.7f;
     private float volHighRange = 1.0f;
 
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        source = GetComponent<AudioSource>();
+        sources = GetComponents<AudioSource>();   //0: bullets, 1: engines, 2: shield, 3: impacts, 4: other
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour {
             }
 
             // Shooting controls
-            if (im.getInput("Shoot") > 0.3f && !isFiring)
+            if (weaponsEnabled && im.getInput("Shoot") > 0.3f && !isFiring)
             {
                 isFiring = true;
                 InvokeRepeating("fireBullets", 0.0f, fireRate);
@@ -612,7 +612,7 @@ public class PlayerController : MonoBehaviour {
     public void restoreHullPoint()
     {
         currHullIntegrity++;
-        source.PlayOneShot(hullRestoreSound);
+        sources[4].PlayOneShot(hullRestoreSound);
 
     }
 
@@ -638,7 +638,7 @@ public class PlayerController : MonoBehaviour {
 		}*/
 
         float vol = Random.Range(volLowRange, volHighRange);
-        source.PlayOneShot(playerBulletSound, vol);
+        sources[0].PlayOneShot(playerBulletSound, vol);
 
         for(int i = 0; i < bulletSpawnLocations.Length; ++i)
         {
