@@ -36,7 +36,7 @@ public class BossManager : MonoBehaviour {
 
 		if(shieldCount % turretInterval == 0 
 			&& divideTMP < hasSpawned.Length
-			&& hasSpawned[divideTMP]){
+			&& !hasSpawned[divideTMP]){
 
 			turretTurnOn[divideTMP].GetComponent<Turret> ().TurnOn ();
 			
@@ -45,6 +45,7 @@ public class BossManager : MonoBehaviour {
 		//If shieldCount > enableReactorField, enable the sphere trigger
 		if(shieldCount > enableReactorField){
 			reactor.GetComponent<SphereCollider>().enabled = true;
+			reactor.transform.GetChild(0).GetComponent<Light>().color = Color.red;
 		}
 	}
 }
