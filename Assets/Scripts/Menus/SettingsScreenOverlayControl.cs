@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SettingsScreenOverlayControl : MonoBehaviour {
 
-    public Canvas keybindingFields;
+    public GameObject keybindingFields;
     private Canvas thisOverlay;
 
 	// Use this for initialization
@@ -16,11 +16,11 @@ public class SettingsScreenOverlayControl : MonoBehaviour {
 	void Update () {
         if (thisOverlay.enabled)
         {
-            keybindingFields.enabled = true;
+            keybindingFields.SetActive(true);
         }
         else
         {
-            keybindingFields.enabled = false;
+            keybindingFields.SetActive(false);
         }
 	}
 }
