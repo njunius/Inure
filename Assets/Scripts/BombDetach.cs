@@ -4,7 +4,7 @@ using System.Collections;
 public class BombDetach : MonoBehaviour
 {
     public bool detached = false;
-    private float count_down = 60;
+    private float count_down = 80;
     private bool escaped = false;
     private bool stopChecking = false;
     //private int counter = 0;
