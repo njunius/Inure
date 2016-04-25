@@ -20,6 +20,15 @@ public class PauseController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
+        if(!pauseOverlay.enabled && player.paused)
+        {
+            player.paused = !player.paused;
+            Time.timeScale = 1;
+            pauseOverlay.enabled = false;
+            Cursor.visible = false;
+        }
+
         if (im.getInputDown("Pause") && !player.paused)
         {
             player.paused = !player.paused;

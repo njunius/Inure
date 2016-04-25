@@ -5,15 +5,14 @@ using System.Collections;
 
 public class ButtonOverlayControl : MonoBehaviour, IPointerDownHandler {
 
-    private Canvas settingsOverlay;
+    public Canvas overlay;
 
     // Use this for initialization
     void Start () {
-        settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
 	}
 	
 	// Update is called once per frame
 	public void OnPointerDown (PointerEventData eventData) {
-        settingsOverlay.enabled = !settingsOverlay.enabled;
+        overlay.enabled = !overlay.enabled;
 	}
 }
