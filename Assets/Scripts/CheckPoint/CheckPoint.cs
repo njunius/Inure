@@ -33,6 +33,7 @@ public class CheckPoint : MonoBehaviour {
 				hasHealed = true;
 			}
 
+			savedROT = GameObject.FindGameObjectWithTag("Player").transform.rotation;
 			shieldCharge = pController.getShieldCharge();
 			hullHealth = pController.getCurrHullIntegrity();
 			pData.setCheckPoint(shieldCharge, bombCharge, hullHealth, savedPOS, savedROT);
