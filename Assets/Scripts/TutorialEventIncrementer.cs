@@ -41,7 +41,7 @@ public class TutorialEventIncrementer : MonoBehaviour {
             }
             if (Disables.Count > 0)
             {
-                foreach (GameObject g in Enables)
+                foreach (GameObject g in Disables)
                 {
                     g.SetActive(false);
                 }

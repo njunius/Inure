@@ -143,6 +143,11 @@ public class TutorialEventManager : MonoBehaviour {
 
 
                 break;
+            case 14:
+                //source.PlayOneShot(Shields);
+                subtitles.text = "Use Right Mouse Button to activate shield.";
+                player.sheildEnabled = true;
+                break;
         }
     }
 }
