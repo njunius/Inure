@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
     public Color bulletColor = Color.blue;
-	public float bulletVel = 80.0f;
+	public float bulletVel = 220.0f;
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
 
@@ -131,32 +131,6 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         
-
-
-        //Toggles pausing the game
-        /*
-        if (im.getInputDown("Pause") && !paused)
-        {
-            paused = !paused;
-            Time.timeScale = 0;
-            pauseScreen.enabled = true;
-            Cursor.visible = true;
-        }
-        else if (im.getInputDown("Pause") && paused)
-        {
-            Cursor.visible = false;
-            if (!settingsOverlay.enabled)
-            {
-                paused = !paused;
-                Time.timeScale = 1;
-                pauseScreen.enabled = false;
-            }
-            else if (settingsOverlay.enabled)
-            {
-                settingsOverlay.enabled = false;
-            }
-        }*/
-
         if (!paused)
         {
             //find new point at front of ship for firing
