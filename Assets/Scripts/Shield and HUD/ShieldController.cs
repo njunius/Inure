@@ -45,7 +45,7 @@ public class ShieldController : MonoBehaviour {
         shieldChargeDelayTimer = 0.0f;
         shieldDepleteAmount = -20;
         shieldRechargeAmount = 5;
-        shieldDeltaChargeTimer = 0.0f;
+        shieldDeltaChargeTimer = 0.0f; // initialize to 0 otherwise the timer is immediately updated.
         interpShieldValue = 100.0f;
 
         shieldMesh = GetComponent<MeshRenderer>();
@@ -122,7 +122,7 @@ public class ShieldController : MonoBehaviour {
                     shieldActive = false;
                     currShieldCharge = 0;
                     shieldChargeDelayTimer = 0.0f;
-                    shieldDeltaChargeTimer = 1.0f;
+                    shieldDeltaChargeTimer = 1.0f; // set to 1 to allow the shield to be immediately charged, otherwise there is a 3 second delay instead of a 2 second one
                 }
                 else if (currShieldCharge > 0 && shieldDeltaChargeTimer >= 1.0f) // remove a charge from the shield after a 1 second delay
                 {
