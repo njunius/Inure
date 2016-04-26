@@ -424,7 +424,11 @@ public class PlayerController : MonoBehaviour {
             {
                 if (lockOnTarget != null)
                 {
+                    Quaternion prevRot = transform.rotation;
                     transform.LookAt(lockOnTarget.transform, transform.up);
+
+
+                    transform.rotation = Quaternion.RotateTowards(prevRot, transform.rotation, 1);
 
                 }
                 if (rotRoll != 0)
@@ -434,7 +438,7 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
-                                                                       transform.InverseTransformDirection(rb.angularVelocity).y, 0));
+                                                                       transform.InverseTransformDirection(rb.angularVelocity).y, Time.deltaTime));
 
                 }
             }
