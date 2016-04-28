@@ -20,38 +20,45 @@ public class PauseController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
-        if(!pauseOverlay.enabled && player.paused)
+        if (im == null)
         {
-            player.paused = !player.paused;
-            Time.timeScale = 1;
-            pauseOverlay.enabled = false;
-            Cursor.visible = false;
+            im = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
         }
-
-        if (im.getInputDown("Pause") && !player.paused)
+        else
         {
-            player.paused = !player.paused;
-            Time.timeScale = 0;
-            pauseOverlay.enabled = true;
-            Cursor.visible = true;
-        }
-        else if (im.getInputDown("Pause") && player.paused)
-        {
-            if (!settingsOverlay.enabled)
+            if (!pauseOverlay.enabled && player.paused)
             {
                 player.paused = !player.paused;
                 Time.timeScale = 1;
                 pauseOverlay.enabled = false;
                 Cursor.visible = false;
             }
-            else if (settingsOverlay.enabled)
+
+            if (im.getInputDown("Pause") && !player.paused)
             {
-                settingsOverlay.enabled = false;
+                player.paused = !player.paused;
+                Time.timeScale = 0;
+                pauseOverlay.enabled = true;
+                Cursor.visible = true;
             }
+            else if (im.getInputDown("Pause") && player.paused)
+            {
+                if (!settingsOverlay.enabled)
+                {
+                    player.paused = !player.paused;
+                    Time.timeScale = 1;
+                    pauseOverlay.enabled = false;
+                    Cursor.visible = false;
+                }
+                else if (settingsOverlay.enabled)
+                {
+                    settingsOverlay.enabled = false;
+                }
+            }
+            if (Cursor.visible && !player.paused && !player.isDead())
+                Cursor.visible = false;
         }
-        if (Cursor.visible && !player.paused && !player.isDead())
-            Cursor.visible = false;
+        
     }
 
 }
