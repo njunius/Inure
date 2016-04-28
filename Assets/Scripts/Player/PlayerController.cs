@@ -10,12 +10,12 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-    public float moveSpeed = 20.0f;
-    public float maxSpeed = 500.0f;
+    public float moveSpeed = 200.0f;
+    public float maxSpeed = 200.0f;
     public float rotSpeed = 120.0f;
     public float rollSpeed = 100.0f;
     public Color bulletColor = Color.blue;
-	public float bulletVel = 80.0f;
+	public float bulletVel = 220.0f;
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
 
@@ -41,11 +41,9 @@ public class PlayerController : MonoBehaviour {
 	private string curPowerUp;
 
     private Rigidbody rb;
-	private GameObject canvasOBJ, gameOverOBJ, pauseTxtOBJ, inureTxtOBJ; //UI GameObjects
-    private Canvas UICanvas; //Base user interface, pause menu here
+
+    private Canvas pauseScreen; //Base user interface, pause menu here
     private Canvas settingsOverlay;
-	private RawImage gameOver; //Game Over IMG
-	private Text pauseTxt, inureTxt;
 
 	private float timerTMP = 0;
     
@@ -71,7 +69,8 @@ public class PlayerController : MonoBehaviour {
 	public GameObject thrusterRight;
 
     public AudioClip playerBulletSound;
-    private AudioSource source;
+    public AudioClip hullRestoreSound;
+    private AudioSource[] sources;
     private float volLowRange = 0.7f;
     private float volHighRange = 1.0f;
 
@@ -82,9 +81,11 @@ public class PlayerController : MonoBehaviour {
     public bool weaponsEnabled = true;
     public bool sheildEnabled = true;
 
+    public bool tutorialMode = false;
+
     // Use this for initialization
     void Awake () {
-        source = GetComponent<AudioSource>();
+        sources = GetComponents<AudioSource>();   //0: bullets, 1: engines, 2: shield, 3: impacts, 4: other
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
@@ -92,25 +93,20 @@ public class PlayerController : MonoBehaviour {
 
         curPowerUp = powerUpList[0];
 
-        settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
+        pauseScreen = GameObject.FindGameObjectWithTag("Pause Overlay").GetComponent<Canvas>();
 
-		//Set the UI objects and assign components 
-		//(Wall of text to be fixed in future updates)
-		canvasOBJ = GameObject.Find("Canvas");
-        UICanvas = canvasOBJ.GetComponent<Canvas>();
-		pauseTxtOBJ = GameObject.Find ("PausedTXT");
-		pauseTxt = pauseTxtOBJ.GetComponent<Text> ();
-		inureTxtOBJ = GameObject.Find ("InureTXT");
-		inureTxt = inureTxtOBJ.GetComponent<Text> ();
-		gameOverOBJ = GameObject.Find("GameOverIMG");
-		gameOver = gameOverOBJ.GetComponent<RawImage> ();
+        /*settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
 
-		UICanvas.enabled = false;
-		gameOver.enabled = false;
+		*/
 
         shield = GetComponentInChildren<ShieldController>();
 
         maxHullIntegrity = currHullIntegrity = 5;
+
+        if (tutorialMode)
+        {
+            currHullIntegrity = 0;
+        }
 
         Transform[] temp = bulletSpawns.GetComponentsInChildren<Transform>();
         bulletSpawnLocations = new Transform[temp.Length - 1];
@@ -137,83 +133,58 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        //find new point at front of ship for firing
-        Vector3 forwardNorm = gameObject.transform.forward;
-		forwardNorm.Normalize ();
-		frontOfShip = mesh.GetComponent<Renderer>().bounds.center + (forwardNorm * mesh.GetComponent<Renderer>().bounds.extents.z * 1.15f);
+        
+        if (!paused)
+        {
+            //find new point at front of ship for firing
+            Vector3 forwardNorm = gameObject.transform.forward;
+            forwardNorm.Normalize();
+            frontOfShip = mesh.GetComponent<Renderer>().bounds.center + (forwardNorm * mesh.GetComponent<Renderer>().bounds.extents.z * 1.15f);
 
-        //Activate the game over sequence when death is true
-        if (isDead() && !noGameOver)
-        {
-            killPlayer();
-        }
-        //Count down invulnerability
-        if (fInvincible)
-        {
-            timerTMP -= Time.deltaTime;
-            if (timerTMP / invulnSecs < .8)
+            //Activate the game over sequence when death is true
+            if (!tutorialMode && isDead() && !noGameOver)
             {
-                if (!invincibleFlashing)
+                killPlayer();
+            }
+            //Count down invulnerability
+            if (fInvincible)
+            {
+                timerTMP -= Time.deltaTime;
+                if (timerTMP / invulnSecs < .8)
                 {
-                    Renderer r = mesh.GetComponent<Renderer>();
-                    r.material.color = originalColor;
-                    r.material.DisableKeyword("_Emmisive");
-                    invincibleFlashing = true;
-                }
-                else
-                {
-                    Renderer r = mesh.GetComponent<Renderer>();
-                    if (r.enabled)
+                    if (!invincibleFlashing)
                     {
-                        r.enabled = false;
+                        Renderer r = mesh.GetComponent<Renderer>();
+                        r.material.color = originalColor;
+                        r.material.DisableKeyword("_Emmisive");
+                        invincibleFlashing = true;
                     }
                     else
                     {
-                        r.enabled = true;
+                        Renderer r = mesh.GetComponent<Renderer>();
+                        if (r.enabled)
+                        {
+                            r.enabled = false;
+                        }
+                        else
+                        {
+                            r.enabled = true;
+                        }
+
                     }
-                    
+
                 }
-                
+
+                if (timerTMP <= 0)
+                {
+                    fInvincible = false;
+                    invincibleFlashing = false;
+                    Renderer r = mesh.GetComponent<Renderer>();
+                    r.material.color = originalColor;
+                    r.enabled = true;
+                }
             }
 
-            if (timerTMP <= 0)
-            {
-                fInvincible = false;
-                invincibleFlashing = false;
-                Renderer r = mesh.GetComponent<Renderer>();
-                r.material.color = originalColor;
-                r.enabled = true;
-            }
-        }
-
-
-        //Toggles pausing the game
-
-        if (im.getInputDown("Pause") && !paused)
-        {
-            paused = !paused;
-            Time.timeScale = 0;
-            UICanvas.enabled = true;
-            Cursor.visible = true;
-        }
-        else if (im.getInputDown("Pause") && paused)
-        {
-            Cursor.visible = false;
-            if (!settingsOverlay.enabled)
-            {
-                paused = !paused;
-                Time.timeScale = 1;
-                UICanvas.enabled = false;
-            }
-            else if (settingsOverlay.enabled)
-            {
-                settingsOverlay.enabled = false;
-            }
-        }
-
-        if (!paused)
-        {
-            if (Cursor.visible && !gameOver.enabled) Cursor.visible = false;
             // Shield Controls 
             if (im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
             {
@@ -221,13 +192,13 @@ public class PlayerController : MonoBehaviour {
             }
 
             // Shooting controls
-            if (im.getInput("Shoot") > 0.3f && !isFiring)
+            if (weaponsEnabled && im.getInput("Shoot") > 0.3f && !isFiring)
             {
                 isFiring = true;
                 InvokeRepeating("fireBullets", 0.0f, fireRate);
             }
 
-            if (im.getInputUpEnhanced("Shoot"))
+            if (weaponsEnabled && im.getInputUpEnhanced("Shoot"))
             {
                 CancelInvoke("fireBullets");
                 isFiring = false;
@@ -283,182 +254,196 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
 
-
-        float moveLongitudinal = im.getInput("Longitudinal") * moveSpeed;
-        float moveLateral = im.getInput("Lateral") * moveSpeed;
-        float moveVertical = im.getInput("Vertical") * moveSpeed;
-        float rotRoll = im.getInput("Roll") * rollSpeed;
-        float rotPitch = im.getInput("Pitch") * rotSpeed;
-        float rotYaw = im.getInput("Yaw") * rotSpeed;
-
-        if (!verticalEnginesEnabled)
+        if (!paused)
         {
-            moveVertical = 0;
-        }
-        if (!longitudinalEnginesEnabled)
-        {
-            moveLongitudinal = 0;
-        }
-        if (!lateralEnginesEnabled)
-        {
-            moveLateral = 0;
-        }
+            float moveLongitudinal = im.getInput("Longitudinal") * moveSpeed;
+            float moveLateral = im.getInput("Lateral") * moveSpeed;
+            float moveVertical = im.getInput("Vertical") * moveSpeed;
+            float rotRoll = im.getInput("Roll") * rollSpeed;
+            float rotPitch = im.getInput("Pitch") * rotSpeed;
+            float rotYaw = im.getInput("Yaw") * rotSpeed;
+
+            if (!verticalEnginesEnabled)
+            {
+                moveVertical = 0;
+            }
+            if (!longitudinalEnginesEnabled)
+            {
+                moveLongitudinal = 0;
+            }
+            if (!lateralEnginesEnabled)
+            {
+                moveLateral = 0;
+            }
 
 
-        if (!rotateEnabled)
-        {
-            rotRoll = rotPitch = rotYaw = 0;
-        }
+            if (!rotateEnabled)
+            {
+                rotRoll = rotPitch = rotYaw = 0;
+            }
 
-        if (wallSlide)
-        {
-            if (im.getInputUpEnhanced("Longitudinal"))
+            if (wallSlide)
+            {
+                if (im.getInputUpEnhanced("Longitudinal"))
+                {
+                    rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
+                                                                       transform.InverseTransformDirection(rb.velocity).y, 0));
+                }
+
+                if (im.getInputUpEnhanced("Lateral"))
+                {
+                    rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
+                                                                            transform.InverseTransformDirection(rb.velocity).z));
+                }
+                if (im.getInputUpEnhanced("Vertical"))
+                {
+                    rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
+                                                                       transform.InverseTransformDirection(rb.velocity).z));
+                }
+            }
+
+            if (moveLongitudinal == 0)
+            {
+                TurnOffThruster("main");
+            }
+            else if (moveLongitudinal != 0)
+            {
+                if (moveLongitudinal > 0)
+                {
+                    TurnOnThruster("main");
+                }
+                if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).z) != Mathf.Sign(moveLongitudinal))
+                {
+                    rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
+                                                                   transform.InverseTransformDirection(rb.velocity).y, 0));
+                }
+                rb.AddForce(transform.TransformDirection(Vector3.forward * moveLongitudinal));
+            }
+            else if (!wallSlide)
             {
                 rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
                                                                    transform.InverseTransformDirection(rb.velocity).y, 0));
             }
 
-            if (im.getInputUpEnhanced("Lateral"))
+            if (moveLateral != 0)
             {
-                rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
+                if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).x) != Mathf.Sign(moveLateral))
+                {
+                    rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
+                                                                        transform.InverseTransformDirection(rb.velocity).z));
+                }
+                rb.AddForce(transform.TransformDirection(Vector3.right * moveLateral));
+            }
+            else if (!wallSlide)
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x / 2, transform.InverseTransformDirection(rb.velocity).y,
                                                                         transform.InverseTransformDirection(rb.velocity).z));
             }
-            if (im.getInputUpEnhanced("Vertical"))
+
+            if (moveVertical != 0)
             {
-                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
+                if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).y) != Mathf.Sign(moveVertical))
+                {
+                    rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
+                                                                   transform.InverseTransformDirection(rb.velocity).z));
+                }
+                rb.AddForce(transform.TransformDirection(Vector3.up * moveVertical));
+            }
+            else if (!wallSlide)
+            {
+                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, transform.InverseTransformDirection(rb.velocity).y / 2,
                                                                    transform.InverseTransformDirection(rb.velocity).z));
             }
-        }
-        
-		if (moveLongitudinal == 0) {
-			TurnOffThruster ("main");
-		}
-		else if (moveLongitudinal != 0)
-        {
-			if (moveLongitudinal > 0) {
-				TurnOnThruster ("main");
-			}
-            if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).z) != Mathf.Sign(moveLongitudinal))
+
+            if (moveLongitudinal == 0 && moveLateral == 0 && moveVertical == 0)
             {
-                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
-                                                               transform.InverseTransformDirection(rb.velocity).y, 0));
-            }
-            rb.AddForce(transform.TransformDirection(Vector3.forward * moveLongitudinal));
-        }
-        else if (!wallSlide)
-        {
-            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x,
-                                                               transform.InverseTransformDirection(rb.velocity).y, 0));
-        }
-
-        if (moveLateral != 0)
-        {
-            if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).x) != Mathf.Sign(moveLateral))
-            {
-                rb.velocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.velocity).y,
-                                                                    transform.InverseTransformDirection(rb.velocity).z));
-            }
-            rb.AddForce(transform.TransformDirection(Vector3.right * moveLateral));
-        }
-        else if (!wallSlide)
-        {
-            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x / 2, transform.InverseTransformDirection(rb.velocity).y,
-                                                                    transform.InverseTransformDirection(rb.velocity).z));
-        }
-
-        if (moveVertical != 0)
-        {
-            if (Mathf.Sign(transform.InverseTransformDirection(rb.velocity).y) != Mathf.Sign(moveVertical))
-            {
-                rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, 0,
-                                                               transform.InverseTransformDirection(rb.velocity).z));
-            }
-            rb.AddForce(transform.TransformDirection(Vector3.up * moveVertical));
-        }
-        else if (!wallSlide)
-        {
-            rb.velocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.velocity).x, transform.InverseTransformDirection(rb.velocity).y / 2,
-                                                               transform.InverseTransformDirection(rb.velocity).z));
-        }
-
-        if (moveLongitudinal == 0 && moveLateral == 0 && moveVertical == 0)
-        {
-            rb.velocity = Vector3.zero;
-        }
-
-        if (!targetLocked)
-        {
-            localPrevVel = transform.InverseTransformVector(rb.velocity);
-            if (rotPitch == 0)
-            {
-                rb.angularVelocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.angularVelocity).y,
-                                                                        transform.InverseTransformDirection(rb.angularVelocity).z));
-
+                rb.velocity = Vector3.zero;
             }
 
-            if (rotYaw == 0)
+            if (!targetLocked)
             {
-                rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x, 0,
-                                                                   transform.InverseTransformDirection(rb.angularVelocity).z));
-            }
+                //localPrevVel = transform.InverseTransformVector(rb.velocity);
+                localPrevVel = rb.velocity;
+                if (rotPitch == 0)
+                {
+                    rb.angularVelocity = transform.TransformDirection(new Vector3(0, transform.InverseTransformDirection(rb.angularVelocity).y,
+                                                                            transform.InverseTransformDirection(rb.angularVelocity).z));
 
-            if (rotRoll == 0)
-            {
-                rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
-                                                                   transform.InverseTransformDirection(rb.angularVelocity).y, 0));
+                }
 
-            }
-            if (rotPitch != 0 || rotYaw != 0 || rotRoll != 0)
-            {
-                //rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll));
-                rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
-                turned = true;
+                if (rotYaw == 0)
+                {
+                    rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x, 0,
+                                                                       transform.InverseTransformDirection(rb.angularVelocity).z));
+                }
+
+                if (rotRoll == 0)
+                {
+                    rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
+                                                                       transform.InverseTransformDirection(rb.angularVelocity).y, 0));
+
+                }
+                if (rotPitch != 0 || rotYaw != 0 || rotRoll != 0)
+                {
+                    //rb.AddTorque(transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll));
+                    rb.angularVelocity = transform.TransformDirection(Vector3.left * rotPitch + Vector3.up * rotYaw + Vector3.forward * rotRoll);
+                    turned = true;
+                }
+                else
+                {
+                    rb.angularVelocity = Vector3.zero;
+                    turned = false;
+                }
+
+
             }
             else
             {
-                rb.angularVelocity = Vector3.zero;
-                turned = false;
+                if (lockOnTarget != null)
+                {
+                    Quaternion prevRot = transform.rotation;
+                    transform.LookAt(lockOnTarget.transform, transform.up);
+
+
+                    transform.rotation = Quaternion.RotateTowards(prevRot, transform.rotation, 2);
+
+                }
+                if (rotRoll != 0)
+                {
+                    rb.angularVelocity = transform.TransformDirection(Vector3.left + Vector3.up + Vector3.forward * rotRoll);
+                }
+                else
+                {
+                    rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
+                                                                       transform.InverseTransformDirection(rb.angularVelocity).y, Time.deltaTime));
+
+                }
             }
 
-            
-        }
-        else
-        {
-            if (lockOnTarget != null)
+
+            if (rb.velocity.magnitude > maxSpeed)
             {
-                transform.LookAt(lockOnTarget.transform, transform.up);
+                rb.velocity = rb.velocity.normalized * maxSpeed;
 
             }
-            if (rotRoll != 0)
+            if (rb.velocity.magnitude < 0.01f)
             {
-                rb.angularVelocity = transform.TransformDirection(Vector3.left + Vector3.up + Vector3.forward * rotRoll);
-            }
-            else
-            {
-                rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
-                                                                   transform.InverseTransformDirection(rb.angularVelocity).y, 0));
-
+                rb.velocity = Vector3.zero;
             }
         }
-        
-
-        if (rb.velocity.magnitude > maxSpeed)
-        {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
-
-        }
-        if (rb.velocity.magnitude < 0.01f)
-        {
-            rb.velocity = Vector3.zero;
-        }
-
     }
 
     void LateUpdate()
     {
         if (!targetLocked && turned)
         {
-            rb.velocity = (rb.velocity + 2 * transform.TransformVector(localPrevVel)) / 3;
+            //Debug.Log("Vel");
+            //Debug.Log(rb.velocity);
+            //Debug.Log(localPrevVel);
+            //float vm = rb.velocity.magnitude;
+            //rb.velocity = (rb.velocity - 0.9f * localPrevVel).normalized * vm;
+            //rb.velocity = (rb.velocity + 2 * localPrevVel) / 3;
+            //Debug.Log(rb.velocity);
         }
     }
 
@@ -482,7 +467,7 @@ public class PlayerController : MonoBehaviour {
 		//Reset stats
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
-		//GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().setBombCharge(savedData.getBomb());
+
 
 		//Overwrite data
 		savePlayer ();
@@ -510,26 +495,22 @@ public class PlayerController : MonoBehaviour {
 	private void killPlayer()
 	{
         Cursor.visible = true;
+        paused = true;
         //Show Game Over Screen
-        pauseTxt.enabled = false;
-		inureTxt.enabled = false;
         Time.timeScale = 0.3f;
-		gameOver.enabled = true;
-		UICanvas.enabled = true;
+		pauseScreen.enabled = true;
 		//Destroy player
-		this.enabled = false;
+		//this.enabled = false;
         
     }
 
 	//Disable game over screen
 	public void savePlayer ()
 	{
+        paused = false;
 		//Show Pause Screen
-		pauseTxt.enabled = true;
-		inureTxt.enabled = true;
 		Time.timeScale = 1.0f;
-		gameOver.enabled = false;
-		UICanvas.enabled = false;
+		pauseScreen.enabled = false;
 		//save player
 		this.enabled = true;
 	}
@@ -537,7 +518,7 @@ public class PlayerController : MonoBehaviour {
     // returns true if the player's hull integrity has dropped to 0
     public bool isDead()
     {
-        return currHullIntegrity == 0;
+        return currHullIntegrity <= 0;
     }
 
     /* 
@@ -597,6 +578,13 @@ public class PlayerController : MonoBehaviour {
         return currHullIntegrity;
     }
 
+    public void restoreHullPoint()
+    {
+        currHullIntegrity++;
+        sources[4].PlayOneShot(hullRestoreSound);
+
+    }
+
 	private void fireBullets() {
 
         // make direction and velocity vectors local for easy addition of components
@@ -619,7 +607,7 @@ public class PlayerController : MonoBehaviour {
 		}*/
 
         float vol = Random.Range(volLowRange, volHighRange);
-        source.PlayOneShot(playerBulletSound, vol);
+        sources[0].PlayOneShot(playerBulletSound, vol);
 
         for(int i = 0; i < bulletSpawnLocations.Length; ++i)
         {

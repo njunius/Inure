@@ -3,9 +3,9 @@ using System.Collections;
 
 public class LightController : MonoBehaviour
 {
-    public int i = 0;
+    private int i = 0;
     public GameObject[] all_lights;
-    public float lifetime = 0f;
+    private float lifetime = 0f;
     public float timeLimit = 0.4f;
     void Start()
     {

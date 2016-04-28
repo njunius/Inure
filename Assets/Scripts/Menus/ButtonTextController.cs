@@ -6,6 +6,7 @@ using System.Collections;
 public class ButtonTextController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler{
 
     private Text buttonText;
+    public Image buttonTextBg;
 
 	// Use this for initialization
 	void Start () {
@@ -13,13 +14,16 @@ public class ButtonTextController : MonoBehaviour, IPointerEnterHandler, IPointe
         buttonText.enabled = false;
 	}
 	
-	public void OnPointerEnter (PointerEventData eventData) {
+	public void OnPointerEnter (PointerEventData eventData)
+    {
         buttonText.enabled = true;
+        buttonTextBg.enabled = true;
 	}
 
     public void OnPointerExit(PointerEventData eventData)
     {
         buttonText.enabled = false;
+        buttonTextBg.enabled = false;
     }
 
 }

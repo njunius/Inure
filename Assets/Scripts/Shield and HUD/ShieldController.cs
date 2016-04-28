@@ -31,6 +31,7 @@ public class ShieldController : MonoBehaviour {
     private Image[] shieldGauge;
     private GameObject bomb;
     private BombController bombBehavior;
+    private PlayerController player;
     private MeshRenderer shieldMesh;
     private Collider shieldCollider;
     private float interpShieldValue;
@@ -44,12 +45,13 @@ public class ShieldController : MonoBehaviour {
         shieldChargeDelayTimer = 0.0f;
         shieldDepleteAmount = -20;
         shieldRechargeAmount = 5;
-        shieldDeltaChargeTimer = 0.0f;
+        shieldDeltaChargeTimer = 0.0f; // initialize to 0 otherwise the timer is immediately updated.
         interpShieldValue = 100.0f;
 
         shieldMesh = GetComponent<MeshRenderer>();
         shieldCollider = GetComponent<Collider>();
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         bomb = GameObject.FindGameObjectWithTag("Bomb");
         bombBehavior = bomb.GetComponent<BombController>();
         GameObject[] temp = GameObject.FindGameObjectsWithTag("Shield Gauge");
@@ -65,69 +67,85 @@ public class ShieldController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
-        // enables and disables the effect and collision volume based on the player's state
-        if (shieldActive)
+        if (!player.paused)
         {
-            shieldMesh.enabled = true;
-            shieldCollider.enabled = true;
 
-            interpShieldValue += shieldDepleteAmount * Time.deltaTime;
-            for (int i = 0; i < shieldGauge.Length; ++i)
+            if (!shieldActive) // shield recharging
             {
-                shieldGauge[i].fillAmount = interpShieldValue / (float)maxShieldCharge;
+
+                shieldMesh.enabled = false;
+                shieldCollider.enabled = false;
+
+                if (currShieldCharge > maxShieldCharge)
+                {
+                    currShieldCharge = maxShieldCharge;
+                }
+                else if (shieldChargeDelay > shieldChargeDelayTimer && currShieldCharge == 0) // delays the start of the shield recharge by 2 seconds
+                {
+                    shieldChargeDelayTimer += Time.deltaTime;
+                    interpShieldValue = 0.0f;
+                }
+                else if (currShieldCharge < maxShieldCharge && shieldDeltaChargeTimer >= 1.0f) // add a charge to the shield after a 1 second delay
+                {
+                    currShieldCharge += shieldRechargeAmount;
+                    shieldDeltaChargeTimer = 0.0f;
+                }
+                else if (shieldDeltaChargeTimer < 1.0f && currShieldCharge < maxShieldCharge)
+                {
+                    shieldDeltaChargeTimer += Time.deltaTime;
+                }
+
+                if (currShieldCharge < maxShieldCharge)
+                {
+                    interpShieldValue += shieldRechargeAmount * Time.deltaTime;
+
+                    if (interpShieldValue > maxShieldCharge)
+                    {
+                        interpShieldValue = (float)maxShieldCharge;
+                    }
+
+                    for (int i = 0; i < shieldGauge.Length; ++i)
+                    {
+                        shieldGauge[i].fillAmount = interpShieldValue / (float)maxShieldCharge;
+                    }
+                }
+                
             }
-        }
-        else
-        {
-            shieldMesh.enabled = false;
-            shieldCollider.enabled = false;
-
-            if (currShieldCharge < maxShieldCharge)
+            else // shield depleting
             {
-                interpShieldValue += shieldRechargeAmount * Time.deltaTime;
+
+                shieldMesh.enabled = true;
+                shieldCollider.enabled = true;
+
+                if (currShieldCharge <= 0)
+                {
+                    shieldActive = false;
+                    currShieldCharge = 0;
+                    shieldChargeDelayTimer = 0.0f;
+                    shieldDeltaChargeTimer = 1.0f; // set to 1 to allow the shield to be immediately charged, otherwise there is a 3 second delay instead of a 2 second one
+                }
+                else if (currShieldCharge > 0 && shieldDeltaChargeTimer >= 1.0f) // remove a charge from the shield after a 1 second delay
+                {
+                    currShieldCharge += shieldDepleteAmount;
+                    shieldDeltaChargeTimer = 0.0f;
+                }
+                else if (shieldDeltaChargeTimer < 1.0f)
+                {
+                    shieldDeltaChargeTimer += Time.deltaTime;
+                } 
+                
+                interpShieldValue += shieldDepleteAmount * Time.deltaTime;
+
+                if (interpShieldValue < 0f)
+                {
+                    interpShieldValue = 0f;
+                }
+
                 for (int i = 0; i < shieldGauge.Length; ++i)
                 {
                     shieldGauge[i].fillAmount = interpShieldValue / (float)maxShieldCharge;
                 }
-            }
-        }
 
-    }
-
-    void FixedUpdate()
-    {
-        if (!shieldActive) // shield recharging
-        {
-            if (shieldChargeDelay > shieldChargeDelayTimer && currShieldCharge < maxShieldCharge) // delays the start of the shield recharge by 2 seconds
-            {
-                shieldChargeDelayTimer += Time.deltaTime;
-            }
-            else if (currShieldCharge < maxShieldCharge && shieldDeltaChargeTimer >= 1.0f) // add a charge to the shield after a 1 second delay
-            {
-                currShieldCharge += shieldRechargeAmount;
-                shieldDeltaChargeTimer = 0.0f;
-            }
-            else if (shieldDeltaChargeTimer < 1.0f)
-            {
-                shieldDeltaChargeTimer += Time.deltaTime;
-            }
-        }
-        else // shield depleting
-        {
-            if (currShieldCharge > 0 && shieldDeltaChargeTimer >= 1.0f) // remove a charge from the shield after a 1 second delay
-            {
-                currShieldCharge += shieldDepleteAmount;
-                shieldDeltaChargeTimer = 0.0f;
-            }
-            else if (shieldDeltaChargeTimer < 1.0f)
-            {
-                shieldDeltaChargeTimer += Time.deltaTime;
-            }
-            else if (currShieldCharge <= 0)
-            {
-                shieldActive = !shieldActive;
-                shieldChargeDelayTimer = 0.0f;
             }
         }
     }
@@ -185,7 +203,7 @@ public class ShieldController : MonoBehaviour {
 	}
 
     public bool getShieldActive()
-   		 {
+    {
         return shieldActive;
     }
 
@@ -194,11 +212,13 @@ public class ShieldController : MonoBehaviour {
         return currShieldCharge == maxShieldCharge;
     }
 
-	public int getCurrShieldCharge (){
+	public int getCurrShieldCharge ()
+    {
 		return currShieldCharge;
 	}
 
-	public void setCurrShieldCharge (int setShield){
+	public void setCurrShieldCharge (int setShield)
+    {
 		currShieldCharge = setShield;
 
         interpShieldValue = (float)currShieldCharge;
