@@ -402,7 +402,7 @@ public class PlayerController : MonoBehaviour {
                     transform.LookAt(lockOnTarget.transform, transform.up);
 
 
-                    transform.rotation = Quaternion.RotateTowards(prevRot, transform.rotation, 1);
+                    transform.rotation = Quaternion.RotateTowards(prevRot, transform.rotation, 2);
 
                 }
                 if (rotRoll != 0)
