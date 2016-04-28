@@ -33,6 +33,10 @@ public class PowerUp_Turret : Turret {
 		isFiring = false;
 		isOn = false;
 		CancelInvoke ("Fire");
+		Explode ();
+		for (int numChild = 0; numChild < transform.childCount; ++numChild) {
+			transform.GetChild (numChild).gameObject.SetActive (false);
+		}
 		Instantiate (reward, transform.position + new Vector3 (0, gameObject.GetComponent<Renderer> ().bounds.size.y * 1.5f, 0), transform.rotation);
 	}
 }

@@ -27,6 +27,11 @@ public class PlayerBullet : MonoBehaviour {
 
 	void OnCollisionEnter (Collision hit) {
 		if (hit.gameObject.tag != "Player Projectile") {
+			ContactPoint contact = hit.contacts [0];
+			GameObject particles = (GameObject) Instantiate (Resources.Load ("Particle Systems/Bullet Collision"), contact.point + contact.normal * 2, Quaternion.FromToRotation (Vector3.forward, contact.normal));
+			//particles.transform.GetChild (0).gameObject.transform.rotation = particles.transform.rotation;
+			particles.GetComponent<ParticleSystem> ().startColor = GetComponent<Renderer> ().material.color;
+			particles.transform.GetChild(0).GetComponent<ParticleSystem> ().startColor = GetComponent<Renderer> ().material.color;
 			Destroy (gameObject);
 		}
 	}

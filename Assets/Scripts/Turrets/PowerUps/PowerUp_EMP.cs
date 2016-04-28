@@ -12,7 +12,7 @@ public class PowerUp_EMP : PowerUp {
     private AudioSource source;
 
     void OnEnable () {
-		FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 50f;
+		FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 100f;
 		effectField= (GameObject)Resources.Load("FieldSphereEMP");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
 		if (gameObject.CompareTag ("Player")) {
