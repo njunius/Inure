@@ -21,7 +21,6 @@ public class Radar3D : MonoBehaviour {
 	void Start () {
 		triggerRadius = GameObject.FindGameObjectWithTag ("Radar Trigger").GetComponent<SphereCollider> ().radius;
 		radarRadius = gameObject.GetComponent<Renderer> ().bounds.extents.x;
-		Debug.Log (radarRadius);
 	}
 	
 	// Update is called once per frame

@@ -130,6 +130,9 @@ public class PlayerController : MonoBehaviour {
         }
         gameController = GameObject.FindGameObjectWithTag("GameController");
         im = gameController.GetComponent<InputManager>();
+
+		mainThrusterLeft.Play ();
+		mainThrusterRight.Play ();
     }
 
     // Update is called once per frame
@@ -706,14 +709,18 @@ public class PlayerController : MonoBehaviour {
 	private void TurnOnThruster (string name) {
 		switch (name) {
 		case "main":
-			if (!mainThrusterLeft.isPlaying) {
+			mainThrusterLeft.startSpeed = 64;
+			mainThrusterRight.startSpeed = 64;
+			mainThrusterLeft.simulationSpace = ParticleSystemSimulationSpace.World;
+			mainThrusterRight.simulationSpace = ParticleSystemSimulationSpace.World;
+			/*if (!mainThrusterLeft.isPlaying) {
 				//thrusterLeft.SetActive (true);
 				mainThrusterLeft.Play ();
 				//thrusterRight.SetActive (true);
 				mainThrusterRight.Play ();
 				//mainThrusterLeft.startLifetime = mainThrusterLeft.startLifetime;
 				//mainThrusterRight.startLifetime = mainThrusterRight.startLifetime;
-			}
+			}*/
 			break;
 		default:
 			break;
@@ -723,12 +730,16 @@ public class PlayerController : MonoBehaviour {
 	private void TurnOffThruster (string name) {
 		switch (name) {
 		case "main":
-			if (mainThrusterLeft.isPlaying) {
+			mainThrusterLeft.startSpeed = 1;
+			mainThrusterRight.startSpeed = 1;
+			mainThrusterLeft.simulationSpace = ParticleSystemSimulationSpace.Local;
+			mainThrusterRight.simulationSpace = ParticleSystemSimulationSpace.Local;
+			/*if (mainThrusterLeft.isPlaying) {
 				mainThrusterLeft.Stop ();
 				//thrusterLeft.SetActive (false);
 				mainThrusterRight.Stop ();
 				//thrusterRight.SetActive (false);
-			}
+			}*/
 			break;
 		default:
 			break;

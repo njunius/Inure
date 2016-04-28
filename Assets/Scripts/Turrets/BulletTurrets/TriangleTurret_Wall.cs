@@ -116,6 +116,7 @@ public class TriangleTurret_Wall : SimpleTurret {
 		isFiring = false;
 		isOn = false;
 		CancelInvoke ("Fire");
+		Explode ();
 		InvokeRepeating ("DeathBullet", 0f, 0.05f);
 	}
 

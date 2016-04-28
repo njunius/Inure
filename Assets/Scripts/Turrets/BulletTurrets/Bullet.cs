@@ -45,13 +45,18 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter (Collision hit) {
         PlayerController hitScript = hit.gameObject.GetComponent<PlayerController>();
-		if (hit.gameObject.CompareTag("Player")) {
-            hit.collider.GetComponent<CollisionHitDetector>().updateIndicators();
-            if (!hitScript.isShielded())
-            {
-                hitScript.takeDamage();
-            }
-        }
+		if (hit.gameObject.CompareTag ("Player")) {
+			hit.collider.GetComponent<CollisionHitDetector> ().updateIndicators ();
+			if (!hitScript.isShielded ()) {
+				hitScript.takeDamage ();
+			}
+		} else if (!hit.gameObject.CompareTag ("Projectile")) {
+			ContactPoint contact = hit.contacts [0];
+			GameObject particles = (GameObject) Instantiate (Resources.Load ("Particle Systems/Bullet Collision"), contact.point + contact.normal * 2, Quaternion.FromToRotation (Vector3.forward, contact.normal));
+			//particles.transform.GetChild (0).gameObject.transform.rotation = particles.transform.rotation;
+			particles.GetComponent<ParticleSystem> ().startColor = GetComponent<Renderer> ().material.color;
+			particles.transform.GetChild(0).GetComponent<ParticleSystem> ().startColor = GetComponent<Renderer> ().material.color;
+		}
         //Destroy (gameObject);
 		Destroy();
 		//gameObject.SetActive(false);
