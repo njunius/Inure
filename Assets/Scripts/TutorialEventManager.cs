@@ -34,6 +34,7 @@ public class TutorialEventManager : MonoBehaviour {
         eventTimer = 150;
         subtitles.text = "";
         source.PlayOneShot(Initialize);
+        
     }
 	
 
@@ -123,7 +124,7 @@ public class TutorialEventManager : MonoBehaviour {
         else if (GameObject.FindGameObjectWithTag("Player") != null)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-            player.unFreezeRotation();
+            player.freezeRotation();
             player.rotateEnabled = false;
             player.verticalEnginesEnabled = false;
             player.longitudinalEnginesEnabled = false;
@@ -140,7 +141,6 @@ public class TutorialEventManager : MonoBehaviour {
         switch (eventIndex)
         {
             case 0:         //Scene ends with hull indicatiors activated.
-                
 
                 break;
             case 1:

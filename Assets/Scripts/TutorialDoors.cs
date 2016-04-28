@@ -2,42 +2,35 @@
 using System.Collections;
 
 public class TutorialDoors : MonoBehaviour {
-    public GameObject endPoint;
-    public Vector3 endPosition;
-    public Vector3 startPosition;
+    //public GameObject endPoint;
+    private Vector3 endPosition;
+    private Vector3 startPosition;
     private bool active;
     public bool open = false;
     public float speed = 1f;
 
 	// Use this for initialization
 	void Start () {
-        
-	}
+        endPosition = transform.FindChild("EndPoint").transform.position;
+        startPosition = transform.position;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (startPosition == Vector3.zero)
-        {
-            startPosition = transform.position;
-            endPosition = endPoint.transform.position;
 
-            GameObject.Destroy(endPoint);
-        }
-        else
+        if (active)
         {
-            if (active)
+            //Debug.Log(transform.position);
+            //Debug.Log(endPoint);
+            transform.position = Vector3.MoveTowards(transform.position, endPosition, speed);
+            //Debug.Log("Opening");
+            if (transform.position == endPosition)
             {
-                //Debug.Log(transform.position);
-                //Debug.Log(endPoint);
-                transform.position = Vector3.MoveTowards(transform.position, endPosition, speed);
-                //Debug.Log("Opening");
-                if (transform.position == endPosition)
-                {
-                    active = false;
-                    open = !open;
-                }
+                active = false;
+                open = !open;
             }
         }
+
 	    
 	}
 
