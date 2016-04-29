@@ -40,9 +40,10 @@ GameObject:
   - 4: {fileID: 477212}
   - 33: {fileID: 3317600}
   - 23: {fileID: 2307596}
-  m_Layer: 0
+  - 64: {fileID: 6404558}
+  m_Layer: 11
   m_Name: Injector-Base
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,9 +74,10 @@ GameObject:
   - 33: {fileID: 3390150}
   - 23: {fileID: 2325184}
   - 114: {fileID: 11424562}
-  m_Layer: 0
+  - 64: {fileID: 6443266}
+  m_Layer: 11
   m_Name: Injector-Pump
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,8 +113,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1200, y: -1400, z: 1699.9998}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -625.5, y: 670.75, z: 1968.4}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 434246}
   - {fileID: 494340}
@@ -209,6 +211,30 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183006}
+  m_Mesh: {fileID: 4300000, guid: b0bb7db53c212d5479dbe3d5412a123b, type: 3}
+--- !u!64 &6404558
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140090}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300002, guid: b0bb7db53c212d5479dbe3d5412a123b, type: 3}
+--- !u!64 &6443266
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: b0bb7db53c212d5479dbe3d5412a123b, type: 3}
 --- !u!114 &11424562
 MonoBehaviour:

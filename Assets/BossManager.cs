@@ -8,8 +8,9 @@ public class BossManager : MonoBehaviour {
 	public int turretInterval = 4;
 	public GameObject[] turretTurnOn;
 	public bool[] hasSpawned;
+	public GameObject reactorCore;
 
-	public int shieldCount = 0;
+	private int shieldCount = 0;
 	private int countTMP = 0;
 
 	// Use this for initialization
@@ -45,6 +46,7 @@ public class BossManager : MonoBehaviour {
 		//If shieldCount > enableReactorField, enable the sphere trigger
 		if(shieldCount > enableReactorField){
 			reactor.GetComponent<SphereCollider>().enabled = true;
+			Destroy(reactorCore);
 			reactor.transform.GetChild(0).GetComponent<Light>().color = Color.red;
 		}
 	}
