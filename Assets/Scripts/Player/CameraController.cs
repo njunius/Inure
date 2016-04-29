@@ -111,39 +111,46 @@ public class CameraController : MonoBehaviour {
 
     void Update()
     {
-
-        if (!isShaking && bd.detached)
+        if (im == null)
         {
-            isShaking = true;
+            im = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
         }
-        if (im.getInputDown("Camera Mode"))
+        else
         {
-            switch (mode)
+            if (!isShaking && bd.detached)
             {
-                case CameraMode.ThirdPerson:
-                    Debug.Log("Camera Mode: First Person");
-                    mode = CameraMode.FirstPerson;
+                isShaking = true;
+            }
+            if (im.getInputDown("Camera Mode"))
+            {
+                switch (mode)
+                {
+                    case CameraMode.ThirdPerson:
+                        Debug.Log("Camera Mode: First Person");
+                        mode = CameraMode.FirstPerson;
 
-                    //Renderer rend = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
-                    //rend.enabled = false;
-                    GameObject.FindGameObjectWithTag("Radar Trigger").GetComponent<RadarTrigger>().enabled = false;
-                    cameraPositionOffset = firstPersonPosition;
-                    gameObject.GetComponent<Camera>().fieldOfView = 90;
-                    //updateCamera();
-                    break;
-                case CameraMode.FirstPerson:
-                    mode = CameraMode.ThirdPerson;
-                    Debug.Log("Camera Mode: Third Person");
-                    //rend = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
-                    //rend.enabled = true;
-                    GameObject.FindGameObjectWithTag("Radar Trigger").GetComponent<RadarTrigger>().enabled = true;
-                    cameraPositionOffset = thirdPersonPosition;
-                    gameObject.GetComponent<Camera>().fieldOfView = 60;
-                    
-                    break;
+                        //Renderer rend = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
+                        //rend.enabled = false;
+                        GameObject.FindGameObjectWithTag("Radar Trigger").GetComponent<RadarTrigger>().enabled = false;
+                        cameraPositionOffset = firstPersonPosition;
+                        gameObject.GetComponent<Camera>().fieldOfView = 90;
+                        //updateCamera();
+                        break;
+                    case CameraMode.FirstPerson:
+                        mode = CameraMode.ThirdPerson;
+                        Debug.Log("Camera Mode: Third Person");
+                        //rend = target.transform.Find("Sol Starfighter Advanced Model").GetComponent<Renderer>();
+                        //rend.enabled = true;
+                        GameObject.FindGameObjectWithTag("Radar Trigger").GetComponent<RadarTrigger>().enabled = true;
+                        cameraPositionOffset = thirdPersonPosition;
+                        gameObject.GetComponent<Camera>().fieldOfView = 60;
 
+                        break;
+
+                }
             }
         }
+        
     }
 
     void LateUpdate()

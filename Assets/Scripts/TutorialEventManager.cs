@@ -61,7 +61,7 @@ public class TutorialEventManager : MonoBehaviour {
                 eventIndex = 11;
 
             }
-            else
+            else if (eventIndex < 15)
             {
                 interior.SetActive(false);
                 exterior.SetActive(true);
@@ -76,6 +76,28 @@ public class TutorialEventManager : MonoBehaviour {
                 player.transform.position = DebugTutorialLocations[1].transform.position;
                 player.transform.rotation = DebugTutorialLocations[1].transform.rotation;
                 GameObject.FindGameObjectWithTag("MainCamera").transform.position = DebugTutorialLocations[1].transform.position;
+                while (player.getCurrHullIntegrity() < 5)
+                {
+                    player.restoreHullPoint();
+                }
+                player.tutorialMode = false;
+                eventIndex = 15;
+            }
+            else
+            {
+                interior.SetActive(false);
+                exterior.SetActive(true);
+                player.targetLocked = false;
+                player.unFreezeRotation();
+                player.rotateEnabled = true;
+                player.verticalEnginesEnabled = true;
+                player.longitudinalEnginesEnabled = true;
+                player.lateralEnginesEnabled = true;
+                player.weaponsEnabled = true;
+                player.sheildEnabled = true;
+                player.transform.position = DebugTutorialLocations[2].transform.position;
+                player.transform.rotation = DebugTutorialLocations[2].transform.rotation;
+                GameObject.FindGameObjectWithTag("MainCamera").transform.position = DebugTutorialLocations[2].transform.position;
                 while (player.getCurrHullIntegrity() < 5)
                 {
                     player.restoreHullPoint();
