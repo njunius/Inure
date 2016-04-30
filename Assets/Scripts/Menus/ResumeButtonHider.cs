@@ -13,7 +13,7 @@ public class ResumeButtonHider : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (player.isDead())
+        if (player.isDead() && !player.tutorialMode)
         {
             resumeButton.SetActive(false);
         }

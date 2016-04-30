@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CollisionHitDetector : MonoBehaviour {
 
-    private FirstPersonHitIndicatorController[] editableIndicators = new FirstPersonHitIndicatorController[2];
+    public FirstPersonHitIndicatorController[] editableIndicators = new FirstPersonHitIndicatorController[2];
     public string[] indicatorNames = new string[2]; 
 
 	// Use this for initialization
@@ -11,7 +11,7 @@ public class CollisionHitDetector : MonoBehaviour {
 
         for (int i = 0; i < editableIndicators.Length; ++i)
         {
-            if(editableIndicators[i] != null)
+            if(indicatorNames[i] != "")
             {
                 editableIndicators[i] = GameObject.Find(indicatorNames[i]).GetComponent<FirstPersonHitIndicatorController>();
             }
