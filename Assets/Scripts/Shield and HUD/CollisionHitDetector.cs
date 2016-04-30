@@ -11,10 +11,10 @@ public class CollisionHitDetector : MonoBehaviour {
 
         for (int i = 0; i < editableIndicators.Length; ++i)
         {
-            if(indicatorNames[i] != "")
-            {
+            //if(indicatorNames[i] != "")
+            //{
                 editableIndicators[i] = GameObject.Find(indicatorNames[i]).GetComponent<FirstPersonHitIndicatorController>();
-            }
+            //}
         }
 	}
 	
@@ -27,7 +27,8 @@ public class CollisionHitDetector : MonoBehaviour {
     {
         for(int i = 0; i < editableIndicators.Length; ++i)
         {
-            if(editableIndicators[i] != null)
+            Debug.Log(editableIndicators[i] + " " + editableIndicators.Length);
+            if (editableIndicators[i] != null)
             {
                 editableIndicators[i].detectHit();
             }
