@@ -16,7 +16,6 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
     private Event controlBindEvent;
     private Canvas settingsScreen;
 
-    public EventSystem events;
     public Text currentKey;
     public string command;
     public bool positiveDirection;
