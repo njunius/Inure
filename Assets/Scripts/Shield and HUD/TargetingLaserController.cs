@@ -13,7 +13,7 @@ public class TargetingLaserController : MonoBehaviour {
 	void Start () {
 
         laserSight = GetComponent<LineRenderer>();
-        layerMask = 0 << 9;
+        layerMask = 0x0901; // raycast will hit environment, bullet, and default layers
 	}
 	
 	// Update is called once per frame
