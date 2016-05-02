@@ -9,12 +9,13 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
 
     private InputManager inputs;
     private Dictionary<string, InputBinding> inputBindings;
-    private Selectable button;
     private string key;
     private bool selected;
     private bool delay;
-    private Event controlBindEvent;
     private Canvas settingsScreen;
+    private Image keyBuffer;
+    private float timerMax;
+    private float timer;
 
     public Text currentKey;
     public string command;
@@ -26,8 +27,10 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
 
         inputs = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
         currentKey = gameObject.GetComponentInChildren<Text>();
-        button = GetComponent<Selectable>();
         settingsScreen = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
+        keyBuffer = GameObject.FindGameObjectWithTag("Key Buffer").GetComponent<Image>();
+        timerMax = 0.5f;
+        timer = 0.0f;
 
         delay = true;
         selected = false;
@@ -54,7 +57,32 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
                 key = inputBindings[command].negAxis;
             }
 
-            foreach(KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
+            if (selected)
+            {
+                if (timer < timerMax)
+                {
+                    timer += Time.deltaTime;
+                }
+                else if (timer >= timerMax)
+                {
+                    timer = 0;
+                    if (currentKey.text.Equals("_"))
+                    {
+                        currentKey.text = "";
+                    }
+                    else
+                    {
+                        currentKey.text = "_";
+                    }
+                }
+            }
+            else
+            {
+                currentKey.text = key.ToUpper();
+
+            }
+
+            foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
             {
                 if (Input.GetKeyDown(vKey))
                 {
@@ -63,14 +91,19 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
                         if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
                         {
                             inputBindings[command].posAxis = vKey.ToString().ToLower();
+                            currentKey.text = key.ToUpper();
+
                         }
                         else if (inputBindings[command].bidirectional && !positiveDirection)
                         {
                             inputBindings[command].negAxis = vKey.ToString().ToLower();
+                            currentKey.text = key.ToUpper();
+
                         }
                         EventSystem.current.SetSelectedGameObject(null);
                         selected = false;
                         delay = true;
+                        keyBuffer.enabled = false;
                     }
                     break;
                 }
@@ -79,9 +112,8 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
             if(selected && delay)
             {
                 delay = false;
+                keyBuffer.enabled = true;
             }
-
-            currentKey.text = key.ToUpper();
 
         }
 
