@@ -177,7 +177,7 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
             case 6:
                 source.PlayOneShot(Vertical);
-                subtitles.text = "Press " + im.getPosInputName("Vertical") + " or " + im.getNegInputName("Vertical") + " to move Vertically.";
+                subtitles.text = "Press [" + im.getPosInputName("Vertical") + "] or [" + im.getNegInputName("Vertical") + "] to move Vertically.";
                 player.verticalEnginesEnabled = true;
                 
                 break;
@@ -192,18 +192,20 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
             case 8:         //Player can lift off. Display vertical controls
                 source.PlayOneShot(Accelerators);
-                subtitles.text = "Press " + im.getPosInputName("Longitudinal").ToUpper() + im.getNegInputName("Longitudinal").ToUpper() + im.getNegInputName("Lateral").ToUpper() + im.getPosInputName("Lateral").ToUpper() + " to accelerate in Longitudinal or Lateral.";
+                subtitles.text = "Press [" + im.getPosInputName("Longitudinal").ToUpper() + "] or [" + im.getNegInputName("Longitudinal").ToUpper() + "] to accelerate in Forward and back or Lateral.";
                 player.longitudinalEnginesEnabled = true;
-                player.lateralEnginesEnabled = true;
+                
                 break;
 
             case 9:
-                subtitles.text = "";
+                //source.PlayOneShot(Lateral);
+                subtitles.text = "Press [" + im.getNegInputName("Lateral").ToUpper() + "] or [" + im.getPosInputName("Lateral").ToUpper() + "] to accelerate side to side.";
+                player.lateralEnginesEnabled = true;
                 break;
 
             case 10:         //Player can move forward.
                 source.PlayOneShot(Rotators);
-                subtitles.text = "Use Mouse to rotate Pitch and Yaw.  Use " + im.getPosInputName("Roll").ToUpper() + " and " + im.getNegInputName("Roll").ToUpper() + " to Roll.";
+                subtitles.text = "Use Mouse to rotate Pitch and Yaw.  Use [" + im.getPosInputName("Roll").ToUpper() + "] or [" + im.getNegInputName("Roll").ToUpper() + "] to Roll.";
                 player.rotateEnabled = true;
                 player.unFreezeRotation();
                 break;
