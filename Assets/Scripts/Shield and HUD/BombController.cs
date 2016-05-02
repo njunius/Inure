@@ -15,7 +15,6 @@ public class BombController : MonoBehaviour {
     public int currBombCharge;
     private int maxBombCharge;
 
-    private GameObject player;
     private Image[] bombGauge;
 
 	// Use this for initialization
@@ -25,8 +24,6 @@ public class BombController : MonoBehaviour {
         hasRigidbody = false;
         currBombCharge = 0;
         maxBombCharge = 100;
-
-        player = GameObject.FindGameObjectWithTag("Player");
 
         //transform.parent = player.transform;
 
