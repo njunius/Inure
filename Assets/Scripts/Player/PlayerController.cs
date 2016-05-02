@@ -67,6 +67,11 @@ public class PlayerController : MonoBehaviour {
 	public ParticleSystem mainThrusterRight;
 	public GameObject thrusterLeft;
 	public GameObject thrusterRight;
+	public GameObject contrail;
+	private GameObject trailLeft;
+	private GameObject trailRight;
+	public Vector3 trailPositionLeft = new Vector3 (-5.5f, -3f, 0f);
+	public Vector3 trailPositionRight = new Vector3 (5.5f, -3f, 0f);
 
     public AudioClip playerBulletSound;
     public AudioClip hullRestoreSound;
@@ -701,14 +706,16 @@ public class PlayerController : MonoBehaviour {
 			mainThrusterRight.startSpeed = 64;
 			mainThrusterLeft.simulationSpace = ParticleSystemSimulationSpace.World;
 			mainThrusterRight.simulationSpace = ParticleSystemSimulationSpace.World;
-			/*if (!mainThrusterLeft.isPlaying) {
-				//thrusterLeft.SetActive (true);
-				mainThrusterLeft.Play ();
-				//thrusterRight.SetActive (true);
-				mainThrusterRight.Play ();
-				//mainThrusterLeft.startLifetime = mainThrusterLeft.startLifetime;
-				//mainThrusterRight.startLifetime = mainThrusterRight.startLifetime;
-			}*/
+
+			if (trailLeft == null) {
+				trailLeft = (GameObject) Instantiate (contrail);
+				trailRight = (GameObject) Instantiate (contrail);
+				trailLeft.GetComponent<DestroyContrail> ().GiveParent (transform);
+				trailRight.GetComponent<DestroyContrail> ().GiveParent (transform);
+
+				trailLeft.transform.localPosition = trailPositionLeft;
+				trailRight.transform.localPosition = trailPositionRight;
+			}
 			break;
 		default:
 			break;
@@ -722,12 +729,13 @@ public class PlayerController : MonoBehaviour {
 			mainThrusterRight.startSpeed = 1;
 			mainThrusterLeft.simulationSpace = ParticleSystemSimulationSpace.Local;
 			mainThrusterRight.simulationSpace = ParticleSystemSimulationSpace.Local;
-			/*if (mainThrusterLeft.isPlaying) {
-				mainThrusterLeft.Stop ();
-				//thrusterLeft.SetActive (false);
-				mainThrusterRight.Stop ();
-				//thrusterRight.SetActive (false);
-			}*/
+
+			if (trailLeft != null) {
+				trailLeft.transform.parent = null;
+				trailRight.transform.parent = null;
+				trailLeft = null;
+				trailRight = null;
+			}
 			break;
 		default:
 			break;
