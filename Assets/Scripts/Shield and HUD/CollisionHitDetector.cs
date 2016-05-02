@@ -27,7 +27,6 @@ public class CollisionHitDetector : MonoBehaviour {
     {
         for(int i = 0; i < editableIndicators.Length; ++i)
         {
-            Debug.Log(editableIndicators[i] + " " + editableIndicators.Length);
             if (editableIndicators[i] != null)
             {
                 editableIndicators[i].detectHit();
