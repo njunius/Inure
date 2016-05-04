@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class KeybindingsButtonController : MonoBehaviour, IPointerDownHandler {
+public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
 
     private GameObject[] keybindingElements;
     private GameObject[] gameSettingElements;
@@ -22,11 +22,19 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerDownHandler {
 
 	}
 
-    // Update is called once per frame
     public void OnPointerDown(PointerEventData eventData)
     {
         if (thisButton.interactable && !gameSettingsButton.interactable)
         {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (thisButton.interactable && !gameSettingsButton.interactable)
+        {
+
             for (int i = 0; i < keybindingElements.Length; ++i)
             {
                 keybindingElements[i].SetActive(true);
