@@ -585,8 +585,10 @@ public class PlayerController : MonoBehaviour {
 
     public void restoreHullPoint()
     {
-        currHullIntegrity++;
-        sources[4].PlayOneShot(hullRestoreSound);
+		if (maxHullIntegrity > currHullIntegrity) {
+			currHullIntegrity++;
+			sources[4].PlayOneShot(hullRestoreSound);
+		}
 
     }
 
@@ -702,8 +704,8 @@ public class PlayerController : MonoBehaviour {
 	private void TurnOnThruster (string name) {
 		switch (name) {
 		case "main":
-			mainThrusterLeft.startSpeed = 64;
-			mainThrusterRight.startSpeed = 64;
+			mainThrusterLeft.startSpeed = 2;
+			mainThrusterRight.startSpeed = 2;
 			mainThrusterLeft.simulationSpace = ParticleSystemSimulationSpace.World;
 			mainThrusterRight.simulationSpace = ParticleSystemSimulationSpace.World;
 

@@ -32,7 +32,8 @@ public class ShieldController : MonoBehaviour {
     private GameObject bomb;
     private BombController bombBehavior;
     private PlayerController player;
-    private MeshRenderer shieldMesh;
+    //private MeshRenderer shieldMesh;
+	private ParticleSystem shieldParticles;
     private Collider shieldCollider;
     private float interpShieldValue;
 
@@ -48,7 +49,8 @@ public class ShieldController : MonoBehaviour {
         shieldDeltaChargeTimer = 0.0f; // initialize to 0 otherwise the timer is immediately updated.
         interpShieldValue = 100.0f;
 
-        shieldMesh = GetComponent<MeshRenderer>();
+        //shieldMesh = GetComponent<MeshRenderer>();
+		shieldParticles = transform.FindChild("Shield Field").gameObject.GetComponent<ParticleSystem> ();
         shieldCollider = GetComponent<Collider>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -73,7 +75,8 @@ public class ShieldController : MonoBehaviour {
             if (!shieldActive) // shield recharging
             {
 
-                shieldMesh.enabled = false;
+                //shieldMesh.enabled = false;
+				shieldParticles.maxParticles = 0;
                 shieldCollider.enabled = false;
 
                 if (currShieldCharge > maxShieldCharge)
@@ -114,7 +117,8 @@ public class ShieldController : MonoBehaviour {
             else // shield depleting
             {
 
-                shieldMesh.enabled = true;
+                //shieldMesh.enabled = true;
+				shieldParticles.maxParticles = 1000;
                 shieldCollider.enabled = true;
 
                 if (currShieldCharge <= 0)

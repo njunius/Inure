@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Effect_Shockwave : MonoBehaviour {
 
-	private float velMultiplier = 4f;
-	private float effectDuration = 2f;
+	private float velMultiplier = 64f;
+	private float effectDuration = 1f;
 	private bool isPlayer = false;
 
 	// Use this for initialization
