@@ -2,23 +2,14 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PowerupUIController : MonoBehaviour, HUDElement {
+public class PowerupUIController : MonoBehaviour {
 
     public Sprite[] powerupSprites;
     private Image[] powerupGauges;
     private PlayerController player;
 
-    private HUDColorController hudColorController;
-    private string hudElementName;
-
-    private Image[] powerupBackground;
-
-    // Use this for initialization
-    void Start () {
-
-        hudElementName = "powerup";
-        hudColorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
-
+	// Use this for initialization
+	void Start () {
         powerupSprites = new Sprite[] { Resources.Load<Sprite>("UI Sprites/EmptyPowerup"), Resources.Load<Sprite>("UI Sprites/EMPPlaceHolder"),
                                         Resources.Load<Sprite>("UI Sprites/ShockwavePlaceHolder"), Resources.Load<Sprite>("UI Sprites/TimeSlowPlaceholder")};
 
@@ -29,18 +20,7 @@ public class PowerupUIController : MonoBehaviour, HUDElement {
         for (int i = 0; i < powerupGauges.Length; ++i)
         {
             powerupGauges[i] = temp[i].GetComponent<Image>();
-            powerupGauges[i].color = hudColorController.getColorByString(hudElementName);
         }
-
-        temp = GameObject.FindGameObjectsWithTag("Powerup Background");
-        powerupBackground = new Image[temp.Length];
-
-        for(int i = 0; i < powerupBackground.Length; ++i)
-        {
-            powerupBackground[i] = temp[i].GetComponent<Image>();
-            powerupBackground[i].color = hudColorController.getColorByString(hudElementName);
-        }
-
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 	
@@ -49,19 +29,6 @@ public class PowerupUIController : MonoBehaviour, HUDElement {
         for (int i = 0; i < powerupGauges.Length; ++i)
         {
             powerupGauges[i].sprite = powerupSprites[player.getPowerupIndex()];
-        }
-    }
-
-    public void UpdateColor()
-    {
-        for (int i = 0; i < powerupGauges.Length; ++i)
-        {
-            powerupGauges[i].color = hudColorController.getColorByString(hudElementName);
-        }
-
-        for (int i = 0; i < powerupBackground.Length; ++i)
-        {
-            powerupBackground[i].color = hudColorController.getColorByString(hudElementName);
         }
     }
 }

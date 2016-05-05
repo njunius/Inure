@@ -2,11 +2,10 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ArmorController : MonoBehaviour, HUDElement {
+public class ArmorController : MonoBehaviour {
 
     private PlayerController player;
-    private HUDColorController hudColorController;
-    private string hudElementName;
+
     public GameObject armorChunk;
     private Image[] armorChunkTracker;
 
@@ -21,9 +20,6 @@ public class ArmorController : MonoBehaviour, HUDElement {
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-        hudElementName = "armor";
-        hudColorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
-
         currChunks = maxChunks = player.getMaxHullIntegrity();
 
         arrayMidpoint = maxChunks / 2;
@@ -35,7 +31,6 @@ public class ArmorController : MonoBehaviour, HUDElement {
             GameObject temp = (GameObject)Instantiate(armorChunk, gameObject.transform.position, gameObject.transform.rotation);
             temp.transform.SetParent(gameObject.transform);
             armorChunkTracker[i] = temp.GetComponent<Image>();
-            armorChunkTracker[i].color = hudColorController.getColorByString(hudElementName);
             chunkOn = armorChunkTracker[i].color;
             chunkOff = new Color(chunkOn.r, chunkOn.g, chunkOn.b, 0.0f);
             if(i % 2 != 0)
@@ -49,7 +44,7 @@ public class ArmorController : MonoBehaviour, HUDElement {
 	void Update () {
         currChunks = player.getCurrHullIntegrity();
 
-        for (int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
+        for(int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
         {
             armorChunkTracker[i].color = chunkOff;
         }
@@ -76,11 +71,5 @@ public class ArmorController : MonoBehaviour, HUDElement {
         {
             armorChunkTracker[arrayMidpoint].color = chunkOn;
         }
-    }
-
-    public void UpdateColor()
-    {
-        chunkOn = hudColorController.getColorByString(hudElementName);
-        chunkOff = new Color(chunkOn.r, chunkOn.g, chunkOn.b, 0.0f);
     }
 }
