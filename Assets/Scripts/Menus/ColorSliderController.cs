@@ -9,6 +9,9 @@ public class ColorSliderController : MonoBehaviour {
     private string hudElement;
     public string colorChannelName;
 
+    public Image elementSample;
+    private HUDElement elementToUpdate;
+
 	// Use this for initialization
 	void Start () {
         colorChannel = GetComponent<Slider>();
@@ -26,6 +29,11 @@ public class ColorSliderController : MonoBehaviour {
 
     public void ValueChangeCheck()
     {
+        if(elementToUpdate != null)
+        {
+            elementToUpdate.UpdateColor();
+        }
+
         if (colorChannelName.Equals("red"))
         {
             colorController.setColorByString(hudElement, colorChannel.value, colorController.getColorByString(hudElement).g, colorController.getColorByString(hudElement).b);
@@ -46,5 +54,22 @@ public class ColorSliderController : MonoBehaviour {
     public void setHUDElement(string elementName)
     {
         hudElement = elementName;
+
+        if (hudElement.Equals("armor"))
+        {
+            elementToUpdate = GameObject.Find("Armor Gauge Canvas").GetComponent<HUDElement>();
+        }
+        else if (hudElement.Equals("shield"))
+        {
+            elementToUpdate = GameObject.Find("Shield").GetComponent<HUDElement>();
+        }
+        else if (hudElement.Equals("powerup"))
+        {
+            elementToUpdate = GameObject.Find("Powerup Gauge Canvas").GetComponent<HUDElement>();
+        }
+        else if (hudElement.Equals("bomb"))
+        {
+            elementToUpdate = GameObject.FindGameObjectWithTag("Bomb").GetComponent<HUDElement>();
+        }
     }
 }

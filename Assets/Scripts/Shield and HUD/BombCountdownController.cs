@@ -2,20 +2,26 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class BombCountdownController : MonoBehaviour
-{
+public class BombCountdownController : MonoBehaviour {
 
     public GameObject bomb;
     private BombDetach detachScript;
     private Canvas timerTextCanavas;
     private Text timerText;
 
+    private HUDColorController hudColorController;
+    private string hudElementName;
+
     // Use this for initialization
     void Start()
     {
+        hudElementName = "bomb";
+        hudColorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
         detachScript = bomb.GetComponent<BombDetach>();
         timerTextCanavas = GetComponent<Canvas>();
         timerText = GetComponentInChildren<Text>();
+
+        timerText.color = hudColorController.getColorByString(hudElementName);
 
         timerTextCanavas.enabled = false;
     }
@@ -35,5 +41,10 @@ public class BombCountdownController : MonoBehaviour
                 timerText.text = "T-" + detachScript.get_countdown().ToString("00.00") + "s";
             }
         }
+    }
+
+    public void colorUpdate()
+    {
+        timerText.color = bomb.GetComponent<BombController>().getBombColor();
     }
 }

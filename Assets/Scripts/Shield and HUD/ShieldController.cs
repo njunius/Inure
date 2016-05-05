@@ -8,7 +8,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class ShieldController : MonoBehaviour {
+public class ShieldController : MonoBehaviour, HUDElement {
     // shield fields
     private bool shieldActive;
     public int maxShieldCharge, currShieldCharge;
@@ -17,7 +17,8 @@ public class ShieldController : MonoBehaviour {
     private float shieldChargeDelay; // delay in number of seconds
     private float shieldChargeDelayTimer; // timer used to keep track of the delay from the shield being depleted before it starts recharging
     private float shieldDeltaChargeTimer; // timer for delaying each change in the shield value
-	private List<GameObject> particleSystems;
+
+    private List<GameObject> particleSystems;
 	public GameObject shieldCollisionParticles;
 	private Gradient redTail;
 	private Gradient greenTail;
@@ -32,10 +33,13 @@ public class ShieldController : MonoBehaviour {
     private GameObject bomb;
     private BombController bombBehavior;
     private PlayerController player;
-    //private MeshRenderer shieldMesh;
-	private ParticleSystem shieldParticles;
-    private Collider shieldCollider;
     private float interpShieldValue;
+    private HUDColorController hudColorController;
+    private string hudElementName;
+
+    //private MeshRenderer shieldMesh;
+    private ParticleSystem shieldParticles;
+    private Collider shieldCollider;
 
     // Use this for initialization
     void Start() {
@@ -49,8 +53,11 @@ public class ShieldController : MonoBehaviour {
         shieldDeltaChargeTimer = 0.0f; // initialize to 0 otherwise the timer is immediately updated.
         interpShieldValue = 100.0f;
 
+        hudElementName = "shield";
+        hudColorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
+
         //shieldMesh = GetComponent<MeshRenderer>();
-		shieldParticles = transform.FindChild("Shield Field").gameObject.GetComponent<ParticleSystem> ();
+        shieldParticles = transform.FindChild("Shield Field").gameObject.GetComponent<ParticleSystem> ();
         shieldCollider = GetComponent<Collider>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -61,6 +68,7 @@ public class ShieldController : MonoBehaviour {
         for(int i = 0; i < shieldGauge.Length; ++i)
         {
             shieldGauge[i] = temp[i].GetComponent<Image>();
+            shieldGauge[i].color = hudColorController.getColorByString(hudElementName);
         }
 		particleSystems = new List<GameObject> ();
 
@@ -69,6 +77,7 @@ public class ShieldController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
         if (!player.paused)
         {
 
@@ -154,6 +163,15 @@ public class ShieldController : MonoBehaviour {
         }
     }
 
+    public void UpdateColor()
+    {
+        for (int i = 0; i < shieldGauge.Length; ++i)
+        {
+            shieldGauge[i].color = hudColorController.getColorByString(hudElementName);
+        }
+
+    }
+
     /*void OnCollisionEnter(Collision collision)
     {
 		if (collision.collider.gameObject.CompareTag("Projectile") && shieldActive)
@@ -164,7 +182,7 @@ public class ShieldController : MonoBehaviour {
 		//Vector3.RotateTowards(collisionParticles.transform.up, collision.)
     } */
 
-	void OnTriggerEnter(Collider other){
+    void OnTriggerEnter(Collider other){
 		if (other.gameObject.CompareTag ("Projectile") && shieldActive) {
 			bombBehavior.chargeBomb (other.gameObject.GetComponent<Bullet> ().getAbsorbValue ());
 			other.gameObject.GetComponent<Bullet> ().Destroy ();
