@@ -108,6 +108,8 @@ public class BombController : MonoBehaviour, HUDElement {
             bombGauge[i].color = hudColorController.getColorByString(hudElementName);
         }
 
+        bombHUDColor = hudColorController.getColorByString(hudElementName);
+
         bombTimer.colorUpdate();
     }
 }

@@ -11,6 +11,8 @@ public class PowerupUIController : MonoBehaviour, HUDElement {
     private HUDColorController hudColorController;
     private string hudElementName;
 
+    private Image[] powerupBackground;
+
     // Use this for initialization
     void Start () {
 
@@ -29,6 +31,16 @@ public class PowerupUIController : MonoBehaviour, HUDElement {
             powerupGauges[i] = temp[i].GetComponent<Image>();
             powerupGauges[i].color = hudColorController.getColorByString(hudElementName);
         }
+
+        temp = GameObject.FindGameObjectsWithTag("Powerup Background");
+        powerupBackground = new Image[temp.Length];
+
+        for(int i = 0; i < powerupBackground.Length; ++i)
+        {
+            powerupBackground[i] = temp[i].GetComponent<Image>();
+            powerupBackground[i].color = hudColorController.getColorByString(hudElementName);
+        }
+
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 	
@@ -45,6 +57,11 @@ public class PowerupUIController : MonoBehaviour, HUDElement {
         for (int i = 0; i < powerupGauges.Length; ++i)
         {
             powerupGauges[i].color = hudColorController.getColorByString(hudElementName);
+        }
+
+        for (int i = 0; i < powerupBackground.Length; ++i)
+        {
+            powerupBackground[i].color = hudColorController.getColorByString(hudElementName);
         }
     }
 }
