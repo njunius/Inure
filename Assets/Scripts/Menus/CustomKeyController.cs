@@ -61,7 +61,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
             {
                 if (timer < timerMax)
                 {
-                    timer += Time.deltaTime;
+                    timer += Time.unscaledDeltaTime;
                 }
                 else if (timer >= timerMax)
                 {

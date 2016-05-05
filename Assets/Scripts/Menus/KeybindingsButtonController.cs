@@ -3,15 +3,21 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class KeybindingsButtonController : MonoBehaviour, IPointerDownHandler {
+public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
 
     private GameObject[] keybindingElements;
     private GameObject[] gameSettingElements;
     private Button thisButton;
     public Button gameSettingsButton;
+    public ResetColorButtonController colorResetButton;
 
-	// Use this for initialization
-	void Awake () {
+    public TabTransitionController tabTransition;
+    private Button[] colorSelectorButtons;
+
+
+
+    // Use this for initialization
+    void Awake () {
 
         keybindingElements = GameObject.FindGameObjectsWithTag("Keybinding Screen");
 
@@ -19,23 +25,36 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerDownHandler {
 
         thisButton = gameObject.GetComponent<Button>();
 
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("Color Selector Button");
+        colorSelectorButtons = new Button[temp.Length];
 
-	}
+        for (int i = 0; i < colorSelectorButtons.Length; ++i)
+        {
+            colorSelectorButtons[i] = temp[i].GetComponent<Button>();
+        }
 
-    // Update is called once per frame
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (thisButton.interactable && !gameSettingsButton.interactable)
         {
-            for (int i = 0; i < keybindingElements.Length; ++i)
+            EventSystem.current.SetSelectedGameObject(null);
+
+            for (int i = 0; i < colorSelectorButtons.Length; ++i)
             {
-                keybindingElements[i].SetActive(true);
+                colorSelectorButtons[i].interactable = true;
             }
 
-            for (int i = 0; i < gameSettingElements.Length; ++i)
-            {
-                gameSettingElements[i].SetActive(false);
-            }
+            colorResetButton.resetHUDElementName();
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (thisButton.interactable && !gameSettingsButton.interactable)
+        {
+            tabTransition.startTabTransition(true);
 
             thisButton.interactable = false;
             gameSettingsButton.interactable = true;

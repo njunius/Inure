@@ -8,17 +8,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class BombController : MonoBehaviour {
+public class BombController : MonoBehaviour, HUDElement {
 
     private bool isArmed;
     private bool hasRigidbody;
     public int currBombCharge;
     private int maxBombCharge;
 
+    public BombCountdownController bombTimer;
+
+    private HUDColorController hudColorController;
+    private string hudElementName;
+
+    private Color bombHUDColor;
+
     private Image[] bombGauge;
 
 	// Use this for initialization
 	void Start () {
+
+        hudElementName = "bomb";
+        hudColorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
 
         isArmed = false;
         hasRigidbody = false;
@@ -33,6 +43,7 @@ public class BombController : MonoBehaviour {
         for(int i = 0; i < bombGauge.Length; ++i)
         {
             bombGauge[i] = temp[i].GetComponent<Image>();
+            bombHUDColor = bombGauge[i].color = hudColorController.getColorByString(hudElementName);
         }
 	}
 	
@@ -83,5 +94,22 @@ public class BombController : MonoBehaviour {
     public void armBomb()
     {
         isArmed = true;
+    }
+
+    public Color getBombColor()
+    {
+        return bombHUDColor;
+    }
+
+    public void UpdateColor()
+    {
+        for (int i = 0; i < bombGauge.Length; ++i)
+        {
+            bombGauge[i].color = hudColorController.getColorByString(hudElementName);
+        }
+
+        bombHUDColor = hudColorController.getColorByString(hudElementName);
+
+        bombTimer.colorUpdate();
     }
 }
