@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class ColorSliderController : MonoBehaviour {
@@ -55,21 +56,24 @@ public class ColorSliderController : MonoBehaviour {
     {
         hudElement = elementName;
 
-        if (hudElement.Equals("armor"))
+        if (!SceneManager.GetActiveScene().name.Contains("Menu"))
         {
-            elementToUpdate = GameObject.Find("Armor Gauge Canvas").GetComponent<HUDElement>();
-        }
-        else if (hudElement.Equals("shield"))
-        {
-            elementToUpdate = GameObject.Find("Shield").GetComponent<HUDElement>();
-        }
-        else if (hudElement.Equals("powerup"))
-        {
-            elementToUpdate = GameObject.Find("Powerup Gauge Canvas").GetComponent<HUDElement>();
-        }
-        else if (hudElement.Equals("bomb"))
-        {
-            elementToUpdate = GameObject.FindGameObjectWithTag("Bomb").GetComponent<HUDElement>();
+            if (hudElement.Equals("armor"))
+            {
+                elementToUpdate = GameObject.Find("Armor Gauge Canvas").GetComponent<HUDElement>();
+            }
+            else if (hudElement.Equals("shield"))
+            {
+                elementToUpdate = GameObject.Find("Shield").GetComponent<HUDElement>();
+            }
+            else if (hudElement.Equals("powerup"))
+            {
+                elementToUpdate = GameObject.Find("Powerup Gauge Canvas").GetComponent<HUDElement>();
+            }
+            else if (hudElement.Equals("bomb"))
+            {
+                elementToUpdate = GameObject.FindGameObjectWithTag("Bomb").GetComponent<HUDElement>();
+            }
         }
     }
 }
