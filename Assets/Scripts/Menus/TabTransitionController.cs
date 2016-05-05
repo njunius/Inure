@@ -20,9 +20,7 @@ public class TabTransitionController : MonoBehaviour {
         halfway = false;
 
         keybindingElements = GameObject.FindGameObjectsWithTag("Keybinding Screen");
-        Debug.Log(keybindingElements.Length);
         gameSettingElements = GameObject.FindGameObjectsWithTag("Game Settings Screen");
-        Debug.Log(gameSettingElements.Length);
 
         for (int i = 0; i < gameSettingElements.Length; ++i)
         {
