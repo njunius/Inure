@@ -9,6 +9,7 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
     private GameObject[] gameSettingElements;
     private Button thisButton;
     public Button gameSettingsButton;
+    public ResetColorButtonController colorResetButton;
 
     public TabTransitionController tabTransition;
     private Button[] colorSelectorButtons;
@@ -45,6 +46,7 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
                 colorSelectorButtons[i].interactable = true;
             }
 
+            colorResetButton.resetHUDElementName();
         }
     }
 

@@ -13,7 +13,7 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler 
     private HUDColorController colorController;
 
     public Slider[] colorSliders;
-    public Button resetButton;
+    public ResetColorButtonController resetButton;
     public GameObject[] otherElementSliders;
 
     // Use this for initialization
@@ -67,6 +67,8 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler 
             colorSliders[0].value = hudElementColor.r;
             colorSliders[1].value = hudElementColor.g;
             colorSliders[2].value = hudElementColor.b;
+
+            resetButton.setHUDElementName(hudElement, colorSliders);
         }
     }
 }
