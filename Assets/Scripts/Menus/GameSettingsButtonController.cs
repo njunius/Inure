@@ -3,14 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
+public class GameSettingsButtonController : MonoBehaviour, IPointerDownHandler {
 
     private GameObject[] keybindingElements;
     private GameObject[] gameSettingElements;
     private Button thisButton;
     public Button keyButton;
-
-    public TabTransitionController tabTransition;
 
     // Use this for initialization
     void Start()
@@ -22,22 +20,28 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler,
 
         thisButton = gameObject.GetComponent<Button>();
 
+        for(int i = 0; i < gameSettingElements.Length; ++i)
+        {
+            gameSettingElements[i].SetActive(false);
+        }
+
+
     }
 
+    // Update is called once per frame
     public void OnPointerDown(PointerEventData eventData)
     {
         if (thisButton.interactable && !keyButton.interactable)
         {
-            EventSystem.current.SetSelectedGameObject(null);
+            for (int i = 0; i < keybindingElements.Length; ++i)
+            {
+                keybindingElements[i].SetActive(false);
+            }
 
-        }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (thisButton.interactable && !keyButton.interactable)
-        {
-            tabTransition.startTabTransition(false);
+            for (int i = 0; i < gameSettingElements.Length; ++i)
+            {
+                gameSettingElements[i].SetActive(true);
+            }
 
             thisButton.interactable = false;
             keyButton.interactable = true;
