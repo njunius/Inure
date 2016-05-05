@@ -12,6 +12,9 @@ public class TabTransitionController : MonoBehaviour {
     private GameObject[] keybindingElements;
     private GameObject[] gameSettingElements;
 
+    public GameObject[] hudElementSliders;
+    public GameObject[] emptySliders;
+
     // Use this for initialization
     void Start () {
         transition = gameObject.GetComponent<Image>();
@@ -60,6 +63,16 @@ public class TabTransitionController : MonoBehaviour {
                     for (int i = 0; i < gameSettingElements.Length; ++i)
                     {
                         gameSettingElements[i].SetActive(true);
+                    }
+
+                    for(int i = 0; i < hudElementSliders.Length; ++i)
+                    {
+                        hudElementSliders[i].SetActive(false);
+                    }
+
+                    for(int i = 0; i < emptySliders.Length; ++i)
+                    {
+                        emptySliders[i].SetActive(true);
                     }
                 }
             }
