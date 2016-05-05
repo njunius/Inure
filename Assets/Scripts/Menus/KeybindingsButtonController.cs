@@ -11,6 +11,8 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
     public Button gameSettingsButton;
 
     public TabTransitionController tabTransition;
+    private Button[] colorSelectorButtons;
+
 
 
     // Use this for initialization
@@ -22,13 +24,26 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
 
         thisButton = gameObject.GetComponent<Button>();
 
-	}
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("Color Selector Button");
+        colorSelectorButtons = new Button[temp.Length];
+
+        for (int i = 0; i < colorSelectorButtons.Length; ++i)
+        {
+            colorSelectorButtons[i] = temp[i].GetComponent<Button>();
+        }
+
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (thisButton.interactable && !gameSettingsButton.interactable)
         {
             EventSystem.current.SetSelectedGameObject(null);
+
+            for (int i = 0; i < colorSelectorButtons.Length; ++i)
+            {
+                colorSelectorButtons[i].interactable = true;
+            }
 
         }
     }
@@ -38,16 +53,6 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
         if (thisButton.interactable && !gameSettingsButton.interactable)
         {
             tabTransition.startTabTransition(true);
-
-            /*for (int i = 0; i < keybindingElements.Length; ++i)
-            {
-                keybindingElements[i].SetActive(true);
-            }
-
-            for (int i = 0; i < gameSettingElements.Length; ++i)
-            {
-                gameSettingElements[i].SetActive(false);
-            }*/
 
             thisButton.interactable = false;
             gameSettingsButton.interactable = true;

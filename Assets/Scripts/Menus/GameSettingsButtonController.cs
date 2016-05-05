@@ -22,12 +22,6 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler,
 
         thisButton = gameObject.GetComponent<Button>();
 
-        for(int i = 0; i < gameSettingElements.Length; ++i)
-        {
-            gameSettingElements[i].SetActive(false);
-        }
-
-
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -44,16 +38,6 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler,
         if (thisButton.interactable && !keyButton.interactable)
         {
             tabTransition.startTabTransition(false);
-
-            /*for (int i = 0; i < keybindingElements.Length; ++i)
-            {
-                keybindingElements[i].SetActive(false);
-            }
-
-            for (int i = 0; i < gameSettingElements.Length; ++i)
-            {
-                gameSettingElements[i].SetActive(true);
-            }*/
 
             thisButton.interactable = false;
             keyButton.interactable = true;

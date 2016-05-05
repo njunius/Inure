@@ -20,8 +20,14 @@ public class TabTransitionController : MonoBehaviour {
         halfway = false;
 
         keybindingElements = GameObject.FindGameObjectsWithTag("Keybinding Screen");
-
+        Debug.Log(keybindingElements.Length);
         gameSettingElements = GameObject.FindGameObjectsWithTag("Game Settings Screen");
+        Debug.Log(gameSettingElements.Length);
+
+        for (int i = 0; i < gameSettingElements.Length; ++i)
+        {
+            gameSettingElements[i].SetActive(false);
+        }
     }
 	
 	// Update is called once per frame
@@ -61,11 +67,11 @@ public class TabTransitionController : MonoBehaviour {
             }
             else if(alpha < 1 && !halfway)
             {
-                alpha += 5 * Time.unscaledDeltaTime;
+                alpha += 6 * Time.unscaledDeltaTime;
             }
             else if(alpha <= 1 && halfway)
             {
-                alpha -= 5 * Time.unscaledDeltaTime;
+                alpha -= 6 * Time.unscaledDeltaTime;
             }
             if(alpha < 0)
             {

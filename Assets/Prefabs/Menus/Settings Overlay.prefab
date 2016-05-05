@@ -525,6 +525,7 @@ GameObject:
   - 114: {fileID: 11407754}
   - 114: {fileID: 11491782}
   - 95: {fileID: 9538604}
+  - 114: {fileID: 11439206}
   m_Layer: 5
   m_Name: Powerup Indicator
   m_TagString: Color Selector Button
@@ -685,7 +686,7 @@ GameObject:
   - 224: {fileID: 22403166}
   - 222: {fileID: 22248686}
   - 114: {fileID: 11483060}
-  - 111: {fileID: 11153634}
+  - 114: {fileID: 11479746}
   m_Layer: 5
   m_Name: Tab Transition
   m_TagString: Untagged
@@ -1251,6 +1252,7 @@ GameObject:
   - 114: {fileID: 11416524}
   - 114: {fileID: 11406478}
   - 95: {fileID: 9546126}
+  - 114: {fileID: 11473314}
   m_Layer: 5
   m_Name: Armor Bar Selector
   m_TagString: Color Selector Button
@@ -1287,6 +1289,7 @@ GameObject:
   - 114: {fileID: 11458634}
   - 114: {fileID: 11495240}
   - 95: {fileID: 9524338}
+  - 114: {fileID: 11457906}
   m_Layer: 5
   m_Name: Shield Bar Selector
   m_TagString: Color Selector Button
@@ -1362,6 +1365,7 @@ GameObject:
   - 114: {fileID: 11475404}
   - 114: {fileID: 11476370}
   - 95: {fileID: 9546466}
+  - 114: {fileID: 11474920}
   m_Layer: 5
   m_Name: Bomb Gauge/Timer
   m_TagString: Color Selector Button
@@ -2644,20 +2648,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!111 &11153634
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 133946}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: c37f9a1537312a5468cefca7f768adf9, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &11400294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3339,6 +3329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettingsButton: {fileID: 11405266}
+  tabTransition: {fileID: 11479746}
 --- !u!114 &11414392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3667,6 +3658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyButton: {fileID: 11414392}
+  tabTransition: {fileID: 11479746}
 --- !u!114 &11422334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4418,6 +4410,17 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 11418420}
+--- !u!114 &11439206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1c5b73ee9929048b285962fb0fb079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11439510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5105,6 +5108,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Down
+--- !u!114 &11457906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1c5b73ee9929048b285962fb0fb079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11458436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5698,6 +5712,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &11473314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1c5b73ee9929048b285962fb0fb079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11473358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5857,6 +5882,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
+--- !u!114 &11474920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1c5b73ee9929048b285962fb0fb079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11475398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6245,6 +6281,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11479746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551727aaa0bddcf4d84916d8e4d1cf56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11479840
 MonoBehaviour:
   m_ObjectHideFlags: 1
