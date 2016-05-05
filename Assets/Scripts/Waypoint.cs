@@ -61,11 +61,17 @@ public class Waypoint : MonoBehaviour {
         {
             PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             Waypoint next = NextPoint.GetComponent<Waypoint>();
-            if (next.isBox)
+            if (next != null && next.isBox)
             {
                 
                 pc.lockOnTarget = next.getTarget();
                 next.active = true;
+                next.GetComponent<SpriteRenderer>().enabled = true;
+                if (isBox)
+                {
+                    GetComponent<SpriteRenderer>().enabled = false;
+                }
+                
 
             }
             else
