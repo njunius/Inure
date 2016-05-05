@@ -10,6 +10,8 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler,
     private Button thisButton;
     public Button keyButton;
 
+    public TabTransitionController tabTransition;
+
     // Use this for initialization
     void Start()
     {
@@ -33,6 +35,7 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler,
         if (thisButton.interactable && !keyButton.interactable)
         {
             EventSystem.current.SetSelectedGameObject(null);
+
         }
     }
 
@@ -40,8 +43,9 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler,
     {
         if (thisButton.interactable && !keyButton.interactable)
         {
+            tabTransition.startTabTransition(false);
 
-            for (int i = 0; i < keybindingElements.Length; ++i)
+            /*for (int i = 0; i < keybindingElements.Length; ++i)
             {
                 keybindingElements[i].SetActive(false);
             }
@@ -49,7 +53,7 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler,
             for (int i = 0; i < gameSettingElements.Length; ++i)
             {
                 gameSettingElements[i].SetActive(true);
-            }
+            }*/
 
             thisButton.interactable = false;
             keyButton.interactable = true;

@@ -10,15 +10,17 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
     private Button thisButton;
     public Button gameSettingsButton;
 
-	// Use this for initialization
-	void Awake () {
+    public TabTransitionController tabTransition;
+
+
+    // Use this for initialization
+    void Awake () {
 
         keybindingElements = GameObject.FindGameObjectsWithTag("Keybinding Screen");
 
         gameSettingElements = GameObject.FindGameObjectsWithTag("Game Settings Screen");
 
         thisButton = gameObject.GetComponent<Button>();
-
 
 	}
 
@@ -27,6 +29,7 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
         if (thisButton.interactable && !gameSettingsButton.interactable)
         {
             EventSystem.current.SetSelectedGameObject(null);
+
         }
     }
 
@@ -34,8 +37,9 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
     {
         if (thisButton.interactable && !gameSettingsButton.interactable)
         {
+            tabTransition.startTabTransition(true);
 
-            for (int i = 0; i < keybindingElements.Length; ++i)
+            /*for (int i = 0; i < keybindingElements.Length; ++i)
             {
                 keybindingElements[i].SetActive(true);
             }
@@ -43,7 +47,7 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
             for (int i = 0; i < gameSettingElements.Length; ++i)
             {
                 gameSettingElements[i].SetActive(false);
-            }
+            }*/
 
             thisButton.interactable = false;
             gameSettingsButton.interactable = true;
