@@ -10,7 +10,6 @@ public class ColorSliderController : MonoBehaviour {
     private string hudElement;
     public string colorChannelName;
 
-    public Image elementSample;
     private HUDElement elementToUpdate;
 
 	// Use this for initialization
@@ -48,7 +47,6 @@ public class ColorSliderController : MonoBehaviour {
         else if (colorChannelName.Equals("blue"))
         {
             colorController.setColorByString(hudElement, colorController.getColorByString(hudElement).r, colorController.getColorByString(hudElement).g, colorChannel.value);
-
         }
     }
 
