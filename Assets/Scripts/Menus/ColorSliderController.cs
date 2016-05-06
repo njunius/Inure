@@ -13,7 +13,7 @@ public class ColorSliderController : MonoBehaviour {
     private HUDElement elementToUpdate;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         colorChannel = GetComponent<Slider>();
         hudElement = "";
 
@@ -24,8 +24,8 @@ public class ColorSliderController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+
+    }
 
     public void ValueChangeCheck()
     {
@@ -33,7 +33,6 @@ public class ColorSliderController : MonoBehaviour {
         {
             elementToUpdate.UpdateColor();
         }
-
         if (colorChannelName.Equals("red"))
         {
             colorController.setColorByString(hudElement, colorChannel.value, colorController.getColorByString(hudElement).g, colorController.getColorByString(hudElement).b);

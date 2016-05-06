@@ -59,9 +59,12 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler 
                 otherElementSliders[i].SetActive(false);
             }
 
-            for(int i = 0; i < colorSliders.Length; ++i)
+            // turn on the layout group through the sliders
+            colorSliders[0].gameObject.transform.parent.gameObject.SetActive(true);
+
+            for (int i = 0; i < colorSliders.Length; ++i)
             {
-                colorSliders[i].GetComponent<ColorSliderController>().setHUDElement(hudElement);
+                colorSliders[i].gameObject.GetComponent<ColorSliderController>().setHUDElement(hudElement);
             }
 
             hudElementSample.enabled = true;
@@ -71,9 +74,6 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler 
             {
                 otherHUDElements[i].enabled = false;
             }
-
-            // turn on the layout group through the sliders
-            colorSliders[0].gameObject.transform.parent.gameObject.SetActive(true);
 
             // color sliders should only ever be length 3
             colorSliders[0].value = hudElementColor.r;
