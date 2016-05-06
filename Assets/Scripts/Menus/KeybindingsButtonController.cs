@@ -5,8 +5,6 @@ using System.Collections;
 
 public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
 
-    private GameObject[] keybindingElements;
-    private GameObject[] gameSettingElements;
     private Button thisButton;
     public Button gameSettingsButton;
     public ResetColorButtonController colorResetButton;
@@ -14,14 +12,10 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
     public TabTransitionController tabTransition;
     private Button[] colorSelectorButtons;
 
-
+    private Image[] hudElementSamples;
 
     // Use this for initialization
     void Awake () {
-
-        keybindingElements = GameObject.FindGameObjectsWithTag("Keybinding Screen");
-
-        gameSettingElements = GameObject.FindGameObjectsWithTag("Game Settings Screen");
 
         thisButton = gameObject.GetComponent<Button>();
 
@@ -31,6 +25,14 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
         for (int i = 0; i < colorSelectorButtons.Length; ++i)
         {
             colorSelectorButtons[i] = temp[i].GetComponent<Button>();
+        }
+
+        temp = GameObject.FindGameObjectsWithTag("HUD Element Sample");
+        hudElementSamples = new Image[temp.Length];
+
+        for(int i = 0; i < hudElementSamples.Length; ++i)
+        {
+            hudElementSamples[i] = temp[i].GetComponent<Image>();
         }
 
     }
@@ -47,6 +49,11 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
             }
 
             colorResetButton.resetHUDElementName();
+
+            for (int i = 0; i < hudElementSamples.Length; ++i)
+            {
+                hudElementSamples[i].enabled = false;
+            }
         }
     }
 

@@ -16,6 +16,9 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler 
     public ResetColorButtonController resetButton;
     public GameObject[] otherElementSliders;
 
+    public Image hudElementSample;
+    public Image[] otherHUDElements;
+
     // Use this for initialization
     void Start () {
         thisButton = gameObject.GetComponent<Button>();
@@ -31,6 +34,7 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler 
         }
 
         hudElementColor = colorController.getColorByString(hudElement);
+        hudElementSample.color = hudElementColor;
     }
 
     // Update is called once per frame
@@ -55,14 +59,22 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler 
                 otherElementSliders[i].SetActive(false);
             }
 
-            for(int i = 0; i < colorSliders.Length; ++i)
-            {
-                colorSliders[i].GetComponent<ColorSliderController>().setHUDElement(hudElement);
-            }
-
             // turn on the layout group through the sliders
             colorSliders[0].gameObject.transform.parent.gameObject.SetActive(true);
-            
+
+            for (int i = 0; i < colorSliders.Length; ++i)
+            {
+                colorSliders[i].gameObject.GetComponent<ColorSliderController>().setHUDElement(hudElement);
+            }
+
+            hudElementSample.enabled = true;
+            hudElementSample.color = hudElementColor;
+
+            for (int i = 0; i < otherHUDElements.Length; ++i)
+            {
+                otherHUDElements[i].enabled = false;
+            }
+
             // color sliders should only ever be length 3
             colorSliders[0].value = hudElementColor.r;
             colorSliders[1].value = hudElementColor.g;
@@ -70,5 +82,10 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler 
 
             resetButton.setHUDElementName(hudElement, colorSliders);
         }
+    }
+
+    public void disableSample()
+    {
+        hudElementSample.enabled = false;
     }
 }
