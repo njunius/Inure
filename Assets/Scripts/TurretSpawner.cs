@@ -29,6 +29,21 @@ public class TurretSpawner : MonoBehaviour {
                     orientationConfirmed = true;
                 }
             }
+            if (!orientationConfirmed)
+            {
+                dirToJug = juggernaut.transform.position - transform.GetChild(1).position;
+                hits = Physics.RaycastAll(transform.GetChild(1).position, dirToJug, 1000.0f);
+                foreach (RaycastHit hit in hits)
+                {
+                    if (hit.transform.CompareTag("Environment"))
+                    {
+                        Vector3 other = new Vector3(hit.normal.x, hit.normal.y, hit.normal.z + 15);
+                        Vector3 perp = Vector3.Cross(hit.normal, other);
+                        transform.rotation = Quaternion.LookRotation(perp, hit.normal);
+                        orientationConfirmed = true;
+                    }
+                }
+            }
         }
 	}
 
