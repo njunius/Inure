@@ -25,8 +25,15 @@ public class DriftMotion : MonoBehaviour {
         if (spinDirection.Equals(Vector3.zero))
         {
             spinDirection = new Vector3(Random.Range(-255, 255), Random.Range(-255, 255), Random.Range(-255, 255));
+            
+        }
+        else
+        {
+            spinDirection = transform.TransformDirection(spinDirection);
         }
         spinDirection = spin * spinDirection.normalized;
+        Debug.Log(transform.name);
+        Debug.Log(spinDirection);
         rb.AddTorque(spinDirection);
     }
 	
