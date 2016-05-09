@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Waypoint : MonoBehaviour {
 
@@ -10,16 +11,16 @@ public class Waypoint : MonoBehaviour {
     public bool active = false;
 
     public GameObject target;
-    public GameObject HUD;
     private Vector3 prevDir;
+
+    public RectTransform waypointSprite;
+    public Text distance;
 
     void Start()
     {
         if (isBox)
         {
             target = transform.FindChild("Waypoint Target").gameObject;
-            HUD = transform.FindChild("Waypoint HUD").gameObject;
-            HUD.GetComponent<SpriteRenderer>().enabled = false;
         }
         
     }
@@ -50,6 +51,9 @@ public class Waypoint : MonoBehaviour {
                 
             }
             Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            waypointSprite.position = screenPos;
+
+            distance.text = ((int)Vector3.Distance(player.transform.position, transform.position)).ToString();
             //HUD.transform.position = screenPos;
             //HUD.transform.LookAt(Camera.main.transform, Camera.main.transform.up);
 
@@ -73,11 +77,6 @@ public class Waypoint : MonoBehaviour {
                 
                 pc.lockOnTarget = next.getTarget();
                 next.active = true;
-                next.HUD.GetComponent<SpriteRenderer>().enabled = true;
-                if (isBox)
-                {
-                    HUD.GetComponent<SpriteRenderer>().enabled = false;
-                }
                 
 
             }
