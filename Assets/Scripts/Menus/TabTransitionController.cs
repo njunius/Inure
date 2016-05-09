@@ -8,6 +8,7 @@ public class TabTransitionController : MonoBehaviour {
     private float alpha;
     private bool keyBindingPressed;
     private bool halfway;
+    private float transitionDelay;
 
     private GameObject[] keybindingElements;
     private GameObject[] gameSettingElements;
@@ -18,7 +19,8 @@ public class TabTransitionController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         transition = gameObject.GetComponent<Image>();
-        alpha = 0.0f;
+        alpha = 1.0f;
+        transitionDelay = 0.0f;
         keyBindingPressed = false;
         halfway = false;
 
@@ -36,10 +38,11 @@ public class TabTransitionController : MonoBehaviour {
         if (transition.enabled)
         {
             
-            if(alpha > 1)
+            if(transitionDelay > 1)
             {
                 halfway = true;
                 alpha = 1.0f;
+                transitionDelay = 0.0f;
 
                 if (keyBindingPressed)
                 {
@@ -76,9 +79,9 @@ public class TabTransitionController : MonoBehaviour {
                     }
                 }
             }
-            else if(alpha < 1 && !halfway)
+            else if(transitionDelay < 1 && !halfway)
             {
-                alpha += 6 * Time.unscaledDeltaTime;
+                transitionDelay += 6 * Time.unscaledDeltaTime;
             }
             else if(alpha <= 1 && halfway)
             {
@@ -86,7 +89,7 @@ public class TabTransitionController : MonoBehaviour {
             }
             if(alpha < 0)
             {
-                alpha = 0.0f;
+                alpha = 1.0f;
                 transition.enabled = false;
                 halfway = false;
             }
