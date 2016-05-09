@@ -36,6 +36,7 @@ public class ShieldController : MonoBehaviour, HUDElement
     private float interpShieldValue;
     private HUDColorController hudColorController;
     private string hudElementName;
+    public Image shieldOutline;
 
     //private MeshRenderer shieldMesh;
     private ParticleSystem shieldParticles;
@@ -56,6 +57,8 @@ public class ShieldController : MonoBehaviour, HUDElement
 
         hudElementName = "shield";
         hudColorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
+
+        shieldOutline.color = hudColorController.getColorByString(hudElementName);
 
         //shieldMesh = GetComponent<MeshRenderer>();
         shieldParticles = transform.FindChild("Shield Field").gameObject.GetComponent<ParticleSystem>();
@@ -168,6 +171,7 @@ public class ShieldController : MonoBehaviour, HUDElement
         {
             shieldGauge[i].color = hudColorController.getColorByString(hudElementName);
         }
+        shieldOutline.color = hudColorController.getColorByString(hudElementName);
 
     }
 
