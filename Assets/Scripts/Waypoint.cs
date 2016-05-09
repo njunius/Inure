@@ -16,6 +16,8 @@ public class Waypoint : MonoBehaviour {
     public RectTransform waypointSprite;
     public Text distance;
 
+    public bool lockOnNext = true;
+
     void Start()
     {
         if (isBox)
@@ -39,10 +41,10 @@ public class Waypoint : MonoBehaviour {
             Transform player = GameObject.FindGameObjectWithTag("Player").transform;
             //Vector3 waypointDirection = -1 * transform.eulerAngles;
 
-            Debug.DrawRay(player.position, prevDir, Color.yellow);
+            //Debug.DrawRay(player.position, prevDir, Color.yellow);
             int layer = 1 << 14;
             RaycastHit hit;
-            if (Physics.Raycast(player.position, prevDir, out hit, 1000.0f, layer))
+            if (Physics.Raycast(player.position, prevDir, out hit, 20000.0f, layer))
             {
                 if (hit.transform.gameObject.GetComponent<Waypoint>().active)
                 {
@@ -86,7 +88,11 @@ public class Waypoint : MonoBehaviour {
             }
             active = false;
             
-            pc.targetLocked = true;
+            if (lockOnNext)
+            {
+                pc.targetLocked = true;
+            }
+            
         }
     }
 }

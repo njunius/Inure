@@ -199,7 +199,7 @@ public class CameraController : MonoBehaviour {
                                 Mathf.Sqrt(defaultDistance * defaultDistance + defaultHeight * defaultHeight), layer);
 
             Vector3 cameraPlaneCenter = transform.InverseTransformDirection(transform.position);
-            float clipPlane = Camera.main.nearClipPlane;
+            //float clipPlane = Camera.main.nearClipPlane;
             cameraPlaneCenter.z = Camera.main.nearClipPlane;
 
             foreach (RaycastHit ray in hits)
@@ -221,8 +221,8 @@ public class CameraController : MonoBehaviour {
 
             }
 
-            Vector3 topOfScreen = transform.TransformDirection(new Vector3(0, defaultHeight, 0));
-            Vector3 localTargetPos = transform.InverseTransformPoint(target.transform.position);
+            //Vector3 topOfScreen = transform.TransformDirection(new Vector3(0, defaultHeight, 0));
+            //Vector3 localTargetPos = transform.InverseTransformPoint(target.transform.position);
             Vector3 rayBase = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
             Debug.DrawRay(rayBase, transform.position - rayBase, Color.blue);
             hits = Physics.RaycastAll(rayBase, transform.position - rayBase, defaultHeight + 0.2f);

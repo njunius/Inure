@@ -32,8 +32,8 @@ public class DriftMotion : MonoBehaviour {
             spinDirection = transform.TransformDirection(spinDirection);
         }
         spinDirection = spin * spinDirection.normalized;
-        Debug.Log(transform.name);
-        Debug.Log(spinDirection);
+        //Debug.Log(transform.name);
+        //Debug.Log(spinDirection);
         rb.AddTorque(spinDirection);
     }
 	

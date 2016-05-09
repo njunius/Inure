@@ -88,6 +88,12 @@ public class PlayerController : MonoBehaviour {
 
     public bool tutorialMode = false;
 
+    public bool twoSpeedMode = false;
+    public float twoSpeedMultiplier = 2;
+    public float twoSpeedTimer = 5;
+    private float speedTimer = 0;
+    private bool twoSpeedEngaged = false;
+
     // Use this for initialization
     void Awake () {
         sources = GetComponents<AudioSource>();   //0: bullets, 1: engines, 2: shield, 3: impacts, 4: other
@@ -191,7 +197,7 @@ public class PlayerController : MonoBehaviour {
             }
 
             // Shield Controls 
-            if (im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
+            if (sheildEnabled && im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
             {
                 shield.setShieldActive(true);
             }
@@ -262,11 +268,33 @@ public class PlayerController : MonoBehaviour {
         if (!paused)
         {
             float moveLongitudinal = im.getInput("Longitudinal") * moveSpeed;
+            if (twoSpeedEngaged && moveLongitudinal > 0)
+            {
+                moveLongitudinal *= twoSpeedMultiplier;
+            }
             float moveLateral = im.getInput("Lateral") * moveSpeed;
             float moveVertical = im.getInput("Vertical") * moveSpeed;
             float rotRoll = im.getInput("Roll") * rollSpeed;
             float rotPitch = im.getInput("Pitch") * rotSpeed;
             float rotYaw = im.getInput("Yaw") * rotSpeed;
+
+            if (twoSpeedEngaged && moveLongitudinal > 0)
+            {
+                moveLongitudinal *= twoSpeedMultiplier;
+                moveLateral /= 2;
+                moveVertical /= 2;
+                rotPitch /= 2;
+                rotYaw /= 2;
+            }
+
+            if (twoSpeedMode)
+            {
+                if (moveLongitudinal <= 0)
+                {
+                    speedTimer = 0;
+                }
+
+            }
 
             if (!verticalEnginesEnabled)
             {
@@ -426,9 +454,21 @@ public class PlayerController : MonoBehaviour {
             }
 
 
-            if (rb.velocity.magnitude > maxSpeed)
+            float inGameMaxSpeed = maxSpeed;
+            speedTimer += Time.deltaTime;
+            if (twoSpeedMode  && speedTimer > twoSpeedTimer)
             {
-                rb.velocity = rb.velocity.normalized * maxSpeed;
+                inGameMaxSpeed *= 1.1f;
+                twoSpeedEngaged = true;
+            }
+            else
+            {
+                twoSpeedEngaged = false;
+            }
+
+            if (rb.velocity.magnitude > inGameMaxSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * inGameMaxSpeed;
 
             }
             if (rb.velocity.magnitude < 0.01f)

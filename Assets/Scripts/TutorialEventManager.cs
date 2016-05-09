@@ -17,6 +17,7 @@ public class TutorialEventManager : MonoBehaviour {
     public GameObject exterior;
 
     public Text subtitles;
+    public Canvas subtitleCanvas;
 
     private GameObject gameController;
     private InputManager im;
@@ -28,18 +29,22 @@ public class TutorialEventManager : MonoBehaviour {
     public AudioClip Rotators;
     public AudioClip Weapons;
 
+
+    private float timer = 0;
     // Use this for initialization
     void Start () {
         source = GetComponent<AudioSource>();
         eventTimer = 150;
         subtitles.text = "";
         source.PlayOneShot(Initialize);
+
         
     }
 	
 
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Equals))
         {
             if (eventIndex < 11)
@@ -106,6 +111,14 @@ public class TutorialEventManager : MonoBehaviour {
                 eventIndex = 15;
             }
         }
+
+        timer -= Time.deltaTime;
+        if (timer < 0)
+        {
+            subtitles.text = "";
+            subtitles.enabled = false;
+            subtitleCanvas.enabled = false;
+        }
     }
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -159,11 +172,11 @@ public class TutorialEventManager : MonoBehaviour {
 
     public void refresh()
     {
-        Debug.Log("Event " + eventIndex);
+        //Debug.Log("Event " + eventIndex);
         switch (eventIndex)
         {
             case 0:         //Scene ends with hull indicatiors activated.
-
+                subtitleCanvas.enabled = false;
                 break;
             case 1:
             case 2:
@@ -177,6 +190,9 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
             case 6:
                 source.PlayOneShot(Vertical);
+                subtitleCanvas.enabled = true;
+                subtitles.enabled = true;
+                timer = 10;
                 subtitles.text = "Press [" + im.getPosInputName("Vertical") + "] or [" + im.getNegInputName("Vertical") + "] to move Vertically.";
                 player.verticalEnginesEnabled = true;
                 
@@ -184,7 +200,8 @@ public class TutorialEventManager : MonoBehaviour {
 
             case 7:         //Doors open
                 subtitles.text = "";
-                
+                subtitles.enabled = false;
+                subtitleCanvas.enabled = false;
                 door1Lower.GetComponent<TutorialDoors>().activate();
                 door1Upper.GetComponent<TutorialDoors>().activate();
                 door2Lower.GetComponent<TutorialDoors>().activate();
@@ -192,19 +209,28 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
             case 8:         //Player can lift off. Display vertical controls
                 source.PlayOneShot(Accelerators);
-                subtitles.text = "Press [" + im.getPosInputName("Longitudinal").ToUpper() + "] or [" + im.getNegInputName("Longitudinal").ToUpper() + "] to accelerate in Forward and back or Lateral.";
+                subtitleCanvas.enabled = true;
+                subtitles.enabled = true;
+                timer = 10;
+                subtitles.text = "Press [" + im.getPosInputName("Longitudinal").ToUpper() + "] or [" + im.getNegInputName("Longitudinal").ToUpper() + "] to accelerate forward and back.";
                 player.longitudinalEnginesEnabled = true;
                 
                 break;
 
             case 9:
                 //source.PlayOneShot(Lateral);
+                subtitleCanvas.enabled = true;
+                subtitles.enabled = true;
+                timer = 10;
                 subtitles.text = "Press [" + im.getNegInputName("Lateral").ToUpper() + "] or [" + im.getPosInputName("Lateral").ToUpper() + "] to accelerate side to side.";
                 player.lateralEnginesEnabled = true;
                 break;
 
             case 10:         //Player can move forward.
                 source.PlayOneShot(Rotators);
+                subtitleCanvas.enabled = true;
+                subtitles.enabled = true;
+                timer = 10;
                 subtitles.text = "Use Mouse to rotate Pitch and Yaw.  Use [" + im.getPosInputName("Roll").ToUpper() + "] or [" + im.getNegInputName("Roll").ToUpper() + "] to Roll.";
                 player.rotateEnabled = true;
                 player.unFreezeRotation();
@@ -212,9 +238,12 @@ public class TutorialEventManager : MonoBehaviour {
             case 11:
                 subtitles.text = "";
                 subtitles.enabled = false;
+                subtitleCanvas.enabled = false;
                 break;
             case 12:
+                subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
+                timer = 10;
                 source.PlayOneShot(Weapons);
                 subtitles.text = "Use Left Mouse Button to fire.";
                 player.weaponsEnabled = true;
@@ -223,20 +252,26 @@ public class TutorialEventManager : MonoBehaviour {
 
                 break;
             case 13:
-                subtitles.text = "";
-                subtitles.enabled = false;
+                subtitleCanvas.enabled = true;
+                subtitles.enabled = true;
+                timer = 10;
+                subtitles.text = "Approach course confirmed.  Manuvering thrusters dissabled.";
                 interior.SetActive(false);
                 exterior.SetActive(true);
                 break;
             case 14:
                 //source.PlayOneShot(Shields);
+                subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
+                timer = 10;
                 subtitles.text = "Use Right Mouse Button to activate shield.";
                 player.sheildEnabled = true;
                 break;
             case 15:
-                subtitles.text = "";
-                subtitles.enabled = false;
+                subtitleCanvas.enabled = true;
+                subtitles.enabled = true;
+                timer = 10;
+                subtitles.text = "Manuvering thursters re-engaged.";
                 player.targetLocked = false;
                 player.unFreezeRotation();
                 player.rotateEnabled = true;

@@ -25,7 +25,7 @@ public class TutorialEventIncrementer : MonoBehaviour {
         
         if (other.gameObject.CompareTag("Player Turret Trigger"))
         {
-            Debug.Log("Target " + targetEventIndex + " " + manager.eventIndex);
+            //Debug.Log("Target " + targetEventIndex + " " + manager.eventIndex);
             if (manager.eventIndex + 1 == targetEventIndex)
             {
                 manager.eventIndex++;
