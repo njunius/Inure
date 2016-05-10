@@ -77,6 +77,11 @@ public class BombController : MonoBehaviour, HUDElement {
             currBombCharge = maxBombCharge;
     }
 
+	public int getBombCharge()
+	{
+		return currBombCharge;
+	}
+
     // use only when reloading checkpoints
     public void setBombCharge(int charge)
     {

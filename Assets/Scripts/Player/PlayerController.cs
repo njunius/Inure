@@ -18,10 +18,12 @@ public class PlayerController : MonoBehaviour {
 	public float bulletVel = 220.0f;
 	public float fireRate = 0.2f;
 	public GameObject bulletPrefab;
+	public GameObject powerBomb;
 
     public GameObject bulletSpawns;
     public Transform[] bulletSpawnLocations;
     int bulletSpawnLocIndex;
+	public GameObject powerBombSpawner;
 
     public float invulnSecs = 1.0f;
 	public bool noGameOver = false;
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 	private float timerTMP = 0;
     
 	private ShieldController shield;
+	private BombController bomb;
 
     public GameObject lockOnTarget;
     public bool targetLocked = false;
@@ -111,6 +114,7 @@ public class PlayerController : MonoBehaviour {
 		*/
 
         shield = GetComponentInChildren<ShieldController>();
+		bomb = GetComponentInChildren<BombController> ();
 
         maxHullIntegrity = currHullIntegrity = 5;
 
@@ -248,6 +252,9 @@ public class PlayerController : MonoBehaviour {
                 //Destroy(gameObject.GetComponent<PowerUp> ());
                 curPowerUp = "";
             }
+			if (Input.GetKeyDown (KeyCode.F)) {
+				FireBomb ();
+			}
         }        
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -613,6 +620,14 @@ public class PlayerController : MonoBehaviour {
 		shield.setCurrShieldCharge(setCharge);
 	}
 
+	public int getBombCharge () {
+		return bomb.getBombCharge ();
+	}
+
+	public void setBombCharge (int newCharge) {
+		bomb.setBombCharge (newCharge);
+	}
+
     public int getMaxHullIntegrity()
     {
         return maxHullIntegrity;
@@ -670,6 +685,14 @@ public class PlayerController : MonoBehaviour {
 		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
 		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
 		newBullet.setVars (bulletColor, realBulletVel);*/
+	}
+
+	private void FireBomb () {
+		Vector3 forwardNorm = transform.forward;
+		forwardNorm.Normalize ();
+		GameObject newBomb = (GameObject)Instantiate (powerBomb, powerBombSpawner.transform.position, Quaternion.identity);
+		newBomb.GetComponent<PowerBomb> ().CalculateVariables (getBombCharge(), forwardNorm);
+		setBombCharge (0);
 	}
 
     public int getPowerupIndex()
