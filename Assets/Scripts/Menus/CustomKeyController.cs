@@ -123,4 +123,37 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
     {
         selected = true;
     }
+
+    // defaultKey must be lowercase to work properly
+    public void resetKey(string defaultKey)
+    {
+
+        /*if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
+        {
+            key = inputBindings[command].posAxis;
+        }
+        else if (inputBindings[command].bidirectional && !positiveDirection)
+        {
+            key = inputBindings[command].negAxis;
+        }*/
+
+        if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
+        {
+            inputBindings[command].posAxis = defaultKey;
+            key = inputBindings[command].posAxis;
+            currentKey.text = key.ToUpper();
+
+        }
+        else if (inputBindings[command].bidirectional && !positiveDirection)
+        {
+            inputBindings[command].negAxis = defaultKey;
+            key = inputBindings[command].negAxis;
+            currentKey.text = key.ToUpper();
+
+        }
+        EventSystem.current.SetSelectedGameObject(null);
+        selected = false;
+        delay = true;
+        keyBuffer.enabled = false;
+    }
 }
