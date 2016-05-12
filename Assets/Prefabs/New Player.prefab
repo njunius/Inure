@@ -41,7 +41,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 224: {fileID: 22415780}
+  - 224: {fileID: 22486268}
   - 222: {fileID: 22235596}
   - 114: {fileID: 11477910}
   - 95: {fileID: 9554592}
@@ -1301,6 +1301,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &194254
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22415780}
+  - 222: {fileID: 22247462}
+  - 114: {fileID: 11488158}
+  - 95: {fileID: 9537638}
+  m_Layer: 5
+  m_Name: Bomb Use Gauge
+  m_TagString: Bomb Use Gauge
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &195414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,6 +1349,21 @@ GameObject:
   - 199: {fileID: 19931732}
   m_Layer: 0
   m_Name: Main Thruster Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &198506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 422514}
+  m_Layer: 0
+  m_Name: PowerBomb Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1531,6 +1564,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 457814}
   m_RootOrder: 2
+--- !u!4 &422514
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.38, z: 9.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 457814}
+  m_RootOrder: 40
 --- !u!4 &427210
 Transform:
   m_ObjectHideFlags: 1
@@ -1779,7 +1824,7 @@ Transform:
   m_LocalScale: {x: 0.60626686, y: 1, z: 1.3609595}
   m_Children: []
   m_Father: {fileID: 457814}
-  m_RootOrder: 40
+  m_RootOrder: 42
 --- !u!4 &456622
 Transform:
   m_ObjectHideFlags: 1
@@ -1799,7 +1844,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -13, y: 0, z: 18.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 478726}
@@ -1842,9 +1887,10 @@ Transform:
   - {fileID: 475378}
   - {fileID: 447650}
   - {fileID: 449540}
+  - {fileID: 422514}
+  - {fileID: 488498}
   - {fileID: 451292}
   - {fileID: 492978}
-  - {fileID: 488498}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &457960
@@ -2110,7 +2156,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457814}
-  m_RootOrder: 42
+  m_RootOrder: 41
 --- !u!4 &488660
 Transform:
   m_ObjectHideFlags: 1
@@ -2135,7 +2181,7 @@ Transform:
   m_LocalScale: {x: 0.6062667, y: 1, z: 1.3609592}
   m_Children: []
   m_Father: {fileID: 457814}
-  m_RootOrder: 41
+  m_RootOrder: 43
 --- !u!4 &495932
 Transform:
   m_ObjectHideFlags: 1
@@ -2870,6 +2916,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &9537638
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194254}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e184bbfe697b9634ea5f8905e5ce6a6e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9554592
 Animator:
   serializedVersion: 3
@@ -3875,6 +3938,33 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11488158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.5019608}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: fd2846bbe1eef7f499a4c41bd863ff28, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 2
 --- !u!114 &11488520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3949,8 +4039,10 @@ MonoBehaviour:
   bulletVel: 220
   fireRate: 0.2
   bulletPrefab: {fileID: 162432, guid: ff8bb83fcc2b7df4eb87d80057cbe025, type: 2}
+  powerBomb: {fileID: 135314, guid: 0878516f3e5d08f4fba0535667fd9226, type: 2}
   bulletSpawns: {fileID: 184574}
   bulletSpawnLocations: []
+  powerBombSpawner: {fileID: 198506}
   invulnSecs: 1
   noGameOver: 0
   paused: 0
@@ -3976,6 +4068,9 @@ MonoBehaviour:
   weaponsEnabled: 1
   sheildEnabled: 1
   tutorialMode: 0
+  twoSpeedMode: 0
+  twoSpeedMultiplier: 2
+  twoSpeedTimer: 5
 --- !u!114 &11498090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5628,7 +5723,7 @@ ParticleSystem:
   looping: 1
   prewarm: 0
   playOnAwake: 0
-  moveWithTransform: 0
+  moveWithTransform: 1
   scalingMode: 1
   InitialModule:
     serializedVersion: 2
@@ -5669,7 +5764,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 64
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7107,7 +7202,7 @@ ParticleSystem:
   looping: 1
   prewarm: 0
   playOnAwake: 0
-  moveWithTransform: 0
+  moveWithTransform: 1
   scalingMode: 1
   InitialModule:
     serializedVersion: 2
@@ -7148,7 +7243,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 64
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -8697,6 +8792,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141292}
+--- !u!222 &22247462
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194254}
 --- !u!222 &22251504
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -8938,16 +9039,16 @@ RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107310}
+  m_GameObject: {fileID: 194254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 22472990}
+  m_Father: {fileID: 22486268}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.0000009536743, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22416020
@@ -9187,7 +9288,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1.6, y: 1.6, z: 1.4}
   m_Children:
-  - {fileID: 22415780}
+  - {fileID: 22486268}
   m_Father: {fileID: 418346}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -9263,6 +9364,24 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22462808}
   m_RootOrder: 1
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22486268
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 22415780}
+  m_Father: {fileID: 22472990}
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
