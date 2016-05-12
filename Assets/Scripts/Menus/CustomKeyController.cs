@@ -22,7 +22,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
     public bool positiveDirection;
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
 
         inputs = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
@@ -34,11 +34,16 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
 
         delay = true;
         selected = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(inputs == null)
+        {
+            inputs = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
+        }
 
         if (inputBindings == null)
         {

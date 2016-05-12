@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
 
     private Canvas pauseScreen; //Base user interface, pause menu here
-    private Canvas settingsOverlay;
 
 	private float timerTMP = 0;
     
@@ -108,10 +107,6 @@ public class PlayerController : MonoBehaviour {
         curPowerUp = powerUpList[0];
 
         pauseScreen = GameObject.FindGameObjectWithTag("Pause Overlay").GetComponent<Canvas>();
-
-        /*settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
-
-		*/
 
         shield = GetComponentInChildren<ShieldController>();
 		bomb = GetComponentInChildren<BombController> ();

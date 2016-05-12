@@ -13,7 +13,7 @@ public class ColorSliderController : MonoBehaviour {
     private HUDElement elementToUpdate;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
         colorChannel = GetComponent<Slider>();
         hudElement = "";
 
@@ -24,7 +24,11 @@ public class ColorSliderController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(colorController == null)
+        {
+            colorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
 
+        }
     }
 
     public void ValueChangeCheck()
