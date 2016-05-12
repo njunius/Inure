@@ -53,9 +53,15 @@ public class BombController : MonoBehaviour, HUDElement {
             bombGauge[i] = temp[i].GetComponent<Image>();
 			bombHUDColor = bombGauge [i].color = newColor;
         }
+
 		useGauge = useGaugeObject.GetComponent<Image>();
 		useGauge.color = new Color (newColor.r / 2, newColor.g / 2, newColor.b / 2, newColor.a);
-	}
+
+        for (int i = 0; i < bombGauge.Length; ++i)
+        {
+            bombGauge[i].fillAmount = (float)currBombCharge / (float)maxBombCharge;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -68,11 +74,6 @@ public class BombController : MonoBehaviour, HUDElement {
             temp.angularDrag = 1;
 
             hasRigidbody = true;
-        }
-
-        for (int i = 0; i < bombGauge.Length; ++i)
-        {
-            bombGauge[i].fillAmount = (float)currBombCharge / (float)maxBombCharge;
         }
 
 		setUseRotation (360f * (float)currBombCharge / (float)maxBombCharge);
@@ -88,6 +89,11 @@ public class BombController : MonoBehaviour, HUDElement {
         currBombCharge += newCharge;
         if (currBombCharge > maxBombCharge)
             currBombCharge = maxBombCharge;
+
+        for (int i = 0; i < bombGauge.Length; ++i)
+        {
+            bombGauge[i].fillAmount = (float)currBombCharge / (float)maxBombCharge;
+        }
     }
 
 	public int getBombCharge()
@@ -96,9 +102,15 @@ public class BombController : MonoBehaviour, HUDElement {
 	}
 
     // use only when reloading checkpoints
+    // charge <= maxBombCharge
     public void setBombCharge(int charge)
     {
         currBombCharge = charge;
+
+        for (int i = 0; i < bombGauge.Length; ++i)
+        {
+            bombGauge[i].fillAmount = (float)currBombCharge / (float)maxBombCharge;
+        }
     }
 
 	public float getUseCharge() {
