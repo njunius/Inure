@@ -4,7 +4,6 @@ using System.Collections;
 
 public class ArmorController : MonoBehaviour, HUDElement {
 
-    private PlayerController player;
     private HUDColorController hudColorController;
     private string hudElementName;
     public GameObject armorChunk;
@@ -19,12 +18,10 @@ public class ArmorController : MonoBehaviour, HUDElement {
 
 	// Use this for initialization
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
         hudElementName = "armor";
         hudColorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
 
-        currChunks = maxChunks = player.getMaxHullIntegrity();
+        currChunks = maxChunks = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().getMaxHullIntegrity();
 
         arrayMidpoint = maxChunks / 2;
 
@@ -47,7 +44,12 @@ public class ArmorController : MonoBehaviour, HUDElement {
 	
 	// Update is called once per frame
 	void Update () {
-        currChunks = player.getCurrHullIntegrity();
+        
+    }
+
+    public void updateChunks(int newHullIntegrity)
+    {
+        currChunks = newHullIntegrity;
 
         for (int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
         {
@@ -59,7 +61,7 @@ public class ArmorController : MonoBehaviour, HUDElement {
             armorChunkTracker[i].color = chunkOn;
         }
 
-        for(int i = arrayMidpoint + currChunks / 2; i < maxChunks; ++i)
+        for (int i = arrayMidpoint + currChunks / 2; i < maxChunks; ++i)
         {
             if (currChunks % 2 == 0)
             {
@@ -67,12 +69,12 @@ public class ArmorController : MonoBehaviour, HUDElement {
             }
         }
 
-        if(currChunks == maxChunks)
+        if (currChunks == maxChunks)
         {
             armorChunkTracker[armorChunkTracker.Length - 1].color = chunkOn;
         }
 
-        if(currChunks == 1)
+        if (currChunks == 1)
         {
             armorChunkTracker[arrayMidpoint].color = chunkOn;
         }

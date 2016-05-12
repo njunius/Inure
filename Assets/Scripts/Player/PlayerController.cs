@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
 	private bool fInvincible = false;
 	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_SlowTime"};
 	private string curPowerUp;
+    private ArmorController armorGauge;
 
     private Rigidbody rb;
 
@@ -112,6 +113,7 @@ public class PlayerController : MonoBehaviour {
 		bomb = GetComponentInChildren<BombController> ();
 
         maxHullIntegrity = currHullIntegrity = 5;
+        armorGauge = gameObject.GetComponentInChildren<ArmorController>();
 
         if (tutorialMode)
         {
@@ -514,10 +516,11 @@ public class PlayerController : MonoBehaviour {
 		//Reset stats
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
+        armorGauge.updateChunks(currHullIntegrity);
 
 
-		//Overwrite data
-		savePlayer ();
+        //Overwrite data
+        savePlayer();
 
 		//Turn off turrets + Destroy bullets
 		GameObject[] allTurrets, allBullets;
@@ -584,6 +587,8 @@ public class PlayerController : MonoBehaviour {
             Renderer r = mesh.GetComponent<Renderer>();
             r.material.color = new Color(255, 255, 255, r.material.color.a);
             r.material.EnableKeyword("_Emmisive");
+
+            armorGauge.updateChunks(currHullIntegrity);
         }
 
         if (currHullIntegrity < 0)
