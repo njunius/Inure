@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
 	private bool isFiring = false;
 	private bool isSlowed = false;
     private bool invincibleFlashing = false;
+	private bool justUsedBomb = false;
 
     public bool paused = false;
 
@@ -252,8 +253,21 @@ public class PlayerController : MonoBehaviour {
                 //Destroy(gameObject.GetComponent<PowerUp> ());
                 curPowerUp = "";
             }
-			if (Input.GetKeyDown (KeyCode.F)) {
-				FireBomb ();
+			if (Input.GetKey (KeyCode.F)) {
+				if (getBombCharge () > 0) {
+					float newCharge = (getUseCharge () + (10 * Time.deltaTime));
+					setUseCharge(Mathf.Min (newCharge, getBombCharge ()));
+					if (getUseCharge () == getBombCharge ()) {
+						FireBomb ((int)Mathf.Floor(getUseCharge ()));
+						justUsedBomb = true;
+					}
+				}
+			}
+			if (Input.GetKeyUp (KeyCode.F)) {
+				if (getBombCharge () > 0 && !justUsedBomb) {
+					FireBomb ((int)Mathf.Floor(getUseCharge ()));
+				}
+				justUsedBomb = false;
 			}
         }        
         if (Input.GetKeyDown(KeyCode.P))
@@ -628,6 +642,14 @@ public class PlayerController : MonoBehaviour {
 		bomb.setBombCharge (newCharge);
 	}
 
+	public float getUseCharge () {
+		return bomb.getUseCharge ();
+	}
+
+	public void setUseCharge (float newCharge) {
+		bomb.setUseCharge (newCharge);
+	}
+
     public int getMaxHullIntegrity()
     {
         return maxHullIntegrity;
@@ -687,12 +709,13 @@ public class PlayerController : MonoBehaviour {
 		newBullet.setVars (bulletColor, realBulletVel);*/
 	}
 
-	private void FireBomb () {
+	private void FireBomb (int strength) {
 		Vector3 forwardNorm = transform.forward;
 		forwardNorm.Normalize ();
 		GameObject newBomb = (GameObject)Instantiate (powerBomb, powerBombSpawner.transform.position, Quaternion.identity);
-		newBomb.GetComponent<PowerBomb> ().CalculateVariables (getBombCharge(), forwardNorm);
-		setBombCharge (0);
+		newBomb.GetComponent<PowerBomb> ().CalculateVariables (strength, forwardNorm);
+		setBombCharge (getBombCharge () - strength);
+		setUseCharge (0f);
 	}
 
     public int getPowerupIndex()

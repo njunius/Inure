@@ -14,6 +14,7 @@ public class BombController : MonoBehaviour, HUDElement {
     private bool hasRigidbody;
     public int currBombCharge;
     private int maxBombCharge;
+	private float currUseCharge;
 
     public BombCountdownController bombTimer;
 
@@ -21,8 +22,11 @@ public class BombController : MonoBehaviour, HUDElement {
     private string hudElementName;
 
     private Color bombHUDColor;
+	private Color useHUDColor;
 
     private Image[] bombGauge;
+	private Image useGauge;
+	private GameObject useGaugeObject;
 
 	// Use this for initialization
 	void Start () {
@@ -34,17 +38,23 @@ public class BombController : MonoBehaviour, HUDElement {
         hasRigidbody = false;
         currBombCharge = 0;
         maxBombCharge = 100;
+		currUseCharge = 0f;
 
         //transform.parent = player.transform;
 
         GameObject[] temp = GameObject.FindGameObjectsWithTag("Bomb Gauge");
         bombGauge = new Image[temp.Length];
+		useGaugeObject = GameObject.FindGameObjectWithTag ("Bomb Use Gauge");
+
+		Color newColor = hudColorController.getColorByString(hudElementName);
 
         for(int i = 0; i < bombGauge.Length; ++i)
         {
             bombGauge[i] = temp[i].GetComponent<Image>();
-            bombHUDColor = bombGauge[i].color = hudColorController.getColorByString(hudElementName);
+			bombHUDColor = bombGauge [i].color = newColor;
         }
+		useGauge = useGaugeObject.GetComponent<Image>();
+		useGauge.color = new Color (newColor.r / 2, newColor.g / 2, newColor.b / 2, newColor.a);
 	}
 	
 	// Update is called once per frame
@@ -64,6 +74,9 @@ public class BombController : MonoBehaviour, HUDElement {
         {
             bombGauge[i].fillAmount = (float)currBombCharge / (float)maxBombCharge;
         }
+
+		setUseRotation (360f * (float)currBombCharge / (float)maxBombCharge);
+		useGauge.fillAmount = currUseCharge / (float)maxBombCharge;
     }
 
     /*
@@ -88,6 +101,19 @@ public class BombController : MonoBehaviour, HUDElement {
         currBombCharge = charge;
     }
 
+	public float getUseCharge() {
+		return currUseCharge;
+	}
+
+	public void setUseCharge(float charge) {
+		currUseCharge = charge;
+	}
+
+	public void setUseRotation(float angle)
+	{
+		useGaugeObject.transform.localRotation = Quaternion.Euler(0f, 0f, angle);
+	}
+
     /*
      * returns true if the bomb has been successfully charged to 100%
      */
@@ -108,10 +134,13 @@ public class BombController : MonoBehaviour, HUDElement {
 
     public void UpdateColor()
     {
+		Color newColor = hudColorController.getColorByString(hudElementName);
         for (int i = 0; i < bombGauge.Length; ++i)
         {
-            bombGauge[i].color = hudColorController.getColorByString(hudElementName);
+			bombGauge [i].color = newColor;
         }
+
+		useGauge.color = new Color (newColor.r / 2, newColor.g / 2, newColor.b / 2, newColor.a);
 
         bombHUDColor = hudColorController.getColorByString(hudElementName);
 

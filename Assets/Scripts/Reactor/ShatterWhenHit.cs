@@ -19,10 +19,13 @@ public class ShatterWhenHit : MonoBehaviour {
 		}
 	}
 	//when the player shoots the thing, reduce HP by 1
-	void OnCollisionEnter(Collision collision) {
-		if(collision.collider.tag == "Player Projectile"){
-			hpInternal--;
-			Destroy(collision.gameObject);
+	void OnTriggerEnter(Collider other) {
+		if(other.tag == "Bomb Explosion"){
+			if(other.gameObject.transform.parent.gameObject.GetComponent<PowerBomb> ().GetPowerLevel () >= hitPoints) {
+				hpInternal = 0;
+				//hpInternal--;
+				//Destroy(collision.gameObject);
+			}
 		}
 	}
 }
