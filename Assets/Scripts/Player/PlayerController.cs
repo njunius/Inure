@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour {
                 isFiring = false;
             }
 
-            if (im.getInputDown("Use Powerup") && curPowerUp != "")
+            /*if (im.getInputDown("Use Powerup") && curPowerUp != "")
             {
                 PowerUp whichPowerUp = null;
                 switch (curPowerUp)
@@ -258,7 +258,8 @@ public class PlayerController : MonoBehaviour {
                 //gameObject.GetComponent<PowerUp> ().Activate ();
                 //Destroy(gameObject.GetComponent<PowerUp> ());
                 curPowerUp = "";
-            }
+            }*/
+
 			if (Input.GetKey (KeyCode.F)) {
 				if (getBombCharge () > 0) {
 					float newCharge = (getUseCharge () + (10 * Time.deltaTime));
