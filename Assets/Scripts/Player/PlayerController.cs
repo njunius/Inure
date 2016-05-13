@@ -277,17 +277,6 @@ public class PlayerController : MonoBehaviour {
 				justUsedBomb = false;
 			}
         }        
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (wallSlide)
-            {
-                wallSlide = false;
-            }
-            else
-            {
-                wallSlide = true;
-            }
-        }
     }
 
     void FixedUpdate()
