@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour {
                 curPowerUp = "";
             }*/
 
-			if (Input.GetKey (KeyCode.F)) {
+			if (im.getInput("Launch Bomb") > 0.3) {
 				if (getBombCharge () > 0) {
 					float newCharge = (getUseCharge () + (10 * Time.deltaTime));
 					setUseCharge(Mathf.Min (newCharge, getBombCharge ()));
@@ -270,7 +270,7 @@ public class PlayerController : MonoBehaviour {
 					}
 				}
 			}
-			if (Input.GetKeyUp (KeyCode.F)) {
+			if (im.getInputUp("Launch Bomb")) {
 				if (getBombCharge () > 0 && !justUsedBomb) {
 					FireBomb ((int)Mathf.Floor(getUseCharge ()));
 				}
