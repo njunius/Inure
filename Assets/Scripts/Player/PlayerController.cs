@@ -82,8 +82,6 @@ public class PlayerController : MonoBehaviour {
     public AudioClip hullRestoreSound;
     public AudioClip deathSound;
     public AudioClip ShieldHitSound;
-    public AudioClip ShieldOnSound;
-    public AudioClip ShieldRechargeSound;
     public AudioClip SteeringSound;
     public AudioClip ThrottleUpSound;
     public AudioClip PowerDownSound;
@@ -213,7 +211,6 @@ public class PlayerController : MonoBehaviour {
             if (shieldEnabled && im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
             {
                 shield.setShieldActive(true);
-                sources[2].PlayOneShot(ShieldOnSound);
             }
 
             // Shooting controls
