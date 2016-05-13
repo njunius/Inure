@@ -16,14 +16,19 @@ public class TurnDeathTurretsOn : MonoBehaviour {
 		
 	}
 
-	void OnTriggerExit (Collider other) {
-		if (other.gameObject.CompareTag ("Player Turret Trigger")) {
-			toggleTurrets ();
+	void OnTriggerExit (Collider other)
+    {
+		if (other.gameObject.CompareTag ("Player Turret Trigger"))
+        {
+            Debug.Log("YOUR GON DIE!");
+			toggleTurrets();
 		}
 	}
 
-	void toggleTurrets () {
-		for (int numTurret = 0; numTurret < turretList.Count; ++numTurret) {
+	void toggleTurrets ()
+    {
+		for (int numTurret = 0; numTurret < turretList.Count; ++numTurret)
+        {
 			turretList [numTurret].GetComponent<Turret> ().TurnOn ();
 		}
 	}
