@@ -76,8 +76,17 @@ public class PlayerController : MonoBehaviour {
 	public Vector3 trailPositionLeft = new Vector3 (-5.5f, -3f, 0f);
 	public Vector3 trailPositionRight = new Vector3 (5.5f, -3f, 0f);
 
+    //sounds
     public AudioClip playerBulletSound;
     public AudioClip hullRestoreSound;
+    public AudioClip deathSound;
+    public AudioClip ShieldHitSound;
+    public AudioClip ShieldOnSound;
+    public AudioClip ShieldRechargeSound;
+    public AudioClip SteeringSound;
+    public AudioClip ThrottleUpSound;
+    public AudioClip PowerDownSound;
+
     private AudioSource[] sources;
     private float volLowRange = 0.7f;
     private float volHighRange = 1.0f;
@@ -87,7 +96,7 @@ public class PlayerController : MonoBehaviour {
     public bool longitudinalEnginesEnabled = true;
     public bool lateralEnginesEnabled = true;
     public bool weaponsEnabled = true;
-    public bool sheildEnabled = true;
+    public bool shieldEnabled = true;
 
     public bool tutorialMode = false;
 
@@ -117,7 +126,9 @@ public class PlayerController : MonoBehaviour {
 
         if (tutorialMode)
         {
+            Debug.Log("tutorial mode");
             currHullIntegrity = 0;
+            shield.setShieldEnabled(false);
         }
 
         Transform[] temp = bulletSpawns.GetComponentsInChildren<Transform>();
@@ -198,9 +209,10 @@ public class PlayerController : MonoBehaviour {
             }
 
             // Shield Controls 
-            if (sheildEnabled && im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
+            if (shieldEnabled && im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
             {
                 shield.setShieldActive(true);
+                sources[2].PlayOneShot(ShieldOnSound);
             }
 
             // Shooting controls
@@ -281,6 +293,23 @@ public class PlayerController : MonoBehaviour {
             float rotRoll = im.getInput("Roll") * rollSpeed;
             float rotPitch = im.getInput("Pitch") * rotSpeed;
             float rotYaw = im.getInput("Yaw") * rotSpeed;
+
+            if (rotPitch > 0 || rotYaw > 0 || rotRoll > 0)
+            {
+                if (!sources[4].isPlaying)
+                {
+                    sources[4].Play();
+                }
+                
+            }
+            if (rotPitch == 0 || rotYaw == 0 || rotRoll == 0)
+            {
+                if (sources[4].isPlaying)
+                {
+                    sources[4].Stop();
+                }
+            }
+
 
             if (twoSpeedEngaged && moveLongitudinal > 0)
             {
@@ -475,9 +504,10 @@ public class PlayerController : MonoBehaviour {
                 rb.velocity = rb.velocity.normalized * inGameMaxSpeed;
 
             }
-            if (rb.velocity.magnitude < 0.01f)
+            if (rb.velocity.magnitude < 0.01f && rb.velocity.magnitude != 0)
             {
                 rb.velocity = Vector3.zero;
+                sources[1].PlayOneShot(PowerDownSound);
             }
         }
     }
@@ -605,6 +635,8 @@ public class PlayerController : MonoBehaviour {
     public void setHullIntegrity(int newHullIntegrity)
     {
         currHullIntegrity = newHullIntegrity;
+        armorGauge.updateChunks(currHullIntegrity);
+
     }
 
     public bool isShielded()
@@ -635,6 +667,7 @@ public class PlayerController : MonoBehaviour {
 
     public int getCurrHullIntegrity()
     {
+        Debug.Log(currHullIntegrity);
         return currHullIntegrity;
     }
 
@@ -642,7 +675,8 @@ public class PlayerController : MonoBehaviour {
     {
 		if (maxHullIntegrity > currHullIntegrity) {
 			currHullIntegrity++;
-			sources[4].PlayOneShot(hullRestoreSound);
+            armorGauge.updateChunks(currHullIntegrity);
+            sources[4].PlayOneShot(hullRestoreSound);
 		}
 
     }

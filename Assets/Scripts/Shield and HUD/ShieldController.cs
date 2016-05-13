@@ -11,6 +11,7 @@ using System.Collections.Generic;
 public class ShieldController : MonoBehaviour, HUDElement
 {
     // shield fields
+    private bool shieldEnabled;
     private bool shieldActive;
     public int maxShieldCharge, currShieldCharge;
     private int shieldRechargeAmount; // used for recharging the shield to full
@@ -46,6 +47,7 @@ public class ShieldController : MonoBehaviour, HUDElement
     void Start()
     {
         // shield initializations
+        shieldEnabled = true;           //Disables Shield Recharge for Tutorial
         shieldActive = false;
         maxShieldCharge = currShieldCharge = 100;
         shieldChargeDelay = 2.0f;
@@ -84,7 +86,7 @@ public class ShieldController : MonoBehaviour, HUDElement
 
 
 
-        if (!shieldActive) // shield recharging
+        if (shieldEnabled && !shieldActive) // shield recharging
         {
 
             //shieldMesh.enabled = false;
@@ -260,6 +262,15 @@ public class ShieldController : MonoBehaviour, HUDElement
     public void setShieldActive(bool setActive)
     {
         shieldActive = setActive;
+    }
+
+    public void setShieldEnabled(bool setEnabled)
+    {
+        shieldEnabled = setEnabled;
+        if (setEnabled == false)
+        {
+            currShieldCharge = 0;
+        }
     }
 
     /*private GameObject GetParticleSystem () {

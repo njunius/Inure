@@ -21,7 +21,8 @@ public class ArmorController : MonoBehaviour, HUDElement {
         hudElementName = "armor";
         hudColorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
 
-        currChunks = maxChunks = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().getMaxHullIntegrity();
+        maxChunks = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().getMaxHullIntegrity();
+        currChunks = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().getCurrHullIntegrity();
 
         arrayMidpoint = maxChunks / 2;
 
@@ -40,7 +41,35 @@ public class ArmorController : MonoBehaviour, HUDElement {
                 armorChunkTracker[i].gameObject.transform.Rotate(new Vector3(180, 0, 0));
             }
         }
-	}
+
+        for (int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
+        {
+            armorChunkTracker[i].color = chunkOff;
+        }
+
+        for (int i = arrayMidpoint - currChunks / 2; i < arrayMidpoint + currChunks / 2 + 1; ++i)
+        {
+            armorChunkTracker[i].color = chunkOn;
+        }
+
+        for (int i = arrayMidpoint + currChunks / 2; i < maxChunks; ++i)
+        {
+            if (currChunks % 2 == 0)
+            {
+                armorChunkTracker[i].color = chunkOff;
+            }
+        }
+
+        if (currChunks == maxChunks)
+        {
+            armorChunkTracker[armorChunkTracker.Length - 1].color = chunkOn;
+        }
+
+        if (currChunks == 1)
+        {
+            armorChunkTracker[arrayMidpoint].color = chunkOn;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {

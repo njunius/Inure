@@ -25,9 +25,14 @@ public class TutorialEventManager : MonoBehaviour {
     private AudioSource source;
     public AudioClip Initialize;
     public AudioClip Vertical;
-    public AudioClip Accelerators;
-    public AudioClip Rotators;
+    public AudioClip Longitudinal;
+    public AudioClip Lateral;
+    public AudioClip ManuveringOnline;
     public AudioClip Weapons;
+    public AudioClip Course;
+    public AudioClip ShieldCharging;
+    public AudioClip ShieldReady;
+    public AudioClip ManuveringEnabled;
 
 
     private float timer = 0;
@@ -77,7 +82,7 @@ public class TutorialEventManager : MonoBehaviour {
                 player.longitudinalEnginesEnabled = true;
                 player.lateralEnginesEnabled = true;
                 player.weaponsEnabled = true;
-                player.sheildEnabled = true;
+                player.shieldEnabled = true;
                 player.transform.position = DebugTutorialLocations[1].transform.position;
                 player.transform.rotation = DebugTutorialLocations[1].transform.rotation;
                 GameObject.FindGameObjectWithTag("MainCamera").transform.position = DebugTutorialLocations[1].transform.position;
@@ -99,7 +104,7 @@ public class TutorialEventManager : MonoBehaviour {
                 player.longitudinalEnginesEnabled = true;
                 player.lateralEnginesEnabled = true;
                 player.weaponsEnabled = true;
-                player.sheildEnabled = true;
+                player.shieldEnabled = true;
                 player.transform.position = DebugTutorialLocations[2].transform.position;
                 player.transform.rotation = DebugTutorialLocations[2].transform.rotation;
                 GameObject.FindGameObjectWithTag("MainCamera").transform.position = DebugTutorialLocations[2].transform.position;
@@ -165,7 +170,7 @@ public class TutorialEventManager : MonoBehaviour {
             player.longitudinalEnginesEnabled = false;
             player.lateralEnginesEnabled = false;
             player.weaponsEnabled = false;
-            player.sheildEnabled = false;
+            player.shieldEnabled = false;
         }
 	}
 
@@ -208,7 +213,7 @@ public class TutorialEventManager : MonoBehaviour {
                 door2Upper.GetComponent<TutorialDoors>().activate();
                 break;
             case 8:         //Player can lift off. Display vertical controls
-                source.PlayOneShot(Accelerators);
+                source.PlayOneShot(Longitudinal);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -218,7 +223,7 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
 
             case 9:
-                //source.PlayOneShot(Lateral);
+                source.PlayOneShot(Lateral);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -227,7 +232,7 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
 
             case 10:         //Player can move forward.
-                source.PlayOneShot(Rotators);
+                source.PlayOneShot(ManuveringOnline);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -255,22 +260,24 @@ public class TutorialEventManager : MonoBehaviour {
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
+                source.PlayOneShot(Course);
                 subtitles.text = "Approach course confirmed.  Manuvering thrusters dissabled.";
                 interior.SetActive(false);
                 exterior.SetActive(true);
                 break;
             case 14:
-                //source.PlayOneShot(Shields);
+                source.PlayOneShot(ShieldCharging);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
                 subtitles.text = "Use Right Mouse Button to activate shield.";
-                player.sheildEnabled = true;
+                player.shieldEnabled = true;
                 break;
             case 15:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
+                source.PlayOneShot(ManuveringEnabled);
                 subtitles.text = "Manuvering thursters re-engaged.";
                 player.targetLocked = false;
                 player.unFreezeRotation();
@@ -279,7 +286,7 @@ public class TutorialEventManager : MonoBehaviour {
                 player.longitudinalEnginesEnabled = true;
                 player.lateralEnginesEnabled = true;
                 player.weaponsEnabled = true;
-                player.sheildEnabled = true;
+                player.shieldEnabled = true;
                 break;
 
         }
