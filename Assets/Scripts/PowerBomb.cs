@@ -3,14 +3,21 @@ using System.Collections;
 
 public class PowerBomb : MonoBehaviour {
 
-	private float MAX_VEL = 300;
-	private float MIN_VEL = 10;
+	private float MIN_VEL = 10f;
+	private float MAX_VEL = 300f;
+
+	private float MIN_EXPLOSION_SIZE = 10f;
+	private float MAX_EXPLOSION_SIZE = 100f;
+
+	private float MIN_TIME_LEFT = 0.5f;
+	private float MAX_TIME_LEFT = 3f;
 
 	private float powerLevel;
 	private float curVel;
 	private float deceleration;
 	private Vector3 direction;
-	private float sizeOfExplosion;
+	private float explosionSize;
+	private float timeLeft;
 	private bool isTriggered = false;
 	private bool printed = false;
 
@@ -27,21 +34,36 @@ public class PowerBomb : MonoBehaviour {
 	void Update () {
 		//Over time, deplete velocity to 0 and tick down to explosion
 
-		if (isTriggered && curVel != 0) {
+		if (isTriggered && curVel != 0f) {
 			curVel = Mathf.Max (curVel - (deceleration * Time.deltaTime), 0);
 			GetComponent<Rigidbody> ().velocity = curVel * direction;
-		} else if (curVel == 0 && !printed) {
-			printed = true;
-			Debug.Log ("The bomb has stopped");
+		} else if (curVel == 0f && timeLeft > 0f) {
+			timeLeft = Mathf.Max(timeLeft - (1f * Time.deltaTime), 0f);
+			if (timeLeft == 0f) {
+				//timeLeft = -1f;
+				Explode ();
+			}
 		}
 	}
 
 	public void CalculateVariables (float percOfChargeUsed, Vector3 directionNorm) {
-		curVel = (MAX_VEL - MIN_VEL) * (percOfChargeUsed/100) + MIN_VEL;
+		curVel = (MAX_VEL - MIN_VEL) * (percOfChargeUsed/100f) + MIN_VEL;
 		deceleration = curVel;
 		direction = directionNorm;
 
+		powerLevel = percOfChargeUsed/2;
+		explosionSize = (MAX_EXPLOSION_SIZE - MIN_EXPLOSION_SIZE) * (percOfChargeUsed/100f) + MIN_EXPLOSION_SIZE;
+		timeLeft = (MAX_TIME_LEFT - MIN_TIME_LEFT) * (percOfChargeUsed/100f) + MIN_TIME_LEFT;
 		isTriggered = true;
+	}
+
+	private void Explode () {
+		transform.GetChild (0).gameObject.SetActive (true);
+		gameObject.GetComponentInChildren<PowerBombExplosion> ().Explode (explosionSize);
+	}
+
+	public float GetPowerLevel () {
+		return powerLevel;
 	}
 }
 
