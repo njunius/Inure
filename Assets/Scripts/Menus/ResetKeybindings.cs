@@ -26,8 +26,8 @@ public class ResetKeybindings : MonoBehaviour, IPointerClickHandler {
         defaultKeys[6] = "e";
         defaultKeys[7] = "q";
         defaultKeys[8] = "mouse0";
-        defaultKeys[9] = "mouse1";
-        defaultKeys[10] = "r";
+        defaultKeys[9] = "r";
+        defaultKeys[10] = "mouse1";
     }
 
 	public void OnPointerClick (PointerEventData eventData) {
