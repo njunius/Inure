@@ -686,7 +686,6 @@ public class PlayerController : MonoBehaviour {
 
     public int getCurrHullIntegrity()
     {
-        Debug.Log(currHullIntegrity);
         return currHullIntegrity;
     }
 

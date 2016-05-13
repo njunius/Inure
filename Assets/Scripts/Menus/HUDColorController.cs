@@ -11,11 +11,11 @@ public class HUDColorController : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        shieldColor = new Color(0.729f, 0.894f, 0.937f, 0.784f);
-        defaultColor = new Color(0.729f, 0.894f, 0.937f, 0.784f);
-        armorColor = new Color(0.729f, 0.894f, 0.937f, 0.784f);
-        powerupColor = new Color(0.729f, 0.894f, 0.937f, 0.784f);
-        bombColor = new Color(0.729f, 0.894f, 0.937f, 0.784f);
+        shieldColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
+        defaultColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
+        armorColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
+        powerupColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
+        bombColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
     }
 	
 	// Update is called once per frame
