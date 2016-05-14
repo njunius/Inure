@@ -113,6 +113,10 @@ public class ShieldController : MonoBehaviour, HUDElement
                 {
                     shieldChargeDelayTimer += Time.deltaTime;
                     interpShieldValue = 0.0f;
+                    if (shieldChargeDelayTimer > shieldChargeDelay)
+                    {
+                        baseSoundSource.PlayOneShot(shieldRechargeSound);
+                    }
                 }
                 else if (currShieldCharge < maxShieldCharge && shieldDeltaChargeTimer >= 1.0f) // add a charge to the shield after a 1 second delay
                 {
@@ -149,7 +153,7 @@ public class ShieldController : MonoBehaviour, HUDElement
 
                 if (currShieldCharge <= 0)
                 {
-                    baseSoundSource.PlayOneShot(shieldRechargeSound);
+                    
                     shieldActive = false;
                     baseSoundSource.Stop();
                     

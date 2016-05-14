@@ -91,22 +91,25 @@ public class PlayerController : MonoBehaviour {
     private AudioSource audio_bullet;
     private AudioSource audio_engineHum;
     private AudioSource audio_accellerators;
+    private float audio_accellerators_max_vol;
     private AudioSource audio_thrusters;
+    private float audio_thrusters_max_vol;
     private AudioSource audio_hullHit;
     private AudioSource audio_wallImpact;
     private AudioSource audio_death;
     private AudioSource audio_effects;
 
     public float thrustersWarmUpTime = 1.0f;
-    private float thrustersOnTime = 0;
+    private float thrustersEnergy = 0;
 
     public float thrustersCoolDownTime = 1.0f;
-    private float thrustersOffTime = 0;
 
     private float wallScrapeTime = 0.5f;
 
     private float volLowRange = 0.7f;
     private float volHighRange = 1.0f;
+
+    private bool hasStopped = true;
 
     public bool rotateEnabled = true;
     public bool verticalEnginesEnabled = true;
@@ -133,6 +136,8 @@ public class PlayerController : MonoBehaviour {
         audio_wallImpact = GetComponents<AudioSource>()[5];
         audio_death = GetComponents<AudioSource>()[6];
         audio_effects = GetComponents<AudioSource>()[7];
+        audio_accellerators_max_vol = audio_accellerators.volume;
+        audio_thrusters_max_vol = audio_thrusters.volume;
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
@@ -320,22 +325,20 @@ public class PlayerController : MonoBehaviour {
             float rotPitch = im.getInput("Pitch") * rotSpeed;
             float rotYaw = im.getInput("Yaw") * rotSpeed;
 
-            if (rotPitch != 0 || rotYaw != 0 || rotRoll != 0)
+            if (rotateEnabled && (rotPitch != 0 || rotYaw != 0 || rotRoll != 0))
             {
                 if (!audio_thrusters.isPlaying)
                 {
                     audio_thrusters.volume = 0;
-                    audio_thrusters.Play();
-                    thrustersOnTime = 0;
-                    thrustersOffTime = 0;
+                    thrustersEnergy = 0;
                     
                 }
                 else
                 {
-                    if (thrustersOnTime < thrustersWarmUpTime)
+                    if (thrustersEnergy < thrustersWarmUpTime)
                     {
-                        thrustersOnTime += Time.deltaTime;
-                        audio_thrusters.volume = thrustersOnTime / thrustersWarmUpTime;
+                        thrustersEnergy += Time.deltaTime;
+                        audio_thrusters.volume = thrustersEnergy / thrustersWarmUpTime;
                     }
                 }
                 
@@ -344,20 +347,31 @@ public class PlayerController : MonoBehaviour {
 
             if (rotPitch == 0 && rotYaw == 0 && rotRoll == 0)
             {
-                if (audio_thrusters.isPlaying)
+                if (audio_thrusters.volume > 0)
                 {
-                    if (thrustersOffTime < thrustersCoolDownTime)
+                    if (thrustersEnergy > 0)
                     {
-                        thrustersOffTime += Time.deltaTime;
-                        audio_thrusters.volume = 1 - thrustersOffTime / thrustersCoolDownTime;
+                        thrustersEnergy -= Time.deltaTime * 2;
+                        audio_thrusters.volume = thrustersEnergy / thrustersWarmUpTime;
                     }
-                    else
-                    {
-                        audio_thrusters.Stop();
-                    }
+
                     
                 }
             }
+
+            if (!hasStopped)
+            {
+                if (moveLongitudinal == 0 && moveLateral == 0 && moveVertical == 0)
+                {
+                    audio_accellerators.PlayOneShot(PowerDownSound);
+                    hasStopped = true;
+                }
+                else
+                {
+                    hasStopped = false;
+                }
+            }
+                
 
 
             if (twoSpeedEngaged && moveLongitudinal > 0)
@@ -519,8 +533,24 @@ public class PlayerController : MonoBehaviour {
                     Quaternion prevRot = transform.rotation;
                     transform.LookAt(lockOnTarget.transform, transform.up);
 
-
                     transform.rotation = Quaternion.RotateTowards(prevRot, transform.rotation, 2);
+
+                    
+
+                    if (Quaternion.Angle(prevRot, transform.rotation) != 0)
+                    {
+                        thrustersEnergy += Time.deltaTime;
+                        if (thrustersEnergy > 1) thrustersEnergy = 1;
+                        Debug.Log(thrustersEnergy);
+                        audio_thrusters.volume = thrustersEnergy;
+                    }
+                    else
+                    {
+                        thrustersEnergy -= Time.deltaTime * 2;
+                        if (thrustersEnergy < 0) thrustersEnergy = 0;
+                        audio_thrusters.volume = thrustersEnergy;
+                    }
+                    
 
                 }
                 if (rotRoll != 0)
@@ -553,10 +583,9 @@ public class PlayerController : MonoBehaviour {
                 rb.velocity = rb.velocity.normalized * inGameMaxSpeed;
 
             }
-            if (rb.velocity.magnitude < 0.01f && rb.velocity.magnitude != 0)
+            if (rb.velocity.magnitude < 0.01f)
             {
                 rb.velocity = Vector3.zero;
-                audio_accellerators.PlayOneShot(PowerDownSound);
             }
         }
     }
