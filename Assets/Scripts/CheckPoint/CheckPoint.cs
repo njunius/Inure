@@ -13,8 +13,10 @@ public class CheckPoint : MonoBehaviour {
 	private PlayerController pController;
 	private bool hasHealed = false;
 
+    private AudioSource audioSource;
 	// Use this for initialization
 	void Start () {
+        audioSource = GetComponent<AudioSource>();
 		savedPOS = gameObject.transform.position;
 		savedROT = gameObject.transform.rotation;
 		shieldCharge = 0;
@@ -27,7 +29,7 @@ public class CheckPoint : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.CompareTag("Player Collider")){
-			
+            audioSource.Play();
 			if(!hasHealed && pController.getCurrHullIntegrity() < pController.getMaxHullIntegrity()){
 				pController.setHullIntegrity(pController.getCurrHullIntegrity() + heal_player);
 				hasHealed = true;

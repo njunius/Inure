@@ -80,13 +80,31 @@ public class PlayerController : MonoBehaviour {
     //sounds
     public AudioClip playerBulletSound;
     public AudioClip hullRestoreSound;
+    public AudioClip hullDamageSound;
     public AudioClip deathSound;
     public AudioClip ShieldHitSound;
     public AudioClip SteeringSound;
     public AudioClip ThrottleUpSound;
     public AudioClip PowerDownSound;
+    public AudioClip ScrapeHullSound;
 
-    private AudioSource[] sources;
+    private AudioSource audio_bullet;
+    private AudioSource audio_engineHum;
+    private AudioSource audio_accellerators;
+    private AudioSource audio_thrusters;
+    private AudioSource audio_hullHit;
+    private AudioSource audio_wallImpact;
+    private AudioSource audio_death;
+    private AudioSource audio_effects;
+
+    public float thrustersWarmUpTime = 1.0f;
+    private float thrustersOnTime = 0;
+
+    public float thrustersCoolDownTime = 1.0f;
+    private float thrustersOffTime = 0;
+
+    private float wallScrapeTime = 0.5f;
+
     private float volLowRange = 0.7f;
     private float volHighRange = 1.0f;
 
@@ -107,7 +125,14 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        sources = GetComponents<AudioSource>();   //0: bullets, 1: engines, 2: shield, 3: impacts, 4: other
+        audio_bullet = GetComponents<AudioSource>()[0];   //0: bullets, 1: engines, 2: shield, 3: impacts, 4: other
+        audio_engineHum = GetComponents<AudioSource>()[1];
+        audio_accellerators = GetComponents<AudioSource>()[2];
+        audio_thrusters = GetComponents<AudioSource>()[3];
+        audio_hullHit = GetComponents<AudioSource>()[4];
+        audio_wallImpact = GetComponents<AudioSource>()[5];
+        audio_death = GetComponents<AudioSource>()[6];
+        audio_effects = GetComponents<AudioSource>()[7];
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
@@ -295,19 +320,42 @@ public class PlayerController : MonoBehaviour {
             float rotPitch = im.getInput("Pitch") * rotSpeed;
             float rotYaw = im.getInput("Yaw") * rotSpeed;
 
-            if (rotPitch > 0 || rotYaw > 0 || rotRoll > 0)
+            if (rotPitch != 0 || rotYaw != 0 || rotRoll != 0)
             {
-                if (!sources[4].isPlaying)
+                if (!audio_thrusters.isPlaying)
                 {
-                    sources[4].Play();
+                    audio_thrusters.volume = 0;
+                    audio_thrusters.Play();
+                    thrustersOnTime = 0;
+                    thrustersOffTime = 0;
+                    
+                }
+                else
+                {
+                    if (thrustersOnTime < thrustersWarmUpTime)
+                    {
+                        thrustersOnTime += Time.deltaTime;
+                        audio_thrusters.volume = thrustersOnTime / thrustersWarmUpTime;
+                    }
                 }
                 
             }
-            if (rotPitch == 0 || rotYaw == 0 || rotRoll == 0)
+            
+
+            if (rotPitch == 0 && rotYaw == 0 && rotRoll == 0)
             {
-                if (sources[4].isPlaying)
+                if (audio_thrusters.isPlaying)
                 {
-                    sources[4].Stop();
+                    if (thrustersOffTime < thrustersCoolDownTime)
+                    {
+                        thrustersOffTime += Time.deltaTime;
+                        audio_thrusters.volume = 1 - thrustersOffTime / thrustersCoolDownTime;
+                    }
+                    else
+                    {
+                        audio_thrusters.Stop();
+                    }
+                    
                 }
             }
 
@@ -508,7 +556,7 @@ public class PlayerController : MonoBehaviour {
             if (rb.velocity.magnitude < 0.01f && rb.velocity.magnitude != 0)
             {
                 rb.velocity = Vector3.zero;
-                sources[1].PlayOneShot(PowerDownSound);
+                audio_accellerators.PlayOneShot(PowerDownSound);
             }
         }
     }
@@ -610,8 +658,9 @@ public class PlayerController : MonoBehaviour {
     {
         if (!fInvincible)
         {
+            audio_hullHit.PlayOneShot(hullDamageSound);
             --currHullIntegrity;
-
+            
             //become fInvincible for invulnSecs
             timerTMP = invulnSecs;
             fInvincible = true;
@@ -684,7 +733,7 @@ public class PlayerController : MonoBehaviour {
 		if (maxHullIntegrity > currHullIntegrity) {
 			currHullIntegrity++;
             armorGauge.updateChunks(currHullIntegrity);
-            sources[4].PlayOneShot(hullRestoreSound);
+            audio_effects.PlayOneShot(hullRestoreSound);
 		}
 
     }
@@ -711,7 +760,7 @@ public class PlayerController : MonoBehaviour {
 		}*/
 
         float vol = Random.Range(volLowRange, volHighRange);
-        sources[0].PlayOneShot(playerBulletSound, vol);
+        audio_bullet.PlayOneShot(playerBulletSound, vol);
 
         for(int i = 0; i < bulletSpawnLocations.Length; ++i)
         {
@@ -858,5 +907,27 @@ public class PlayerController : MonoBehaviour {
     public void unFreezeRotation()
     {
         rb.freezeRotation = false;
+    }
+
+    void OnCollisionEnter(Collision c)
+    {
+        if (c.transform.CompareTag("Environment"))
+        {
+            
+            if (wallScrapeTime < 0.5f)
+            {
+                wallScrapeTime -= Time.deltaTime;
+                if (wallScrapeTime <= 0)
+                {
+                    wallScrapeTime = 0.5f;
+                }
+                
+            }
+            if (wallScrapeTime >= 0.5f)
+            {
+                audio_wallImpact.PlayOneShot(ScrapeHullSound);
+            }
+            
+        }
     }
 }
