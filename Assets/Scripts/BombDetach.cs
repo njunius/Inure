@@ -4,6 +4,7 @@ using System.Collections;
 public class BombDetach : MonoBehaviour
 {
     public bool detached = false;
+	public int chargeNeeded = 100;
     private float count_down = 80;
     private bool escaped = false;
     private bool stopChecking = false;
@@ -67,8 +68,10 @@ public class BombDetach : MonoBehaviour
     {
         if (col.gameObject.name == "ReactorDetail")
         {
-            gameObject.transform.parent = null;
-            detached = true;
+			if(pc.getBombCharge() > chargeNeeded){
+            	gameObject.transform.parent = null;
+            	detached = true;
+			}
         }
     }
 
