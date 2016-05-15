@@ -4,10 +4,12 @@ using System.Collections;
 public class PowerBombExplosion : MonoBehaviour {
 
 	private float explosionSize;
+	private float powerLevel;
 	private bool isExploding = false;
 	private bool damagedPlayer = false;
 	private float alphaIncrement;
 	private float time = 0f;
+	private Transform parent;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +30,14 @@ public class PowerBombExplosion : MonoBehaviour {
 		}
 	}
 
+	public void SetPowerLevel (float newPower) {
+		powerLevel = newPower;
+	}
+
+	public float GetPowerLevel () {
+		return powerLevel;
+	}
+
 	public void Explode (float size) {
 		explosionSize = size;
 		isExploding = true;
@@ -36,7 +46,7 @@ public class PowerBombExplosion : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.CompareTag ("Turret")) {
-			other.gameObject.GetComponent<Turret> ().takeDamage (transform.parent.GetComponent<PowerBomb> ().GetPowerLevel () * 2);
+			other.gameObject.GetComponent<Turret> ().takeDamage (transform.parent.GetComponent<PowerBomb> ().GetPowerLevel ());
 		} else if (other.CompareTag ("Player Collider")) {
 			GameObject.FindGameObjectWithTag("Player").transform.GetComponentInChildren<PlayerController> ().takeDamage ();
 		}
