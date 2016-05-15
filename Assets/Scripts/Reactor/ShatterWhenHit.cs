@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ShatterWhenHit : MonoBehaviour {
 	public GameObject shatterInto;
-	public int hitPoints = 4;
+    public int hitPoints = 1;
 
 	private int hpInternal = 0;
 	// Use this for initialization
