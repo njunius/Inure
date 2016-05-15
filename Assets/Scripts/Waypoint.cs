@@ -52,8 +52,10 @@ public class Waypoint : MonoBehaviour {
                 }
                 
             }
+            Debug.Log("wp " + transform.position);
             Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-            waypointSprite.position = screenPos;
+            waypointSprite.position = new Vector3(screenPos.x, screenPos.y, 0);
+            Debug.Log("UI " + waypointSprite.position);
 
             distance.text = ((int)Vector3.Distance(player.transform.position, transform.position)).ToString();
             //HUD.transform.position = screenPos;
