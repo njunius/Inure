@@ -52,12 +52,30 @@ public class Waypoint : MonoBehaviour {
                 }
                 
             }
-            Debug.Log("wp " + transform.position);
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-            waypointSprite.position = new Vector3(screenPos.x, screenPos.y, 0);
-            Debug.Log("UI " + waypointSprite.position);
 
-            distance.text = ((int)Vector3.Distance(player.transform.position, transform.position)).ToString();
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            float sign = Mathf.Sign(screenPos.z);
+
+            if (sign > 0)
+            {
+                if (waypointSprite.GetComponent<Image>().enabled == false)
+                {
+                    waypointSprite.GetComponent<Image>().enabled = true;
+                    distance.enabled = true;
+                }
+                
+                waypointSprite.position = new Vector3(screenPos.x, screenPos.y, sign);
+                distance.text = ((int)Vector3.Distance(player.transform.position, transform.position)).ToString();
+            }
+            else
+            {
+                if (waypointSprite.GetComponent<Image>().enabled == true)
+                {
+                    waypointSprite.GetComponent<Image>().enabled = false;
+                    distance.enabled = false;
+                }
+            }
+            
             //HUD.transform.position = screenPos;
             //HUD.transform.LookAt(Camera.main.transform, Camera.main.transform.up);
 
