@@ -20,12 +20,13 @@ public class PowerBomb : MonoBehaviour {
 	private float timeLeft;
 	private bool isTriggered = false;
 	private bool printed = false;
+	private GameObject explosion;
+	private ParticleSystem lastParticle;
 
 	// Use this for initialization
 	void Start () {
 		//Use powerLevel to calculate destructive force (size of explosion)
 		//   and startVelocity
-
 
 
 	}
@@ -44,9 +45,16 @@ public class PowerBomb : MonoBehaviour {
 				Explode ();
 			}
 		}
+
+		if (explosion.activeSelf && !lastParticle.IsAlive ()) {
+			Destroy (gameObject);
+		}
 	}
 
 	public void CalculateVariables (float percOfChargeUsed, Vector3 directionNorm) {
+		explosion = transform.FindChild ("Explosion").gameObject;
+		lastParticle = explosion.transform.FindChild("Dust").GetComponent<ParticleSystem> ();
+
 		curVel = (MAX_VEL - MIN_VEL) * (percOfChargeUsed/100f) + MIN_VEL;
 		deceleration = curVel;
 		direction = directionNorm;
@@ -54,12 +62,25 @@ public class PowerBomb : MonoBehaviour {
 		powerLevel = percOfChargeUsed/2;
 		explosionSize = (MAX_EXPLOSION_SIZE - MIN_EXPLOSION_SIZE) * (percOfChargeUsed/100f) + MIN_EXPLOSION_SIZE;
 		timeLeft = (MAX_TIME_LEFT - MIN_TIME_LEFT) * (percOfChargeUsed/100f) + MIN_TIME_LEFT;
+		Invoke ("StopBombParticles", timeLeft);
 		isTriggered = true;
+		//Vector3 particleScale = new Vector3 (percOfChargeUsed / 100, percOfChargeUsed / 100, percOfChargeUsed / 100);
+		for (int numChild = 0; numChild < explosion.transform.childCount; ++numChild) {
+			explosion.transform.GetChild (numChild).GetComponent<ParticleSystem> ().startSize *= (percOfChargeUsed / 25);
+		}
+		//explosion.transform.localScale = new Vector3(percOfChargeUsed/100, percOfChargeUsed/100, percOfChargeUsed/100);
+	}
+
+	private void StopBombParticles() {
+		transform.FindChild ("Bomb Particles").GetComponent<ParticleSystem> ().Stop ();
 	}
 
 	private void Explode () {
-		transform.GetChild (0).gameObject.SetActive (true);
-		gameObject.GetComponentInChildren<PowerBombExplosion> ().Explode (explosionSize);
+		Transform fieldTrans = transform.FindChild ("Explosive Field");
+		fieldTrans.parent = null;
+		fieldTrans.gameObject.SetActive (true);
+		fieldTrans.GetComponent<PowerBombExplosion> ().Explode (explosionSize);
+		transform.FindChild ("Explosion").gameObject.SetActive (true);
 	}
 
 	public float GetPowerLevel () {
