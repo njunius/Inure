@@ -108,24 +108,26 @@ public class ShieldController : MonoBehaviour, HUDElement
                 if (currShieldCharge > maxShieldCharge)
                 {
                     currShieldCharge = maxShieldCharge;
+                    interpShieldValue = 100f;
                 }
                 else if (shieldChargeDelay > shieldChargeDelayTimer && currShieldCharge == 0) // delays the start of the shield recharge by 2 seconds
                 {
                     shieldChargeDelayTimer += Time.deltaTime;
                     interpShieldValue = 0.0f;
+                    shieldDeltaChargeTimer = 1.0f; // keeps the 1 second delay from starting over when the charge delay ends
                     if (shieldChargeDelayTimer > shieldChargeDelay)
                     {
                         baseSoundSource.PlayOneShot(shieldRechargeSound);
                     }
                 }
+                else if (shieldDeltaChargeTimer < 1.0f && currShieldCharge < maxShieldCharge)
+                {
+                    shieldDeltaChargeTimer += Time.deltaTime;
+                }
                 else if (currShieldCharge < maxShieldCharge && shieldDeltaChargeTimer >= 1.0f) // add a charge to the shield after a 1 second delay
                 {
                     currShieldCharge += shieldRechargeAmount;
                     shieldDeltaChargeTimer = 0.0f;
-                }
-                else if (shieldDeltaChargeTimer < 1.0f && currShieldCharge < maxShieldCharge)
-                {
-                    shieldDeltaChargeTimer += Time.deltaTime;
                 }
 
                 if (currShieldCharge < maxShieldCharge)
@@ -161,20 +163,16 @@ public class ShieldController : MonoBehaviour, HUDElement
                     shieldChargeDelayTimer = 0.0f;
                     shieldDeltaChargeTimer = 1.0f; // set to 1 to allow the shield to be immediately charged, otherwise there is a 3 second delay instead of a 2 second one
                 }
+                else if (shieldDeltaChargeTimer < 1.0f)
+                {
+                    shieldDeltaChargeTimer += Time.deltaTime;
+                }
                 else if (currShieldCharge > 0 && shieldDeltaChargeTimer >= 1.0f) // remove a charge from the shield after a 1 second delay
                 {
-                    if (shieldDeltaChargeTimer == 1.0f)
-                    {
-                        
-                    }
                     currShieldCharge += shieldDepleteAmount;
                     shieldDeltaChargeTimer = 0.0f;
                     
                     //baseSoundSource.pitch = currShieldCharge / maxShieldCharge;
-                }
-                else if (shieldDeltaChargeTimer < 1.0f)
-                {
-                    shieldDeltaChargeTimer += Time.deltaTime;
                 }
 
                 interpShieldValue += shieldDepleteAmount * Time.deltaTime;
@@ -293,6 +291,7 @@ public class ShieldController : MonoBehaviour, HUDElement
         if (setActive)
         {
             baseSoundSource.PlayOneShot(shieldOnSound);
+            shieldDeltaChargeTimer = 0.0f; // makes sure that the 1 second delay is properly set to its initial value
         }
         else
         {
