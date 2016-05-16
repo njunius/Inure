@@ -59,7 +59,7 @@ public class PowerBomb : MonoBehaviour {
 		deceleration = curVel;
 		direction = directionNorm;
 
-		powerLevel = percOfChargeUsed/2;
+		powerLevel = percOfChargeUsed;
 		explosionSize = (MAX_EXPLOSION_SIZE - MIN_EXPLOSION_SIZE) * (percOfChargeUsed/100f) + MIN_EXPLOSION_SIZE;
 		timeLeft = (MAX_TIME_LEFT - MIN_TIME_LEFT) * (percOfChargeUsed/100f) + MIN_TIME_LEFT;
 		Invoke ("StopBombParticles", timeLeft);
@@ -78,6 +78,7 @@ public class PowerBomb : MonoBehaviour {
 	private void Explode () {
 		Transform fieldTrans = transform.FindChild ("Explosive Field");
 		fieldTrans.parent = null;
+		fieldTrans.GetComponent<PowerBombExplosion> ().SetPowerLevel(powerLevel);
 		fieldTrans.gameObject.SetActive (true);
 		fieldTrans.GetComponent<PowerBombExplosion> ().Explode (explosionSize);
 		transform.FindChild ("Explosion").gameObject.SetActive (true);

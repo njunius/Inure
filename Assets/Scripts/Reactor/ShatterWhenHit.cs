@@ -18,10 +18,11 @@ public class ShatterWhenHit : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
+
 	//when the player shoots the thing, reduce HP by 1
 	void OnTriggerEnter(Collider other) {
 		if(other.tag == "Bomb Explosion"){
-			if(other.gameObject.transform.parent.gameObject.GetComponent<PowerBomb> ().GetPowerLevel () >= hitPoints) {
+			if(other.gameObject.GetComponent<PowerBombExplosion> ().GetPowerLevel () >= hitPoints) {
 				hpInternal = 0;
 				//hpInternal--;
 				//Destroy(collision.gameObject);
