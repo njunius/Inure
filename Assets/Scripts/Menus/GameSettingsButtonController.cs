@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
+public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler {
 
     private Button thisButton;
     public Button keyButton;
@@ -17,19 +17,12 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler,
 
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (thisButton.interactable && !keyButton.interactable)
         {
             EventSystem.current.SetSelectedGameObject(null);
 
-        }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (thisButton.interactable && !keyButton.interactable)
-        {
             tabTransition.startTabTransition(false);
 
             thisButton.interactable = false;

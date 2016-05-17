@@ -42,33 +42,7 @@ public class ArmorController : MonoBehaviour, HUDElement {
             }
         }
 
-        for (int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
-        {
-            armorChunkTracker[i].color = chunkOff;
-        }
-
-        for (int i = arrayMidpoint - currChunks / 2; i < arrayMidpoint + currChunks / 2 + 1; ++i)
-        {
-            armorChunkTracker[i].color = chunkOn;
-        }
-
-        for (int i = arrayMidpoint + currChunks / 2; i < maxChunks; ++i)
-        {
-            if (currChunks % 2 == 0)
-            {
-                armorChunkTracker[i].color = chunkOff;
-            }
-        }
-
-        if (currChunks == maxChunks)
-        {
-            armorChunkTracker[armorChunkTracker.Length - 1].color = chunkOn;
-        }
-
-        if (currChunks == 1)
-        {
-            armorChunkTracker[arrayMidpoint].color = chunkOn;
-        }
+        updateChunks(currChunks);
     }
 	
 	// Update is called once per frame
@@ -114,32 +88,6 @@ public class ArmorController : MonoBehaviour, HUDElement {
         chunkOn = hudColorController.getColorByString(hudElementName);
         chunkOff = new Color(chunkOn.r, chunkOn.g, chunkOn.b, 0.0f);
 
-        for (int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
-        {
-            armorChunkTracker[i].color = chunkOff;
-        }
-
-        for (int i = arrayMidpoint - currChunks / 2; i < arrayMidpoint + currChunks / 2 + 1; ++i)
-        {
-            armorChunkTracker[i].color = chunkOn;
-        }
-
-        for (int i = arrayMidpoint + currChunks / 2; i < maxChunks; ++i)
-        {
-            if (currChunks % 2 == 0)
-            {
-                armorChunkTracker[i].color = chunkOff;
-            }
-        }
-
-        if (currChunks == maxChunks)
-        {
-            armorChunkTracker[armorChunkTracker.Length - 1].color = chunkOn;
-        }
-
-        if (currChunks == 1)
-        {
-            armorChunkTracker[arrayMidpoint].color = chunkOn;
-        }
+        updateChunks(currChunks);
     }
 }

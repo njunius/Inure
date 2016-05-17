@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, IPointerDownHandler {
+public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler {
 
     private Button thisButton;
     public Button gameSettingsButton;
@@ -15,7 +15,8 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
     private Image[] hudElementSamples;
 
     // Use this for initialization
-    void Awake () {
+    void Awake()
+    {
 
         thisButton = gameObject.GetComponent<Button>();
 
@@ -30,17 +31,18 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
         temp = GameObject.FindGameObjectsWithTag("HUD Element Sample");
         hudElementSamples = new Image[temp.Length];
 
-        for(int i = 0; i < hudElementSamples.Length; ++i)
+        for (int i = 0; i < hudElementSamples.Length; ++i)
         {
             hudElementSamples[i] = temp[i].GetComponent<Image>();
         }
 
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (thisButton.interactable && !gameSettingsButton.interactable)
         {
+
             EventSystem.current.SetSelectedGameObject(null);
 
             for (int i = 0; i < colorSelectorButtons.Length; ++i)
@@ -54,13 +56,8 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler, 
             {
                 hudElementSamples[i].enabled = false;
             }
-        }
-    }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (thisButton.interactable && !gameSettingsButton.interactable)
-        {
+
             tabTransition.startTabTransition(true);
 
             thisButton.interactable = false;

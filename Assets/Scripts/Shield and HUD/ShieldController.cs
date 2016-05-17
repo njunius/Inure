@@ -64,7 +64,7 @@ public class ShieldController : MonoBehaviour, HUDElement
         shieldChargeDelay = 2.0f;
         shieldChargeDelayTimer = 0.0f;
         shieldDepleteAmount = -20;
-        shieldRechargeAmount = 5;
+        shieldRechargeAmount = 10;
         shieldDeltaChargeTimer = 0.0f; // initialize to 0 otherwise the timer is immediately updated.
         interpShieldValue = 100.0f;
 
