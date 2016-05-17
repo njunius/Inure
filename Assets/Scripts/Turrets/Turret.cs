@@ -14,10 +14,17 @@ public class Turret : MonoBehaviour {
 	protected float fireDelay = 0f;
 	private float effectDuration = 5f;
 
+    private AudioSource destructAudio;
+
 	// Use this for initialization
 	void Start () {
-	
+        
 	}
+
+    void Awake()
+    {
+        destructAudio = GetComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -71,6 +78,8 @@ public class Turret : MonoBehaviour {
 	}
 
 	protected void Explode() {
-		GameObject newSparks = (GameObject)Instantiate (Resources.Load ("Particle Systems/TurretExplosion"), transform.position, Quaternion.identity);
+        destructAudio.Play();
+        GameObject newSparks = (GameObject)Instantiate (Resources.Load ("Particle Systems/TurretExplosion"), transform.position, Quaternion.identity);
+        
 	}
 }

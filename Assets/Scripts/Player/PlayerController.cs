@@ -652,6 +652,7 @@ public class PlayerController : MonoBehaviour {
 	//Deactivates player controls and shows game over screen
 	private void killPlayer()
 	{
+        audio_effects.PlayOneShot(deathSound);
         Cursor.visible = true;
         paused = true;
         //Show Game Over Screen
