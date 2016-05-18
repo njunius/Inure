@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class ButtonDeselect : MonoBehaviour, IPointerDownHandler {
+public class ButtonDeselect : MonoBehaviour, IPointerClickHandler {
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +15,7 @@ public class ButtonDeselect : MonoBehaviour, IPointerDownHandler {
 	
 	}
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         EventSystem.current.SetSelectedGameObject(null);
     }

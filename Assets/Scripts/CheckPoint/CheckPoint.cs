@@ -4,7 +4,7 @@ using System.Collections;
 public class CheckPoint : MonoBehaviour {
 	public Vector3 savedPOS;
 	public Quaternion savedROT;
-	public int shieldCharge;
+	public float shieldCharge;
 	public int bombCharge;
 	public int hullHealth;
 	public int heal_player = 1;

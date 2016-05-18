@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler {
+public class ColorSelectorButtonController : MonoBehaviour, IPointerClickHandler {
 
     private Button thisButton;
     private Button[] colorSelectorButtons;
@@ -42,12 +42,11 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerDownHandler 
 	
 	}
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (thisButton.interactable)
         {
             hudElementColor = colorController.getColorByString(hudElement);
-
             for (int i = 0; i < colorSelectorButtons.Length; ++i)
             {
                 colorSelectorButtons[i].interactable = true;

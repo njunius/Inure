@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     public Color bulletColor = Color.blue;
 	public float bulletVel = 220.0f;
 	public float fireRate = 0.2f;
+	private float useGaugeIncreaseRate = 10f;
 	public GameObject bulletPrefab;
 	public GameObject powerBomb;
 
@@ -292,12 +293,13 @@ public class PlayerController : MonoBehaviour {
 
 			if (im.getInput("Launch Bomb") > 0.3) {
 				if (getBombCharge () > 0) {
-					float newCharge = (getUseCharge () + (10 * Time.deltaTime));
+					float newCharge = (getUseCharge () + (useGaugeIncreaseRate * Time.deltaTime));
 					setUseCharge(Mathf.Min (newCharge, getBombCharge ()));
 					if (getUseCharge () == getBombCharge ()) {
 						FireBomb ((int)Mathf.Floor(getUseCharge ()));
 						justUsedBomb = true;
 					}
+					useGaugeIncreaseRate += (5f * Time.deltaTime);
 				}
 			}
 			if (im.getInputUp("Launch Bomb")) {
@@ -724,7 +726,7 @@ public class PlayerController : MonoBehaviour {
         return shield.getShieldActive();
     }
 
-	public int getShieldCharge(){
+	public float getShieldCharge(){
 		return shield.getCurrShieldCharge();
 	}
 
@@ -889,8 +891,8 @@ public class PlayerController : MonoBehaviour {
 	private void TurnOnThruster (string name) {
 		switch (name) {
 		case "main":
-			mainThrusterLeft.startSpeed = 2;
-			mainThrusterRight.startSpeed = 2;
+			mainThrusterLeft.startSpeed = 0f;
+			mainThrusterRight.startSpeed = 0f;
 			mainThrusterLeft.simulationSpace = ParticleSystemSimulationSpace.World;
 			mainThrusterRight.simulationSpace = ParticleSystemSimulationSpace.World;
 

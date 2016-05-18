@@ -4,14 +4,17 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
-public class CustomKeyController : MonoBehaviour, IPointerDownHandler
+public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 {
 
+    private CustomKeyController[] keyBindings;
     private InputManager inputs;
     private Dictionary<string, InputBinding> inputBindings;
     private string key;
+    private string doubleKeyBindingBuffer;
     private bool selected;
     private bool delay;
+    private bool alreadyBound;
     private Canvas settingsScreen;
     private Image keyBuffer;
     private float timerMax;
@@ -20,10 +23,19 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
     public Text currentKey;
     public string command;
     public bool positiveDirection;
+    public Image keyMessage;
+    public Text keyMessageText;
 
     // Use this for initialization
     void Start()
     {
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("Keybinding Button");
+        keyBindings = new CustomKeyController[temp.Length];
+
+        for (int i = 0; i < keyBindings.Length; ++i)
+        {
+            keyBindings[i] = temp[i].GetComponent<CustomKeyController>();
+        }
 
         inputs = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
         currentKey = gameObject.GetComponentInChildren<Text>();
@@ -35,12 +47,13 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
         delay = true;
         selected = false;
 
+        alreadyBound = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(inputs == null)
+        if (inputs == null)
         {
             inputs = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
         }
@@ -91,7 +104,31 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
             {
                 if (Input.GetKeyDown(vKey))
                 {
-                    if(selected && !delay)
+
+                    if (alreadyBound)
+                    {
+                        alreadyBound = false;
+                    }
+
+                    for (int i = 0; i < keyBindings.Length; ++i)
+                    {
+                        if (vKey.ToString().ToLower().Equals(doubleKeyBindingBuffer))
+                        {
+                            break;
+                        }
+                        else if (!delay && vKey.ToString().ToLower().Equals(keyBindings[i].getKey()) && !keyBindings[i].Equals(this))
+                        {
+                            alreadyBound = true;
+                            doubleKeyBindingBuffer = vKey.ToString().ToLower();
+
+                            keyMessage.enabled = true;
+                            keyMessageText.enabled = true;
+                            keyMessageText.text = "Press again to confirm";
+                            break;
+                        }
+                    }
+
+                    if (selected && !delay && !vKey.ToString().Equals("Escape") && !alreadyBound)
                     {
                         if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
                         {
@@ -106,15 +143,32 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
 
                         }
                         EventSystem.current.SetSelectedGameObject(null);
+                        keyMessage.enabled = false;
+                        keyMessageText.enabled = false;
                         selected = false;
                         delay = true;
+                        alreadyBound = false;
+                        doubleKeyBindingBuffer = "";
                         keyBuffer.enabled = false;
+                        break;
                     }
-                    break;
+                    else if (selected && !delay && vKey.ToString().Equals("Escape"))
+                    {
+                        keyMessage.enabled = true;
+                        keyMessageText.enabled = true;
+                        keyMessageText.text = "Key is reserved";
+
+                        alreadyBound = false;
+                    }
                 }
             }
 
-            if(selected && delay)
+            if (selected)
+            {
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
+            }
+
+            if (selected && delay)
             {
                 delay = false;
                 keyBuffer.enabled = true;
@@ -124,7 +178,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
 
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         selected = true;
     }
