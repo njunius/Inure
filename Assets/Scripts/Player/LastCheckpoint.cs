@@ -5,7 +5,7 @@ public class LastCheckpoint : MonoBehaviour {
 
 	public Vector3 savedPlayerPOS, savedCamPOS;
 	public Quaternion savedPlayerROT, savedCamROT;
-	public int shieldCharge;
+	public float shieldCharge;
 	public int bombCharge;
 	public int hullHealth;
 
@@ -28,7 +28,7 @@ public class LastCheckpoint : MonoBehaviour {
 
 	//This is usually called by PlayerController during a reload
 	//NOTE: Assumes the main camera exists
-	public void setCheckPoint(int newShield, int newBomb, int newHull, Vector3 newPOS, Quaternion newROT){
+	public void setCheckPoint(float newShield, int newBomb, int newHull, Vector3 newPOS, Quaternion newROT){
 		shieldCharge = newShield;
 		bombCharge = newBomb;
 		hullHealth = newHull;
@@ -38,7 +38,7 @@ public class LastCheckpoint : MonoBehaviour {
 		savedCamROT = GameObject.FindGameObjectWithTag("MainCamera").transform.rotation;
 	}
 
-	public int getShield (){ return shieldCharge;}
+	public float getShield (){ return shieldCharge;}
 
 	public int getBomb (){ return bombCharge;}
 

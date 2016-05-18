@@ -724,7 +724,7 @@ public class PlayerController : MonoBehaviour {
         return shield.getShieldActive();
     }
 
-	public int getShieldCharge(){
+	public float getShieldCharge(){
 		return shield.getCurrShieldCharge();
 	}
 
