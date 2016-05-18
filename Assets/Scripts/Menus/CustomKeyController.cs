@@ -163,6 +163,11 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                 }
             }
 
+            if (selected)
+            {
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
+            }
+
             if (selected && delay)
             {
                 delay = false;
