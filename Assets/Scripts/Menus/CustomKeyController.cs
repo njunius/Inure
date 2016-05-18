@@ -20,6 +20,8 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
     public Text currentKey;
     public string command;
     public bool positiveDirection;
+    public Image keyMessage;
+    public Text keyMessageText;
 
     // Use this for initialization
     void Start()
@@ -106,11 +108,26 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 
                         }
                         EventSystem.current.SetSelectedGameObject(null);
+                        keyMessage.enabled = false;
+                        keyMessageText.enabled = false;
                         selected = false;
                         delay = true;
                         keyBuffer.enabled = false;
+                        break;
                     }
-                    break;
+                    else if (selected && !delay && vKey.ToString().Equals("Escape"))
+                    {
+                        keyMessage.enabled = true;
+                        keyMessageText.enabled = true;
+                        keyMessageText.text = "Key is reserved";
+                    }
+                    /*else if (selected && !delay && ) // for use when player tries to bind a key that is already bound
+                    {
+                        keyMessage.enabled = true;
+                        keyMessageText.enabled = true;
+                        keyMessageText.text = "Press again to confirm";
+                    }*/
+
                 }
             }
 
