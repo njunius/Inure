@@ -15,7 +15,8 @@ public class ColorSliderController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         colorChannel = GetComponent<Slider>();
-        hudElement = "";
+
+        //hudElement = "";
 
         colorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
 
@@ -33,19 +34,17 @@ public class ColorSliderController : MonoBehaviour {
 
     public void ValueChangeCheck()
     {
-        if(elementToUpdate != null)
+        if (elementToUpdate != null)
         {
             elementToUpdate.UpdateColor();
         }
         if (colorChannelName.Equals("red"))
         {
             colorController.setColorByString(hudElement, colorChannel.value, colorController.getColorByString(hudElement).g, colorController.getColorByString(hudElement).b);
-
         }
         else if (colorChannelName.Equals("green"))
         {
             colorController.setColorByString(hudElement, colorController.getColorByString(hudElement).r, colorChannel.value, colorController.getColorByString(hudElement).b);
-
         }
         else if (colorChannelName.Equals("blue"))
         {

@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
-public class CustomKeyController : MonoBehaviour, IPointerDownHandler
+public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 {
 
     private InputManager inputs;
@@ -91,7 +91,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
             {
                 if (Input.GetKeyDown(vKey))
                 {
-                    if(selected && !delay)
+                    if(selected && !delay && !vKey.ToString().Equals("Escape"))
                     {
                         if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
                         {
@@ -124,7 +124,7 @@ public class CustomKeyController : MonoBehaviour, IPointerDownHandler
 
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         selected = true;
     }

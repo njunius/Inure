@@ -5,7 +5,6 @@ public class HUDColorController : MonoBehaviour {
 
     private Color shieldColor;
     private Color armorColor;
-    private Color powerupColor;
     private Color bombColor;
     private Color defaultColor;
 
@@ -14,7 +13,6 @@ public class HUDColorController : MonoBehaviour {
         shieldColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
         defaultColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
         armorColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
-        powerupColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
         bombColor = new Color(0.729f, 0.894f, 0.937f, 0.9f);
     }
 	
@@ -26,7 +24,6 @@ public class HUDColorController : MonoBehaviour {
     // must use one of the following
     // shield
     // armor
-    // powerup
     // bomb
     // floats must be between 0 and 1.0
     public void setColorByString(string elementName, float red, float green, float blue)
@@ -39,13 +36,13 @@ public class HUDColorController : MonoBehaviour {
         {
             armorColor = new Color(red, green, blue, defaultColor.a);
         }
-        else if (elementName.Equals("powerup"))
-        {
-            powerupColor = new Color(red, green, blue, defaultColor.a);
-        }
         else if (elementName.Equals("bomb"))
         {
             bombColor = new Color(red, green, blue, defaultColor.a);
+        }
+        else
+        {
+            Debug.Log("Invalid Element");
         }
     }
 
@@ -57,11 +54,6 @@ public class HUDColorController : MonoBehaviour {
     public void setArmorColor(Color newColor)
     {
         armorColor = newColor;
-    }
-
-    public void setPowerupColor(Color newColor)
-    {
-        powerupColor = newColor;
     }
 
     public void setBombColor(Color newColor)
@@ -84,10 +76,6 @@ public class HUDColorController : MonoBehaviour {
         {
             armorColor = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultColor.a);
         }
-        else if(elementName.Equals("powerup"))
-        {
-            powerupColor = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultColor.a);
-        }
         else if (elementName.Equals("bomb"))
         {
             bombColor = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultColor.a);
@@ -104,16 +92,13 @@ public class HUDColorController : MonoBehaviour {
         {
             return armorColor;
         }
-        else if (getColor.Equals("powerup"))
-        {
-            return powerupColor;
-        }
         else if (getColor.Equals("bomb"))
         {
             return bombColor;
         }
         else
         {
+            Debug.Log("Invalid Element");
             return Color.black;
         }
     }

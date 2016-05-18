@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class ButtonOverlayControl : MonoBehaviour, IPointerDownHandler {
+public class ButtonOverlayControl : MonoBehaviour, IPointerClickHandler {
 
     public Canvas overlay;
 
@@ -12,7 +12,7 @@ public class ButtonOverlayControl : MonoBehaviour, IPointerDownHandler {
 	}
 	
 	// Update is called once per frame
-	public void OnPointerDown (PointerEventData eventData) {
+	public void OnPointerClick(PointerEventData eventData) {
         overlay.enabled = !overlay.enabled;
 	}
 }

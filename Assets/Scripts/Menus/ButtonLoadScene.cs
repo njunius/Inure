@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class ButtonLoadScene : MonoBehaviour, IPointerDownHandler{
+public class ButtonLoadScene : MonoBehaviour, IPointerClickHandler {
 
     public string sceneToLoad;
 
@@ -13,7 +13,7 @@ public class ButtonLoadScene : MonoBehaviour, IPointerDownHandler{
 	
 	}
 	
-	public void OnPointerDown (PointerEventData eventData) {
+	public void OnPointerClick(PointerEventData eventData) {
         SceneManager.LoadScene(sceneToLoad);
 	}
 }
