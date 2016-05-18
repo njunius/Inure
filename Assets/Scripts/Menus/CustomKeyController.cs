@@ -7,11 +7,14 @@ using System.Collections.Generic;
 public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 {
 
+    private CustomKeyController[] keyBindings;
     private InputManager inputs;
     private Dictionary<string, InputBinding> inputBindings;
     private string key;
+    private string doubleKeyBindingBuffer;
     private bool selected;
     private bool delay;
+    private bool alreadyBound;
     private Canvas settingsScreen;
     private Image keyBuffer;
     private float timerMax;
@@ -26,6 +29,13 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
     // Use this for initialization
     void Start()
     {
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("Keybinding Button");
+        keyBindings = new CustomKeyController[temp.Length];
+
+        for (int i = 0; i < keyBindings.Length; ++i)
+        {
+            keyBindings[i] = temp[i].GetComponent<CustomKeyController>();
+        }
 
         inputs = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
         currentKey = gameObject.GetComponentInChildren<Text>();
@@ -37,12 +47,13 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
         delay = true;
         selected = false;
 
+        alreadyBound = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(inputs == null)
+        if (inputs == null)
         {
             inputs = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
         }
@@ -93,7 +104,31 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
             {
                 if (Input.GetKeyDown(vKey))
                 {
-                    if(selected && !delay && !vKey.ToString().Equals("Escape"))
+
+                    if (alreadyBound)
+                    {
+                        alreadyBound = false;
+                    }
+
+                    for (int i = 0; i < keyBindings.Length; ++i)
+                    {
+                        if (vKey.ToString().ToLower().Equals(doubleKeyBindingBuffer))
+                        {
+                            break;
+                        }
+                        else if (!delay && vKey.ToString().ToLower().Equals(keyBindings[i].getKey()) && !keyBindings[i].Equals(this))
+                        {
+                            alreadyBound = true;
+                            doubleKeyBindingBuffer = vKey.ToString().ToLower();
+
+                            keyMessage.enabled = true;
+                            keyMessageText.enabled = true;
+                            keyMessageText.text = "Press again to confirm";
+                            break;
+                        }
+                    }
+
+                    if (selected && !delay && !vKey.ToString().Equals("Escape") && !alreadyBound)
                     {
                         if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
                         {
@@ -112,6 +147,8 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                         keyMessageText.enabled = false;
                         selected = false;
                         delay = true;
+                        alreadyBound = false;
+                        doubleKeyBindingBuffer = "";
                         keyBuffer.enabled = false;
                         break;
                     }
@@ -120,18 +157,13 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                         keyMessage.enabled = true;
                         keyMessageText.enabled = true;
                         keyMessageText.text = "Key is reserved";
-                    }
-                    /*else if (selected && !delay && ) // for use when player tries to bind a key that is already bound
-                    {
-                        keyMessage.enabled = true;
-                        keyMessageText.enabled = true;
-                        keyMessageText.text = "Press again to confirm";
-                    }*/
 
+                        alreadyBound = false;
+                    }
                 }
             }
 
-            if(selected && delay)
+            if (selected && delay)
             {
                 delay = false;
                 keyBuffer.enabled = true;
