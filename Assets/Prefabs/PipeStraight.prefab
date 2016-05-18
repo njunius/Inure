@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &115848
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 458762}
-  m_Layer: 0
-  m_Name: Plane Transform 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &116030
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 414150}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Pipe Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +26,7 @@ GameObject:
   - 198: {fileID: 19879392}
   - 199: {fileID: 19944422}
   m_Layer: 0
-  m_Name: Pipe Particles
+  m_Name: Cells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 92.6, y: 14.1, z: 15.2}
+  m_LocalPosition: {x: 92.6, y: 14.1, z: 27.2}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 414150}
@@ -100,21 +85,8 @@ Transform:
   m_LocalRotation: {x: 1, y: -0.00000016292068, z: -0.00000016292068, w: 2.654315e-14}
   m_LocalPosition: {x: 2.148079, y: 0.40955925, z: -0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 458762}
-  m_Father: {fileID: 414150}
-  m_RootOrder: 0
---- !u!4 &458762
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115848}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 428324}
+  m_Father: {fileID: 414150}
   m_RootOrder: 0
 --- !u!23 &2328514
 MeshRenderer:
@@ -126,7 +98,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: d5e179726bdceed4a8b359021afb2e1e, type: 2}
+  - {fileID: 2100000, guid: 8aa73c83eece1e249a40be7a5e96a88c, type: 2}
   - {fileID: 2100000, guid: 98fea9d29c8df8b4bbbd582a4622aa2b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
@@ -216,7 +188,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 5
+      scalar: 1.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -251,7 +223,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 5
+      scalar: 8.33
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -377,10 +349,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4278207999
       minMaxState: 0
     startSize:
-      scalar: 1
+      scalar: 0.7
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -527,7 +499,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 4
-    radius: 0.7
+    radius: 0.6
     angle: 0
     length: 5
     boxX: 1
@@ -1671,7 +1643,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ad0db21930391894f9412add0f45a0e5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

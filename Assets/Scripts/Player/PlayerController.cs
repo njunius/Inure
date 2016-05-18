@@ -889,8 +889,8 @@ public class PlayerController : MonoBehaviour {
 	private void TurnOnThruster (string name) {
 		switch (name) {
 		case "main":
-			mainThrusterLeft.startSpeed = 2;
-			mainThrusterRight.startSpeed = 2;
+			mainThrusterLeft.startSpeed = 0f;
+			mainThrusterRight.startSpeed = 0f;
 			mainThrusterLeft.simulationSpace = ParticleSystemSimulationSpace.World;
 			mainThrusterRight.simulationSpace = ParticleSystemSimulationSpace.World;
 
