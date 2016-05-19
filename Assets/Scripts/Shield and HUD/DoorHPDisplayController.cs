@@ -19,7 +19,13 @@ public class DoorHPDisplayController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(doorController != null && doorController.getHPInternal() <= 0)
+        if (doorHPIndicator.enabled && doorHPIndicator.fillAmount != (float)doorController.getHPInternal())
+        {
+            doorHPIndicator.fillAmount = (float)doorController.getHPInternal() / 100f;
+
+        }
+
+        if (doorController != null && doorController.getHPInternal() <= 0)
         {
             doorHPIndicator.enabled = false;
         }
