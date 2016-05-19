@@ -716,7 +716,14 @@ public class PlayerController : MonoBehaviour {
      */
     public void setHullIntegrity(int newHullIntegrity)
     {
-        currHullIntegrity = newHullIntegrity;
+        if(newHullIntegrity > maxHullIntegrity)
+        {
+            currHullIntegrity = maxHullIntegrity;
+        }
+        else
+        {
+            currHullIntegrity = newHullIntegrity;
+        }
         armorGauge.updateChunks(currHullIntegrity);
 
     }
