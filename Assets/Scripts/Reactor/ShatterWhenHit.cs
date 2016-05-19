@@ -29,4 +29,9 @@ public class ShatterWhenHit : MonoBehaviour {
 			}
 		}
 	}
+
+    public int getHPInternal()
+    {
+        return hpInternal;
+    }
 }
