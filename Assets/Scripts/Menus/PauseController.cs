@@ -7,12 +7,14 @@ public class PauseController : MonoBehaviour {
     private Canvas pauseOverlay;
     private Canvas settingsOverlay;
     private PlayerController player;
+    private SettingsExitBuffer canQuitSettings;
 
     public InputManager im;
 
     // Use this for initialization
-    void Start () {
-
+    void Start ()
+    {
+        canQuitSettings = GameObject.FindGameObjectWithTag("GameController").GetComponent<SettingsExitBuffer>();
         pauseOverlay = GameObject.FindGameObjectWithTag("Pause Overlay").GetComponent<Canvas>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
@@ -50,7 +52,7 @@ public class PauseController : MonoBehaviour {
                     pauseOverlay.enabled = false;
                     Cursor.visible = false;
                 }
-                else if (settingsOverlay.enabled)
+                else if (settingsOverlay.enabled && !canQuitSettings.keyBindingIsSelected())
                 {
                     settingsOverlay.enabled = false;
                 }

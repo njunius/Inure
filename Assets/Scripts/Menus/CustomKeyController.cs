@@ -20,6 +20,8 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
     private float timerMax;
     private float timer;
 
+    private SettingsExitBuffer canQuitSettings;
+
     public Text currentKey;
     public string command;
     public bool positiveDirection;
@@ -36,6 +38,8 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
         {
             keyBindings[i] = temp[i].GetComponent<CustomKeyController>();
         }
+
+        canQuitSettings = GameObject.FindGameObjectWithTag("GameController").GetComponent<SettingsExitBuffer>();
 
         inputs = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
         currentKey = gameObject.GetComponentInChildren<Text>();
@@ -77,6 +81,9 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 
             if (selected)
             {
+                canQuitSettings.setSelected(true);
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
+
                 if (timer < timerMax)
                 {
                     timer += Time.unscaledDeltaTime;
@@ -150,6 +157,8 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                         alreadyBound = false;
                         doubleKeyBindingBuffer = "";
                         keyBuffer.enabled = false;
+
+                        canQuitSettings.setSelected(false);
                         break;
                     }
                     else if (selected && !delay && vKey.ToString().Equals("Escape"))
@@ -161,11 +170,6 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                         alreadyBound = false;
                     }
                 }
-            }
-
-            if (selected)
-            {
-                EventSystem.current.SetSelectedGameObject(this.gameObject);
             }
 
             if (selected && delay)
