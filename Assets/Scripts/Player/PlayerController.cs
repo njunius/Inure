@@ -129,6 +129,7 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+		Cursor.lockState = CursorLockMode.Confined;
         audio_bullet = GetComponents<AudioSource>()[0];   //0: bullets, 1: engines, 2: shield, 3: impacts, 4: other
         audio_engineHum = GetComponents<AudioSource>()[1];
         audio_accellerators = GetComponents<AudioSource>()[2];
