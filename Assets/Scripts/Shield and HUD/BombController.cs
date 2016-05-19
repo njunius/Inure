@@ -24,6 +24,8 @@ public class BombController : MonoBehaviour, HUDElement {
     private Color bombHUDColor;
 	private Color useHUDColor;
 
+    private DoorHPDisplayController[] doorHPIndicators;
+
     private Image[] bombGauge;
 	private Image useGauge;
 	private GameObject useGaugeObject;
@@ -60,6 +62,15 @@ public class BombController : MonoBehaviour, HUDElement {
         for (int i = 0; i < bombGauge.Length; ++i)
         {
             bombGauge[i].fillAmount = (float)currBombCharge / (float)maxBombCharge;
+        }
+
+        temp = GameObject.FindGameObjectsWithTag("Door HP Indicator");
+
+        doorHPIndicators = new DoorHPDisplayController[temp.Length];
+
+        for(int i = 0; i < doorHPIndicators.Length; ++i)
+        {
+            doorHPIndicators[i] = temp[i].GetComponent<DoorHPDisplayController>();
         }
     }
 	
@@ -157,5 +168,10 @@ public class BombController : MonoBehaviour, HUDElement {
         bombHUDColor = hudColorController.getColorByString(hudElementName);
 
         bombTimer.colorUpdate();
+
+        for (int i = 0; i < doorHPIndicators.Length; ++i)
+        {
+            doorHPIndicators[i].colorUpdate();
+        }
     }
 }

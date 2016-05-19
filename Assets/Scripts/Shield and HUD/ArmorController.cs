@@ -52,7 +52,14 @@ public class ArmorController : MonoBehaviour, HUDElement {
 
     public void updateChunks(int newHullIntegrity)
     {
-        currChunks = newHullIntegrity;
+        if (newHullIntegrity > maxChunks)
+        {
+            currChunks = maxChunks;
+        }
+        else
+        {
+            currChunks = newHullIntegrity;
+        }
 
         for (int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
         {
