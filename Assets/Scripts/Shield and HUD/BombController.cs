@@ -17,6 +17,7 @@ public class BombController : MonoBehaviour, HUDElement {
 	private float currUseCharge;
 
     public BombCountdownController bombTimer;
+    public Image bombGaugeBackground;
 
     private HUDColorController hudColorController;
     private string hudElementName;
@@ -55,6 +56,8 @@ public class BombController : MonoBehaviour, HUDElement {
             bombGauge[i] = temp[i].GetComponent<Image>();
 			bombHUDColor = bombGauge [i].color = newColor;
         }
+
+        bombGaugeBackground.color = newColor;
 
 		useGauge = useGaugeObject.GetComponent<Image>();
 		useGauge.color = new Color (newColor.r / 2, newColor.g / 2, newColor.b / 2, newColor.a);
@@ -162,6 +165,8 @@ public class BombController : MonoBehaviour, HUDElement {
         {
 			bombGauge [i].color = newColor;
         }
+
+        bombGaugeBackground.color = newColor;
 
 		useGauge.color = new Color (newColor.r / 2, newColor.g / 2, newColor.b / 2, newColor.a);
 
