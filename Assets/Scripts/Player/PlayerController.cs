@@ -825,6 +825,7 @@ public class PlayerController : MonoBehaviour {
 		newBomb.GetComponent<PowerBomb> ().CalculateVariables (strength, forwardNorm);
 		setBombCharge (getBombCharge () - strength);
 		setUseCharge (0f);
+		useGaugeIncreaseRate = 10f;
 	}
 
     public int getPowerupIndex()
