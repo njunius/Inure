@@ -544,7 +544,7 @@ public class PlayerController : MonoBehaviour {
                     {
                         thrustersEnergy += Time.deltaTime;
                         if (thrustersEnergy > 1) thrustersEnergy = 1;
-                        Debug.Log(thrustersEnergy);
+                        //Debug.Log(thrustersEnergy);
                         audio_thrusters.volume = thrustersEnergy;
                     }
                     else
