@@ -16,7 +16,7 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerClickHandler
     public ResetColorButtonController resetButton;
     public GameObject[] otherElementSliders;
 
-    public Image hudElementSample;
+    public Image[] hudElementSample;
     public Image[] otherHUDElements;
 
     // Use this for initialization
@@ -34,7 +34,11 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerClickHandler
         }
 
         hudElementColor = colorController.getColorByString(hudElement);
-        hudElementSample.color = hudElementColor;
+
+        for(int i = 0; i < hudElementSample.Length; ++i)
+        {
+            hudElementSample[i].color = hudElementColor;
+        }
     }
 
     // Update is called once per frame
@@ -66,8 +70,11 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerClickHandler
                 colorSliders[i].gameObject.GetComponent<ColorSliderController>().setHUDElement(hudElement);
             }
 
-            hudElementSample.enabled = true;
-            hudElementSample.color = hudElementColor;
+            for(int i = 0; i < hudElementSample.Length; ++i)
+            {
+                hudElementSample[i].enabled = true;
+                hudElementSample[i].color = hudElementColor;
+            }
 
             for (int i = 0; i < otherHUDElements.Length; ++i)
             {
@@ -85,6 +92,9 @@ public class ColorSelectorButtonController : MonoBehaviour, IPointerClickHandler
 
     public void disableSample()
     {
-        hudElementSample.enabled = false;
+        for(int i = 0; i < hudElementSample.Length; ++i)
+        {
+            hudElementSample[i].enabled = false;
+        }
     }
 }
