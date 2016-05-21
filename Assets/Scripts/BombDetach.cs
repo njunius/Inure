@@ -64,16 +64,17 @@ public class BombDetach : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col)
+
+    /*void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.name == "ReactorDetail")
         {
-			if(pc.getBombCharge() > chargeNeeded){
+			if(pc.getBombCharge() >= chargeNeeded){
             	gameObject.transform.parent = null;
             	detached = true;
 			}
         }
-    }
+    }*/
 
     // retrieve the value of the current time
     public float get_countdown()
