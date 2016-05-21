@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BombCountdownController : MonoBehaviour {
@@ -39,6 +40,11 @@ public class BombCountdownController : MonoBehaviour {
             else
             {
                 timerText.text = "T-" + detachScript.get_countdown().ToString("00.00") + "s";
+            }
+
+            if(detachScript.get_countdown() <= 0)
+            {
+                SceneManager.LoadScene("EndingDead");
             }
         }
     }
