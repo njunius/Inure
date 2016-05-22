@@ -130,6 +130,8 @@ public class PlayerController : MonoBehaviour {
     private float speedTimer = 0;
     private bool twoSpeedEngaged = false;
 
+    private bool tutorialInitialized = false;
+
     // Use this for initialization
     void Awake () {
 		Cursor.lockState = CursorLockMode.Confined;
@@ -164,7 +166,6 @@ public class PlayerController : MonoBehaviour {
         {
             Debug.Log("tutorial mode");
             currHullIntegrity = 0;
-            shield.setShieldEnabled(false);
         }
 
         Transform[] temp = bulletSpawns.GetComponentsInChildren<Transform>();
@@ -192,7 +193,13 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        
+        if (tutorialMode && !tutorialInitialized)
+        {
+            shield.setCurrShieldCharge(0);
+            shield.setShieldEnabled(false);
+            tutorialInitialized = true;
+        }
+
         if (!paused)
         {
             //find new point at front of ship for firing

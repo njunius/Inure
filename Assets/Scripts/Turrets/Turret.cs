@@ -40,6 +40,11 @@ public class Turret : MonoBehaviour {
 		isOn = false;
 	}
 
+    public bool isTurretOn()
+    {
+        return isOn;
+    }
+
 	public bool GetIsEMP () {
 		return isEMP;
 	}

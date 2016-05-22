@@ -41,7 +41,7 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
         {
             dir = player.transform.position - transform.position;
             RaycastHit hit;
-            if (Physics.SphereCast(transform.position, 20.0f, dir, out hit))
+            if (Physics.SphereCast(transform.position, 10.0f, dir, out hit,  dir.magnitude * 1.1f, layermask))
             {
                 if (hit.transform.CompareTag("Player"))
                 {
@@ -63,7 +63,7 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
                 charge = 0f;
 
                 dir = (player.transform.position + player.GetComponent<Rigidbody>().velocity * 2f) - transform.position;
-                
+                //dir = (player.transform.position) - transform.position;
                 lr.enabled = true;
                 //target = transform.position + dir * 2;
                 lr.SetPosition(0, transform.position);
@@ -86,16 +86,17 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
                 chargeHalo.range -= Time.deltaTime * 2 * haloDelta;
             }
 
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, 10f, newDir, Vector3.Distance(transform.position, target), layermask, QueryTriggerInteraction.Ignore);
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, 5f, newDir, Vector3.Distance(transform.position, target), layermask, QueryTriggerInteraction.Ignore);
             Vector3 closestHit = target;
             foreach (RaycastHit hit in hits)
             {
                 if (hit.transform.CompareTag("Environment"))
                 {
-                    Debug.Log(hit.transform.name);
+                    
                     if (Vector3.Distance(transform.position, hit.point) < Vector3.Distance(transform.position, closestHit))
                     {
                         closestHit = hit.point;
+                        //Debug.Log(hit.transform.name);
                     }
                     
 
