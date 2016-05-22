@@ -61,6 +61,6 @@ public class BombCountdownController : MonoBehaviour {
 
     public bool isCountingDown()
     {
-        return timerText.enabled;
+        return timerTextCanavas.enabled;
     }
 }

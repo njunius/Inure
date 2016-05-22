@@ -6,10 +6,14 @@ public class PauseController : MonoBehaviour {
 
     private Canvas pauseOverlay;
     private Canvas settingsOverlay;
+    private BombCountdownController bombTimer;
     private PlayerController player;
     private SettingsExitBuffer canQuitSettings;
 
     public InputManager im;
+    public AudioClip deathSound;
+    private AudioSource audio_effects;
+
 
     // Use this for initialization
     void Start ()
@@ -18,6 +22,9 @@ public class PauseController : MonoBehaviour {
         pauseOverlay = GameObject.FindGameObjectWithTag("Pause Overlay").GetComponent<Canvas>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         settingsOverlay = GameObject.FindGameObjectWithTag("Settings Screen").GetComponent<Canvas>();
+        bombTimer = GetComponentInChildren<BombCountdownController>();
+
+        audio_effects = GetComponents<AudioSource>()[7];
     }
 
     // Update is called once per frame
@@ -57,8 +64,20 @@ public class PauseController : MonoBehaviour {
                     settingsOverlay.enabled = false;
                 }
             }
+
+            if(player.isDead() && !bombTimer.isCountingDown() && !player.tutorialMode)
+            {
+                audio_effects.PlayOneShot(deathSound);
+                player.paused = true;
+                Time.timeScale = 0.3f;
+                pauseOverlay.enabled = true;
+                Cursor.visible = true;
+            }
+
             if (Cursor.visible && !player.paused && !player.isDead())
+            {
                 Cursor.visible = false;
+            }
         }
         
     }
