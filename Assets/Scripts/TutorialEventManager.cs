@@ -23,7 +23,8 @@ public class TutorialEventManager : MonoBehaviour {
     private GameObject gameController;
     private InputManager im;
 
-    private AudioSource source;
+    private AudioSource computerSource;
+    private AudioSource dialogueSource;
     public AudioClip Initialize;
     public AudioClip Vertical;
     public AudioClip Longitudinal;
@@ -36,15 +37,24 @@ public class TutorialEventManager : MonoBehaviour {
     public AudioClip ManuveringEnabled;
 
 
+    public AudioClip dialogue1_a;
+    public AudioClip dialogue1_b;
+    public AudioClip dialogue2;
+    public AudioClip dialogue3;
+    public AudioClip dialogue4;
+    public AudioClip dialogue5;
+
+
     private float timer = 0;
     // Use this for initialization
     void Start () {
-        source = GetComponent<AudioSource>();
-        eventTimer = 150;
+        computerSource = GetComponents<AudioSource>()[0];
+        dialogueSource = GetComponents<AudioSource>()[1];
+        eventTimer = 500;
         subtitles.text = "";
-        source.PlayOneShot(Initialize);
-
         
+        dialogueSource.PlayOneShot(dialogue1_a);
+
     }
 	
 
@@ -53,7 +63,7 @@ public class TutorialEventManager : MonoBehaviour {
         
         if (Input.GetKeyDown(KeyCode.Equals))
         {
-            if (eventIndex < 11)
+            if (eventIndex < 12)
             {
                 player.unFreezeRotation();
                 player.rotateEnabled = true;
@@ -69,10 +79,10 @@ public class TutorialEventManager : MonoBehaviour {
                     player.restoreHullPoint();
                 }
                 player.tutorialMode = false;
-                eventIndex = 11;
+                eventIndex = 12;
 
             }
-            else if (eventIndex < 14)
+            else if (eventIndex < 15)
             {
                 interior.SetActive(false);
                 exterior.SetActive(true);
@@ -93,7 +103,7 @@ public class TutorialEventManager : MonoBehaviour {
                     player.restoreHullPoint();
                 }
                 player.tutorialMode = false;
-                eventIndex = 14;
+                eventIndex = 15;
             }
             else
             {
@@ -116,7 +126,7 @@ public class TutorialEventManager : MonoBehaviour {
                     player.restoreHullPoint();
                 }
                 player.tutorialMode = false;
-                eventIndex = 15;
+                eventIndex = 16;
             }
         }
 
@@ -153,7 +163,14 @@ public class TutorialEventManager : MonoBehaviour {
 
             switch (eventIndex)
             {
-                case 7:
+                case 0:
+                    if (!dialogueSource.isPlaying)
+                    {
+                        eventIndex++;
+                        refresh();
+                    }
+                    break;
+                case 8:
                     if (door1Upper.GetComponent<TutorialDoors>().open)
                     {
                         eventIndex++;
@@ -187,19 +204,24 @@ public class TutorialEventManager : MonoBehaviour {
         {
             case 0:         //Scene ends with hull indicatiors activated.
                 subtitleCanvas.enabled = false;
+                
                 break;
             case 1:
+                computerSource.PlayOneShot(Initialize);
+                eventTimer = 150;
+                break;
             case 2:
             case 3:
             case 4:
             case 5:
+            case 6:
                 player.restoreHullPoint();
                 eventTimer = 20;
 
                 
                 break;
-            case 6:
-                source.PlayOneShot(Vertical);
+            case 7:
+                computerSource.PlayOneShot(Vertical);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -208,7 +230,7 @@ public class TutorialEventManager : MonoBehaviour {
                 
                 break;
 
-            case 7:         //Doors open
+            case 8:         //Doors open
                 subtitles.text = "";
                 subtitles.enabled = false;
                 subtitleCanvas.enabled = false;
@@ -217,8 +239,8 @@ public class TutorialEventManager : MonoBehaviour {
                 door2Lower.GetComponent<TutorialDoors>().activate();
                 door2Upper.GetComponent<TutorialDoors>().activate();
                 break;
-            case 8:         //Player can lift off. Display vertical controls
-                source.PlayOneShot(Longitudinal);
+            case 9:         //Player can lift off. Display vertical controls
+                computerSource.PlayOneShot(Longitudinal);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -227,8 +249,8 @@ public class TutorialEventManager : MonoBehaviour {
                 
                 break;
 
-            case 9:
-                source.PlayOneShot(Lateral);
+            case 10:
+                computerSource.PlayOneShot(Lateral);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -236,8 +258,8 @@ public class TutorialEventManager : MonoBehaviour {
                 player.lateralEnginesEnabled = true;
                 break;
 
-            case 10:         //Player can move forward.
-                source.PlayOneShot(ManuveringOnline);
+            case 11:         //Player can move forward.
+                computerSource.PlayOneShot(ManuveringOnline);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -245,33 +267,39 @@ public class TutorialEventManager : MonoBehaviour {
                 player.rotateEnabled = true;
                 player.unFreezeRotation();
                 break;
-            case 11:
+            case 12:
+                dialogueSource.Stop();
+                dialogueSource.PlayOneShot(dialogue1_b);
                 subtitles.text = "";
                 subtitles.enabled = false;
                 subtitleCanvas.enabled = false;
                 break;
-            case 12:
+            case 13:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
-                source.PlayOneShot(Weapons);
+                computerSource.PlayOneShot(Weapons);
+                dialogueSource.Stop();
+                dialogueSource.PlayOneShot(dialogue2);
                 subtitles.text = "Use Left Mouse Button to fire.";
                 player.weaponsEnabled = true;
                 player.tutorialMode = false;
 
 
                 break;
-            case 13:
+            case 14:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
-                source.PlayOneShot(Course);
+                dialogueSource.Stop();
+                dialogueSource.PlayOneShot(dialogue3);
+                computerSource.PlayOneShot(Course);
                 subtitles.text = "Approach course confirmed.  Manuvering thrusters dissabled.";
                 interior.SetActive(false);
                 exterior.SetActive(true);
                 break;
-            case 14:
-                source.PlayOneShot(ShieldCharging);
+            case 15:
+                computerSource.PlayOneShot(ShieldCharging);
                 /*subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -279,11 +307,13 @@ public class TutorialEventManager : MonoBehaviour {
                 player.shieldEnabled = true;
                 shield.setShieldEnabled(true);
                 break;
-            case 15:
+            case 16:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
-                source.PlayOneShot(ManuveringEnabled);
+                computerSource.PlayOneShot(ManuveringEnabled);
+                dialogueSource.Stop();
+                dialogueSource.PlayOneShot(dialogue4);
                 subtitles.text = "Manuvering thursters re-engaged.";
                 player.targetLocked = false;
                 player.unFreezeRotation();
@@ -295,19 +325,21 @@ public class TutorialEventManager : MonoBehaviour {
                 player.shieldEnabled = true;
                 shield.setShieldEnabled(true);
                 break;
-            case 16:
-                subtitleCanvas.enabled = true;
-                subtitles.enabled = true;
-                timer = 10;
-                source.PlayOneShot(ShieldReady);
-                subtitles.text = "Use [" + im.getPosInputName("Shield") + "] to activate shield and absorb enemy projectiles.";
-                break;
             case 17:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
+                computerSource.PlayOneShot(ShieldReady);
+                dialogueSource.Stop();
+                dialogueSource.PlayOneShot(dialogue5);
+                subtitles.text = "Use [" + im.getPosInputName("Shield").ToUpper() + "] to activate shield and absorb enemy projectiles.";
+                break;
+            case 18:
+                subtitleCanvas.enabled = true;
+                subtitles.enabled = true;
+                timer = 10;
                 //source.PlayOneShot(ShieldReady);
-                subtitles.text = "Hold [" + im.getPosInputName("Launch Bomb") + "] to charge bomb and release to launch.";
+                subtitles.text = "Hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge bomb and release to launch.";
                 break;
                 
 

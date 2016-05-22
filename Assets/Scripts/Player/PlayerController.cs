@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour {
         audio_effects = GetComponents<AudioSource>()[7];
         audio_accellerators_max_vol = audio_accellerators.volume;
         audio_thrusters_max_vol = audio_thrusters.volume;
+        audio_thrusters.volume = 0;
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
@@ -372,6 +373,11 @@ public class PlayerController : MonoBehaviour {
 
                     
                 }
+            }
+
+            if (audio_thrusters.volume > audio_thrusters_max_vol)
+            {
+                audio_thrusters.volume = audio_thrusters_max_vol;
             }
 
             if (!hasStopped)
