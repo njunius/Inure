@@ -12,6 +12,7 @@ public class LoadSceneAfterClip : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        Time.timeScale = 1.0f;
         voiceOver = gameObject.GetComponent<AudioSource>();
         audioClipStartDelay = 2;
         audioClipEndDelay = 0;
@@ -24,8 +25,11 @@ public class LoadSceneAfterClip : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        if (Input.anyKey)
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
+    }
 
     private void loadScene()
     {

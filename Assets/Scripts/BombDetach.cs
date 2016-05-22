@@ -47,7 +47,7 @@ public class BombDetach : MonoBehaviour
                         stopChecking = true;
                         //Debug.Log("else " + counter + ": " + stopChecking);
                         //Debug.Log("Game Over!");
-                        pc.setHullIntegrity(0);
+                        //pc.setHullIntegrity(0);
                     }
                 }
             }

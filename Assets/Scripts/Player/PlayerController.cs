@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour {
 	private string[] powerUpList = new string[]{"", "PowerUp_EMP", "PowerUp_Shockwave", "PowerUp_SlowTime"};
 	private string curPowerUp;
     private ArmorController armorGauge;
+
+    private BombCountdownController bombTimer;
 
     private Rigidbody rb;
 
@@ -154,6 +157,8 @@ public class PlayerController : MonoBehaviour {
 
         maxHullIntegrity = currHullIntegrity = 5;
         armorGauge = gameObject.GetComponentInChildren<ArmorController>();
+
+        bombTimer = gameObject.GetComponentInChildren<BombCountdownController>();
 
         if (tutorialMode)
         {
@@ -709,6 +714,10 @@ public class PlayerController : MonoBehaviour {
             currHullIntegrity = 0;
         }
 
+        if (bombTimer.isCountingDown() && currHullIntegrity == 0)
+        {
+            SceneManager.LoadScene("EndingDead");
+        }
     }
 
     /*
@@ -720,6 +729,10 @@ public class PlayerController : MonoBehaviour {
         if(newHullIntegrity > maxHullIntegrity)
         {
             currHullIntegrity = maxHullIntegrity;
+        }
+        else if(newHullIntegrity < 0)
+        {
+            currHullIntegrity = 0;
         }
         else
         {
