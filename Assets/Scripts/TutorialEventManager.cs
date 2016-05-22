@@ -82,7 +82,7 @@ public class TutorialEventManager : MonoBehaviour {
                 eventIndex = 12;
 
             }
-            else if (eventIndex < 15)
+            else if (eventIndex < 16)
             {
                 interior.SetActive(false);
                 exterior.SetActive(true);
@@ -103,7 +103,7 @@ public class TutorialEventManager : MonoBehaviour {
                     player.restoreHullPoint();
                 }
                 player.tutorialMode = false;
-                eventIndex = 15;
+                eventIndex = 16;
             }
             else
             {
@@ -126,7 +126,7 @@ public class TutorialEventManager : MonoBehaviour {
                     player.restoreHullPoint();
                 }
                 player.tutorialMode = false;
-                eventIndex = 16;
+                eventIndex = 17;
             }
         }
 
@@ -291,14 +291,17 @@ public class TutorialEventManager : MonoBehaviour {
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
-                dialogueSource.Stop();
-                dialogueSource.PlayOneShot(dialogue3);
+                
                 computerSource.PlayOneShot(Course);
                 subtitles.text = "Approach course confirmed.  Manuvering thrusters dissabled.";
                 interior.SetActive(false);
                 exterior.SetActive(true);
                 break;
             case 15:
+                dialogueSource.Stop();
+                dialogueSource.PlayOneShot(dialogue3);
+                break;
+            case 16:
                 computerSource.PlayOneShot(ShieldCharging);
                 /*subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
@@ -307,7 +310,7 @@ public class TutorialEventManager : MonoBehaviour {
                 player.shieldEnabled = true;
                 shield.setShieldEnabled(true);
                 break;
-            case 16:
+            case 17:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -325,7 +328,7 @@ public class TutorialEventManager : MonoBehaviour {
                 player.shieldEnabled = true;
                 shield.setShieldEnabled(true);
                 break;
-            case 17:
+            case 18:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -334,7 +337,7 @@ public class TutorialEventManager : MonoBehaviour {
                 dialogueSource.PlayOneShot(dialogue5);
                 subtitles.text = "Use [" + im.getPosInputName("Shield").ToUpper() + "] to activate shield and absorb enemy projectiles.";
                 break;
-            case 18:
+            case 19:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
