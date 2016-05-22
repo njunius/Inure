@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class TutorialEventManager : MonoBehaviour {
     public PlayerController player;
+    public ShieldController shield;
     public int eventIndex = 0;
     private float eventTimer = 0;
     public GameObject door1Upper;
@@ -71,7 +72,7 @@ public class TutorialEventManager : MonoBehaviour {
                 eventIndex = 11;
 
             }
-            else if (eventIndex < 15)
+            else if (eventIndex < 14)
             {
                 interior.SetActive(false);
                 exterior.SetActive(true);
@@ -83,6 +84,7 @@ public class TutorialEventManager : MonoBehaviour {
                 player.lateralEnginesEnabled = true;
                 player.weaponsEnabled = true;
                 player.shieldEnabled = true;
+                shield.setShieldEnabled(true);
                 player.transform.position = DebugTutorialLocations[1].transform.position;
                 player.transform.rotation = DebugTutorialLocations[1].transform.rotation;
                 GameObject.FindGameObjectWithTag("MainCamera").transform.position = DebugTutorialLocations[1].transform.position;
@@ -91,7 +93,7 @@ public class TutorialEventManager : MonoBehaviour {
                     player.restoreHullPoint();
                 }
                 player.tutorialMode = false;
-                eventIndex = 15;
+                eventIndex = 14;
             }
             else
             {
@@ -105,6 +107,7 @@ public class TutorialEventManager : MonoBehaviour {
                 player.lateralEnginesEnabled = true;
                 player.weaponsEnabled = true;
                 player.shieldEnabled = true;
+                shield.setShieldEnabled(true);
                 player.transform.position = DebugTutorialLocations[2].transform.position;
                 player.transform.rotation = DebugTutorialLocations[2].transform.rotation;
                 GameObject.FindGameObjectWithTag("MainCamera").transform.position = DebugTutorialLocations[2].transform.position;
@@ -171,6 +174,8 @@ public class TutorialEventManager : MonoBehaviour {
             player.lateralEnginesEnabled = false;
             player.weaponsEnabled = false;
             player.shieldEnabled = false;
+            shield = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ShieldController>();
+            
         }
 	}
 
@@ -267,11 +272,12 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
             case 14:
                 source.PlayOneShot(ShieldCharging);
-                subtitleCanvas.enabled = true;
+                /*subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
-                subtitles.text = "Use Right Mouse Button to activate shield.";
+                subtitles.text = "Use Right Mouse Button to activate shield.";*/
                 player.shieldEnabled = true;
+                shield.setShieldEnabled(true);
                 break;
             case 15:
                 subtitleCanvas.enabled = true;
@@ -287,7 +293,23 @@ public class TutorialEventManager : MonoBehaviour {
                 player.lateralEnginesEnabled = true;
                 player.weaponsEnabled = true;
                 player.shieldEnabled = true;
+                shield.setShieldEnabled(true);
                 break;
+            case 16:
+                subtitleCanvas.enabled = true;
+                subtitles.enabled = true;
+                timer = 10;
+                source.PlayOneShot(ShieldReady);
+                subtitles.text = "Use [" + im.getPosInputName("Shield") + "] to activate shield and absorb enemy projectiles.";
+                break;
+            case 17:
+                subtitleCanvas.enabled = true;
+                subtitles.enabled = true;
+                timer = 10;
+                //source.PlayOneShot(ShieldReady);
+                subtitles.text = "Hold [" + im.getPosInputName("Launch Bomb") + "] to charge bomb and release to launch.";
+                break;
+                
 
         }
     }

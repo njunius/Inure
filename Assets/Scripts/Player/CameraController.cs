@@ -25,8 +25,8 @@ public class CameraController : MonoBehaviour {
     public float maxHeightPercent = 0.25f;
 
 
-    private float currentSide;
-    private float targetSide;
+    //private float currentSide;
+    //private float targetSide;
     
 
     public float positionDamping = 2.0f;
@@ -72,7 +72,7 @@ public class CameraController : MonoBehaviour {
         //Cursor.visible = false; // comment and uncomment this based on current needs
         targetDistance = currentDistance = defaultDistance;
         targetHeight = currentHeight = defaultHeight;
-        targetSide = currentSide = defaultSide;
+        //targetSide = currentSide = defaultSide;
         target = GameObject.FindGameObjectWithTag("Player");
         //positionTarget = target.GetComponent<Rigidbody>();
         lookAtTarget = GameObject.FindGameObjectWithTag("Camera Target").GetComponent<Transform>();

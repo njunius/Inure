@@ -22,7 +22,7 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
 
     private float haloDelta;
     private Vector3 dir;
-    private bool lockDist;
+    //private bool lockDist;
 
     private float accuracy;
 
@@ -120,7 +120,7 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
                 isFiring = false;
                 energy = 0f;
                 lr.enabled = false;
-                lockDist = false;
+                //lockDist = false;
             }
 
             lr.SetPosition(1, closestHit);
