@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour {
     private float audio_thrusters_max_vol;
     private AudioSource audio_hullHit;
     private AudioSource audio_wallImpact;
-    private AudioSource audio_death;
+    //private AudioSource audio_death;
     private AudioSource audio_effects;
 
     public float thrustersWarmUpTime = 1.0f;
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour {
         audio_thrusters = GetComponents<AudioSource>()[3];
         audio_hullHit = GetComponents<AudioSource>()[4];
         audio_wallImpact = GetComponents<AudioSource>()[5];
-        audio_death = GetComponents<AudioSource>()[6];
+        //audio_death = GetComponents<AudioSource>()[6];
         audio_effects = GetComponents<AudioSource>()[7];
         audio_accellerators_max_vol = audio_accellerators.volume;
         audio_thrusters_max_vol = audio_thrusters.volume;
@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour {
             //Activate the game over sequence when death is true
             if (!tutorialMode && isDead() && !noGameOver)
             {
-                killPlayer();
+                //killPlayer();
             }
             //Count down invulnerability
             if (fInvincible)
@@ -622,6 +622,16 @@ public class PlayerController : MonoBehaviour {
             paused = false;
         }
 
+        if(Time.timeScale != 1.0f)
+        {
+            Time.timeScale = 1.0f;
+        }
+
+        if (pauseScreen.enabled)
+        {
+            pauseScreen.enabled = false;
+        }
+
 		//Teleport Player + Camera
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
@@ -636,7 +646,7 @@ public class PlayerController : MonoBehaviour {
 
 
         //Overwrite data
-        savePlayer();
+        //savePlayer();
 
 		//Turn off turrets + Destroy bullets
 		GameObject[] allTurrets, allBullets;
@@ -658,7 +668,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 	//Deactivates player controls and shows game over screen
-	private void killPlayer()
+	/*private void killPlayer()
 	{
         audio_effects.PlayOneShot(deathSound);
         Cursor.visible = true;
@@ -680,7 +690,7 @@ public class PlayerController : MonoBehaviour {
 		pauseScreen.enabled = false;
 		//save player
 		this.enabled = true;
-	}
+	}*/
 
     // returns true if the player's hull integrity has dropped to 0
     public bool isDead()

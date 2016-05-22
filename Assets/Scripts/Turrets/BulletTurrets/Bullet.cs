@@ -15,12 +15,14 @@ public class Bullet : MonoBehaviour {
 
     private int absorbValue;
 	private float lifeTime;
+    private AudioSource bulletHum;
 
     public Renderer brackets;
 
 	// Use this for initialization
 	void Awake () {
         absorbValue = 1;
+        bulletHum = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -70,6 +72,7 @@ public class Bullet : MonoBehaviour {
         if (volume.gameObject.CompareTag("Warning Radius"))
         {
             brackets.enabled = true;
+            bulletHum.enabled = true;
         }
 
     }
@@ -79,6 +82,7 @@ public class Bullet : MonoBehaviour {
         if (volume.gameObject.CompareTag("Warning Radius"))
         {
             brackets.enabled = false;
+            bulletHum.enabled = false;
         }
     }
 

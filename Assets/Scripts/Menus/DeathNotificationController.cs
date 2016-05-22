@@ -21,12 +21,12 @@ public class DeathNotificationController : MonoBehaviour {
 	void Update () {
         if (player.isDead() && !player.tutorialMode)
         {
-            for(int i = 0; i < pauseItems.Length; ++i)
+            for (int i = 0; i < pauseItems.Length; ++i)
             {
                 pauseItems[i].SetActive(false);
             }
 
-            for(int i = 0; i < deathItems.Length; ++i)
+            for (int i = 0; i < deathItems.Length; ++i)
             {
                 deathItems[i].SetActive(true);
             }
