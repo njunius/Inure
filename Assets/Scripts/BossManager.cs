@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BossManager : MonoBehaviour {
 	public GameObject reactor;
+	public GameObject escapeDoor;
 	public GameObject[] shieldPieces;
 	public int enableReactorField = 16;
 	public int turretInterval = 4;
@@ -12,7 +13,7 @@ public class BossManager : MonoBehaviour {
 
 	private int shieldCount = 0;
 	private int countTMP = 0;
-
+	private bool activatedDoor = false;
 	// Use this for initialization
 	void Start () {
 	}
@@ -47,6 +48,10 @@ public class BossManager : MonoBehaviour {
 		if(shieldCount > enableReactorField){
 			reactor.GetComponent<SphereCollider>().enabled = true;
 			Destroy(reactorCore);
+			if(!activatedDoor){
+				escapeDoor.GetComponent<ShatterWhenHit>().enabled = true;
+				activatedDoor = true;
+			}
 			reactor.transform.GetChild(0).GetComponent<Light>().color = Color.red;
 		}
 	}

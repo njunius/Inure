@@ -310,14 +310,14 @@ public class CameraController : MonoBehaviour {
 
         if (isShaking && lastShake >= shakeDuration)
         {
-            thisTransformCache.position += (Vector3)Random.insideUnitCircle * shakeAmount;
+            /*thisTransformCache.position += (Vector3)Random.insideUnitCircle * shakeAmount;
 
             shakeDuration = shakeFreq + Random.Range(-0.05f, 0.05f);
-            lastShake = 0;
+            lastShake = 0;*/
         }
         else if (isShaking)
         {
-            lastShake += Time.deltaTime;
+            //lastShake += Time.deltaTime;
         }
 
 
