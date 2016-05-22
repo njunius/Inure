@@ -9,14 +9,18 @@ public class CheckPoint : MonoBehaviour {
 	public int hullHealth;
 	public int heal_player = 1;
 
+    public bool tutorialCheckpoint = false;
+
 	private LastCheckpoint pData;
 	private PlayerController pController;
 	private bool hasHealed = false;
 
+
+
     private AudioSource audioSource;
 	// Use this for initialization
 	void Start () {
-        audioSource = GetComponent<AudioSource>();
+        if (!tutorialCheckpoint) audioSource = GetComponent<AudioSource>();
 		savedPOS = gameObject.transform.position;
 		savedROT = gameObject.transform.rotation;
 		shieldCharge = 0;
@@ -29,7 +33,7 @@ public class CheckPoint : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.CompareTag("Player Collider")){
-            audioSource.Play();
+            if (!tutorialCheckpoint) audioSource.Play();
 			if(!hasHealed && pController.getCurrHullIntegrity() < pController.getMaxHullIntegrity()){
 				pController.setHullIntegrity(pController.getCurrHullIntegrity() + heal_player);
 				hasHealed = true;
@@ -40,8 +44,8 @@ public class CheckPoint : MonoBehaviour {
 			hullHealth = pController.getCurrHullIntegrity();
 			pData.setCheckPoint(shieldCharge, bombCharge, hullHealth, savedPOS, savedROT);
 
-			transform.GetChild(1).GetComponent<Light>().color = Color.red;
-			transform.GetChild(2).GetComponent<Light>().color = Color.red;
+            if (!tutorialCheckpoint) transform.GetChild(1).GetComponent<Light>().color = Color.red;
+            if (!tutorialCheckpoint) transform.GetChild(2).GetComponent<Light>().color = Color.red;
 			bombCharge = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge;
 		}
 	}
