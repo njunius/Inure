@@ -67,7 +67,10 @@ public class PauseController : MonoBehaviour {
 
             if(player.isDead() && !bombTimer.isCountingDown() && !player.tutorialMode)
             {
-                audio_effects.PlayOneShot(deathSound);
+                if (!audio_effects.isPlaying)
+                {
+                    audio_effects.PlayOneShot(deathSound);
+                }
                 player.paused = true;
                 Time.timeScale = 0.3f;
                 pauseOverlay.enabled = true;
