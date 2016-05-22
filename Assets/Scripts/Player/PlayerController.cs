@@ -632,6 +632,8 @@ public class PlayerController : MonoBehaviour {
             pauseScreen.enabled = false;
         }
 
+        Cursor.visible = false;
+
 		//Teleport Player + Camera
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
