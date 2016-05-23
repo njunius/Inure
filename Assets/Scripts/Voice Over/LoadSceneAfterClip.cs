@@ -25,7 +25,7 @@ public class LoadSceneAfterClip : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.anyKey)
+        if (Input.GetKey(KeyCode.Escape))
         {
             SceneManager.LoadScene(sceneToLoad);
         }
