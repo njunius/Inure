@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class rotate_blade : MonoBehaviour {
-    public Vector3 rotation_rate;
+    public Vector3 rotationVelocity;
+	//public float speed = 1;
+
     void fixedUpdate()
     {
         //gameObject.transform.Rotate(rotation_rate * Time.deltaTime);
@@ -17,6 +19,7 @@ public class rotate_blade : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        gameObject.transform.Rotate(rotation_rate * Time.deltaTime);
+		Quaternion deltaRotation = Quaternion.Euler(rotationVelocity * Time.deltaTime);
+		GetComponent<Rigidbody>().MoveRotation(GetComponent<Rigidbody>().rotation * deltaRotation);
     }
 }

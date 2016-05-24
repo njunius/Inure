@@ -24,7 +24,7 @@ public class objectMove : MonoBehaviour {
 		} else if (closeEnough (gameObject, nodes [index]) && index + 1 >= nodes.Length) {
 			index = 0;
 		}
-		transform.position = Vector3.MoveTowards (transform.position, nodes[index].transform.position, speed);
+		GetComponent<Rigidbody>().position = Vector3.MoveTowards (transform.position, nodes[index].transform.position, speed);
 	}
 
 	bool closeEnough (GameObject point1, GameObject point2){
