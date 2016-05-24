@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
 	public GameObject bulletPrefab;
 	public GameObject powerBomb;
 
+    private float deathEndingTimer;
+
     public GameObject bulletSpawns;
     public Transform[] bulletSpawnLocations;
     int bulletSpawnLocIndex;
@@ -165,6 +167,8 @@ public class PlayerController : MonoBehaviour {
 
         bombTimer = gameObject.GetComponentInChildren<BombCountdownController>();
 
+        deathEndingTimer = 0.0f;
+
         if (tutorialMode)
         {
             Debug.Log("tutorial mode");
@@ -203,18 +207,30 @@ public class PlayerController : MonoBehaviour {
             tutorialInitialized = true;
         }
 
-        if (!paused)
+
+        // allows for time between the player dying and the ending cutscene
+        if (bombTimer.isCountingDown() && isDead())
+        {
+            if (!audio_effects.isPlaying)
+            {
+                audio_effects.PlayOneShot(deathSound);
+            }
+            deathEndingTimer += Time.unscaledDeltaTime;
+            Time.timeScale = 0.3f;
+        }
+        
+        if(deathEndingTimer > 3.0f)
+        {
+            SceneManager.LoadScene("EndingDead");
+        }
+
+        if (!paused && !isDead())
         {
             //find new point at front of ship for firing
             Vector3 forwardNorm = gameObject.transform.forward;
             forwardNorm.Normalize();
             frontOfShip = mesh.GetComponent<Renderer>().bounds.center + (forwardNorm * mesh.GetComponent<Renderer>().bounds.extents.z * 1.15f);
 
-            //Activate the game over sequence when death is true
-            if (!tutorialMode && isDead() && !noGameOver)
-            {
-                //killPlayer();
-            }
             //Count down invulnerability
             if (fInvincible)
             {
@@ -338,7 +354,7 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
 
-        if (!paused)
+        if (!paused && !isDead())
         {
             float moveLongitudinal = im.getInput("Longitudinal") * moveSpeed;
             if (twoSpeedEngaged && moveLongitudinal > 0)
@@ -749,10 +765,10 @@ public class PlayerController : MonoBehaviour {
             currHullIntegrity = 0;
         }
 
-        if (bombTimer.isCountingDown() && currHullIntegrity == 0)
+        /*if (bombTimer.isCountingDown() && currHullIntegrity == 0 && deathEndingTimer > 2)
         {
             SceneManager.LoadScene("EndingDead");
-        }
+        }*/
     }
 
     /*

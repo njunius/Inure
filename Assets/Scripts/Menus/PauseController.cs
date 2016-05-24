@@ -41,6 +41,7 @@ public class PauseController : MonoBehaviour {
                 Time.timeScale = 1;
                 pauseOverlay.enabled = false;
                 Cursor.visible = false;
+                AudioListener.pause = false;
             }
 
             if (im.getInputDown("Pause") && !player.paused)
@@ -49,6 +50,7 @@ public class PauseController : MonoBehaviour {
                 Time.timeScale = 0;
                 pauseOverlay.enabled = true;
                 Cursor.visible = true;
+                AudioListener.pause = true;
             }
             else if (im.getInputDown("Pause") && player.paused)
             {
@@ -58,6 +60,7 @@ public class PauseController : MonoBehaviour {
                     Time.timeScale = 1;
                     pauseOverlay.enabled = false;
                     Cursor.visible = false;
+                    AudioListener.pause = false;
                 }
                 else if (settingsOverlay.enabled && !canQuitSettings.keyBindingIsSelected())
                 {

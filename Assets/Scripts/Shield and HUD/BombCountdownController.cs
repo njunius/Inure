@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BombCountdownController : MonoBehaviour {
 
     public GameObject bomb;
-    private BombDetach detachScript;
+    private BombDetach detachScript; //replace with new script
     private Canvas timerTextCanavas;
     private Text timerText;
 
@@ -30,7 +30,7 @@ public class BombCountdownController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (detachScript.isDetached())
+        if (detachScript.isDetached()) //replace with conditional from new script
         {
             timerTextCanavas.enabled = true;
             if (detachScript.get_countdown() < 10)

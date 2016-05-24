@@ -77,8 +77,8 @@ GameObject:
   - 4: {fileID: 458818}
   - 33: {fileID: 3329570}
   - 23: {fileID: 2339504}
-  - 64: {fileID: 6400224}
   - 114: {fileID: 11406528}
+  - 54: {fileID: 5432560}
   m_Layer: 11
   m_Name: Fan
   m_TagString: Environment
@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 596.761, y: -120.65369, z: -2578.3286}
+  m_LocalPosition: {x: 647.6609, y: -120.953735, z: -2059.629}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 440768}
@@ -249,18 +249,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101058}
   m_Mesh: {fileID: 4300004, guid: bf426b8b6fcfad74abbfe571d7e97640, type: 3}
---- !u!64 &6400224
-MeshCollider:
+--- !u!54 &5432560
+Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198694}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: bf426b8b6fcfad74abbfe571d7e97640, type: 3}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &6426578
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -329,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59dca0aa2295634692102ca5264c56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation_rate: {x: 0, y: 0, z: 100}
+  rotationVelocity: {x: 0, y: 0, z: 50}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
