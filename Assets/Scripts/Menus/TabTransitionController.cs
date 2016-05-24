@@ -6,12 +6,13 @@ public class TabTransitionController : MonoBehaviour {
 
     private Image transition;
     private float alpha;
-    private bool keyBindingPressed;
+    private string buttonName;
     private bool halfway;
     private float transitionDelay;
 
     private GameObject[] keybindingElements;
     private GameObject[] gameSettingElements;
+    private GameObject[] screenSettingElements;
 
     public GameObject[] hudElementSliders;
     public GameObject[] emptySliders;
@@ -21,15 +22,23 @@ public class TabTransitionController : MonoBehaviour {
         transition = gameObject.GetComponent<Image>();
         alpha = 1.0f;
         transitionDelay = 0.0f;
-        keyBindingPressed = false;
+
+        buttonName = "";
+
         halfway = false;
 
         keybindingElements = GameObject.FindGameObjectsWithTag("Keybinding Screen");
         gameSettingElements = GameObject.FindGameObjectsWithTag("Game Settings Screen");
+        screenSettingElements = GameObject.FindGameObjectsWithTag("Screen Settings");
 
         for (int i = 0; i < gameSettingElements.Length; ++i)
         {
             gameSettingElements[i].SetActive(false);
+        }
+        
+        for(int i = 0; i < screenSettingElements.Length; ++i)
+        {
+            screenSettingElements[i].SetActive(false);
         }
     }
 	
@@ -44,7 +53,7 @@ public class TabTransitionController : MonoBehaviour {
                 alpha = 1.0f;
                 transitionDelay = 0.0f;
 
-                if (keyBindingPressed)
+                if (buttonName.Equals("Keybindings Button"))
                 {
                     for (int i = 0; i < keybindingElements.Length; ++i)
                     {
@@ -55,8 +64,13 @@ public class TabTransitionController : MonoBehaviour {
                     {
                         gameSettingElements[i].SetActive(false);
                     }
+
+                    for(int i = 0; i < screenSettingElements.Length; ++i)
+                    {
+                        screenSettingElements[i].SetActive(false);
+                    }
                 }
-                else
+                else if(buttonName.Equals("Game Settings"))
                 {
                     for (int i = 0; i < keybindingElements.Length; ++i)
                     {
@@ -76,6 +90,28 @@ public class TabTransitionController : MonoBehaviour {
                     for(int i = 0; i < emptySliders.Length; ++i)
                     {
                         emptySliders[i].SetActive(true);
+                    }
+
+                    for (int i = 0; i < screenSettingElements.Length; ++i)
+                    {
+                        screenSettingElements[i].SetActive(false);
+                    }
+                }
+                else if (buttonName.Equals("Screen Settings"))
+                {
+                    for (int i = 0; i < keybindingElements.Length; ++i)
+                    {
+                        keybindingElements[i].SetActive(false);
+                    }
+
+                    for (int i = 0; i < gameSettingElements.Length; ++i)
+                    {
+                        gameSettingElements[i].SetActive(false);
+                    }
+
+                    for (int i = 0; i < screenSettingElements.Length; ++i)
+                    {
+                        screenSettingElements[i].SetActive(true);
                     }
                 }
             }
@@ -98,10 +134,10 @@ public class TabTransitionController : MonoBehaviour {
 
 	}
 
-    // flag true for keybinding was pressed, false for game settings was pressed
-    public void startTabTransition(bool keyBinding)
+    // starts the tab transition and gets the 
+    public void startTabTransition(string buttonPressed)
     {
         transition.enabled = true;
-        keyBindingPressed = keyBinding;
+        buttonName = buttonPressed;
     }
 }

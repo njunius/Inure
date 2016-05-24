@@ -3,11 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler {
+public class ScreenSettingsButtonController : MonoBehaviour, IPointerClickHandler {
 
     private Button thisButton;
+    public Button keyButton;
     public Button gameSettingsButton;
-    public Button screenSettingsButton;
+
     public ResetColorButtonController colorResetButton;
 
     public TabTransitionController tabTransition;
@@ -16,9 +17,7 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler {
     private Image[] hudElementSamples;
 
     // Use this for initialization
-    void Awake()
-    {
-
+    void Start () {
         thisButton = gameObject.GetComponent<Button>();
 
         GameObject[] temp = GameObject.FindGameObjectsWithTag("Color Selector Button");
@@ -36,14 +35,17 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler {
         {
             hudElementSamples[i] = temp[i].GetComponent<Image>();
         }
-
     }
+
+    // Update is called once per frame
+    void Update () {
+	
+	}
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (thisButton.interactable)
         {
-
             EventSystem.current.SetSelectedGameObject(null);
 
             for (int i = 0; i < colorSelectorButtons.Length; ++i)
@@ -61,8 +63,8 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler {
             tabTransition.startTabTransition(gameObject.name);
 
             thisButton.interactable = false;
+            keyButton.interactable = true;
             gameSettingsButton.interactable = true;
-            screenSettingsButton.interactable = true;
         }
     }
 }
