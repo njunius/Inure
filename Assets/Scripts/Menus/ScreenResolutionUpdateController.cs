@@ -7,6 +7,7 @@ public class ScreenResolutionUpdateController : MonoBehaviour, IPointerClickHand
 
     public int screenWidth;
     public int screenHeight;
+    public CurrentResolutionDisplayController currentResolutionText;
 
     private Text buttonText;
 
@@ -25,6 +26,6 @@ public class ScreenResolutionUpdateController : MonoBehaviour, IPointerClickHand
     {
         Screen.SetResolution(screenWidth, screenHeight, true);
         EventSystem.current.SetSelectedGameObject(null);
-
+        currentResolutionText.updateDisplayedResolution();
     }
 }
