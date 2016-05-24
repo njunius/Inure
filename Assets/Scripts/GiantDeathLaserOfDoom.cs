@@ -47,7 +47,9 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
                 {
                     isCharging = true;
                     target = transform.position + dir.normalized;
+                    Debug.Log("Targeted");
                 }
+
             }
         }
 
