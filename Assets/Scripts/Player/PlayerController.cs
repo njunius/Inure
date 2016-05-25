@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour {
     public AudioClip ThrottleUpSound;
     public AudioClip PowerDownSound;
     public AudioClip ScrapeHullSound;
+    public AudioClip BombChargeSound;
+    public AudioClip BombLaunchSound;
 
     private AudioSource audio_bullet;
     private AudioSource audio_engineHum;
@@ -102,8 +104,8 @@ public class PlayerController : MonoBehaviour {
     private float audio_thrusters_max_vol;
     private AudioSource audio_hullHit;
     private AudioSource audio_wallImpact;
-    //private AudioSource audio_death;
     private AudioSource audio_effects;
+    private AudioSource audio_bomb;
 
     public float thrustersWarmUpTime = 1.0f;
     private float thrustersEnergy = 0;
@@ -143,8 +145,8 @@ public class PlayerController : MonoBehaviour {
         audio_thrusters = GetComponents<AudioSource>()[3];
         audio_hullHit = GetComponents<AudioSource>()[4];
         audio_wallImpact = GetComponents<AudioSource>()[5];
-        //audio_death = GetComponents<AudioSource>()[6];
-        audio_effects = GetComponents<AudioSource>()[7];
+        audio_effects = GetComponents<AudioSource>()[6];
+        audio_bomb = GetComponents<AudioSource>()[7];
         audio_accellerators_max_vol = audio_accellerators.volume;
         audio_thrusters_max_vol = audio_thrusters.volume;
         audio_thrusters.volume = 0;
@@ -323,6 +325,11 @@ public class PlayerController : MonoBehaviour {
 
 			if (im.getInput("Launch Bomb") > 0.3) {
 				if (getBombCharge () > 0) {
+                    if (!audio_bomb.isPlaying)
+                    {
+                        audio_bomb.loop = true;
+                        audio_bomb.PlayOneShot(BombChargeSound);
+                    }
 					float newCharge = (getUseCharge () + (useGaugeIncreaseRate * Time.deltaTime));
 					setUseCharge(Mathf.Min (newCharge, getBombCharge ()));
 					if (getUseCharge () == getBombCharge ()) {
@@ -335,7 +342,10 @@ public class PlayerController : MonoBehaviour {
 			if (im.getInputUp("Launch Bomb")) {
 				if (getBombCharge () > 0 && !justUsedBomb) {
 					FireBomb ((int)Mathf.Floor(getUseCharge ()));
-				}
+                    audio_bomb.Stop();
+                    audio_bomb.loop = false;
+                    audio_bomb.PlayOneShot(BombLaunchSound);
+                }
 				justUsedBomb = false;
 			}
         }        

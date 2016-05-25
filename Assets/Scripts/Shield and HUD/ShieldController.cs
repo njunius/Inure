@@ -42,11 +42,14 @@ public class ShieldController : MonoBehaviour, HUDElement
 
     //Audio
     public AudioClip shieldOnSound;
-    public AudioClip shieldRechargeSound;
+    public AudioClip shieldAlarm;
+    public AudioClip shieldRechargeStart;
+    public AudioClip shieldRechargeMain;
+    public AudioClip shieldRechargeEnd;
     public AudioClip shieldHitSound;
     private AudioSource baseSoundSource;
     private AudioSource effectSoundSource;
-
+    private bool recharged = true;
 
     // Use this for initialization
     void Start()
@@ -103,18 +106,29 @@ public class ShieldController : MonoBehaviour, HUDElement
 
                     if (shieldChargeDelayTimer > shieldChargeDelay)
                     {
-                        baseSoundSource.PlayOneShot(shieldRechargeSound);
+                        baseSoundSource.Stop();
+                        baseSoundSource.PlayOneShot(shieldRechargeMain);
+                        effectSoundSource.PlayOneShot(shieldRechargeStart);
+                        recharged = false;
                     }
                 }
                 else if(currShieldCharge < maxShieldCharge)
                 {
                     currShieldCharge += shieldRechargeAmount * Time.deltaTime;
+                    
                 }
 
-                if (currShieldCharge > maxShieldCharge)
+                if (currShieldCharge >= maxShieldCharge)
                 {
                     currShieldCharge = maxShieldCharge;
                 }
+                if (!recharged && (maxShieldCharge - currShieldCharge) / shieldRechargeAmount <= shieldRechargeEnd.length)
+                {
+                    effectSoundSource.PlayOneShot(shieldRechargeEnd);
+                    baseSoundSource.Stop();
+                    recharged = true;
+                }
+
 
                 for (int i = 0; i < shieldGauge.Length; ++i)
                 {
@@ -131,7 +145,7 @@ public class ShieldController : MonoBehaviour, HUDElement
 
                     shieldActive = false;
                     baseSoundSource.Stop();
-
+                    baseSoundSource.PlayOneShot(shieldAlarm);
                     currShieldCharge = 0;
                     shieldChargeDelayTimer = 0.0f;
                 }
@@ -243,10 +257,6 @@ public class ShieldController : MonoBehaviour, HUDElement
         if (setActive)
         {
             baseSoundSource.PlayOneShot(shieldOnSound);
-        }
-        else
-        {
-            baseSoundSource.PlayOneShot(shieldRechargeSound);
         }
 
     }

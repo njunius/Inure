@@ -10,12 +10,15 @@ public class CheckPoint : MonoBehaviour {
 	public int heal_player = 1;
 
     public bool tutorialCheckpoint = false;
+    public bool finalCheckpoint = false;
 
 	private LastCheckpoint pData;
 	private PlayerController pController;
 	private bool hasHealed = false;
 
 
+    public AudioClip standard;
+    public AudioClip final;
 
     private AudioSource audioSource;
 	// Use this for initialization
@@ -33,7 +36,18 @@ public class CheckPoint : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.CompareTag("Player Collider")){
-            if (!tutorialCheckpoint) audioSource.Play();
+            if (!tutorialCheckpoint)
+            {
+                if (!finalCheckpoint)
+                {
+                    audioSource.PlayOneShot(standard);
+                }
+                else
+                {
+                    audioSource.PlayOneShot(final);
+                }
+                
+            }
 			if(!hasHealed && pController.getCurrHullIntegrity() < pController.getMaxHullIntegrity()){
 				pController.setHullIntegrity(pController.getCurrHullIntegrity() + heal_player);
 				hasHealed = true;

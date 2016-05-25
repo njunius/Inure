@@ -13,7 +13,7 @@ public class BossManager : MonoBehaviour {
 
 	private int shieldCount = 0;
 	private int countTMP = 0;
-	private bool activatedDoor = false;
+	public bool activatedDoor = false;
 	// Use this for initialization
 	void Start () {
 	}
