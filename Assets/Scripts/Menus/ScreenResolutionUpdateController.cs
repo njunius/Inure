@@ -24,7 +24,7 @@ public class ScreenResolutionUpdateController : MonoBehaviour, IPointerClickHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Screen.SetResolution(screenWidth, screenHeight, true);
+        Screen.SetResolution(screenWidth, screenHeight, Screen.fullScreen);
         EventSystem.current.SetSelectedGameObject(null);
         currentResolutionText.updateDisplayedResolution();
     }
