@@ -47,6 +47,14 @@ public class PauseController : MonoBehaviour {
                 AudioListener.pause = false;
             }
 
+			if(pauseOverlay.enabled && !player.paused)
+            {
+                Time.timeScale = 1;
+                pauseOverlay.enabled = false;
+                Cursor.visible = false;
+                AudioListener.pause = false;
+            }
+			
             if (im.getInputDown("Pause") && !player.paused)
             {
                 player.paused = !player.paused;
