@@ -243,7 +243,18 @@ public class ShieldController : MonoBehaviour, HUDElement
 
     public void setCurrShieldCharge(float setShield)
     {
-        currShieldCharge = setShield;
+        if(setShield > maxShieldCharge)
+        {
+            currShieldCharge = maxShieldCharge;
+        }
+        else if(setShield < 0)
+        {
+            currShieldCharge = 0;
+        }
+        else
+        {
+            currShieldCharge = setShield;
+        }
 
         for (int i = 0; i < shieldGauge.Length; ++i)
         {

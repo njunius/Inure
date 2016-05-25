@@ -52,8 +52,6 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
 
-    private Canvas pauseScreen; //Base user interface, pause menu here
-
 	private float timerTMP = 0;
     
 	private ShieldController shield;
@@ -156,8 +154,6 @@ public class PlayerController : MonoBehaviour {
         originalColor = mesh.GetComponent<Renderer>().material.color;
 
         curPowerUp = powerUpList[0];
-
-        pauseScreen = GameObject.FindGameObjectWithTag("Pause Overlay").GetComponent<Canvas>();
 
         shield = GetComponentInChildren<ShieldController>();
 		bomb = GetComponentInChildren<BombController> ();
@@ -666,11 +662,6 @@ public class PlayerController : MonoBehaviour {
             Time.timeScale = 1.0f;
         }
 
-        if (pauseScreen.enabled)
-        {
-            pauseScreen.enabled = false;
-        }
-
         Cursor.visible = false;
 
 		//Teleport Player + Camera
@@ -708,31 +699,6 @@ public class PlayerController : MonoBehaviour {
         mesh.transform.rotation = transform.rotation;
     }
 
-	//Deactivates player controls and shows game over screen
-	/*private void killPlayer()
-	{
-        audio_effects.PlayOneShot(deathSound);
-        Cursor.visible = true;
-        paused = true;
-        //Show Game Over Screen
-        Time.timeScale = 0.3f;
-		pauseScreen.enabled = true;
-		//Destroy player
-		//this.enabled = false;
-        
-    }
-
-	//Disable game over screen
-	public void savePlayer ()
-	{
-        paused = false;
-		//Show Pause Screen
-		Time.timeScale = 1.0f;
-		pauseScreen.enabled = false;
-		//save player
-		this.enabled = true;
-	}*/
-
     // returns true if the player's hull integrity has dropped to 0
     public bool isDead()
     {
@@ -765,10 +731,6 @@ public class PlayerController : MonoBehaviour {
             currHullIntegrity = 0;
         }
 
-        /*if (bombTimer.isCountingDown() && currHullIntegrity == 0 && deathEndingTimer > 2)
-        {
-            SceneManager.LoadScene("EndingDead");
-        }*/
     }
 
     /*

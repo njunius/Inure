@@ -50,11 +50,16 @@ public class ArmorController : MonoBehaviour, HUDElement {
         
     }
 
+    // Redraws the armor chunks based on a specified number and checks for possible out of bounds problems
     public void updateChunks(int newHullIntegrity)
     {
         if (newHullIntegrity > maxChunks)
         {
             currChunks = maxChunks;
+        }
+        else if(newHullIntegrity < 0)
+        {
+            currChunks = 0;
         }
         else
         {
@@ -79,6 +84,7 @@ public class ArmorController : MonoBehaviour, HUDElement {
             }
         }
 
+        // special cases for turning on chunks that are missed by the above algorithm.
         if (currChunks == maxChunks)
         {
             armorChunkTracker[armorChunkTracker.Length - 1].color = chunkOn;
