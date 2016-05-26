@@ -281,7 +281,7 @@ public class TutorialEventManager : MonoBehaviour {
                 computerSource.PlayOneShot(Weapons);
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue2);
-                subtitles.text = "Use Left Mouse Button to fire.";
+                subtitles.text = "Use [" + im.getPosInputName("Shoot").ToUpper() + "] to fire.";
                 player.weaponsEnabled = true;
                 player.tutorialMode = false;
 
@@ -342,7 +342,7 @@ public class TutorialEventManager : MonoBehaviour {
                 subtitles.enabled = true;
                 timer = 10;
                 //source.PlayOneShot(ShieldReady);
-                subtitles.text = "Hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge bomb and release to launch.";
+                subtitles.text = "Hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge bomb and release to launch. The charge required is always displayed on the door.";
                 break;
                 
 

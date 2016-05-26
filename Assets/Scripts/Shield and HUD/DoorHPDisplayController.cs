@@ -6,6 +6,8 @@ public class DoorHPDisplayController : MonoBehaviour {
 
     public ShatterWhenHit doorController;
     public Image doorHPIndicatorBackground;
+    public Image doorHPIndicatorColorBalancer;
+    public Canvas doorHPCanvas;
     private Image doorHPIndicator;
     private HUDColorController colorController;
 
@@ -14,29 +16,37 @@ public class DoorHPDisplayController : MonoBehaviour {
         doorHPIndicator = gameObject.GetComponent<Image>();
         colorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
 
+        Color tempColor = colorController.getColorByString("bomb");
+
         doorHPIndicatorBackground.color = colorController.getColorByString("bomb");
-        doorHPIndicator.color = colorController.getColorByString("bomb");
+        // door hp color should be the same as bombUseGauge color
+        doorHPIndicator.color = new Color(tempColor.r / 2, tempColor.g / 2, tempColor.b / 2, tempColor.a);
         doorHPIndicator.fillAmount = (float)doorController.getHPInternal() / 100f;
-	}
+
+        doorHPIndicatorColorBalancer.color = tempColor;
+        doorHPIndicatorColorBalancer.fillAmount = (float)doorController.getHPInternal() / 100f; 
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (doorHPIndicator.enabled && doorHPIndicator.fillAmount != (float)doorController.getHPInternal())
         {
             doorHPIndicator.fillAmount = (float)doorController.getHPInternal() / 100f;
+            doorHPIndicatorColorBalancer.fillAmount = (float)doorController.getHPInternal() / 100f;
 
         }
 
         if (doorController != null && doorController.getHPInternal() <= 0)
         {
-            doorHPIndicator.enabled = false;
-            doorHPIndicatorBackground.enabled = false;
+            doorHPCanvas.enabled = false;
         }
 	}
 
-    public void colorUpdate()
+    public void colorUpdate(Color newColor)
     {
-        doorHPIndicator.color = colorController.getColorByString("bomb");
+        // door HP color should be the same as the bombUseGauge color
+        doorHPIndicator.color = newColor;
+        doorHPIndicatorColorBalancer.color = colorController.getColorByString("bomb");
         doorHPIndicatorBackground.color = colorController.getColorByString("bomb");
     }
 }

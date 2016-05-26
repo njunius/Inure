@@ -26,7 +26,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 495932}
   - 65: {fileID: 6510916}
-  - 114: {fileID: 11438738}
   m_Layer: 0
   m_Name: BackCollider
   m_TagString: Player Collider
@@ -368,7 +367,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 473376}
   - 65: {fileID: 6550028}
-  - 114: {fileID: 11469322}
   m_Layer: 0
   m_Name: ForwardRightCollider
   m_TagString: Player Collider
@@ -511,7 +509,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 498894}
   - 65: {fileID: 6557562}
-  - 114: {fileID: 11419942}
   m_Layer: 0
   m_Name: BackLeftCollider
   m_TagString: Player Collider
@@ -528,7 +525,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 444844}
   - 65: {fileID: 6536446}
-  - 114: {fileID: 11428940}
   m_Layer: 0
   m_Name: LeftCollider
   m_TagString: Player Collider
@@ -562,7 +558,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 478726}
   - 65: {fileID: 6516564}
-  - 114: {fileID: 11404996}
   m_Layer: 0
   m_Name: ForwardCollider
   m_TagString: Player Collider
@@ -629,7 +624,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 448748}
   - 65: {fileID: 6526038}
-  - 114: {fileID: 11465420}
   m_Layer: 0
   m_Name: RightCollider
   m_TagString: Player Collider
@@ -780,7 +774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &157904
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +784,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 499186}
   - 65: {fileID: 6520446}
-  - 114: {fileID: 11474130}
   m_Layer: 0
   m_Name: ForwardLeftCollider
   m_TagString: Player Collider
@@ -927,7 +920,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 474454}
   - 65: {fileID: 6535292}
-  - 114: {fileID: 11438820}
   m_Layer: 0
   m_Name: BackRightCollider
   m_TagString: Player Collider
@@ -1427,7 +1419,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 419100}
   - 65: {fileID: 6500048}
-  - 114: {fileID: 11447170}
   m_Layer: 0
   m_Name: BackColliderSlant
   m_TagString: Player Collider
@@ -1862,8 +1853,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180074}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -2.847119e-23, w: 0.7071067}
-  m_LocalPosition: {x: -2021.9, y: -1099.9998, z: -1520.0996}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 213, y: -106, z: -10131}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 478726}
@@ -3197,7 +3188,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 514ff2452e48e504b94bb3ac9c08449d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.49
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3371,21 +3362,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11404996
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a852860ebcc590a47aaf8f623f1536a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editableIndicators:
-  - {fileID: 0}
-  indicatorNames:
-  - Top
 --- !u!114 &11405492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3533,23 +3509,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupSprites: []
---- !u!114 &11419942
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 143652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a852860ebcc590a47aaf8f623f1536a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editableIndicators:
-  - {fileID: 0}
-  - {fileID: 0}
-  indicatorNames:
-  - Bottom Left
-  - Left Bottom
 --- !u!114 &11420736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3612,21 +3571,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11428940
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a852860ebcc590a47aaf8f623f1536a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editableIndicators:
-  - {fileID: 0}
-  indicatorNames:
-  - Left
 --- !u!114 &11429118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3715,40 +3659,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &11438738
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 105862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a852860ebcc590a47aaf8f623f1536a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editableIndicators:
-  - {fileID: 0}
-  - {fileID: 0}
-  indicatorNames:
-  - Bottom
-  - Top
---- !u!114 &11438820
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 170180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a852860ebcc590a47aaf8f623f1536a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editableIndicators:
-  - {fileID: 0}
-  - {fileID: 0}
-  indicatorNames:
-  - Right Bottom
-  - Bottom Right
 --- !u!114 &11446994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3770,21 +3680,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &11447170
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 199654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a852860ebcc590a47aaf8f623f1536a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editableIndicators:
-  - {fileID: 0}
-  indicatorNames:
-  - Bottom
 --- !u!114 &11447968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3998,21 +3893,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armorChunk: {fileID: 172470, guid: aafdfcade8743eb408ec5c4e99a37556, type: 2}
---- !u!114 &11465420
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a852860ebcc590a47aaf8f623f1536a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editableIndicators:
-  - {fileID: 0}
-  indicatorNames:
-  - Right
 --- !u!114 &11467604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4045,23 +3925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0775b59d8c85304499731e55cc4d1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11469322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a852860ebcc590a47aaf8f623f1536a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editableIndicators:
-  - {fileID: 0}
-  - {fileID: 0}
-  indicatorNames:
-  - Right Top
-  - Top Right
 --- !u!114 &11469878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4145,23 +4008,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11474130
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a852860ebcc590a47aaf8f623f1536a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editableIndicators:
-  - {fileID: 0}
-  - {fileID: 0}
-  indicatorNames:
-  - Left Top
-  - Top Left
 --- !u!114 &11476406
 MonoBehaviour:
   m_ObjectHideFlags: 1

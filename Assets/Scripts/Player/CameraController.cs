@@ -121,7 +121,7 @@ public class CameraController : MonoBehaviour {
             {
                 isShaking = true;
             }
-            if (im.getInputDown("Camera Mode"))
+            /*if (im.getInputDown("Camera Mode"))
             {
                 switch (mode)
                 {
@@ -148,7 +148,7 @@ public class CameraController : MonoBehaviour {
                         break;
 
                 }
-            }
+            }*/
         }
         
     }
