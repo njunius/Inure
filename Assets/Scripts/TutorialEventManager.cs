@@ -281,7 +281,7 @@ public class TutorialEventManager : MonoBehaviour {
                 computerSource.PlayOneShot(Weapons);
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue2);
-                subtitles.text = "Use Left Mouse Button to fire.";
+                subtitles.text = "Use [" + im.getPosInputName("Shoot").ToUpper() + "] to fire.";
                 player.weaponsEnabled = true;
                 player.tutorialMode = false;
 
