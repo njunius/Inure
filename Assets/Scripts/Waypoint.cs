@@ -20,6 +20,7 @@ public class Waypoint : MonoBehaviour {
     public bool lockOnNext = true;
 
     public bool pathDetector = false;
+    public bool showyBeams = false;
     public float pathWidth = 250;
     private Vector3 toPrevWaypoint;
 
@@ -27,6 +28,7 @@ public class Waypoint : MonoBehaviour {
     [Range(0, 1)]
     public float showBeams = 0;
     private int beamIndex = 0;
+
 
     void Start()
     {
@@ -110,11 +112,13 @@ public class Waypoint : MonoBehaviour {
                     }
                 }
                 
-                if (nearPoint.magnitude / toPrevWaypoint.magnitude < (1 - showBeams))
+                
+                if (showyBeams && nearPoint.magnitude / toPrevWaypoint.magnitude < (1 - showBeams))
                 {
                     foreach (GameObject deathLaser in DeathLasers)
                     {
-                        deathLaser.GetComponent<GiantDeathLaserOfDoom>().fireAt(10000 * player.forward + player.position);
+                        Vector3 target = 500 * player.forward + player.position;
+                        deathLaser.GetComponent<GiantDeathLaserOfDoom>().fireAt(target);
                     }
                 }
 
@@ -152,6 +156,13 @@ public class Waypoint : MonoBehaviour {
             if (lockOnNext)
             {
                 pc.targetLocked = true;
+            }
+            else
+            {
+                foreach (GameObject deathLaser in DeathLasers)
+                {
+                    deathLaser.GetComponent<GiantDeathLaserOfDoom>().killPlayer(true);
+                }
             }
             
         }
