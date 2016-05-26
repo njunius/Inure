@@ -19,7 +19,7 @@ public class LoadSceneAfterClip : MonoBehaviour {
 
         voiceOver.PlayDelayed(audioClipStartDelay);
 
-        // add start and end delays to the audio clip to make sure the next scene doesn't load too early
+        // add start and end delays to the audio clip to make sure the next scene doesn't load before the clip is finished playing
         Invoke("loadScene", audioClipStartDelay + voiceOver.clip.length + audioClipEndDelay);
 	}
 	

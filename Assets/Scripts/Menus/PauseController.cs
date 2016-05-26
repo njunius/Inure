@@ -25,6 +25,9 @@ public class PauseController : MonoBehaviour {
         bombTimer = GetComponentInChildren<BombCountdownController>();
 
         audio_effects = GetComponents<AudioSource>()[7];
+
+        AudioListener.pause = false;
+
     }
 
     // Update is called once per frame
@@ -44,6 +47,14 @@ public class PauseController : MonoBehaviour {
                 AudioListener.pause = false;
             }
 
+			if(pauseOverlay.enabled && !player.paused)
+            {
+                Time.timeScale = 1;
+                pauseOverlay.enabled = false;
+                Cursor.visible = false;
+                AudioListener.pause = false;
+            }
+			
             if (im.getInputDown("Pause") && !player.paused)
             {
                 player.paused = !player.paused;

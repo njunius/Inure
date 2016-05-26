@@ -7,6 +7,7 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler {
 
     private Button thisButton;
     public Button gameSettingsButton;
+    public Button screenSettingsButton;
     public ResetColorButtonController colorResetButton;
 
     public TabTransitionController tabTransition;
@@ -40,7 +41,7 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler {
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (thisButton.interactable && !gameSettingsButton.interactable)
+        if (thisButton.interactable)
         {
 
             EventSystem.current.SetSelectedGameObject(null);
@@ -57,11 +58,11 @@ public class KeybindingsButtonController : MonoBehaviour, IPointerClickHandler {
                 hudElementSamples[i].enabled = false;
             }
 
-
-            tabTransition.startTabTransition(true);
+            tabTransition.startTabTransition(gameObject.name);
 
             thisButton.interactable = false;
             gameSettingsButton.interactable = true;
+            screenSettingsButton.interactable = true;
         }
     }
 }

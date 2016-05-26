@@ -119,7 +119,18 @@ public class BombController : MonoBehaviour, HUDElement {
     // charge <= maxBombCharge
     public void setBombCharge(int charge)
     {
-        currBombCharge = charge;
+        if(charge > maxBombCharge)
+        {
+            currBombCharge = maxBombCharge;
+        }
+        else if(charge < 0)
+        {
+            charge = 0;
+        }
+        else
+        {
+            currBombCharge = charge;
+        }
 
         for (int i = 0; i < bombGauge.Length; ++i)
         {
@@ -158,6 +169,7 @@ public class BombController : MonoBehaviour, HUDElement {
         return bombHUDColor;
     }
 
+    // updates the bomb gauge and other associated HUD elements' colors
     public void UpdateColor()
     {
 		Color newColor = hudColorController.getColorByString(hudElementName);

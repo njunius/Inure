@@ -7,6 +7,7 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler 
 
     private Button thisButton;
     public Button keyButton;
+    public Button screenButton;
 
     public TabTransitionController tabTransition;
 
@@ -19,14 +20,15 @@ public class GameSettingsButtonController : MonoBehaviour, IPointerClickHandler 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (thisButton.interactable && !keyButton.interactable)
+        if (thisButton.interactable)
         {
             EventSystem.current.SetSelectedGameObject(null);
 
-            tabTransition.startTabTransition(false);
+            tabTransition.startTabTransition(gameObject.name);
 
             thisButton.interactable = false;
             keyButton.interactable = true;
+            screenButton.interactable = true;
         }
     }
 }
