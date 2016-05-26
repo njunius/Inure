@@ -603,7 +603,7 @@ public class PlayerController : MonoBehaviour {
                 else
                 {
                     rb.angularVelocity = transform.TransformDirection(new Vector3(transform.InverseTransformDirection(rb.angularVelocity).x,
-                                                                       transform.InverseTransformDirection(rb.angularVelocity).y, Time.deltaTime));
+                                                                       transform.InverseTransformDirection(rb.angularVelocity).y, 0));
 
                 }
             }
@@ -675,6 +675,18 @@ public class PlayerController : MonoBehaviour {
 		currHullIntegrity = savedData.getHealth();
 		shield.setCurrShieldCharge(savedData.getShield());
         armorGauge.updateChunks(currHullIntegrity);
+
+
+        GameObject[] deathLasers = GameObject.FindGameObjectsWithTag("Death Laser");
+        if (deathLasers != null)
+        {
+            foreach (GameObject deathLaser in deathLasers)
+            {
+                deathLaser.GetComponent<GiantDeathLaserOfDoom>().reset();
+            }
+        }
+        
+
 
 
         //Overwrite data
