@@ -188,7 +188,7 @@ public class BombController : MonoBehaviour, HUDElement {
 
         for (int i = 0; i < doorHPIndicators.Length; ++i)
         {
-            doorHPIndicators[i].colorUpdate();
+            doorHPIndicators[i].colorUpdate(useGauge.color);
         }
     }
 }
