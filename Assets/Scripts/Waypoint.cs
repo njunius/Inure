@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Waypoint : MonoBehaviour {
 
@@ -18,11 +19,25 @@ public class Waypoint : MonoBehaviour {
 
     public bool lockOnNext = true;
 
+    public bool pathDetector = false;
+    public float pathWidth = 250;
+    private Vector3 toPrevWaypoint;
+
+    public List<GameObject> DeathLasers;
+    [Range(0, 1)]
+    public float showBeams = 0;
+    private int beamIndex = 0;
+
     void Start()
     {
         if (isBox)
         {
             target = transform.FindChild("Waypoint Target").gameObject;
+        }
+        if (pathDetector)
+        {
+            toPrevWaypoint = PrevPoint.transform.position - transform.position;
+            
         }
         
     }
@@ -36,48 +51,74 @@ public class Waypoint : MonoBehaviour {
             prevDir = transform.position - PrevPoint.transform.position;
         }
 
-        if (active && isBox)
+        if (active)
         {
             Transform player = GameObject.FindGameObjectWithTag("Player").transform;
-            //Vector3 waypointDirection = -1 * transform.eulerAngles;
-
-            //Debug.DrawRay(player.position, prevDir, Color.yellow);
-            int layer = 1 << 14;
-            RaycastHit hit;
-            if (Physics.Raycast(player.position, prevDir, out hit, 20000.0f, layer))
+            if (isBox)
             {
-                if (hit.transform.gameObject.GetComponent<Waypoint>().active)
-                {
-                    target.transform.position = hit.point;
-                }
                 
-            }
+                //Vector3 waypointDirection = -1 * transform.eulerAngles;
 
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-            float sign = Mathf.Sign(screenPos.z);
-
-            if (sign > 0)
-            {
-                if (waypointSprite.GetComponent<Image>().enabled == false)
+                //Debug.DrawRay(player.position, prevDir, Color.yellow);
+                int layer = 1 << 14;
+                RaycastHit hit;
+                if (Physics.Raycast(player.position, prevDir, out hit, 20000.0f, layer))
                 {
-                    waypointSprite.GetComponent<Image>().enabled = true;
-                    distance.enabled = true;
+                    if (hit.transform.gameObject.GetComponent<Waypoint>().active)
+                    {
+                        target.transform.position = hit.point;
+                    }
+
                 }
-                
-                waypointSprite.position = new Vector3(screenPos.x, screenPos.y, sign);
-                distance.text = ((int)Vector3.Distance(player.transform.position, transform.position)).ToString();
-            }
-            else
-            {
-                if (waypointSprite.GetComponent<Image>().enabled == true)
+
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+                float sign = Mathf.Sign(screenPos.z);
+
+                if (sign > 0)
                 {
-                    waypointSprite.GetComponent<Image>().enabled = false;
-                    distance.enabled = false;
+                    if (waypointSprite.GetComponent<Image>().enabled == false)
+                    {
+                        waypointSprite.GetComponent<Image>().enabled = true;
+                        distance.enabled = true;
+                    }
+
+                    waypointSprite.position = new Vector3(screenPos.x, screenPos.y, sign);
+                    distance.text = ((int)Vector3.Distance(player.transform.position, transform.position)).ToString();
+                }
+                else
+                {
+                    if (waypointSprite.GetComponent<Image>().enabled == true)
+                    {
+                        waypointSprite.GetComponent<Image>().enabled = false;
+                        distance.enabled = false;
+                    }
                 }
             }
             
-            //HUD.transform.position = screenPos;
-            //HUD.transform.LookAt(Camera.main.transform, Camera.main.transform.up);
+            
+            if (pathDetector)
+            {
+                Vector3 toPlayer = player.position - transform.position;
+                Vector3 nearPoint = (Vector3.Dot(toPlayer, toPrevWaypoint) / Mathf.Pow(toPrevWaypoint.magnitude, 2)) * toPrevWaypoint;
+                Vector3 toNearPoint = (nearPoint + transform.position) - player.position;
+
+                if (toNearPoint.magnitude > pathWidth)
+                {
+                    foreach (GameObject deathLaser in DeathLasers)
+                    {
+                        deathLaser.GetComponent<GiantDeathLaserOfDoom>().fireAt(player.gameObject.GetComponent<Rigidbody>().velocity + player.position);
+                    }
+                }
+                
+                if (nearPoint.magnitude / toPrevWaypoint.magnitude < (1 - showBeams))
+                {
+                    foreach (GameObject deathLaser in DeathLasers)
+                    {
+                        deathLaser.GetComponent<GiantDeathLaserOfDoom>().fireAt(10000 * player.forward + player.position);
+                    }
+                }
+
+            }
 
         }
         

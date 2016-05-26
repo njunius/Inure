@@ -39,6 +39,7 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
         
         if (!isCharging && !isFiring)
         {
+            /*
             dir = player.transform.position - transform.position;
             RaycastHit hit;
             if (Physics.SphereCast(transform.position, 10.0f, dir, out hit,  dir.magnitude * 1.1f, layermask))
@@ -50,7 +51,7 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
                     Debug.Log("Targeted");
                 }
 
-            }
+            }*/
         }
 
         if (isCharging)
@@ -130,5 +131,17 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
         }
         
 
+
     }
+
+    public void fireAt(Vector3 target)
+    {
+        if(!isCharging && !isFiring)
+        {
+            this.target = target;
+            startTarget = target;
+            isCharging = true;
+        }
+    }
+
 }
