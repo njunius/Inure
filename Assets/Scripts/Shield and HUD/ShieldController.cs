@@ -278,6 +278,8 @@ public class ShieldController : MonoBehaviour, HUDElement
         if (setEnabled == false)
         {
             currShieldCharge = 0;
+            shieldParticles.maxParticles = 0;
+            shieldCollider.enabled = false;
         }
     }
 
