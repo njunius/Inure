@@ -11,7 +11,7 @@ public class BossManager : MonoBehaviour {
 	public bool[] hasSpawned;
 	public GameObject reactorCore;
 
-	private int shieldCount = 21;
+	private int shieldCount = 0;
 	private int countTMP = 0;
 	public bool activatedDoor = false;
 	// Use this for initialization
