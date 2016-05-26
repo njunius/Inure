@@ -21,6 +21,7 @@ public class CheckPoint : MonoBehaviour {
     public AudioClip final;
 
     private AudioSource audioSource;
+    private bool soundHasPlayed = false;
 	// Use this for initialization
 	void Start () {
         if (!tutorialCheckpoint) audioSource = GetComponent<AudioSource>();
@@ -36,7 +37,12 @@ public class CheckPoint : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.CompareTag("Player Collider")){
-            if (!tutorialCheckpoint)
+            
+			if(!hasHealed && pController.getCurrHullIntegrity() < pController.getMaxHullIntegrity()){
+				pController.setHullIntegrity(pController.getCurrHullIntegrity() + heal_player);
+				hasHealed = true;
+			}
+            if (!tutorialCheckpoint && !soundHasPlayed)
             {
                 if (!finalCheckpoint)
                 {
@@ -46,14 +52,9 @@ public class CheckPoint : MonoBehaviour {
                 {
                     audioSource.PlayOneShot(final);
                 }
-                
+                soundHasPlayed = true;
             }
-			if(!hasHealed && pController.getCurrHullIntegrity() < pController.getMaxHullIntegrity()){
-				pController.setHullIntegrity(pController.getCurrHullIntegrity() + heal_player);
-				hasHealed = true;
-			}
-
-			savedROT = GameObject.FindGameObjectWithTag("Player").transform.rotation;
+            savedROT = GameObject.FindGameObjectWithTag("Player").transform.rotation;
 			shieldCharge = pController.getShieldCharge();
 			hullHealth = pController.getCurrHullIntegrity();
 			pData.setCheckPoint(shieldCharge, bombCharge, hullHealth, savedPOS, savedROT);

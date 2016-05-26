@@ -296,7 +296,7 @@ public class TutorialEventManager : MonoBehaviour {
                 timer = 10;
                 
                 computerSource.PlayOneShot(Course);
-                subtitles.text = "Approach course confirmed.  Manuvering thrusters dissabled.";
+                subtitles.text = "Approach course confirmed.  Maneuvering thrusters disabled.";
                 interior.SetActive(false);
                 exterior.SetActive(true);
                 break;
