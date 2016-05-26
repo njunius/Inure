@@ -69,6 +69,7 @@ public class GiantDeathLaserOfDoom : MonoBehaviour {
             if (!audioSource.isPlaying)
             {
                 audioSource.PlayOneShot(chargeSound);
+                Debug.Log("Play");
             }
             charge += Time.deltaTime;
             chargeHalo.range += haloDelta * Time.deltaTime;

@@ -80,6 +80,7 @@ public class TutorialEventManager : MonoBehaviour {
                 }
                 player.tutorialMode = false;
                 eventIndex = 12;
+                eventTimer = 0;
 
             }
             else if (eventIndex < 16)
@@ -104,6 +105,7 @@ public class TutorialEventManager : MonoBehaviour {
                 }
                 player.tutorialMode = false;
                 eventIndex = 16;
+                eventTimer = 0;
             }
             else
             {
@@ -127,6 +129,7 @@ public class TutorialEventManager : MonoBehaviour {
                 }
                 player.tutorialMode = false;
                 eventIndex = 17;
+                eventTimer = 0;
             }
         }
 
