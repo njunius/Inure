@@ -23,12 +23,14 @@ public class PowerBomb : MonoBehaviour {
 	private GameObject explosion;
 	private ParticleSystem lastParticle;
 
+	private bool madeLight = false;
+	private GameObject fakeField;
+	private GameObject radiusLight;
+
 	// Use this for initialization
 	void Start () {
 		//Use powerLevel to calculate destructive force (size of explosion)
 		//   and startVelocity
-
-
 	}
 	
 	// Update is called once per frame
@@ -52,6 +54,9 @@ public class PowerBomb : MonoBehaviour {
 	}
 
 	public void CalculateVariables (float percOfChargeUsed, Vector3 directionNorm) {
+		fakeField = transform.FindChild ("Fake Explosive Field").gameObject;
+		radiusLight = transform.FindChild ("Explosion Radius Light").gameObject;
+
 		explosion = transform.FindChild ("Explosion").gameObject;
 		lastParticle = explosion.transform.FindChild("Dust").GetComponent<ParticleSystem> ();
 
@@ -64,6 +69,9 @@ public class PowerBomb : MonoBehaviour {
 		timeLeft = (MAX_TIME_LEFT - MIN_TIME_LEFT) * (percOfChargeUsed/100f) + MIN_TIME_LEFT;
 		Invoke ("StopBombParticles", timeLeft);
 		isTriggered = true;
+		fakeField.transform.localScale = new Vector3 (explosionSize, explosionSize, explosionSize);
+		radiusLight.GetComponent<Light> ().range = fakeField.GetComponent<SphereCollider> ().radius * explosionSize;
+		Debug.Log (radiusLight.GetComponent<Light> ().range);
 		//Vector3 particleScale = new Vector3 (percOfChargeUsed / 100, percOfChargeUsed / 100, percOfChargeUsed / 100);
 		for (int numChild = 0; numChild < explosion.transform.childCount; ++numChild) {
 			explosion.transform.GetChild (numChild).GetComponent<ParticleSystem> ().startSize *= (percOfChargeUsed / 25);
@@ -76,6 +84,7 @@ public class PowerBomb : MonoBehaviour {
 	}
 
 	private void Explode () {
+		radiusLight.SetActive (false);
 		Transform fieldTrans = transform.FindChild ("Explosive Field");
 		fieldTrans.parent = null;
 		fieldTrans.GetComponent<PowerBombExplosion> ().SetPowerLevel(powerLevel);
