@@ -345,10 +345,8 @@ public class TutorialEventManager : MonoBehaviour {
                 subtitles.enabled = true;
                 timer = 10;
                 //source.PlayOneShot(ShieldReady);
-                subtitles.text = "Hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge bomb and release to launch. The charge required is always displayed on the door.";
+                subtitles.text = "Hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge bomb and release to launch. Charge required is displayed on door.";
                 break;
-                
-
         }
     }
 }
