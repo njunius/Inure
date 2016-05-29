@@ -20,7 +20,7 @@ public class ShatterWhenShot : MonoBehaviour {
 	}
 	//when the player shoots the thing, reduce HP by 1
 	void OnCollisionEnter(Collision other) {
-		if(other.gameObject.tag == "Player Projectile"){
+		if(other.gameObject.tag == "Player Projectile" || other.gameObject.tag == "Bomb Explosion"){
 				hpInternal--;
 		}
 	}
