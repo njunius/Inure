@@ -139,6 +139,9 @@ public class PlayerController : MonoBehaviour {
 		Cursor.lockState = CursorLockMode.Confined;
         audio_bullet = GetComponents<AudioSource>()[0];   //0: bullets, 1: engines, 2: shield, 3: impacts, 4: other
         audio_engineHum = GetComponents<AudioSource>()[1];
+        
+        audio_engineHum.enabled = true;
+        audio_engineHum.Play();
         audio_accellerators = GetComponents<AudioSource>()[2];
         audio_thrusters = GetComponents<AudioSource>()[3];
         audio_hullHit = GetComponents<AudioSource>()[4];
@@ -196,6 +199,10 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if (!audio_engineHum.isPlaying)
+        {
+            audio_engineHum.Play();
+        }
         if (tutorialMode && !tutorialInitialized)
         {
             shield.setCurrShieldCharge(0);
