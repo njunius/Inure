@@ -48,10 +48,10 @@ public class BossManager : MonoBehaviour {
 		if(shieldCount > enableReactorField){
 			reactor.GetComponent<SphereCollider>().enabled = true;
 			Destroy(reactorCore);
-			/*if(!activatedDoor){
+			if(!activatedDoor){
 				escapeDoor.GetComponent<ShatterWhenHit>().enabled = true;
 				activatedDoor = true;
-			}*/
+			}
 			reactor.transform.GetChild(0).GetComponent<Light>().color = Color.red;
 		}
 	}

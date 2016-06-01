@@ -19,5 +19,8 @@ public class PlayerUnEMP : MonoBehaviour {
 
 	private void UnEMP () {
 		gameObject.GetComponent<PlayerController> ().enabled = true;
+		gameObject.transform.FindChild ("Main Thruster Left").GetComponent<ParticleSystem> ().Play ();
+		gameObject.transform.FindChild ("Main Thruster Right").GetComponent<ParticleSystem> ().Play ();
+		gameObject.transform.FindChild ("Player EMP Visual").GetComponent<ParticleSystem> ().Stop ();
 	}
 }
