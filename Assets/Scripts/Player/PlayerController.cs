@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour {
     public AudioClip ShieldHitSound;
     public AudioClip SteeringSound;
     public AudioClip ThrottleUpSound;
+    public AudioClip ThrottleLoop;
     public AudioClip PowerDownSound;
     public AudioClip ScrapeHullSound;
     public AudioClip BombChargeSound;
@@ -104,6 +105,8 @@ public class PlayerController : MonoBehaviour {
     private AudioSource audio_wallImpact;
     private AudioSource audio_effects;
     private AudioSource audio_bomb;
+
+    private bool moving = false;
 
     public float thrustersWarmUpTime = 1.0f;
     private float thrustersEnergy = 0;
@@ -150,7 +153,6 @@ public class PlayerController : MonoBehaviour {
         audio_bomb = GetComponents<AudioSource>()[7];
         audio_accellerators_max_vol = audio_accellerators.volume;
         audio_thrusters_max_vol = audio_thrusters.volume;
-        audio_thrusters.volume = 0;
         Time.timeScale = 1; // The time scale must be reset upon loading from the main menu
 
         rb = GetComponent<Rigidbody>();
@@ -376,7 +378,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     audio_thrusters.volume = 0;
                     thrustersEnergy = 0;
-                    
+
                 }
                 else
                 {
@@ -386,9 +388,9 @@ public class PlayerController : MonoBehaviour {
                         audio_thrusters.volume = thrustersEnergy / thrustersWarmUpTime;
                     }
                 }
-                
+
             }
-            
+
 
             if (rotPitch == 0 && rotYaw == 0 && rotRoll == 0)
             {
@@ -400,14 +402,10 @@ public class PlayerController : MonoBehaviour {
                         audio_thrusters.volume = thrustersEnergy / thrustersWarmUpTime;
                     }
 
-                    
+
                 }
             }
 
-            if (audio_thrusters.volume > audio_thrusters_max_vol)
-            {
-                audio_thrusters.volume = audio_thrusters_max_vol;
-            }
 
             if (!hasStopped)
             {
@@ -421,7 +419,7 @@ public class PlayerController : MonoBehaviour {
                     hasStopped = false;
                 }
             }
-                
+
 
 
             if (twoSpeedEngaged && moveLongitudinal > 0)
@@ -585,7 +583,7 @@ public class PlayerController : MonoBehaviour {
 
                     transform.rotation = Quaternion.RotateTowards(prevRot, transform.rotation, 2);
 
-                    
+
 
                     if (Quaternion.Angle(prevRot, transform.rotation) != 0)
                     {
@@ -600,7 +598,7 @@ public class PlayerController : MonoBehaviour {
                         if (thrustersEnergy < 0) thrustersEnergy = 0;
                         audio_thrusters.volume = thrustersEnergy;
                     }
-                    
+
 
                 }
                 if (rotRoll != 0)
@@ -618,7 +616,7 @@ public class PlayerController : MonoBehaviour {
 
             float inGameMaxSpeed = maxSpeed;
             speedTimer += Time.deltaTime;
-            if (twoSpeedMode  && speedTimer > twoSpeedTimer)
+            if (twoSpeedMode && speedTimer > twoSpeedTimer)
             {
                 inGameMaxSpeed *= 1.1f;
                 twoSpeedEngaged = true;
@@ -637,7 +635,39 @@ public class PlayerController : MonoBehaviour {
             {
                 rb.velocity = Vector3.zero;
             }
+
+            if (moveLongitudinal != 0 || moveLateral != 0 || moveVertical != 0)
+            {
+                if (moving)
+                {
+                    Debug.Log("moving");
+                    if (!audio_thrusters.isPlaying)
+                    {
+                        audio_thrusters.loop = true;
+                        audio_thrusters.clip = ThrottleLoop;
+                        audio_thrusters.Play();
+
+                    }
+                }
+                else
+                {
+                    Debug.Log("accel");
+                    audio_thrusters.loop = false;
+                    audio_thrusters.clip = ThrottleUpSound;
+                    audio_thrusters.Play();
+                    moving = true;
+                }
+            }
+            if (moving && moveLateral == 0 && moveLongitudinal == 0 && moveVertical == 0)
+            {
+                audio_thrusters.Stop();
+                moving = false;
+                audio_thrusters.PlayOneShot(PowerDownSound);
+                Debug.Log("stopping");
+            }
         }
+
+        
     }
 
     void LateUpdate()

@@ -275,7 +275,7 @@ public class DPSMono : MonoBehaviour {
 		audioConfig.speakerMode			= AudioSpeakerMode.Mono;
 		this.nChannels					= (int) audioConfig.speakerMode;
 
-		AudioSettings.Reset(audioConfig);
+		//AudioSettings.Reset(audioConfig);
 		AudioConfiguration audioConfig2 = AudioSettings.GetConfiguration();
 		CreateSystem(this.nChannels, (float) this.sampleRate);
 		LoadDpsFile();

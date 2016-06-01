@@ -278,19 +278,22 @@ public class TutorialEventManager : MonoBehaviour {
                 subtitleCanvas.enabled = false;
                 break;
             case 13:
+                dialogueSource.Stop();
+                dialogueSource.PlayOneShot(dialogue2);
+                break;
+            case 14:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
                 computerSource.PlayOneShot(Weapons);
-                dialogueSource.Stop();
-                dialogueSource.PlayOneShot(dialogue2);
+                
                 subtitles.text = "Use [" + im.getPosInputName("Shoot").ToUpper() + "] to fire.";
                 player.weaponsEnabled = true;
                 player.tutorialMode = false;
 
 
                 break;
-            case 14:
+            case 15:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -300,11 +303,11 @@ public class TutorialEventManager : MonoBehaviour {
                 interior.SetActive(false);
                 exterior.SetActive(true);
                 break;
-            case 15:
+            case 16:
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue3);
                 break;
-            case 16:
+            case 17:
                 computerSource.PlayOneShot(ShieldCharging);
                 /*subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
@@ -313,7 +316,7 @@ public class TutorialEventManager : MonoBehaviour {
                 player.shieldEnabled = true;
                 shield.setShieldEnabled(true);
                 break;
-            case 17:
+            case 18:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -331,7 +334,7 @@ public class TutorialEventManager : MonoBehaviour {
                 player.shieldEnabled = true;
                 shield.setShieldEnabled(true);
                 break;
-            case 18:
+            case 19:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -340,7 +343,7 @@ public class TutorialEventManager : MonoBehaviour {
                 dialogueSource.PlayOneShot(dialogue5);
                 subtitles.text = "Use [" + im.getPosInputName("Shield").ToUpper() + "] to activate shield and absorb enemy projectiles.";
                 break;
-            case 19:
+            case 20:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
