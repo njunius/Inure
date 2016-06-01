@@ -9,6 +9,7 @@ public class CursorReEnable : MonoBehaviour {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         AudioListener.pause = false;
+        Time.timeScale = 1;
 	}
 	
 	// Update is called once per frame

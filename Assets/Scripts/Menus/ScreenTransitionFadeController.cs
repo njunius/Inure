@@ -18,6 +18,7 @@ public class ScreenTransitionFadeController : MonoBehaviour {
         transitionRate = 3;
         transitionCounter = 1;
 
+        Time.timeScale = 1;
     }
 	
 	// Update is called once per frame

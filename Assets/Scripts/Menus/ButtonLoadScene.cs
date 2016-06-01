@@ -11,7 +11,7 @@ public class ButtonLoadScene : MonoBehaviour, IPointerClickHandler {
 
     private bool startTransition;
     private int transitionRate;
-    public float transitionCounter;
+    private float transitionCounter;
 
 	// Use this for initialization
 	void Start () {

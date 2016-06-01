@@ -31,7 +31,6 @@ public class LevelChange : MonoBehaviour {
 
         if (sceneTransition.alpha >= 1 && startTransition)
         {
-            sceneToLoad = "03-MainLevels";
             SceneManager.LoadScene(sceneToLoad);
         }
     }
