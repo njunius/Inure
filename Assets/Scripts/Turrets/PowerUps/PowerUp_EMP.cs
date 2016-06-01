@@ -6,14 +6,14 @@ public class PowerUp_EMP : PowerUp {
 	private float MAX_FIELD_SIZE = 120f;
 	private float FIELD_EXPANSION_PER_FRAME;
 	private GameObject effectField;
-	private Color fieldColor = new Color (0.988f, 0.992f, 0.541f, 0.5f);
+	private Color fieldColor = new Color (0.988f, 0.992f, 0.541f, 0.1f);
 	private bool isGrowing = false;
     public AudioClip EMPSound;
     private AudioSource source;
 
     void OnEnable () {
 		FIELD_EXPANSION_PER_FRAME = MAX_FIELD_SIZE / 100f;
-		effectField= (GameObject)Resources.Load("FieldSphereEMP");
+		effectField = (GameObject)Resources.Load("FieldSphereEMP");
 		effectField = (GameObject)Instantiate (effectField, transform.position, Quaternion.identity);
 		if (gameObject.CompareTag ("Player")) {
 			effectField.GetComponent<Effect_EMP> ().IsPlayer ();
