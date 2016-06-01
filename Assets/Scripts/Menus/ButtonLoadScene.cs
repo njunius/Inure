@@ -11,7 +11,7 @@ public class ButtonLoadScene : MonoBehaviour, IPointerClickHandler {
 
     private bool startTransition;
     private int transitionRate;
-    private float transitionCounter;
+    public float transitionCounter;
 
 	// Use this for initialization
 	void Start () {
@@ -25,21 +25,23 @@ public class ButtonLoadScene : MonoBehaviour, IPointerClickHandler {
 
     void Update()
     {
+
+        if (transitionCounter >= 1 && startTransition)
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
+
         if (startTransition)
         {
             transitionCounter += transitionRate * Time.unscaledDeltaTime;
 
             sceneTransition.alpha = transitionCounter;
         }
-
-        if(sceneTransition.alpha >= 1 && startTransition)
-        {
-            SceneManager.LoadScene(sceneToLoad);
-        }
     }
 	
 	public void OnPointerClick(PointerEventData eventData) {
         startTransition = true;
         Time.timeScale = 1;
+        AudioListener.pause = true;
 	}
 }
