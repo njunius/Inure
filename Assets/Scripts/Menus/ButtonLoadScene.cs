@@ -26,7 +26,7 @@ public class ButtonLoadScene : MonoBehaviour, IPointerClickHandler {
     void Update()
     {
 
-        if (transitionCounter >= 1 && startTransition)
+        if (transitionCounter >= 1)
         {
             SceneManager.LoadScene(sceneToLoad);
         }

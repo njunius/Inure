@@ -29,5 +29,10 @@ public class ScreenTransitionFadeController : MonoBehaviour {
 
             sceneTransition.alpha = transitionCounter;
         }
+
+        if(transitionCounter <= 0)
+        {
+            startTransition = false;
+        }
     }
 }
