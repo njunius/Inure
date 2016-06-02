@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class Effect_EMP : MonoBehaviour {
 
 	private float effectDuration = 5f;
 	private bool isPlayer = false;
 
+    public AudioMixerSnapshot muffled;
 	// Use this for initialization
 	void Start () {
 		
@@ -25,6 +30,7 @@ public class Effect_EMP : MonoBehaviour {
 				player.transform.FindChild ("Main Thruster Left").GetComponent<ParticleSystem> ().Stop ();
 				player.transform.FindChild ("Main Thruster Right").GetComponent<ParticleSystem> ().Stop ();
 				player.transform.FindChild ("Player EMP Visual").GetComponent<ParticleSystem> ().Play ();
+                muffled.TransitionTo(0.5f);
 			}
 		} else if (other.gameObject.CompareTag ("Turret")) {
 			if (!other.gameObject.GetComponent<Turret> ().GetIsEMP ()) {

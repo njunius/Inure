@@ -361,9 +361,7 @@ public class PlayerController : MonoBehaviour {
 			if (im.getInputUp("Launch Bomb")) {
 				if (getBombCharge () > 0 && !justUsedBomb) {
 					FireBomb ((int)Mathf.Floor(getUseCharge ()));
-                    audio_bomb.Stop();
-                    audio_bomb.loop = false;
-                    audio_bomb.PlayOneShot(BombLaunchSound);
+                    
                 }
 				justUsedBomb = false;
 			}
@@ -654,7 +652,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if (moving)
                 {
-                    Debug.Log("moving");
+                    //Debug.Log("moving");
                     if (!audio_thrusters.isPlaying)
                     {
                         audio_thrusters.loop = true;
@@ -665,7 +663,7 @@ public class PlayerController : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("accel");
+                    //Debug.Log("accel");
                     audio_thrusters.loop = false;
                     audio_thrusters.clip = ThrottleUpSound;
                     audio_thrusters.Play();
@@ -677,7 +675,7 @@ public class PlayerController : MonoBehaviour {
                 audio_thrusters.Stop();
                 moving = false;
                 audio_thrusters.PlayOneShot(PowerDownSound);
-                Debug.Log("stopping");
+                //Debug.Log("stopping");
             }
         }
 
@@ -915,7 +913,10 @@ public class PlayerController : MonoBehaviour {
 		setBombCharge (getBombCharge () - strength);
 		setUseCharge (0f);
 		useGaugeIncreaseRate = 10f;
-	}
+        audio_bomb.Stop();
+        audio_bomb.loop = false;
+        audio_bomb.PlayOneShot(BombLaunchSound);
+    }
 
     public int getPowerupIndex()
     {

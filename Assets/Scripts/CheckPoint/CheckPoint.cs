@@ -67,7 +67,7 @@ public class CheckPoint : MonoBehaviour {
             if (!tutorialCheckpoint) transform.GetChild(2).GetComponent<Light>().color = Color.red;
 			bombCharge = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge;
 
-			particles.GetComponent<ParticleSystem> ().startColor = Color.red;
+            if (!tutorialCheckpoint) particles.GetComponent<ParticleSystem> ().startColor = Color.red;
 		}
 	}
 }

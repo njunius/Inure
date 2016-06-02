@@ -29,10 +29,13 @@ public class PowerBomb : MonoBehaviour {
 	private GameObject fakeField;
 	private GameObject radiusLight;
 
+    private AudioSource source;
+
 	// Use this for initialization
 	void Start () {
-		//Use powerLevel to calculate destructive force (size of explosion)
-		//   and startVelocity
+        //Use powerLevel to calculate destructive force (size of explosion)
+        //   and startVelocity
+        source = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -87,6 +90,7 @@ public class PowerBomb : MonoBehaviour {
 	}
 
 	private void Explode () {
+        source.Play();
 		radiusLight.SetActive (false);
 		Transform fieldTrans = transform.FindChild ("Explosive Field");
 		fieldTrans.parent = null;
