@@ -23,15 +23,18 @@ public class PlayerController : MonoBehaviour {
 	public GameObject bulletPrefab;
 	public GameObject powerBomb;
 
+    // ending scene transition variables
     private float deathEndingTimer;
+    private CanvasGroup sceneTransition;
+    private int transitionRate;
 
+    // bullet spawn locations
     public GameObject bulletSpawns;
     public Transform[] bulletSpawnLocations;
     int bulletSpawnLocIndex;
 	public GameObject powerBombSpawner;
 
     public float invulnSecs = 1.0f;
-	public bool noGameOver = false;
 
 	private Vector3 frontOfShip;
 	private bool isFiring = false;
@@ -176,6 +179,8 @@ public class PlayerController : MonoBehaviour {
         bombTimer = gameObject.GetComponentInChildren<BombCountdownController>();
 
         deathEndingTimer = 0.0f;
+        sceneTransition = GameObject.FindGameObjectWithTag("Screen Transition").GetComponent<CanvasGroup>();
+        transitionRate = 3;
 
         if (tutorialMode)
         {
@@ -228,12 +233,14 @@ public class PlayerController : MonoBehaviour {
                 audio_effects.PlayOneShot(deathSound);
             }
             deathEndingTimer += Time.unscaledDeltaTime;
+            sceneTransition.alpha += transitionRate * Time.unscaledDeltaTime;
             Time.timeScale = 0.3f;
         }
-        
-        if(deathEndingTimer > 3.0f)
+
+        if (deathEndingTimer > 3.0f)
         {
             SceneManager.LoadScene("EndingDead");
+
         }
 
         if (!paused && !isDead())

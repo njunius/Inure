@@ -27,6 +27,14 @@ public class PlayerBullet : MonoBehaviour {
 
 	void OnCollisionEnter (Collision hit) {
 		if (hit.gameObject.tag != "Player Projectile") {
+			if (hit.gameObject.CompareTag ("Boss Shield Piece")) {
+				Debug.Log ("HIT IT");
+				Material pieceMat = hit.gameObject.GetComponent<Renderer> ().material;
+				Debug.Log (pieceMat.color);
+				pieceMat.color = new Color(pieceMat.color.r - 0.05f, pieceMat.color.g - 0.05f, pieceMat.color.b);
+				//pieceMat.SetColor("Bluer", new Color(pieceMat.color.r, pieceMat.color.g, pieceMat.color.b + 0.1f));
+				Debug.Log (pieceMat.color);
+			}
 			ContactPoint contact = hit.contacts [0];
 			GameObject particles = (GameObject) Instantiate (Resources.Load ("Particle Systems/Bullet Collision"), contact.point + contact.normal * 2, Quaternion.FromToRotation (Vector3.forward, contact.normal));
 			//particles.transform.GetChild (0).gameObject.transform.rotation = particles.transform.rotation;
