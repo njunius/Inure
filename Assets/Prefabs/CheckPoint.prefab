@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &123588
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 426652}
-  m_Layer: 0
-  m_Name: Particles
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &125768
 GameObject:
   m_ObjectHideFlags: 1
@@ -120,7 +105,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &168906
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -128,8 +113,9 @@ GameObject:
   - 4: {fileID: 484456}
   - 198: {fileID: 19809266}
   - 199: {fileID: 19931034}
+  - 114: {fileID: 11400450}
   m_Layer: 0
-  m_Name: Right Particles
+  m_Name: Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,19 +175,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 420886}
   m_RootOrder: 1
---- !u!4 &426652
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123588}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 484456}
-  m_Father: {fileID: 438362}
-  m_RootOrder: 3
 --- !u!4 &438362
 Transform:
   m_ObjectHideFlags: 1
@@ -215,7 +188,7 @@ Transform:
   - {fileID: 420886}
   - {fileID: 406388}
   - {fileID: 449910}
-  - {fileID: 426652}
+  - {fileID: 484456}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &443150
@@ -249,11 +222,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168906}
   m_LocalRotation: {x: 0.5000001, y: 0.5, z: 0.5, w: 0.49999994}
-  m_LocalPosition: {x: 0, y: -10.8, z: -28.1}
+  m_LocalPosition: {x: 0, y: -10.8, z: -28.099998}
   m_LocalScale: {x: 0.1, y: 1, z: 1.5}
   m_Children: []
-  m_Father: {fileID: 426652}
-  m_RootOrder: 0
+  m_Father: {fileID: 438362}
+  m_RootOrder: 3
 --- !u!4 &492876
 Transform:
   m_ObjectHideFlags: 1
@@ -541,6 +514,17 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11400450
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5baed1ae15d16c6409f5bda1f0036fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11417394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -780,7 +764,7 @@ ParticleSystem:
         rgba: 4278255432
       minMaxState: 0
     startSize:
-      scalar: 40
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
