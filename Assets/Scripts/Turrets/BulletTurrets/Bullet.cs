@@ -48,11 +48,10 @@ public class Bullet : MonoBehaviour {
     void OnCollisionEnter (Collision hit) {
         PlayerController hitScript = hit.gameObject.GetComponent<PlayerController>();
 		if (hit.gameObject.CompareTag ("Player")) {
-            if (hit.collider.GetComponent<CollisionHitDetector>())
-            {
-                hit.collider.GetComponent<CollisionHitDetector>().updateIndicators();
-            }
-            if (!hitScript.isShielded ()) {
+			if (hit.collider.GetComponent<CollisionHitDetector> ()) {
+				hit.collider.GetComponent<CollisionHitDetector> ().updateIndicators ();
+			}
+			if (!hitScript.isShielded ()) {
 				hitScript.takeDamage ();
 			}
 		} else if (!hit.gameObject.CompareTag ("Projectile")) {
@@ -63,7 +62,7 @@ public class Bullet : MonoBehaviour {
 			//GameObject particles = (GameObject) Instantiate (Resources.Load ("Particle Systems/Bullet Collision"), contact.point + contact.normal * 2, Quaternion.FromToRotation (Vector3.forward, contact.normal));
 			//particles.transform.GetChild (0).gameObject.transform.rotation = particles.transform.rotation;
 			particles.GetComponent<ParticleSystem> ().startColor = GetComponent<Renderer> ().material.color;
-			particles.transform.GetChild(0).GetComponent<ParticleSystem> ().startColor = GetComponent<Renderer> ().material.color;
+			particles.transform.GetChild (0).GetComponent<ParticleSystem> ().startColor = GetComponent<Renderer> ().material.color;
 			particles.SetActive (true);
 			particles.GetComponent<ParticleSystem> ().Play ();
 		}
