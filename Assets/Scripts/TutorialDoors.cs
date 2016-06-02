@@ -9,8 +9,10 @@ public class TutorialDoors : MonoBehaviour {
     public bool open = false;
     public float speed = 1f;
 
+    private AudioSource source;
 	// Use this for initialization
 	void Start () {
+        source = GetComponent<AudioSource>();
         endPosition = transform.FindChild("EndPoint").transform.position;
         //startPosition = transform.position;
     }
@@ -28,6 +30,7 @@ public class TutorialDoors : MonoBehaviour {
             {
                 active = false;
                 open = !open;
+                source.Play();
             }
         }
 

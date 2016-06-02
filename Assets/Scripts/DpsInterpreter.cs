@@ -5,11 +5,13 @@ public class DpsInterpreter : MonoBehaviour {
 
 	enum MusicState : int
 	{
-		Waiting,
-		Moving,
-		Jumping,
-		MovingFast,
-		MovingFastJumping
+		NotMovingHectic,
+		NotMovingCalm,
+		MovingHectic,
+		MovingCalm,
+		Cooridors,
+        Charging,
+        FinalCooridor
 	}
 
 	private DPSMono	DPS;
@@ -20,11 +22,11 @@ public class DpsInterpreter : MonoBehaviour {
 	void Start()
 	{
 		this.sliderValue	= 0f;
-		this.startState		= "Moving";
+		this.startState		= "NotMovingCalm";
 		this.endState		= "";
 		this.DPS			= GetComponent<DPSMono>();
 
-		this.DPS.Initialize("Inure_Export/All_Low");
+		this.DPS.Initialize("Inure_Final/Not_moving_(calm)");
 		this.DPS.Play();
 	}
 
@@ -36,40 +38,40 @@ public class DpsInterpreter : MonoBehaviour {
 
 	public void setState(string state) 
 	{
-		/*if (state != this.endState) {
-			if (state == "Falling To Death") {
+		if (state != this.endState) {
+			if (state == "NotMovingHectic") {
 				this.startState = this.endState;
 				this.endState = state;
-				this.DPS.TransitionManual("COMBAT/BIG_FINISH");
+				this.DPS.TransitionManual("Inure_Final/Not_Moving_(hectic)");
 			}
-			else if (state == "Jumping") {
+			else if (state == "NotMovingCalm") {
 				this.startState = state;
 				this.endState = state;
 				this.sliderValue = 0;
-				this.DPS.TransitionImmediate("COMBAT/ALL_MAX");
+				this.DPS.TransitionImmediate("Inure_Final/Not_moving_(calm)");
 			}
-			else if (state == "Moving Fast") {
+			else if (state == "MovingHectic") {
 				this.startState = this.endState;
 				this.endState = state;
 				this.sliderValue = 0;
-				this.DPS.TransitionManual("COMBAT/RUNNING--HIGH_DRUMS");
+				this.DPS.TransitionManual("Inure_Final/Moving_(hectic)");
 				StartCoroutine(sliderLerp(3.0f));
 			}
-			else if (state == "Moving") {
+			else if (state == "Cooridors") {
 				this.startState	= this.endState;
 				this.endState	= state;
-				this.sliderValue = 0;
-				this.DPS.TransitionManual("COMBAT/JUST_SHAKERS_AND_STICKS");
+				//this.sliderValue = 0;
+				this.DPS.TransitionManual("Inure_Final/Moving_(not_hectic)");
 				StartCoroutine(sliderLerp(4.0f));
 			}
-			else if (state == "Waiting") {
+			else if (state == "Charging") {
 				this.startState = this.endState;
 				this.endState = state;
 				this.sliderValue = 0;
-				this.DPS.TransitionManual("COMBAT/THINKING");
+				this.DPS.TransitionManual("Inure_Final/Not_moving_(calm)");
 				StartCoroutine(sliderLerp(4.0f));
 			}
-		}*/
+		}
 	}
 
 	IEnumerator sliderLerp(float totalLerpTime)

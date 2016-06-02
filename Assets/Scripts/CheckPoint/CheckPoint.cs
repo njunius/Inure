@@ -66,10 +66,14 @@ public class CheckPoint : MonoBehaviour {
             if (!tutorialCheckpoint) transform.GetChild(1).GetComponent<Light>().color = Color.red;
             if (!tutorialCheckpoint) transform.GetChild(2).GetComponent<Light>().color = Color.red;
 			bombCharge = GameObject.FindGameObjectWithTag("Bomb").GetComponent<BombController>().currBombCharge;
-
-			for (int numSys = 0; numSys < particles.childCount; ++numSys) {
-				particles.GetChild (numSys).GetComponent<ParticleSystem> ().startColor = Color.red;
-			}
+            if (!tutorialCheckpoint)
+            {
+                for (int numSys = 0; numSys < particles.childCount; ++numSys)
+                {
+                    particles.GetChild(numSys).GetComponent<ParticleSystem>().startColor = Color.red;
+                }
+            }
+			
 		}
 	}
 }

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Audio;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class TutorialEventManager : MonoBehaviour {
     public PlayerController player;
@@ -35,6 +39,7 @@ public class TutorialEventManager : MonoBehaviour {
     public AudioClip ShieldCharging;
     public AudioClip ShieldReady;
     public AudioClip ManuveringEnabled;
+    public AudioClip StructWeakness;
 
 
     public AudioClip dialogue1_a;
@@ -44,7 +49,10 @@ public class TutorialEventManager : MonoBehaviour {
     public AudioClip dialogue4;
     public AudioClip dialogue5;
 
+    public AudioMixerSnapshot normal;
+    public AudioMixerSnapshot voiced;
 
+    private bool speaking = false;
     private float timer = 0;
     // Use this for initialization
     void Start () {
@@ -54,12 +62,22 @@ public class TutorialEventManager : MonoBehaviour {
         subtitles.text = "";
         
         dialogueSource.PlayOneShot(dialogue1_a);
+        speaking = true;
+        voiced.TransitionTo(0.25f);
 
     }
 	
 
     void Update()
     {
+        if (speaking)
+        {
+            if (!dialogueSource.isPlaying && !computerSource.isPlaying)
+            {
+                speaking = false;
+                normal.TransitionTo(0.25f);
+            }
+        }
         
         if (Input.GetKeyDown(KeyCode.Equals))
         {
@@ -211,6 +229,8 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
             case 1:
                 computerSource.PlayOneShot(Initialize);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 eventTimer = 150;
                 break;
             case 2:
@@ -225,6 +245,8 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
             case 7:
                 computerSource.PlayOneShot(Vertical);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -244,6 +266,8 @@ public class TutorialEventManager : MonoBehaviour {
                 break;
             case 9:         //Player can lift off. Display vertical controls
                 computerSource.PlayOneShot(Longitudinal);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -254,6 +278,8 @@ public class TutorialEventManager : MonoBehaviour {
 
             case 10:
                 computerSource.PlayOneShot(Lateral);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -263,6 +289,8 @@ public class TutorialEventManager : MonoBehaviour {
 
             case 11:         //Player can move forward.
                 computerSource.PlayOneShot(ManuveringOnline);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -273,6 +301,8 @@ public class TutorialEventManager : MonoBehaviour {
             case 12:
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue1_b);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 subtitles.text = "";
                 subtitles.enabled = false;
                 subtitleCanvas.enabled = false;
@@ -280,13 +310,17 @@ public class TutorialEventManager : MonoBehaviour {
             case 13:
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue2);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 break;
             case 14:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
                 computerSource.PlayOneShot(Weapons);
-                
+                speaking = true;
+                voiced.TransitionTo(0.25f);
+
                 subtitles.text = "Use [" + im.getPosInputName("Shoot").ToUpper() + "] to fire.";
                 player.weaponsEnabled = true;
                 player.tutorialMode = false;
@@ -299,6 +333,8 @@ public class TutorialEventManager : MonoBehaviour {
                 timer = 10;
                 
                 computerSource.PlayOneShot(Course);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 subtitles.text = "Approach course confirmed.  Maneuvering thrusters disabled.";
                 interior.SetActive(false);
                 exterior.SetActive(true);
@@ -306,9 +342,13 @@ public class TutorialEventManager : MonoBehaviour {
             case 16:
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue3);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 break;
             case 17:
                 computerSource.PlayOneShot(ShieldCharging);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 /*subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
@@ -323,6 +363,8 @@ public class TutorialEventManager : MonoBehaviour {
                 computerSource.PlayOneShot(ManuveringEnabled);
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue4);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 subtitles.text = "Manuvering thursters re-engaged.";
                 player.targetLocked = false;
                 player.unFreezeRotation();
@@ -341,13 +383,17 @@ public class TutorialEventManager : MonoBehaviour {
                 computerSource.PlayOneShot(ShieldReady);
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue5);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 subtitles.text = "Use [" + im.getPosInputName("Shield").ToUpper() + "] to activate shield and absorb enemy projectiles.";
                 break;
             case 20:
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
-                //source.PlayOneShot(ShieldReady);
+                computerSource.PlayOneShot(StructWeakness);
+                speaking = true;
+                voiced.TransitionTo(0.25f);
                 subtitles.text = "Hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge bomb and release to launch. Charge required is displayed on door.";
                 break;
         }

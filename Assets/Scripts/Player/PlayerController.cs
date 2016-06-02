@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+
 public class PlayerController : MonoBehaviour {
 
     public float moveSpeed = 200.0f;
@@ -137,9 +138,15 @@ public class PlayerController : MonoBehaviour {
 
     private bool tutorialInitialized = false;
 
+    void Start()
+    {
+        setUpDPS();
+    }
+
     // Use this for initialization
     void Awake () {
-		Cursor.lockState = CursorLockMode.Confined;
+        
+        Cursor.lockState = CursorLockMode.Confined;
         audio_bullet = GetComponents<AudioSource>()[0];   //0: bullets, 1: engines, 2: shield, 3: impacts, 4: other
         audio_engineHum = GetComponents<AudioSource>()[1];
         
@@ -667,7 +674,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        
+        setMusicState();
     }
 
     void LateUpdate()
@@ -1045,5 +1052,57 @@ public class PlayerController : MonoBehaviour {
             }
             
         }
+    }
+
+
+    private DpsInterpreter dpsInterpreter;
+    public string characterState;
+    private float lastJumpTime = -1f;
+    private float jumpTimeCutoff = 1.0f;
+
+
+    private void setUpDPS()
+    {
+        this.dpsInterpreter = FindObjectOfType<DpsInterpreter>();
+
+    }
+
+    public void setMusicState()
+    {
+
+
+        bool isMoving = (rb.velocity.magnitude > 0);
+        
+
+        if (isMoving)
+        {
+            this.characterState = "Cooridors";
+            this.dpsInterpreter.setSliderValue(10);
+        }
+        else
+        {
+            this.characterState = "NotMovingCalm";
+            this.dpsInterpreter.setSliderValue(10);
+        }
+        /*else if (isJumping)
+        {
+            this.characterState = "Jumping";
+            //sliderValue = jumpRate;
+        }
+        else if (isMovingFast)
+        {
+            this.characterState = "Moving Fast";
+            //sliderValue = (xSpeed - maxSpeed) / (2 * maxSpeed);
+        }
+        else if (!isWaiting)
+        {
+            this.characterState = "Moving";
+            //sliderValue = xSpeed / maxSpeed;
+        }
+        else
+        {
+            this.characterState = "Waiting";
+        }*/
+        this.dpsInterpreter.setState(this.characterState);
     }
 }

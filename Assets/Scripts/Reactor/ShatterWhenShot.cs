@@ -4,6 +4,8 @@ using System.Collections;
 public class ShatterWhenShot : MonoBehaviour {
 	public GameObject shatterInto;
 	public int hitPoints = 4;
+    public AudioSource source;
+    public AudioClip shatter;
 
 	private int hpInternal = 0;
 	// Use this for initialization
