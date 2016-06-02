@@ -12,11 +12,13 @@ public class ObjectPooler : MonoBehaviour {
 
 	public static ObjectPooler current;
 	public GameObject pooledObject;
+	public GameObject pooledObject2;
 	public int pooledAmount = 100;
 	public bool willGrow = false;
 	public int numActiveObj = 0;
 
 	public List<GameObject> pooledObjects;
+	public List<GameObject> pooledObjects2;
 
 	void Awake () {
 		current = this;
@@ -29,6 +31,9 @@ public class ObjectPooler : MonoBehaviour {
 			GameObject obj = (GameObject)Instantiate (pooledObject);
 			obj.SetActive (false);
 			pooledObjects.Add (obj);
+			GameObject obj2 = (GameObject)Instantiate (pooledObject2);
+			obj2.SetActive (false);
+			pooledObjects2.Add (obj2);
 		}
 	}
 
@@ -49,6 +54,22 @@ public class ObjectPooler : MonoBehaviour {
 			GameObject obj = (GameObject)Instantiate (pooledObject);
 			pooledObjects.Add (obj);
 			return obj;
+		}
+
+		return null;
+	}
+
+	public GameObject GetPooledObject2() {
+		for (int i = 0; i < pooledObjects2.Count; ++i) {
+			if (!pooledObjects2 [i].activeInHierarchy) {
+				return pooledObjects2 [i];
+			}
+		}
+
+		if (willGrow) {
+			GameObject obj2 = (GameObject)Instantiate (pooledObject2);
+			pooledObjects2.Add (obj2);
+			return obj2;
 		}
 
 		return null;

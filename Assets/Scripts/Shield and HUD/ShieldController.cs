@@ -10,6 +10,8 @@ using System.Collections.Generic;
 
 public class ShieldController : MonoBehaviour, HUDElement
 {
+	private int MAX_NUM_SHIELD_PARTICLES = 10;
+
     // shield fields
     private bool shieldEnabled;
     private bool shieldActive;
@@ -38,6 +40,7 @@ public class ShieldController : MonoBehaviour, HUDElement
     public Image shieldOutline;
 
     private ParticleSystem shieldParticles;
+	private int numShieldParticles = 0;
     private Collider shieldCollider;
 
     //Audio
@@ -187,42 +190,43 @@ public class ShieldController : MonoBehaviour, HUDElement
             baseSoundSource.PlayOneShot(shieldHitSound);
             bombBehavior.chargeBomb(other.gameObject.GetComponent<Bullet>().getAbsorbValue());
             other.gameObject.GetComponent<Bullet>().Destroy();
+			if (numShieldParticles < MAX_NUM_SHIELD_PARTICLES) {
+				GameObject collisionParticles = Instantiate (shieldCollisionParticles);
+				++numShieldParticles;
+				collisionParticles.transform.parent = transform;
+				//Find angle between all three directions, then rotate around forward, then right, then up
+				collisionParticles.transform.position = transform.position + new Vector3 (0f, 7.5f, 0f);
+				Vector3 centerToCollision = other.transform.position - transform.position;
+				float angleForward = Vector3.Angle (transform.up, centerToCollision);
+				float angleRight = Vector3.Angle (transform.right, centerToCollision);
+				float angleUp = Vector3.Angle (transform.up, centerToCollision);
+				collisionParticles.transform.RotateAround (transform.position, transform.forward, angleForward);
+				collisionParticles.transform.RotateAround (transform.position, transform.right, angleRight);
+				collisionParticles.transform.RotateAround (transform.position, transform.up, angleUp);
+				for (int numTail = 0; numTail < collisionParticles.transform.childCount; ++numTail) {
+					ParticleSystem tail = collisionParticles.transform.GetChild (numTail).GetChild (0).gameObject.GetComponent<ParticleSystem> ();
+					var color = tail.colorOverLifetime;
+					Color bulletColor = other.gameObject.GetComponent<Renderer> ().material.color;
 
-            GameObject collisionParticles = Instantiate(shieldCollisionParticles);
-            collisionParticles.transform.parent = transform;
-            //Find angle between all three directions, then rotate around forward, then right, then up
-            collisionParticles.transform.position = transform.position + new Vector3(0f, 7.5f, 0f);
-            Vector3 centerToCollision = other.transform.position - transform.position;
-            float angleForward = Vector3.Angle(transform.up, centerToCollision);
-            float angleRight = Vector3.Angle(transform.right, centerToCollision);
-            float angleUp = Vector3.Angle(transform.up, centerToCollision);
-            collisionParticles.transform.RotateAround(transform.position, transform.forward, angleForward);
-            collisionParticles.transform.RotateAround(transform.position, transform.right, angleRight);
-            collisionParticles.transform.RotateAround(transform.position, transform.up, angleUp);
-            for (int numTail = 0; numTail < collisionParticles.transform.childCount; ++numTail)
-            {
-                ParticleSystem tail = collisionParticles.transform.GetChild(numTail).GetChild(0).gameObject.GetComponent<ParticleSystem>();
-                var color = tail.colorOverLifetime;
-                Color bulletColor = other.gameObject.GetComponent<Renderer>().material.color;
+					if (bulletColor == Color.red)
+						color.color = new ParticleSystem.MinMaxGradient (redTail);
+					else if (bulletColor == Color.green)
+						color.color = new ParticleSystem.MinMaxGradient (greenTail);
+					else if (bulletColor == Color.blue)
+						color.color = new ParticleSystem.MinMaxGradient (blueTail);
+					else if (bulletColor == Color.cyan)
+						color.color = new ParticleSystem.MinMaxGradient (cyanTail);
+					else if (bulletColor == Color.magenta)
+						color.color = new ParticleSystem.MinMaxGradient (magentaTail);
+					else if (bulletColor == Color.yellow)
+						color.color = new ParticleSystem.MinMaxGradient (yellowTail);
+					else if (bulletColor == new Color (1f, 0.6f, 0f, 1f))
+						color.color = new ParticleSystem.MinMaxGradient (orangeTail);
+				}
+				collisionParticles.GetComponent<ParticleSystem> ().Play ();
 
-                if (bulletColor == Color.red)
-                    color.color = new ParticleSystem.MinMaxGradient(redTail);
-                else if (bulletColor == Color.green)
-                    color.color = new ParticleSystem.MinMaxGradient(greenTail);
-                else if (bulletColor == Color.blue)
-                    color.color = new ParticleSystem.MinMaxGradient(blueTail);
-                else if (bulletColor == Color.cyan)
-                    color.color = new ParticleSystem.MinMaxGradient(cyanTail);
-                else if (bulletColor == Color.magenta)
-                    color.color = new ParticleSystem.MinMaxGradient(magentaTail);
-                else if (bulletColor == Color.yellow)
-                    color.color = new ParticleSystem.MinMaxGradient(yellowTail);
-                else if (bulletColor == new Color(1f, 0.6f, 0f, 1f))
-                    color.color = new ParticleSystem.MinMaxGradient(orangeTail);
-            }
-            collisionParticles.GetComponent<ParticleSystem>().Play();
-
-            StartCoroutine(DestroyParticles(collisionParticles, 2f));
+				StartCoroutine (DestroyParticles (collisionParticles, 2f));
+			}
         }
     }
 
@@ -305,6 +309,7 @@ public class ShieldController : MonoBehaviour, HUDElement
         yield return new WaitForSeconds(delayTime);
         particles.transform.parent = null;
         Destroy(particles);
+		--numShieldParticles;
         //ParticlePooler.current.ReassignTransform (particles);
         //particles.SetActive (false);
     }

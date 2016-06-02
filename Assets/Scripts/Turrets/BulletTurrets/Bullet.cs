@@ -57,10 +57,15 @@ public class Bullet : MonoBehaviour {
 			}
 		} else if (!hit.gameObject.CompareTag ("Projectile")) {
 			ContactPoint contact = hit.contacts [0];
-			GameObject particles = (GameObject) Instantiate (Resources.Load ("Particle Systems/Bullet Collision"), contact.point + contact.normal * 2, Quaternion.FromToRotation (Vector3.forward, contact.normal));
+			GameObject particles = ObjectPooler.current.GetPooledObject2 ();
+			particles.transform.position = contact.point + contact.normal * 2;
+			particles.transform.rotation = Quaternion.FromToRotation (Vector3.forward, contact.normal);
+			//GameObject particles = (GameObject) Instantiate (Resources.Load ("Particle Systems/Bullet Collision"), contact.point + contact.normal * 2, Quaternion.FromToRotation (Vector3.forward, contact.normal));
 			//particles.transform.GetChild (0).gameObject.transform.rotation = particles.transform.rotation;
 			particles.GetComponent<ParticleSystem> ().startColor = GetComponent<Renderer> ().material.color;
 			particles.transform.GetChild(0).GetComponent<ParticleSystem> ().startColor = GetComponent<Renderer> ().material.color;
+			particles.SetActive (true);
+			particles.GetComponent<ParticleSystem> ().Play ();
 		}
         //Destroy (gameObject);
 		Destroy();
