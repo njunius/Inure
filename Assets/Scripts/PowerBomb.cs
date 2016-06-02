@@ -18,7 +18,9 @@ public class PowerBomb : MonoBehaviour {
 	private Vector3 direction;
 	private float explosionSize;
 	private float timeLeft;
+	private float timeCushion = 0.5f;
 	private bool isTriggered = false;
+	private bool isMoving = false;
 	private bool printed = false;
 	private GameObject explosion;
 	private ParticleSystem lastParticle;
@@ -37,10 +39,11 @@ public class PowerBomb : MonoBehaviour {
 	void Update () {
 		//Over time, deplete velocity to 0 and tick down to explosion
 
-		if (isTriggered && curVel != 0f) {
-			curVel = Mathf.Max (curVel - (deceleration * Time.deltaTime), 0);
+		if (isTriggered && !isMoving) {
+			//curVel = Mathf.Max (curVel - (deceleration * Time.deltaTime), 0);
 			GetComponent<Rigidbody> ().velocity = curVel * direction;
-		} else if (curVel == 0f && timeLeft > 0f) {
+			isMoving = true;
+		} else if (isMoving && timeLeft > 0f) {
 			timeLeft = Mathf.Max(timeLeft - (1f * Time.deltaTime), 0f);
 			if (timeLeft == 0f) {
 				//timeLeft = -1f;
@@ -66,7 +69,7 @@ public class PowerBomb : MonoBehaviour {
 
 		powerLevel = percOfChargeUsed;
 		explosionSize = (MAX_EXPLOSION_SIZE - MIN_EXPLOSION_SIZE) * (percOfChargeUsed/100f) + MIN_EXPLOSION_SIZE;
-		timeLeft = (MAX_TIME_LEFT - MIN_TIME_LEFT) * (percOfChargeUsed/100f) + MIN_TIME_LEFT;
+		timeLeft = (MAX_TIME_LEFT - MIN_TIME_LEFT) * (percOfChargeUsed/100f) + MIN_TIME_LEFT + timeCushion;
 		Invoke ("StopBombParticles", timeLeft);
 		isTriggered = true;
 		fakeField.transform.localScale = new Vector3 (explosionSize, explosionSize, explosionSize);

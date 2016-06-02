@@ -188,9 +188,10 @@ public class ShieldController : MonoBehaviour, HUDElement
         if (other.gameObject.CompareTag("Projectile") && shieldActive)
         {
             baseSoundSource.PlayOneShot(shieldHitSound);
-            bombBehavior.chargeBomb(other.gameObject.GetComponent<Bullet>().getAbsorbValue());
+			int chargeAmount = other.gameObject.GetComponent<Bullet> ().getAbsorbValue ();
             other.gameObject.GetComponent<Bullet>().Destroy();
 			if (numShieldParticles < MAX_NUM_SHIELD_PARTICLES) {
+				bombBehavior.chargeBomb(chargeAmount);
 				GameObject collisionParticles = Instantiate (shieldCollisionParticles);
 				++numShieldParticles;
 				collisionParticles.transform.parent = transform;
