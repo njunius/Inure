@@ -76,14 +76,17 @@ public class TriangleTurret_Flat : SimpleTurret {
 			CancelInvoke ("Fire");
 			isFiring = false;
 		}
-	}
 
-	/*
+        respawnTurretTick();
+
+    }
+
+    /*
 	 * Description: Calls for a burst of bullets
 	 * Post: singleBurst() is set to be called repeatedly
 	 *       Turret's angle of rotation is increased or reset
 	 */
-	protected void Fire () {
+    protected void Fire () {
 		InvokeRepeating ("SingleBurst", fireDelay, fireRate * fireRateMultiplier / BULLET_FREQUENCY);
 
 		//if the turret has made a complete rotation, reset the number of times it has been fired

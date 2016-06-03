@@ -14,6 +14,8 @@ public class Turret : MonoBehaviour {
 	protected float fireDelay = 0f;
 	private float effectDuration = 5f;
 
+    protected float respawnTimer = 0;
+
     private AudioSource destructAudio;
 
 	// Use this for initialization
@@ -28,7 +30,18 @@ public class Turret : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (health <= 0)
+        {
+            respawnTimer += Time.deltaTime;
+        }
+
+        if(health <= 0 && respawnTimer > 5)
+        {
+            health = 100;
+            isDead = false;
+            respawnTimer = 0;
+        }
+
 	}
 
 	public void TurnOn () {
@@ -87,4 +100,20 @@ public class Turret : MonoBehaviour {
         GameObject newSparks = (GameObject)Instantiate (Resources.Load ("Particle Systems/TurretExplosion"), transform.position, Quaternion.identity);
         
 	}
+
+    protected void respawnTurretTick()
+    {
+        if (health <= 0)
+        {
+            respawnTimer += Time.deltaTime;
+        }
+
+        if (health <= 0 && respawnTimer > 90)
+        {
+            health = 100;
+            isDead = false;
+            respawnTimer = 0;
+            TurnOn();
+        }
+    }
 }

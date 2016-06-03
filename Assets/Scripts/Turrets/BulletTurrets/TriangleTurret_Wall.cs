@@ -79,6 +79,8 @@ public class TriangleTurret_Wall : SimpleTurret {
 			CancelInvoke ("Fire");
 			isFiring = false;
 		}
+
+        respawnTurretTick();
 	}
 
 	/*

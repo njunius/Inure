@@ -50,13 +50,16 @@ public class PointTurret : SimpleTurret {
 			CancelInvoke ("Fire");
 			isFiring = false;
 		}
-	}
 
-	/*
+        respawnTurretTick();
+
+    }
+
+    /*
 	 * Description: Creates new bullet with specifics
 	 * Post: new bullet is created with defined color and velocity
 	 */
-	protected void Fire () {
+    protected void Fire () {
 		Vector3 aimDirNorm = gameObject.transform.forward;
 		aimDirNorm.Normalize ();
 		CreateBullet (endOfTurret + (aimDirNorm * (barrelList [0].relativeSpawnPoint)), aimDirNorm);
