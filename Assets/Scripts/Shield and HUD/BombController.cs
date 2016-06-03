@@ -26,6 +26,7 @@ public class BombController : MonoBehaviour, HUDElement {
 	private Color useHUDColor;
 
     private DoorHPDisplayController[] doorHPIndicators;
+    private ReactorCoreUIController reactorHPIndicator;
 
     private Image[] bombGauge;
 	private Image useGauge;
@@ -75,6 +76,8 @@ public class BombController : MonoBehaviour, HUDElement {
         {
             doorHPIndicators[i] = temp[i].GetComponent<DoorHPDisplayController>();
         }
+
+        reactorHPIndicator = GameObject.FindGameObjectWithTag("Reactor Display").GetComponent<ReactorCoreUIController>();
     }
 	
 	// Update is called once per frame
@@ -190,5 +193,7 @@ public class BombController : MonoBehaviour, HUDElement {
         {
             doorHPIndicators[i].colorUpdate(useGauge.color);
         }
+
+        reactorHPIndicator.colorUpdate();
     }
 }
