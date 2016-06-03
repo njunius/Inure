@@ -725,6 +725,7 @@ public class PlayerController : MonoBehaviour {
 		shield.setCurrShieldCharge(savedData.getShield());
         armorGauge.updateChunks(currHullIntegrity);
 
+        bomb.setUseCharge(0);
 
         GameObject[] deathLasers = GameObject.FindGameObjectsWithTag("Death Laser");
         if (deathLasers != null)
