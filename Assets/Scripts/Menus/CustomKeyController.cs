@@ -52,6 +52,8 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
         selected = false;
 
         alreadyBound = false;
+
+        PlayerPrefs.SetString(command, key);
     }
 
     // Update is called once per frame
@@ -72,12 +74,26 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
         {
             if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
             {
+                if (PlayerPrefs.GetString(command + ".posAxis", "defaultValue") != "defaultValue")
+                {
+                    inputBindings[command].posAxis = PlayerPrefs.GetString(command + ".posAxis", inputBindings[command].posAxis);
+
+                }
                 key = inputBindings[command].posAxis;
             }
             else if (inputBindings[command].bidirectional && !positiveDirection)
             {
+                if (PlayerPrefs.GetString(command + "negAxis", "defaultValue") != "defaultValue")
+                {
+                    inputBindings[command].negAxis = PlayerPrefs.GetString(command + ".negAxis", inputBindings[command].posAxis);
+
+                }
                 key = inputBindings[command].negAxis;
+
+                PlayerPrefs.SetString(command, key);
             }
+
+            
 
             if (selected)
             {
@@ -142,12 +158,14 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                             inputBindings[command].posAxis = vKey.ToString().ToLower();
                             currentKey.text = key.ToUpper();
 
+                            PlayerPrefs.SetString(command + ".posAxis", inputBindings[command].posAxis);
                         }
                         else if (inputBindings[command].bidirectional && !positiveDirection)
                         {
                             inputBindings[command].negAxis = vKey.ToString().ToLower();
                             currentKey.text = key.ToUpper();
 
+                            PlayerPrefs.SetString(command + ".negAxis", inputBindings[command].negAxis);
                         }
                         EventSystem.current.SetSelectedGameObject(null);
                         keyMessage.enabled = false;
@@ -159,6 +177,8 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                         keyBuffer.enabled = false;
 
                         canQuitSettings.setSelected(false);
+
+                        PlayerPrefs.Save();
                         break;
                     }
                     else if (selected && !delay && vKey.ToString().Equals("Escape"))
@@ -206,6 +226,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
             key = inputBindings[command].posAxis;
             currentKey.text = key.ToUpper();
 
+            PlayerPrefs.SetString(command + ".posAxis", inputBindings[command].posAxis);
         }
         else if (inputBindings[command].bidirectional && !positiveDirection)
         {
@@ -213,11 +234,14 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
             key = inputBindings[command].negAxis;
             currentKey.text = key.ToUpper();
 
+            PlayerPrefs.SetString(command + ".negAxis", inputBindings[command].negAxis);
         }
         EventSystem.current.SetSelectedGameObject(null);
         selected = false;
         delay = true;
         keyBuffer.enabled = false;
+
+        PlayerPrefs.Save();
     }
 
     public string getKey()
