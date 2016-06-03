@@ -56,6 +56,7 @@ public class CheckPoint : MonoBehaviour {
                 else
                 {
                     audioSource.PlayOneShot(final);
+					GameObject.FindGameObjectWithTag ("Bawse").GetComponent<BossManager> ().StartBattle();
                 }
                 soundHasPlayed = true;
             }

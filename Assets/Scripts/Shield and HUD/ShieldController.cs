@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 public class ShieldController : MonoBehaviour, HUDElement
 {
-	private int MAX_NUM_SHIELD_PARTICLES = 10;
+	private int MAX_NUM_SHIELD_PARTICLES = 20;
 
     // shield fields
     private bool shieldEnabled;

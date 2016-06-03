@@ -103,6 +103,12 @@ public class PowerBomb : MonoBehaviour {
 	public float GetPowerLevel () {
 		return powerLevel;
 	}
+
+	void OnCollisionEnter() {
+		GetComponent<Rigidbody> ().velocity.Normalize ();
+		GetComponent<Rigidbody> ().velocity *= 0;
+		curVel = 0;
+	}
 }
 
 /*
