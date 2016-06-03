@@ -28,6 +28,8 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
     public Image keyMessage;
     public Text keyMessageText;
 
+    private bool initialized;
+
     // Use this for initialization
     void Start()
     {
@@ -52,6 +54,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
         selected = false;
 
         alreadyBound = false;
+        initialized = false;
     }
 
     // Update is called once per frame
@@ -66,6 +69,30 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
         {
             inputBindings = inputs.getInputBindings();
 
+        }
+
+        if (!initialized)
+        {
+            if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
+            {
+                if (PlayerPrefs.GetString(command + ".posAxis", "defaultValue") != "defaultValue")
+                {
+                    inputBindings[command].posAxis = PlayerPrefs.GetString(command + ".posAxis", inputBindings[command].posAxis);
+
+                }
+                key = inputBindings[command].posAxis;
+            }
+            else if (inputBindings[command].bidirectional && !positiveDirection)
+            {
+                if (PlayerPrefs.GetString(command + "negAxis", "defaultValue") != "defaultValue")
+                {
+                    inputBindings[command].negAxis = PlayerPrefs.GetString(command + ".negAxis", inputBindings[command].posAxis);
+
+                }
+                key = inputBindings[command].negAxis;
+
+            }
+            initialized = true;
         }
 
         if (inputBindings != null && settingsScreen.enabled)
@@ -88,10 +115,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                 }
                 key = inputBindings[command].negAxis;
 
-                PlayerPrefs.SetString(command, key);
             }
-
-            
 
             if (selected)
             {

@@ -40,6 +40,11 @@ public class LevelChange : MonoBehaviour {
         if (other.CompareTag("Player Collider"))
         {
             startTransition = true;
+
+            PlayerPrefs.SetInt("hullIntegrity", other.gameObject.GetComponentInParent<PlayerController>().getCurrHullIntegrity());
+            PlayerPrefs.SetInt("bombCharge", other.gameObject.GetComponentInParent<PlayerController>().getBombCharge());
+            PlayerPrefs.SetFloat("shieldCharge", other.gameObject.GetComponentInParent<PlayerController>().getShieldCharge());
+            PlayerPrefs.Save();
         }
     }
 
