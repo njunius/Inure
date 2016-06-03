@@ -143,6 +143,19 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
+        if (tutorialMode)
+        {
+            Debug.Log("tutorial mode");
+            currHullIntegrity = 0;
+        }
+        else if (PlayerPrefs.HasKey("hullIntegrity")) // hull integrity, bomb charge, and shield charge all must be set at the same time
+        {
+            currHullIntegrity = PlayerPrefs.GetInt("hullIntegrity");
+            bomb.setBombCharge(PlayerPrefs.GetInt("bombCharge"));
+            shield.setCurrShieldCharge(PlayerPrefs.GetFloat("shieldCharge"));
+
+            armorGauge.updateChunks(currHullIntegrity);
+        }
         setUpDPS();
     }
 
@@ -187,7 +200,7 @@ public class PlayerController : MonoBehaviour {
             Debug.Log("tutorial mode");
             currHullIntegrity = 0;
         }
-
+        
         Transform[] temp = bulletSpawns.GetComponentsInChildren<Transform>();
         bulletSpawnLocations = new Transform[temp.Length - 1];
         bulletSpawnLocIndex = 0;
@@ -725,6 +738,7 @@ public class PlayerController : MonoBehaviour {
 		shield.setCurrShieldCharge(savedData.getShield());
         armorGauge.updateChunks(currHullIntegrity);
 
+        bomb.setUseCharge(0);
 
         GameObject[] deathLasers = GameObject.FindGameObjectsWithTag("Death Laser");
         if (deathLasers != null)

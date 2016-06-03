@@ -55,4 +55,9 @@ public class BossManager : MonoBehaviour {
 			reactor.transform.GetChild(0).GetComponent<Light>().color = Color.red;
 		}
 	}
+
+    public bool isVulnerable()
+    {
+        return reactor.GetComponent<SphereCollider>().enabled;
+    }
 }

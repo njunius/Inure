@@ -40,7 +40,8 @@ public class CheckPoint : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other){
-		if(other.gameObject.CompareTag("Player Collider")){
+        // additional checks so player can only save data once
+		if(other.gameObject.CompareTag("Player Collider") && other.gameObject.GetComponentInParent<PlayerController>().getCurrHullIntegrity() > 0 && !soundHasPlayed){
             
 			if(!hasHealed && pController.getCurrHullIntegrity() < pController.getMaxHullIntegrity()){
 				pController.setHullIntegrity(pController.getCurrHullIntegrity() + heal_player);

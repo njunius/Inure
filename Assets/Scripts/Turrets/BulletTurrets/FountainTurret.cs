@@ -76,13 +76,16 @@ public class FountainTurret : AlgorithmicTurret {
 			CancelInvoke ("Fire");
 			isFiring = false;
 		}
-	}
 
-	/*
+        respawnTurretTick();
+
+    }
+
+    /*
 	 * Description: Shoots bullets equally distributed around the turret while the barrels swivel away from and back toward the center
 	 * Post: A bullet has been fired from all TurretBarrels at an angle determined by MAX_SWIVEL and SWIVEL_PERCENTAGE
 	 */
-	protected void Fire() {
+    protected void Fire() {
 		Vector3 aimDirNorm = transform.forward;
 		aimDirNorm.Normalize ();
 		Vector3 rightNorm = transform.right;

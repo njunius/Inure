@@ -43,4 +43,9 @@ public class reactorBomb : MonoBehaviour {
 		escapeDoor.GetComponent<ShatterWhenHit>().enabled = true;
 		escapeDoor.GetComponent<ShatterWhenHit>().hitPoints = 0;
 	}
+
+    public bool isDead()
+    {
+        return wasBombed;
+    }
 }

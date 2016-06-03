@@ -13,6 +13,7 @@ public class SplashScreenExitController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        //PlayerPrefs.DeleteAll();
         sceneTransition = GameObject.FindGameObjectWithTag("Screen Transition").GetComponent<CanvasGroup>();
 
         startTransition = false;

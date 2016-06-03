@@ -64,13 +64,16 @@ public class RakingTurret : AlgorithmicTurret {
 			CancelInvoke ("Fire");
 			isFiring = false;
 		}
-	}
 
-	/*
+        respawnTurretTick();
+
+    }
+
+    /*
 	 * Description: Shoots NUM_BARRELS bullets, half from one side of the turret and half from the other, as the TurretBarrels swivel left and right
 	 * Post: A bullet has been fired from all TurretBarrels
 	 */
-	protected void Fire() {
+    protected void Fire() {
 		Vector3 aimDirNorm = transform.forward;
 		aimDirNorm.Normalize ();
 		Vector3 rightNorm = transform.right;

@@ -77,13 +77,16 @@ public class ArcTurret : SimpleTurret {
 			CancelInvoke ("Fire");
 			isFiring = false;
 		}
-	}
 
-	/*
+        respawnTurretTick();
+
+    }
+
+    /*
 	 * Description: Shoots five bullets with ArcTurrets specs
 	 * Post: A bullet has been fired from all TurretBarrels
 	 */
-	protected void Fire () {
+    protected void Fire () {
 		Vector3 turretCenter = gameObject.GetComponent<Renderer> ().bounds.center;
 		Vector3 aimDirNorm = gameObject.transform.forward;
 		Vector3 leftNorm = gameObject.transform.right * -1;

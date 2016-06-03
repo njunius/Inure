@@ -61,13 +61,16 @@ public class DoubleHelixTurret : AlgorithmicTurret {
 			CancelInvoke ("Fire");
 			isFiring = false;
 		}
-	}
 
-	/*
+        respawnTurretTick();
+
+    }
+
+    /*
 	 * Description: Shoots two bullets in straight, parallel lines
 	 * Post: A bullet has been fired from both TurretBarrels
 	 */
-	protected void Fire() {
+    protected void Fire() {
 		Vector3 aimDirNorm = transform.forward;
 		aimDirNorm.Normalize ();
 		Vector3 rightNorm = transform.right;
