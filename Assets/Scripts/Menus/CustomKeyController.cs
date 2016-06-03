@@ -52,8 +52,6 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
         selected = false;
 
         alreadyBound = false;
-
-        PlayerPrefs.SetString(command, key);
     }
 
     // Update is called once per frame
