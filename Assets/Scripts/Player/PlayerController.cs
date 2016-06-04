@@ -140,10 +140,11 @@ public class PlayerController : MonoBehaviour {
     private bool twoSpeedEngaged = false;
 
     private bool tutorialInitialized = false;
+    private bool normalInitialized = false;
 
     void Start()
     {
-        if (tutorialMode)
+        /*if (tutorialMode)
         {
             //Debug.Log("tutorial mode");
             currHullIntegrity = 0;
@@ -155,7 +156,7 @@ public class PlayerController : MonoBehaviour {
             shield.setCurrShieldCharge(PlayerPrefs.GetFloat("shieldCharge"));
 
             armorGauge.updateChunks(currHullIntegrity);
-        }
+        }*/
         //setUpDPS();
     }
 
@@ -235,8 +236,19 @@ public class PlayerController : MonoBehaviour {
             shield.setCurrShieldCharge(0);
             shield.setShieldEnabled(false);
             tutorialInitialized = true;
+            normalInitialized = true; // avoids the hull integrity, bomb, and shield being updated in the tutorial
         }
 
+        if(!tutorialMode && !normalInitialized && PlayerPrefs.HasKey("hullIntegrity")) 
+        {
+            currHullIntegrity = PlayerPrefs.GetInt("hullIntegrity");
+            bomb.setBombCharge(PlayerPrefs.GetInt("bombCharge"));
+            shield.setCurrShieldCharge(PlayerPrefs.GetFloat("shieldCharge"));
+
+            armorGauge.updateChunks(currHullIntegrity);
+
+            normalInitialized = true;
+        }
 
         // allows for time between the player dying and the ending cutscene
         if (bombTimer.isCountingDown() && isDead())
