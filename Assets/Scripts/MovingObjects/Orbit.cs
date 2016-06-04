@@ -20,4 +20,12 @@ public class Orbit : MonoBehaviour {
 	{
 		gameObject.transform.RotateAround(orbit_point.transform.position, Vector3.up, rotation_rate * Time.deltaTime);
 	}
+
+	public float GetRotationRate () {
+		return rotation_rate;
+	}
+
+	public void SetRotationRate (float newRate) {
+		rotation_rate = newRate;
+	}
 }

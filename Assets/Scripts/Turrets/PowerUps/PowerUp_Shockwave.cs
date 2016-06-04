@@ -10,7 +10,7 @@ public class PowerUp_Shockwave : PowerUp {
 	private GameObject[] fields = new GameObject[numFields];
 	private float[] fieldTimes = new float[numFields];
 	private bool[] hasSpawned = new bool[numFields];
-	private Color fieldColor = new Color (0.988f, 0.541f, 0.541f, 0.5f);
+	private Color fieldColor = new Color (0.541f, 0.541f, 0.988f, 0.5f);
 	private bool isGrowing = false;
 
     public AudioClip shockwaveSound;
