@@ -730,8 +730,9 @@ public class PlayerController : MonoBehaviour {
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
 
-		GameObject.FindGameObjectWithTag("MainCamera").transform.position = savedData.getCheckCamPOS();
-		GameObject.FindGameObjectWithTag("MainCamera").transform.rotation = savedData.getCheckCamROT();
+        Debug.Log(GameObject.FindGameObjectWithTag("MainCamera"));
+		GameObject.FindGameObjectWithTag("MainCamera").transform.position = savedData.getCheckPOS();
+		GameObject.FindGameObjectWithTag("MainCamera").transform.rotation = savedData.getCheckROT();
 
 		//Reset stats
 		currHullIntegrity = savedData.getHealth();
