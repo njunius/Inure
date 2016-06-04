@@ -106,7 +106,7 @@ public class Waypoint : MonoBehaviour {
 
                 if (toNearPoint.magnitude > pathWidth)
                 {
-                    Debug.Log("OutOfBounds");
+                    //Debug.Log("OutOfBounds " + toNearPoint.magnitude + " " + transform.name);
                     foreach (GameObject deathLaser in DeathLasers)
                     {
                         deathLaser.GetComponent<GiantDeathLaserOfDoom>().fireAt(player.gameObject.GetComponent<Rigidbody>().velocity + player.position);
@@ -116,7 +116,7 @@ public class Waypoint : MonoBehaviour {
                 
                 if (showyBeams && nearPoint.magnitude / toPrevWaypoint.magnitude < (1 - showBeams))
                 {
-                    Debug.Log("showy");
+                    //Debug.Log("showy");
                     foreach (GameObject deathLaser in DeathLasers)
                     {
                         Vector3 target = 500 * player.forward + player.position;

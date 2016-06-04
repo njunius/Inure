@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (tutorialMode)
         {
-            Debug.Log("tutorial mode");
+            //Debug.Log("tutorial mode");
             currHullIntegrity = 0;
         }
         else if (PlayerPrefs.HasKey("hullIntegrity")) // hull integrity, bomb charge, and shield charge all must be set at the same time
@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour {
 
         if (tutorialMode)
         {
-            Debug.Log("tutorial mode");
+            //Debug.Log("tutorial mode");
             currHullIntegrity = 0;
         }
         

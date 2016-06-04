@@ -79,7 +79,7 @@ public class TutorialEventManager : MonoBehaviour {
             }
         }
         
-        if (Input.GetKeyDown(KeyCode.Equals))
+        /*if (Input.GetKeyDown(KeyCode.Equals))
         {
             if (eventIndex < 12)
             {
@@ -149,7 +149,7 @@ public class TutorialEventManager : MonoBehaviour {
                 eventIndex = 17;
                 eventTimer = 0;
             }
-        }
+        }*/
 
         timer -= Time.deltaTime;
         if (timer < 0)
