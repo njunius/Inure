@@ -25,7 +25,7 @@ public class TriangleTurret_Wall : SimpleTurret {
 	void Start () {
 		bulletColor = Color.magenta;
 		barrelList = new TurretBarrel[6];
-		TRIANGLE_HEIGHT = 3f * (float)bulletPrefab.GetComponent<Renderer> ().bounds.size.x;
+		TRIANGLE_HEIGHT = 3f * (float)bulletPrefab.GetComponent<Renderer> ().bounds.size.x * (float)bulletPrefab.transform.localScale.y;
 
 		//top
 		barrelList [0] = new TurretBarrel ((float)bulletPrefab.GetComponent<Renderer>().bounds.size.x, 
