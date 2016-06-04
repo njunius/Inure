@@ -9,9 +9,12 @@ public class reactorBomb : MonoBehaviour {
 	private ParticleSystem reactionParticles;
 	private float reactionPulseInterval = 5f;
 
+    private AudioSource source;
+
 	// Use this for initialization
 	void Start () {
 		reactionParticles = transform.FindChild ("Bomb Particles").gameObject.GetComponent<ParticleSystem> ();
+        source = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -23,6 +26,7 @@ public class reactorBomb : MonoBehaviour {
 				reactionParticles.gameObject.SetActive (true);
 				Invoke ("BreakDoor", 1f);
 				isNewColor = true;
+                source.Play();
 			}
 		}
 	}

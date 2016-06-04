@@ -63,6 +63,7 @@ public class BossManager : MonoBehaviour {
 		}
 		//If shieldCount > enableReactorField, enable the sphere trigger
 		if(shieldCount > enableReactorField && !isSusceptible){
+
 			isSusceptible = true;
 			Orbit curOrbit;
 			for (int numInner = 0; numInner < innerShields.childCount; ++numInner) {
