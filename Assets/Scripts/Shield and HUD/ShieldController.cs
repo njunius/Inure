@@ -43,6 +43,8 @@ public class ShieldController : MonoBehaviour, HUDElement
 	private int numShieldParticles = 0;
     private Collider shieldCollider;
 
+    private float flashTimer;
+
     //Audio
     public AudioClip shieldOnSound;
     public AudioClip shieldAlarm;
@@ -68,6 +70,8 @@ public class ShieldController : MonoBehaviour, HUDElement
         shieldChargeDelayTimer = 0.0f;
         shieldDepleteAmount = -20;
         shieldRechargeAmount = 10;
+
+        flashTimer = 0;
 
         hudElementName = "shield";
         hudColorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
@@ -167,6 +171,26 @@ public class ShieldController : MonoBehaviour, HUDElement
                 for (int i = 0; i < shieldGauge.Length; ++i)
                 {
                     shieldGauge[i].fillAmount = currShieldCharge / maxShieldCharge;
+                }
+            }
+
+            if(currShieldCharge < 33)
+            {
+                flashTimer += Time.deltaTime;
+                for (int i = 0; i < shieldGauge.Length; ++i)
+                {
+                    if(flashTimer > 0.05)
+                    {
+                        shieldGauge[i].enabled = !shieldGauge[i].enabled;
+                        flashTimer = 0;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < shieldGauge.Length; ++i)
+                {
+                    shieldGauge[i].enabled = true;
                 }
             }
         }

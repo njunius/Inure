@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour {
             }
 
             // Shield Controls 
-            if (shieldEnabled && im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.isShieldCharged())
+            if (shieldEnabled && im.getInput("Shield") > 0.3f && !shield.getShieldActive() && shield.getCurrShieldCharge() > 0)
             {
                 shield.setShieldActive(true);
             }
