@@ -9,15 +9,39 @@ public class ResetColorButtonController : MonoBehaviour, IPointerClickHandler {
     private HUDColorController colorController;
     private Slider[] colorSlidersForEdit;
 
+    private Button thisButton;
+    private Image thisButtonImage;
+    private Text thisButtonText;
+
+    private Canvas settingsScreen;
+
 	// Use this for initialization
 	void Start () {
         hudElementName = "";
         colorController = GameObject.FindGameObjectWithTag("GameController").GetComponent<HUDColorController>();
+
+        // gets button information to disable when no HUD element is selected
+        thisButton = GetComponent<Button>();
+        thisButtonImage = GetComponent<Image>();
+        thisButtonText = GetComponentInChildren<Text>();
+
+        settingsScreen = GetComponentInParent<Canvas>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    if(settingsScreen.enabled && hudElementName.Equals(""))
+        {
+            thisButton.enabled = false;
+            thisButtonImage.enabled = false;
+            thisButtonText.enabled = false;
+        }
+        else if(settingsScreen.enabled && !hudElementName.Equals(""))
+        {
+            thisButton.enabled = true;
+            thisButtonImage.enabled = true;
+            thisButtonText.enabled = true;
+        }
 	}
 
     public void OnPointerClick(PointerEventData eventData)

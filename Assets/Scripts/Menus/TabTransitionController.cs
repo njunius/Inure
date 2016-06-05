@@ -117,7 +117,7 @@ public class TabTransitionController : MonoBehaviour {
             }
             else if(transitionDelay < 1 && !halfway)
             {
-                transitionDelay += 6 * Time.unscaledDeltaTime;
+                transitionDelay += 5 * Time.unscaledDeltaTime;
             }
             else if(alpha <= 1 && halfway)
             {
