@@ -66,6 +66,7 @@ public class ArmorController : MonoBehaviour, HUDElement {
             currChunks = newHullIntegrity;
         }
 
+
         for (int i = 0; i < arrayMidpoint - currChunks / 2; ++i)
         {
             armorChunkTracker[i].color = chunkOff;
@@ -92,7 +93,17 @@ public class ArmorController : MonoBehaviour, HUDElement {
 
         if (currChunks == 1)
         {
-            armorChunkTracker[arrayMidpoint].color = chunkOn;
+            for(int i = 0; i < armorChunkTracker.Length; ++i)
+            {
+                if(i != arrayMidpoint)
+                {
+                    armorChunkTracker[i].color = chunkOff;
+                }
+                else
+                {
+                    armorChunkTracker[i].color = chunkOn;
+                }
+            }
         }
     }
 
