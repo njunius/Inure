@@ -742,7 +742,6 @@ public class PlayerController : MonoBehaviour {
 		gameObject.transform.position = savedData.getCheckPOS();
 		gameObject.transform.rotation = savedData.getCheckROT();
 
-        Debug.Log(GameObject.FindGameObjectWithTag("MainCamera"));
 		GameObject.FindGameObjectWithTag("MainCamera").transform.position = savedData.getCheckPOS();
 		GameObject.FindGameObjectWithTag("MainCamera").transform.rotation = savedData.getCheckROT();
 
