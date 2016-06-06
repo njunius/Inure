@@ -104,10 +104,12 @@ public class PowerBomb : MonoBehaviour {
 		return powerLevel;
 	}
 
-	void OnCollisionEnter() {
-		GetComponent<Rigidbody> ().velocity.Normalize ();
-		GetComponent<Rigidbody> ().velocity *= 0;
-		curVel = 0;
+	void OnCollisionEnter(Collision collision) {
+		if (collision.gameObject.tag != "Player Collider") {
+			GetComponent<Rigidbody> ().velocity.Normalize ();
+			GetComponent<Rigidbody> ().velocity *= 0;
+			curVel = 0;
+		}
 	}
 }
 
