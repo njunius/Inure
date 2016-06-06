@@ -31,6 +31,8 @@ public class PowerBomb : MonoBehaviour {
 
     private AudioSource source;
 
+    private Vector3 savedPlayerVelocity;
+
 	// Use this for initialization
 	void Start () {
         //Use powerLevel to calculate destructive force (size of explosion)
@@ -44,7 +46,7 @@ public class PowerBomb : MonoBehaviour {
 
 		if (isTriggered && !isMoving) {
 			//curVel = Mathf.Max (curVel - (deceleration * Time.deltaTime), 0);
-			GetComponent<Rigidbody> ().velocity = curVel * direction;
+			GetComponent<Rigidbody> ().velocity = curVel * direction + savedPlayerVelocity; 
 			isMoving = true;
 		} else if (isMoving && timeLeft > 0f) {
 			timeLeft = Mathf.Max(timeLeft - (1f * Time.deltaTime), 0f);
@@ -59,7 +61,7 @@ public class PowerBomb : MonoBehaviour {
 		}
 	}
 
-	public void CalculateVariables (float percOfChargeUsed, Vector3 directionNorm) {
+	public void CalculateVariables (float percOfChargeUsed, Vector3 directionNorm, Vector3 playerVelocity) {
 		fakeField = transform.FindChild ("Fake Explosive Field").gameObject;
 		radiusLight = transform.FindChild ("Explosion Radius Light").gameObject;
 
@@ -82,7 +84,9 @@ public class PowerBomb : MonoBehaviour {
 		for (int numChild = 0; numChild < explosion.transform.childCount; ++numChild) {
 			explosion.transform.GetChild (numChild).GetComponent<ParticleSystem> ().startSize *= (percOfChargeUsed / 25);
 		}
-		//explosion.transform.localScale = new Vector3(percOfChargeUsed/100, percOfChargeUsed/100, percOfChargeUsed/100);
+        //explosion.transform.localScale = new Vector3(percOfChargeUsed/100, percOfChargeUsed/100, percOfChargeUsed/100);
+
+        savedPlayerVelocity = playerVelocity; // used for avoiding colliding with the player when the player is moving forwards. Often will be 0
 	}
 
 	private void StopBombParticles() {
@@ -105,7 +109,7 @@ public class PowerBomb : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.tag != "Player Collider") {
+		if (collision.gameObject.CompareTag("Player")) {
 			GetComponent<Rigidbody> ().velocity.Normalize ();
 			GetComponent<Rigidbody> ().velocity *= 0;
 			curVel = 0;
