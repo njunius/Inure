@@ -36,7 +36,7 @@ public class CheckPoint : MonoBehaviour {
 
 		pData = GameObject.FindGameObjectWithTag("Player").GetComponent<LastCheckpoint>();
 		pController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController> ();
-		particles = transform.FindChild ("CheckPoint Model").FindChild ("Field Particles");
+		if (!tutorialCheckpoint) particles = transform.FindChild ("CheckPoint Model").FindChild ("Field Particles");
 	}
 	
 	void OnTriggerEnter(Collider other){
