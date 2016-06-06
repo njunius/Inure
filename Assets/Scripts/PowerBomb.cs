@@ -109,7 +109,7 @@ public class PowerBomb : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.CompareTag("Player")) {
+		if (!collision.gameObject.CompareTag("Player")) {
 			GetComponent<Rigidbody> ().velocity.Normalize ();
 			GetComponent<Rigidbody> ().velocity *= 0;
 			curVel = 0;
