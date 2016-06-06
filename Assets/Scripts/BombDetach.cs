@@ -4,10 +4,8 @@ using System.Collections;
 public class BombDetach : MonoBehaviour
 {
     public bool detached = false;
-	public int chargeNeeded = 100;
-    private float count_down = 80;
+    private float count_down = 65;
     private bool escaped = false;
-    private bool stopChecking = false;
     //private int counter = 0;
     PlayerController pc;
 
@@ -24,57 +22,8 @@ public class BombDetach : MonoBehaviour
         if (detached)
         {
             count_down -= Time.deltaTime;
-            if(count_down <= 0)
-            {
-                if(escaped)
-                {
-                    //Debug.Log("if " + counter + ": " + stopChecking);
-                    if (!stopChecking)
-                    {
-                        //Debug.Log("if " + counter + ": " + stopChecking);
-                        stopChecking = true;
-                        //Debug.Log("if " + counter + ": " + stopChecking);
-                        //Debug.Log(escaped);
-                        Debug.Log("You Win!");
-                    }
-                }
-                else
-                {
-                    //Debug.Log("else " + counter + ": " + stopChecking);
-                    if (!stopChecking)
-                    {
-                        //Debug.Log("else " + counter + ": " + stopChecking);
-                        stopChecking = true;
-                        //Debug.Log("else " + counter + ": " + stopChecking);
-                        //Debug.Log("Game Over!");
-                        //pc.setHullIntegrity(0);
-                    }
-                }
-            }
-            /*if (count_down <= 0 && escaped)
-            {
-                Debug.Log(escaped);
-                Debug.Log("You Win!");
-            }
-            else if (count_down <= 0 && !escaped)
-            {
-                //Debug.Log("Game Over!");
-                pc.setHullIntegrity(0);
-            }*/
         }
     }
-
-
-    /*void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.name == "ReactorDetail")
-        {
-			if(pc.getBombCharge() >= chargeNeeded){
-            	gameObject.transform.parent = null;
-            	detached = true;
-			}
-        }
-    }*/
 
     // retrieve the value of the current time
     public float get_countdown()
