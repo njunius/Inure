@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour {
 
             armorGauge.updateChunks(currHullIntegrity);
         }*/
-        //setUpDPS();
+        setUpDPS();
     }
 
     // Use this for initialization
@@ -704,7 +704,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        //setMusicState();
+        setMusicState();
     }
 
     void LateUpdate()
@@ -1087,7 +1087,7 @@ public class PlayerController : MonoBehaviour {
             
         }
     }
-/*
+
     public GameObject dpsPlayer;
     private DpsInterpreter dpsInterpreter;
     public string characterState;
@@ -1108,7 +1108,7 @@ public class PlayerController : MonoBehaviour {
         bool isMoving = (rb.velocity.magnitude > 0);
         
 
-        /*if (isMoving)
+        if (isMoving)
         {
             this.characterState = "Cooridors";
             this.dpsInterpreter.setSliderValue(10);
@@ -1117,7 +1117,7 @@ public class PlayerController : MonoBehaviour {
         {
             this.characterState = "NotMovingCalm";
             this.dpsInterpreter.setSliderValue(10);
-        }*/
+        }
         /*else if (isJumping)
         {
             this.characterState = "Jumping";
@@ -1136,7 +1136,7 @@ public class PlayerController : MonoBehaviour {
         else
         {
             this.characterState = "Waiting";
-        }
-        //this.dpsInterpreter.setState(this.characterState);
-    }*/
+        }*/
+        this.dpsInterpreter.setState(this.characterState);
+    }
 }
