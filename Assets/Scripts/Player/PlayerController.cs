@@ -144,19 +144,6 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
-        /*if (tutorialMode)
-        {
-            //Debug.Log("tutorial mode");
-            currHullIntegrity = 0;
-        }
-        else if (PlayerPrefs.HasKey("hullIntegrity")) // hull integrity, bomb charge, and shield charge all must be set at the same time
-        {
-            currHullIntegrity = PlayerPrefs.GetInt("hullIntegrity");
-            bomb.setBombCharge(PlayerPrefs.GetInt("bombCharge"));
-            shield.setCurrShieldCharge(PlayerPrefs.GetFloat("shieldCharge"));
-
-            armorGauge.updateChunks(currHullIntegrity);
-        }*/
         setUpDPS();
     }
 
@@ -707,19 +694,6 @@ public class PlayerController : MonoBehaviour {
         setMusicState();
     }
 
-    void LateUpdate()
-    {
-        if (!targetLocked && turned)
-        {
-            //Debug.Log("Vel");
-            //Debug.Log(rb.velocity);
-            //Debug.Log(localPrevVel);
-            //float vm = rb.velocity.magnitude;
-            //rb.velocity = (rb.velocity - 0.9f * localPrevVel).normalized * vm;
-            //rb.velocity = (rb.velocity + 2 * localPrevVel) / 3;
-            //Debug.Log(rb.velocity);
-        }
-    }
 
 	//Transports the player to the specified coordinates
 	//Resets their stats to saved data
@@ -897,20 +871,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 localForward = transform.InverseTransformDirection(transform.forward);
         Vector3 localVelocity = new Vector3(0, 0, transform.InverseTransformDirection(rb.velocity).z);
         //GameObject newShot = (GameObject)Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-        //Debug.Log(transform.InverseTransformDirection(rb.velocity));
-        //Debug.Log(transform.InverseTransformDirection(transform.forward));
-        // add constant forward velocity to newShot and add the player's forward velocity component
-        //newShot.GetComponent<Rigidbody>().velocity = transform.TransformDirection(localForward * 40 + localVelocity);
 
-        /*Vector3 aimDirNorm = gameObject.transform.forward;
-		aimDirNorm.Normalize ();
-		Vector3 realBulletVel = aimDirNorm * (float)bulletVel;
-		Vector3 shipVel = GetComponent<Rigidbody> ().velocity;
-		shipVel.Normalize ();
-
-		if (aimDirNorm != -1 * shipVel) {
-			realBulletVel += GetComponent<Rigidbody> ().velocity;
-		}*/
 
         float vol = Random.Range(volLowRange, volHighRange);
         audio_bullet.PlayOneShot(playerBulletSound, vol);
@@ -922,20 +883,27 @@ public class PlayerController : MonoBehaviour {
             newShot.setVars(bulletColor, transform.TransformDirection(localForward * (float) bulletVel + localVelocity));
         }
 
-		/*GameObject bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward + transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
-		PlayerBullet newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
-		newBullet.setVars (bulletColor, realBulletVel);
-
-		bulletObj = (GameObject) Instantiate (bulletPrefab, frontOfShip + transform.forward - transform.right * 1.4f - transform.up * 2.1f, transform.localRotation);
-		newBullet = (PlayerBullet)bulletObj.GetComponent(typeof(PlayerBullet));
-		newBullet.setVars (bulletColor, realBulletVel);*/
 	}
 
 	private void FireBomb (int strength) {
-		Vector3 forwardNorm = transform.forward;
+		//Vector3 forwardNorm = transform.forward;
+        Vector3 localVelocity;
+        // more specific version of the player bullet code above as the bomb's velocity is never large enough to compensate for the player's velocity moving backwards
+        // as such the player will only ever give the bomb its local z velocity if it is moving forwards
+        if (transform.InverseTransformDirection(rb.velocity).z > 0)
+        {
+            localVelocity = new Vector3(0, 0, transform.InverseTransformDirection(rb.velocity).z);
+
+        }
+        else
+        {
+            localVelocity = Vector3.zero;
+        }
+
+        Vector3 forwardNorm = transform.forward;
 		forwardNorm.Normalize ();
 		GameObject newBomb = (GameObject)Instantiate (powerBomb, powerBombSpawner.transform.position, Quaternion.identity);
-		newBomb.GetComponent<PowerBomb> ().CalculateVariables (strength, forwardNorm);
+		newBomb.GetComponent<PowerBomb> ().CalculateVariables (strength, forwardNorm, transform.TransformDirection(localVelocity));
 		setBombCharge (getBombCharge () - strength);
 		setUseCharge (0f);
 		useGaugeIncreaseRate = 10f;

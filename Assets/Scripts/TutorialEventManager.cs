@@ -335,7 +335,7 @@ public class TutorialEventManager : MonoBehaviour {
                 computerSource.PlayOneShot(Course);
                 speaking = true;
                 voiced.TransitionTo(0.25f);
-                subtitles.text = "Approach course confirmed.  Maneuvering thrusters disabled.";
+                subtitles.text = "Approach course confirmed. Maneuvering thrusters disabled.";
                 interior.SetActive(false);
                 exterior.SetActive(true);
                 break;
@@ -365,7 +365,7 @@ public class TutorialEventManager : MonoBehaviour {
                 dialogueSource.PlayOneShot(dialogue4);
                 speaking = true;
                 voiced.TransitionTo(0.25f);
-                subtitles.text = "Manuvering thursters re-engaged.";
+                subtitles.text = "Maneuvering thrusters re-engaged.";
                 player.targetLocked = false;
                 player.unFreezeRotation();
                 player.rotateEnabled = true;
@@ -394,7 +394,7 @@ public class TutorialEventManager : MonoBehaviour {
                 computerSource.PlayOneShot(StructWeakness);
                 speaking = true;
                 voiced.TransitionTo(0.25f);
-                subtitles.text = "Hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge bomb and release to launch. Charge required is displayed on door.";
+                subtitles.text = "Press and hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge bomb and release to launch. Charge required is displayed on door.";
                 break;
         }
     }
