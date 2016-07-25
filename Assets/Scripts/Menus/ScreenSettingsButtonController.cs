@@ -17,7 +17,7 @@ public class ScreenSettingsButtonController : MonoBehaviour, IPointerClickHandle
     private Image[] hudElementSamples;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         thisButton = gameObject.GetComponent<Button>();
 
         GameObject[] temp = GameObject.FindGameObjectsWithTag("Color Selector Button");
