@@ -20,6 +20,8 @@ public class ObjectPooler : MonoBehaviour {
 	public List<GameObject> pooledObjects;
 	public List<GameObject> pooledObjects2;
 
+
+    
 	void Awake () {
 		current = this;
 	}
@@ -34,6 +36,7 @@ public class ObjectPooler : MonoBehaviour {
 			GameObject obj2 = (GameObject)Instantiate (pooledObject2);
 			obj2.SetActive (false);
 			pooledObjects2.Add (obj2);
+            numActiveObj += 1;
 		}
 	}
 
@@ -74,4 +77,8 @@ public class ObjectPooler : MonoBehaviour {
 
 		return null;
 	}
+    public int GetCount()
+    {
+        return pooledObjects.Count;
+    }
 }

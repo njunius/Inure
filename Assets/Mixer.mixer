@@ -15,6 +15,7 @@ AudioMixerController:
   m_StartSnapshot: {fileID: 24500003}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
+  m_UpdateMode: 0
   m_ExposedParameters: []
   m_AudioMixerGroupViews:
   - guids:
@@ -144,7 +145,6 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 24472262}
   - {fileID: 24404292}
-  - {fileID: 24413638}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -181,7 +181,7 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 24420080}
   m_UserColorIndex: 0
-  m_Mute: 0
+  m_Mute: 1
   m_Solo: 0
   m_BypassEffects: 0
 --- !u!243 &24395174
@@ -221,6 +221,7 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 24440222}
   - {fileID: 24485068}
+  - {fileID: 244062939502093584}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -293,19 +294,6 @@ AudioMixerEffectController:
   m_MixLevel: f233a0116dedaa243a9bfaf72281783a
   m_Parameters: []
   m_SendTarget: {fileID: 24400580}
-  m_EnableWetMix: 0
-  m_Bypass: 0
---- !u!244 &24413638
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_EffectID: c1f25cc14a596cf4aaab6f00f87d93f6
-  m_EffectName: Send
-  m_MixLevel: 9230c71595a6ebb4eba183adbfcd2bbc
-  m_Parameters: []
-  m_SendTarget: {fileID: 24450090}
   m_EnableWetMix: 0
   m_Bypass: 0
 --- !u!244 &24420080
@@ -712,7 +700,7 @@ AudioMixerSnapshotController:
     1eed53f39d1502042bcfa8384c3a97a9: 14
     f3338a14d695a844ebf3571e4e3143eb: 0.27
     326db0547400d3b4eb00c35cffbdf0d6: 1.163
-    e802a3546a18e344780fb6591dca2ceb: 1.1400865
+    e802a3546a18e344780fb6591dca2ceb: -9.456394
     42ee97542b16a884ea9b527b1e6ad1c5: -0.037667945
     77458f64877967f4c93c35216251cf1f: 2.019999
     0ec5ca748a0011a44aa182b4af372fe0: 0.9299998
@@ -755,7 +743,7 @@ AudioMixerSnapshotController:
     b33362ace3e686245a8a5c75e6a24a52: 0
     2eb9e2ccb72f7744ab9f78b7d8cd96e4: 0.1
     644b970d725b2734bad1ea01a769b12d: 3
-    73e72f1d2ca28604f9c93c2a0d225f89: -0.02577656
+    73e72f1d2ca28604f9c93c2a0d225f89: -33.611675
     af44646dbbc64914a92efbf26ff539ce: 4
     8cc9d0adfe8d7e94585862f8bae6a3b4: -182
     6ce52fad94d82fd46a3cd8df86450dcd: -2001
@@ -947,3 +935,16 @@ AudioMixerSnapshotController:
     35306dfe074128344b8798a0e5495095: 1
     3e49fddfa8c95a2468e87db572994659: 0.31
   m_TransitionOverrides: {}
+--- !u!244 &244062939502093584
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 58d020503e6770647a995f3ddf5421bf
+  m_EffectName: DynamicPercussionSystem
+  m_MixLevel: 3a21255a03366814eaea42361b893cf6
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
