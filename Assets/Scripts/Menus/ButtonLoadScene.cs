@@ -7,6 +7,8 @@ using System.Collections;
 public class ButtonLoadScene : MonoBehaviour, IPointerClickHandler {
 
     public string sceneToLoad;
+    public int sceneToLoadIndex;
+
     private CanvasGroup sceneTransition;
 
     private bool startTransition;
@@ -18,6 +20,8 @@ public class ButtonLoadScene : MonoBehaviour, IPointerClickHandler {
 
         sceneTransition = GameObject.FindGameObjectWithTag("Screen Transition").GetComponent<CanvasGroup>();
 
+        sceneToLoad = "LoadingScreen";
+
         startTransition = false;
         transitionRate = 3;
         transitionCounter = 0;
@@ -28,6 +32,7 @@ public class ButtonLoadScene : MonoBehaviour, IPointerClickHandler {
 
         if (transitionCounter >= 1)
         {
+            SceneNumHolder.cachedSceneNum = sceneToLoadIndex;
             SceneManager.LoadScene(sceneToLoad);
         }
 

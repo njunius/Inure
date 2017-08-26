@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
-        setUpDPS();
+        //setUpDPS();
     }
 
     // Use this for initialization
@@ -691,7 +691,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        setMusicState();
+        //setMusicState();
     }
 
 

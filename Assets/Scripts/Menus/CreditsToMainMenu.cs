@@ -5,6 +5,8 @@ using System.Collections;
 public class CreditsToMainMenu : MonoBehaviour {
 
     private CanvasGroup sceneTransition;
+    private AudioSource backgroundMusic;
+
 
     private bool startTransition;
     private int transitionRate;
@@ -13,6 +15,7 @@ public class CreditsToMainMenu : MonoBehaviour {
     // Use this for initialization
     void Start () {
         sceneTransition = GameObject.FindGameObjectWithTag("Screen Transition").GetComponent<CanvasGroup>();
+        backgroundMusic = GetComponent<AudioSource>();
 
         startTransition = false;
         transitionRate = 3;
@@ -32,7 +35,8 @@ public class CreditsToMainMenu : MonoBehaviour {
 
         if (transitionCounter >= 1)
         {
-            SceneManager.LoadScene("00-MainMenu");
+            SceneNumHolder.cachedSceneNum = 2; // 2 is the main menu index
+            SceneManager.LoadScene("LoadingScreen");
         }
 
         if (startTransition)
@@ -40,12 +44,13 @@ public class CreditsToMainMenu : MonoBehaviour {
             transitionCounter += transitionRate * Time.unscaledDeltaTime;
 
             sceneTransition.alpha = transitionCounter;
+
+            backgroundMusic.volume -= transitionRate * Time.unscaledDeltaTime; //fade out music with the screen fade
         }
     }
 
     public void endCredits()
     {
-        AudioListener.pause = true;
         startTransition = true;
     }
 }

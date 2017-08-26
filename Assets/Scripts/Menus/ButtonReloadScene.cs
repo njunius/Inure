@@ -6,15 +6,39 @@ using System.Collections;
 
 public class ButtonReloadScene : MonoBehaviour, IPointerClickHandler {
 
-    private string sceneToLoad;
+    private CanvasGroup sceneTransition;
+
+    private bool startTransition;
+    private int transitionRate;
+    private float transitionCounter;
 
     // Use this for initialization
     void Start () {
-        sceneToLoad = SceneManager.GetActiveScene().name;
-	}
+        sceneTransition = GameObject.FindGameObjectWithTag("Screen Transition").GetComponent<CanvasGroup>();
+
+        startTransition = false;
+        transitionRate = 3;
+        transitionCounter = 0;
+    }
+
+    void Update()
+    {
+        if (transitionCounter >= 1)
+        {
+            SceneNumHolder.cachedSceneNum = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene("LoadingScreen");
+        }
+
+        if (startTransition)
+        {
+            transitionCounter += transitionRate * Time.unscaledDeltaTime;
+
+            sceneTransition.alpha = transitionCounter;
+        }
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        SceneManager.LoadScene(sceneToLoad);
+        startTransition = true;
     }
 }

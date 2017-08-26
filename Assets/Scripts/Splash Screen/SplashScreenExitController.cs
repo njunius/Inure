@@ -26,7 +26,9 @@ public class SplashScreenExitController : MonoBehaviour {
 
         if (transitionCounter >= 1)
         {
+            SceneNumHolder.cachedSceneNum = 2; // 2 is the main menu index
             SceneManager.LoadScene(sceneToLoad);
+
         }
 
         if (startTransition)

@@ -31,7 +31,8 @@ public class LevelChange : MonoBehaviour {
 
         if (sceneTransition.alpha >= 1 && startTransition)
         {
-            SceneManager.LoadScene(sceneToLoad);
+            SceneNumHolder.cachedSceneNum = 5; // 5 is the main menu index
+            SceneManager.LoadScene("LoadingScreen");
         }
     }
 
