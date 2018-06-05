@@ -71,6 +71,8 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 
         }
 
+        // for the command, initialize to a new key value if the key in PlayerPrefs is not the default
+        // the two different if statements cover the types of commands inside inputBindings
         if (!initialized)
         {
             if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
@@ -95,8 +97,10 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
             initialized = true;
         }
 
+        // if we have an inputBindings and we are on the settingsScreen then we can check update the key if necessary
         if (inputBindings != null && settingsScreen.enabled)
         {
+            // first make sure the key is its expected value if it is not the defaultValue
             if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
             {
                 if (PlayerPrefs.GetString(command + ".posAxis", "defaultValue") != "defaultValue")
@@ -117,11 +121,14 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 
             }
 
+            // if the player has selected this button
             if (selected)
             {
+                // let other objects know so they can behave accordingly
                 canQuitSettings.setSelected(true);
                 EventSystem.current.SetSelectedGameObject(this.gameObject);
 
+                // signal to the player that the button is waiting for them to press a key by flashing an underscore
                 if (timer < timerMax)
                 {
                     timer += Time.unscaledDeltaTime;
@@ -145,6 +152,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 
             }
 
+            // for every key in the current system, go through and check if it was pressed
             foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
             {
                 if (Input.GetKeyDown(vKey))
@@ -157,10 +165,12 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 
                     for (int i = 0; i < keyBindings.Length; ++i)
                     {
+                        // if the key was already pressed and it was the same key, confirm the player's choice
                         if (vKey.ToString().ToLower().Equals(doubleKeyBindingBuffer))
                         {
                             break;
                         }
+                        // other wise prompt them to confirm their selection or press a different key
                         else if (!delay && vKey.ToString().ToLower().Equals(keyBindings[i].getKey()) && !keyBindings[i].Equals(this))
                         {
                             alreadyBound = true;
@@ -173,6 +183,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                         }
                     }
 
+                    // if the button is selected, the player isn't trying to use a reserved key, and they have confirmed their selection in the case of assigning an already bound key
                     if (selected && !delay && !vKey.ToString().Equals("Escape") && !alreadyBound)
                     {
                         if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
@@ -189,6 +200,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 
                             PlayerPrefs.SetString(command + ".negAxis", inputBindings[command].negAxis);
                         }
+                        // reset all book-keeping variables including saving keys out to PlayerPrefs and then exit the loop
                         EventSystem.current.SetSelectedGameObject(null);
                         keyMessage.enabled = false;
                         keyMessageText.enabled = false;
@@ -232,16 +244,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
     // defaultKey must be lowercase to work properly
     public void resetKey(string defaultKey)
     {
-
-        /*if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
-        {
-            key = inputBindings[command].posAxis;
-        }
-        else if (inputBindings[command].bidirectional && !positiveDirection)
-        {
-            key = inputBindings[command].negAxis;
-        }*/
-
+        // sets the command to its stored default value
         if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
         {
             inputBindings[command].posAxis = defaultKey;
@@ -258,6 +261,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
 
             PlayerPrefs.SetString(command + ".negAxis", inputBindings[command].negAxis);
         }
+        // reset all book-keeping variables and update PlayerPrefs
         EventSystem.current.SetSelectedGameObject(null);
         selected = false;
         delay = true;
