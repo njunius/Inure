@@ -10,6 +10,10 @@ public class PauseController : MonoBehaviour {
     private PlayerController player;
     private SettingsExitBuffer canQuitSettings;
 
+    public Canvas mainMenuConfirm;
+    public Canvas reloadConfirm;
+    public Canvas exitConfirm;
+
     public InputManager im;
     public AudioClip deathSound;
     private AudioSource audio_effects;
@@ -45,6 +49,9 @@ public class PauseController : MonoBehaviour {
                 pauseOverlay.enabled = false;
                 Cursor.visible = false;
                 AudioListener.pause = false;
+                mainMenuConfirm.enabled = false;
+                reloadConfirm.enabled = false;
+                exitConfirm.enabled = false;
             }
 
 			if(pauseOverlay.enabled && !player.paused)
@@ -53,6 +60,9 @@ public class PauseController : MonoBehaviour {
                 pauseOverlay.enabled = false;
                 Cursor.visible = false;
                 AudioListener.pause = false;
+                mainMenuConfirm.enabled = false;
+                reloadConfirm.enabled = false;
+                exitConfirm.enabled = false;
             }
 			
             if (im.getInputDown("Pause") && !player.paused)
@@ -67,11 +77,30 @@ public class PauseController : MonoBehaviour {
             {
                 if (!settingsOverlay.enabled)
                 {
-                    player.paused = !player.paused;
-                    Time.timeScale = 1;
-                    pauseOverlay.enabled = false;
-                    Cursor.visible = false;
-                    AudioListener.pause = false;
+                    if (mainMenuConfirm.enabled)
+                    {
+                        mainMenuConfirm.enabled = false;
+                    }
+                    else if (reloadConfirm.enabled)
+                    {
+                        reloadConfirm.enabled = false;
+                    }
+                    else if (exitConfirm.enabled)
+                    {
+                        exitConfirm.enabled = false;
+                    }
+                    else
+                    {
+                        player.paused = !player.paused;
+                        Time.timeScale = 1;
+                        pauseOverlay.enabled = false;
+                        Cursor.visible = false;
+                        AudioListener.pause = false;
+                        mainMenuConfirm.enabled = false;
+                        reloadConfirm.enabled = false;
+                        exitConfirm.enabled = false;
+                    }
+                    
                 }
                 else if (settingsOverlay.enabled && !canQuitSettings.keyBindingIsSelected())
                 {

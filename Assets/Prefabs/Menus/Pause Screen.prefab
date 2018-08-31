@@ -34,6 +34,8 @@ GameObject:
   - 114: {fileID: 11443098}
   - 114: {fileID: 11478524}
   - 95: {fileID: 9527144}
+  - 114: {fileID: 11488908}
+  - 114: {fileID: 11447858}
   m_Layer: 5
   m_Name: ReloadCheckP
   m_TagString: Pause Screen
@@ -1275,6 +1277,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c67aa7a86417143bdbf1dbb7076b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11447858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908666c46fa1f6f4d88f6de1d335a54f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlay: {fileID: 0}
 --- !u!114 &11457306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1605,8 +1619,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11411836}
-        m_MethodName: resetCheckP
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1615,7 +1629,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11480260
@@ -1799,6 +1813,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11488908
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c67aa7a86417143bdbf1dbb7076b73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11490960
 MonoBehaviour:
   m_ObjectHideFlags: 1
