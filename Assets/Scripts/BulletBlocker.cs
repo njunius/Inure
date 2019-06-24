@@ -14,7 +14,7 @@ public class BulletBlocker : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		Debug.Log (other.gameObject.CompareTag ("Player Projectile"));
+		//Debug.Log (other.gameObject.CompareTag ("Player Projectile"));
 		if (other.gameObject.CompareTag ("Player Projectile") || other.gameObject.CompareTag ("Projectile")) {
 			CancelInvoke ("ResetMatColor");
 			gameObject.GetComponent<Renderer> ().material.color = Color.blue;

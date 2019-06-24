@@ -11,6 +11,7 @@ public class TutorialEventManager : MonoBehaviour {
     public ShieldController shield;
     public int eventIndex = 0;
     private float eventTimer = 0;
+    private bool nonEssential = false;
     public GameObject door1Upper;
     public GameObject door1Lower;
     public GameObject door2Upper;
@@ -151,13 +152,13 @@ public class TutorialEventManager : MonoBehaviour {
             }
         }*/
 
-        //timer -= Time.deltaTime;
-        //if (timer < 0)
-        //{
-        //    subtitles.text = "";
-        //    subtitles.enabled = false;
-        //    subtitleCanvas.enabled = false;
-        //}
+        timer -= Time.deltaTime;
+        if (timer < 0 && nonEssential)
+        {
+            subtitles.text = "";
+            subtitles.enabled = false;
+            subtitleCanvas.enabled = false;
+        }
     }
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -331,7 +332,7 @@ public class TutorialEventManager : MonoBehaviour {
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
-                
+                nonEssential = true;
                 computerSource.PlayOneShot(Course);
                 speaking = true;
                 voiced.TransitionTo(0.25f);
@@ -360,6 +361,7 @@ public class TutorialEventManager : MonoBehaviour {
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
+                nonEssential = true;
                 computerSource.PlayOneShot(ManuveringEnabled);
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue4);
@@ -380,6 +382,7 @@ public class TutorialEventManager : MonoBehaviour {
                 subtitleCanvas.enabled = true;
                 subtitles.enabled = true;
                 timer = 10;
+                nonEssential = false;
                 computerSource.PlayOneShot(ShieldReady);
                 dialogueSource.Stop();
                 dialogueSource.PlayOneShot(dialogue5);
