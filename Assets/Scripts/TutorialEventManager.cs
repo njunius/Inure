@@ -151,13 +151,13 @@ public class TutorialEventManager : MonoBehaviour {
             }
         }*/
 
-        timer -= Time.deltaTime;
-        if (timer < 0)
-        {
-            subtitles.text = "";
-            subtitles.enabled = false;
-            subtitleCanvas.enabled = false;
-        }
+        //timer -= Time.deltaTime;
+        //if (timer < 0)
+        //{
+        //    subtitles.text = "";
+        //    subtitles.enabled = false;
+        //    subtitleCanvas.enabled = false;
+        //}
     }
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -321,7 +321,7 @@ public class TutorialEventManager : MonoBehaviour {
                 speaking = true;
                 voiced.TransitionTo(0.25f);
 
-                subtitles.text = "Use [" + im.getPosInputName("Shoot").ToUpper() + "] to fire.";
+                subtitles.text = "Press and Hold [" + im.getPosInputName("Shoot").ToUpper() + "] to fire.";
                 player.weaponsEnabled = true;
                 player.tutorialMode = false;
 
@@ -385,7 +385,7 @@ public class TutorialEventManager : MonoBehaviour {
                 dialogueSource.PlayOneShot(dialogue5);
                 speaking = true;
                 voiced.TransitionTo(0.25f);
-                subtitles.text = "Use [" + im.getPosInputName("Shield").ToUpper() + "] to activate shield and absorb enemy projectiles.";
+                subtitles.text = "Press [" + im.getPosInputName("Shield").ToUpper() + "] to activate shield and absorb enemy projectiles.";
                 break;
             case 20:
                 subtitleCanvas.enabled = true;
@@ -394,7 +394,7 @@ public class TutorialEventManager : MonoBehaviour {
                 computerSource.PlayOneShot(StructWeakness);
                 speaking = true;
                 voiced.TransitionTo(0.25f);
-                subtitles.text = "Press and hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge bomb and release to launch. Charge required is displayed on door.";
+                subtitles.text = "Press and hold [" + im.getPosInputName("Launch Bomb").ToUpper() + "] to charge and release when the ship indicator matches the door indicator.";
                 break;
         }
     }

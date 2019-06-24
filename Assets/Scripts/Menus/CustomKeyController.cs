@@ -75,25 +75,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
         // the two different if statements cover the types of commands inside inputBindings
         if (!initialized)
         {
-            if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
-            {
-                if (PlayerPrefs.GetString(command + ".posAxis", "defaultValue") != "defaultValue")
-                {
-                    inputBindings[command].posAxis = PlayerPrefs.GetString(command + ".posAxis", inputBindings[command].posAxis);
-
-                }
-                key = inputBindings[command].posAxis;
-            }
-            else if (inputBindings[command].bidirectional && !positiveDirection)
-            {
-                if (PlayerPrefs.GetString(command + "negAxis", "defaultValue") != "defaultValue")
-                {
-                    inputBindings[command].negAxis = PlayerPrefs.GetString(command + ".negAxis", inputBindings[command].posAxis);
-
-                }
-                key = inputBindings[command].negAxis;
-
-            }
+            loadAndCheckKeybindings();
             initialized = true;
         }
 
@@ -101,25 +83,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
         if (inputBindings != null && settingsScreen.enabled)
         {
             // first make sure the key is its expected value if it is not the defaultValue
-            if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
-            {
-                if (PlayerPrefs.GetString(command + ".posAxis", "defaultValue") != "defaultValue")
-                {
-                    inputBindings[command].posAxis = PlayerPrefs.GetString(command + ".posAxis", inputBindings[command].posAxis);
-
-                }
-                key = inputBindings[command].posAxis;
-            }
-            else if (inputBindings[command].bidirectional && !positiveDirection)
-            {
-                if (PlayerPrefs.GetString(command + "negAxis", "defaultValue") != "defaultValue")
-                {
-                    inputBindings[command].negAxis = PlayerPrefs.GetString(command + ".negAxis", inputBindings[command].posAxis);
-
-                }
-                key = inputBindings[command].negAxis;
-
-            }
+            loadAndCheckKeybindings();
 
             // if the player has selected this button
             if (selected)
@@ -186,33 +150,7 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
                     // if the button is selected, the player isn't trying to use a reserved key, and they have confirmed their selection in the case of assigning an already bound key
                     if (selected && !delay && !vKey.ToString().Equals("Escape") && !alreadyBound)
                     {
-                        if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
-                        {
-                            inputBindings[command].posAxis = vKey.ToString().ToLower();
-                            currentKey.text = key.ToUpper();
-
-                            PlayerPrefs.SetString(command + ".posAxis", inputBindings[command].posAxis);
-                        }
-                        else if (inputBindings[command].bidirectional && !positiveDirection)
-                        {
-                            inputBindings[command].negAxis = vKey.ToString().ToLower();
-                            currentKey.text = key.ToUpper();
-
-                            PlayerPrefs.SetString(command + ".negAxis", inputBindings[command].negAxis);
-                        }
-                        // reset all book-keeping variables including saving keys out to PlayerPrefs and then exit the loop
-                        EventSystem.current.SetSelectedGameObject(null);
-                        keyMessage.enabled = false;
-                        keyMessageText.enabled = false;
-                        selected = false;
-                        delay = true;
-                        alreadyBound = false;
-                        doubleKeyBindingBuffer = "";
-                        keyBuffer.enabled = false;
-
-                        canQuitSettings.setSelected(false);
-
-                        PlayerPrefs.Save();
+                        updateKeyBinding(vKey.ToString().ToLower());
                         break;
                     }
                     else if (selected && !delay && vKey.ToString().Equals("Escape"))
@@ -244,34 +182,75 @@ public class CustomKeyController : MonoBehaviour, IPointerClickHandler
     // defaultKey must be lowercase to work properly
     public void resetKey(string defaultKey)
     {
-        // sets the command to its stored default value
-        if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
-        {
-            inputBindings[command].posAxis = defaultKey;
-            key = inputBindings[command].posAxis;
-            currentKey.text = key.ToUpper();
-
-            PlayerPrefs.SetString(command + ".posAxis", inputBindings[command].posAxis);
-        }
-        else if (inputBindings[command].bidirectional && !positiveDirection)
-        {
-            inputBindings[command].negAxis = defaultKey;
-            key = inputBindings[command].negAxis;
-            currentKey.text = key.ToUpper();
-
-            PlayerPrefs.SetString(command + ".negAxis", inputBindings[command].negAxis);
-        }
-        // reset all book-keeping variables and update PlayerPrefs
-        EventSystem.current.SetSelectedGameObject(null);
-        selected = false;
-        delay = true;
-        keyBuffer.enabled = false;
-
-        PlayerPrefs.Save();
+        updateKeyBinding(defaultKey);
     }
 
     public string getKey()
     {
         return key;
     }
+
+
+    // checks key identity to make sure of correct values
+    private void loadAndCheckKeybindings()
+    {
+        if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
+        {
+            if (PlayerPrefs.GetString(command + ".posAxis", "defaultValue") != "defaultValue")
+            {
+                inputBindings[command].posAxis = PlayerPrefs.GetString(command + ".posAxis", inputBindings[command].posAxis);
+
+            }
+            key = inputBindings[command].posAxis;
+        }
+        else if (inputBindings[command].bidirectional && !positiveDirection)
+        {
+            if (PlayerPrefs.GetString(command + "negAxis", "defaultValue") != "defaultValue")
+            {
+                inputBindings[command].negAxis = PlayerPrefs.GetString(command + ".negAxis", inputBindings[command].posAxis);
+
+            }
+            key = inputBindings[command].negAxis;
+
+        }
+
+        return;
+    }
+
+    // updates input bindings to match associated key, resets all book-keeping variables, and saves key bindings out
+    private void updateKeyBinding(string keyName)
+    {
+        // sets the command to the given key identifier
+        if ((inputBindings[command].bidirectional && positiveDirection) || !inputBindings[command].bidirectional)
+        {
+            inputBindings[command].posAxis = keyName;
+            currentKey.text = key.ToUpper();
+
+            PlayerPrefs.SetString(command + ".posAxis", inputBindings[command].posAxis);
+        }
+        else if (inputBindings[command].bidirectional && !positiveDirection)
+        {
+            inputBindings[command].negAxis = keyName;
+            currentKey.text = key.ToUpper();
+
+            PlayerPrefs.SetString(command + ".negAxis", inputBindings[command].negAxis);
+        }
+
+        // reset all book keeping-variables and save out PlayerPrefs
+        EventSystem.current.SetSelectedGameObject(null);
+        keyMessage.enabled = false;
+        keyMessageText.enabled = false;
+        selected = false;
+        delay = true;
+        alreadyBound = false;
+        doubleKeyBindingBuffer = "";
+        keyBuffer.enabled = false;
+
+        canQuitSettings.setSelected(false);
+
+        PlayerPrefs.Save();
+
+        return;
+    }
+
 }
